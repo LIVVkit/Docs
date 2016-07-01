@@ -1,0 +1,580 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Contents &mdash; LIVVKit 2.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="LIVVKit 2.0.0 documentation" href="../index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="contents">
+<h1>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+</div>
+<div class="section" id="readme">
+<h1>README<a class="headerlink" href="#readme" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div></div></blockquote>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>When the page is loaded, do some stuff</li>
+</ul>
+<p class="last"><a href="#id1"><span class="problematic" id="id2">*</span></a>/</p>
+</dd>
+<dt>$(document).ready(function() {</dt>
+<dd><p class="first">// Used to draw the correct element type
+elementMap = {</p>
+<blockquote>
+<div>&#8220;Error&#8221; : drawError,
+&#8220;Summary&#8221; : drawSummary,
+&#8220;Table&#8221; : drawTable,
+&#8220;Bit for Bit&#8221; : drawBitForBit,
+&#8220;Diff&#8221; : drawDiff,
+&#8220;Gallery&#8221; : drawGallery</div></blockquote>
+<p>};</p>
+<p>// Used to draw the correct page
+contentMap = {</p>
+<blockquote>
+<div>&#8220;index&#8221; : drawIndex,
+&#8220;verification&#8221; : drawVerification,
+&#8220;validation&#8221; : drawValidation,
+&#8220;performance&#8221; : drawPerformance,
+&#8220;numerics&#8221; : drawNumerics</div></blockquote>
+<p>};</p>
+<p class="last">// Append the generated content
+drawNav();
+contentMap[vvType]();</p>
+</dd>
+</dl>
+<p>});</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Draw the navigation sidebar</li>
+</ul>
+<p class="last"><a href="#id3"><span class="problematic" id="id4">*</span></a>/</p>
+</dd>
+<dt>function drawNav() {</dt>
+<dd><p class="first">html = &#8220;&#8221;;
+getUrl = window.location.href.substr(0,window.location.href.lastIndexOf(&#8216;/&#8217;)+1);
+data = loadJSON(getUrl + indexPath + &#8216;/index.json&#8217;);
+console.log(data);
+for (var cat in data[&#8220;Elements&#8221;]) {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>if (data[&#8220;Elements&#8221;][cat] != null &amp;&amp; Object.keys(data[&#8220;Elements&#8221;][cat][&#8220;Data&#8221;]).length &gt; 0) {</dt>
+<dd><p class="first">html += &#8220;&lt;h3&gt;&#8221; + data[&#8220;Elements&#8221;][cat][&#8220;Title&#8221;] + &#8220;&lt;/h3&gt;n&#8221;;
+testList = Object.keys(data[&#8220;Elements&#8221;][cat][&#8220;Data&#8221;]).sort();
+for (idx in testList) {</p>
+<blockquote>
+<div>html += &#8220;&lt;a href=&#8221; + indexPath + &#8220;/&#8221; + data[&#8220;Elements&#8221;][cat][&#8220;Title&#8221;].toLowerCase() + &#8220;/&#8221; + testList[idx] + &#8221;.html&gt;&#8221; + testList[idx] + &#8220;&lt;/a&gt;&lt;/br&gt;&#8221;;</div></blockquote>
+<p class="last">}</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p class="last">}
+$(&#8220;#nav&#8221;).append(html);</p>
+</dd>
+</dl>
+<p>}</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Generatees the summary content page</li>
+</ul>
+<p class="last"><a href="#id5"><span class="problematic" id="id6">*</span></a>/</p>
+</dd>
+<dt>function drawIndex() {</dt>
+<dd><p class="first">var data = loadJSON(indexPath + &#8216;/index.json&#8217;);
+for (var cat in data[&#8220;Elements&#8221;]) {</p>
+<blockquote>
+<div><p>console.log(data[&#8220;Elements&#8221;][cat]);
+if (data[&#8220;Elements&#8221;][cat] != null &amp;&amp; Object.keys(data[&#8220;Elements&#8221;][cat][&#8220;Data&#8221;]).length &gt; 0) {</p>
+<blockquote>
+<div>$(&#8220;#content&#8221;).append(&#8220;&lt;h1&gt;&#8221; + data[&#8220;Elements&#8221;][cat][&#8220;Title&#8221;] + &#8220;&lt;/h1&gt;&#8221;);
+elemType = data[&#8220;Elements&#8221;][cat][&#8220;Type&#8221;];
+elementMap[elemType](data[&#8220;Elements&#8221;][cat], &#8220;#content&#8221;);</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p class="last">}</p>
+</dd>
+</dl>
+<p>}</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Generates the verification content page</li>
+</ul>
+<p class="last"><a href="#id7"><span class="problematic" id="id8">*</span></a>/</p>
+</dd>
+<dt>function drawVerification() {</dt>
+<dd><dl class="first docutils">
+<dt>var verType = window.location.href.substr(</dt>
+<dd>window.location.href.lastIndexOf(&#8220;/&#8221;)+1).split(&#8220;#&#8221;)[0].replace(&#8221;.html&#8221;, &#8220;&#8221;);</dd>
+</dl>
+<p>var data = loadJSON(&#8216;./&#8217; + verType + &#8221;.json&#8221;);
+var testCases = Object.keys(data).sort();</p>
+<p>// Add the tabs
+html = &#8220;&lt;div id=&#8221;tabs&#8221;&gt;n&#8221;;
+html += &#8220;&lt;ul&gt;n&#8221;;
+for (var idx in testCases) {</p>
+<blockquote>
+<div>html += &#8220;&lt;li&gt;&lt;a href=&#8221;#&#8221; + testCases[idx] + &#8220;&#8221;&gt;&#8221; + testCases[idx] + &#8220;&lt;/a&gt;&lt;/li&gt;n&#8221;;</div></blockquote>
+<p>}
+html += &#8220;&lt;/ul&gt;n&#8221;;
+for (var idx in testCases) {</p>
+<blockquote>
+<div>html += &#8220;&lt;div id=&#8221;&#8221; + testCases[idx] + &#8220;&#8221;&gt;&lt;/div&gt;&#8221;;</div></blockquote>
+<p>}
+html += &#8220;&lt;/div&gt;&#8221;;
+$(&#8220;#content&#8221;).append(html);</p>
+<p>// Add the content
+for (var idx in testCases) {</p>
+<blockquote>
+<div><p>testName = testCases[idx];
+for (var subcase in data[testCases[idx]]) {</p>
+<blockquote>
+<div><p>section = data[testName][subcase];
+sectionName = testName + &#8220;_&#8221; + subcase;
+$(&#8220;#&#8221;+testName).append(&#8220;&lt;div id=&#8221;&#8221; + sectionName + &#8220;&#8221;&gt;&lt;/div&gt;&#8221;);
+$(&#8220;#&#8221;+sectionName).append(&#8220;&lt;h1&gt;&#8221; + section[&#8220;Title&#8221;] + &#8220;&lt;/h1&gt;&#8221;);
+for (var idx2 in data[testCases[idx]][subcase][&#8220;Elements&#8221;]) {</p>
+<blockquote>
+<div>elem = section[&#8220;Elements&#8221;][idx2];
+elementMap[elem[&#8220;Type&#8221;]](elem, &#8220;#&#8221;+sectionName);</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p class="last">}
+$(&#8220;#tabs&#8221;).tabs();</p>
+</dd>
+</dl>
+<p>}</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Generates the validation content page</li>
+</ul>
+<p class="last"><a href="#id9"><span class="problematic" id="id10">*</span></a>/</p>
+</dd>
+<dt>function drawValidation() {</dt>
+<dd>html = &#8220;&#8221;;
+return html;</dd>
+</dl>
+<p>}</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Generates the performance content page</li>
+</ul>
+<p class="last"><a href="#id11"><span class="problematic" id="id12">*</span></a>/</p>
+</dd>
+<dt>function drawPerformance() {</dt>
+<dd><dl class="first docutils">
+<dt>var verType = window.location.href.substr(</dt>
+<dd>window.location.href.lastIndexOf(&#8220;/&#8221;)+1).split(&#8220;#&#8221;)[0].replace(&#8221;.html&#8221;, &#8220;&#8221;);</dd>
+</dl>
+<p>var data = loadJSON(&#8216;./&#8217; + verType + &#8221;.json&#8221;);</p>
+<p>html = &#8220;&lt;div id=&#8221; + data[&#8220;Title&#8221;] + &#8220;&gt;&#8221;;
+html += &#8220;&lt;h2&gt;&#8221; + data[&#8220;Title&#8221;] + &#8220;&lt;/h2&gt;&#8221;;
+html += &#8220;&lt;p&gt;&#8221; + data[&#8220;Description&#8221;];
+html += &#8220;&lt;/div&gt;&#8221;;
+$(&#8220;#content&#8221;).append(html);</p>
+<p>// Add the content
+for (var idx in data[&#8220;Elements&#8221;]) {</p>
+<blockquote>
+<div>elem = data[&#8220;Elements&#8221;][idx];
+elementMap[elem[&#8220;Type&#8221;]](elem, &#8220;#&#8221;+data[&#8220;Title&#8221;]);</div></blockquote>
+<p class="last">}</p>
+</dd>
+</dl>
+<p>}</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Generates the numerics content page</li>
+</ul>
+<p class="last"><a href="#id13"><span class="problematic" id="id14">*</span></a>/</p>
+</dd>
+<dt>function drawNumerics() {</dt>
+<dd>html = &#8220;&#8221;;
+return html;</dd>
+</dl>
+<p>}</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Build a table</li>
+</ul>
+<p class="last"><a href="#id15"><span class="problematic" id="id16">*</span></a>/</p>
+</dd>
+<dt>function drawSummary(data, div) {</dt>
+<dd><p class="first">var html = &#8220;&lt;table&gt;n&#8221;;
+// Add the headers
+html += &#8220;&lt;th&gt;&lt;/th&gt;n&#8221;;
+for (var header in data[&#8220;Headers&#8221;]) {</p>
+<blockquote>
+<div>html += &#8220;&lt;th&gt;&#8221; + data[&#8220;Headers&#8221;][header] + &#8220;&lt;/th&gt;n&#8221;;</div></blockquote>
+<p>}
+// Add the data
+var testNames = Object.keys(data[&#8220;Data&#8221;]).sort();
+for (var idx in testNames) {</p>
+<blockquote>
+<div><p>testName = testNames[idx];
+html += &#8220;&lt;tr class=&#8221;testName&#8221;&gt;&lt;td&gt;&#8221; + testName + &#8220;&lt;/td&gt;&lt;/tr&gt;n&#8221;;
+for (var testCase in data[&#8220;Data&#8221;][testName]) {</p>
+<blockquote>
+<div><p>html_tmp1 = &#8220;&lt;tr &#8221;;
+html_tmp2 = &#8220;&gt;n&lt;td class=&#8221;testCase&#8221;&gt;&#8221; + testCase + &#8220;&lt;/td&gt;n&#8221;;
+style = &#8220;&#8221;;
+for (var headerIdx in data[&#8220;Headers&#8221;]) {</p>
+<blockquote>
+<div><p>header = data[&#8220;Headers&#8221;][headerIdx];
+html_tmp2 += &#8220;&lt;td&gt;&#8221;;
+value = data[&#8220;Data&#8221;][testName][testCase][header];
+dtype = typeof value;
+console.log(dtype);
+if (dtype == &#8216;number&#8217; || dtype == &#8216;string&#8217;) {</p>
+<blockquote>
+<div>html_tmp2 += value;</div></blockquote>
+<dl class="docutils">
+<dt>} else if (dtype == &#8216;object&#8217;) {</dt>
+<dd><dl class="first docutils">
+<dt>if (value.length == 2) {</dt>
+<dd><p class="first">html_tmp2 += value[0] + &#8221; of &#8221; + value[1];
+// Handle failures
+if (value[0] != value[1]) {</p>
+<blockquote>
+<div>style = &#8220;style=&#8221;color:red&#8221;; &#8221;;</div></blockquote>
+<p class="last">}</p>
+</dd>
+</dl>
+<p class="last">}</p>
+</dd>
+</dl>
+<p>}
+html_tmp2 += &#8220;&lt;/td&gt;n&#8221;;</p>
+</div></blockquote>
+<p>}
+html += html_tmp1 + style + html_tmp2 + &#8220;&lt;/tr&gt;n&#8221;;</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p class="last">}
+html += &#8220;&lt;/table&gt;n&#8221;;
+$(div).append(html);</p>
+</dd>
+</dl>
+<p>}</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Build an error message</li>
+</ul>
+<p class="last"><a href="#id17"><span class="problematic" id="id18">*</span></a>/</p>
+</dd>
+<dt>function drawError(data, div) {</dt>
+<dd>html = &#8220;&lt;h3&gt;&#8221; + data[&#8220;Title&#8221;] + &#8220;&lt;/h3&gt;n&#8221;;
+html += &#8220;&lt;div class=&#8221;error&#8221;&gt;&#8221;;
+html += &#8220;&lt;p&gt;ERROR: &#8221; + data[&#8220;Message&#8221;] + &#8220;&lt;/p&gt;n&#8221;;
+html += &#8220;&lt;/div&gt;&#8221;;
+$(div).append(html);</dd>
+</dl>
+<p>}</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Build a diff</li>
+</ul>
+<p class="last"><a href="#id19"><span class="problematic" id="id20">*</span></a>/</p>
+</dd>
+<dt>function drawDiff(data, div) {</dt>
+<dd><p class="first">controller = div.replace(&#8220;#&#8221;,&#8221;&#8221;) + &#8220;_controller&#8221;;
+// TODO: What&#8217;s up with this button!?
+html = &#8220;&lt;h3&gt;&#8221; + data[&#8220;Title&#8221;] +&#8221;&lt;/h3&gt;&#8221;;//+&#8221;  &lt;button id=&#8221;&#8221; + controller + &#8220;&#8221;&gt;Hide/Show&lt;/button&gt;&lt;/h3&gt;&#8221;;
+html += &#8220;&lt;div class=&#8221;diff&#8221; id=&#8221;&#8220;+div+&#8221;&#8220;&gt;&#8221;;
+for (var section in data[&#8220;Data&#8221;]) {</p>
+<blockquote>
+<div><p>html += &#8220;&lt;b&gt;[&#8221; + section + &#8220;]&lt;/b&gt;&#8221;;
+for (var varName in data[&#8220;Data&#8221;][section]) {</p>
+<blockquote>
+<div><p>arr = data[&#8220;Data&#8221;][section][varName];
+if (arr[0]) {</p>
+<blockquote>
+<div>html += &#8220;&lt;p&gt;   &#8221; + varName + &#8221; = &#8221; + arr[1] + &#8220;&lt;/p&gt;&#8221;;</div></blockquote>
+<dl class="docutils">
+<dt>} else {</dt>
+<dd>html += &#8220;&lt;p class=&#8221;new&#8221;&gt; + &#8221; + varName + &#8221; = &#8221; + arr[1] + &#8220;&lt;/p&gt;&#8221;;
+html += &#8220;&lt;p class=&#8221;old&#8221;&gt; - &#8221; + varName + &#8221; = &#8221; + arr[2] + &#8220;&lt;/p&gt;&#8221;;</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}
+html += &#8220;&lt;/div&gt;&#8221;;
+$(div).append(html);
+$(&#8221;.&#8221;+controller).click(function() {</p>
+<blockquote>
+<div>$(div).toggle();</div></blockquote>
+<p class="last">});</p>
+</dd>
+</dl>
+<p>}</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Build a bit for bit table</li>
+</ul>
+<p class="last"><a href="#id21"><span class="problematic" id="id22">*</span></a>/</p>
+</dd>
+<dt>function drawBitForBit(data, div) {</dt>
+<dd><p class="first">html = &#8220;&lt;h3&gt;&#8221; + data[&#8220;Title&#8221;] + &#8220;&lt;/h3&gt;n&#8221;;
+html += &#8220;&lt;div class=&#8221;bitForBit&#8221;&gt;&#8221;;
+html += &#8220;&lt;table&gt;n&#8221;;
+html += &#8220;&lt;th&gt;Variable&lt;/th&gt;n&#8221;;
+for (var idx in data[&#8220;Headers&#8221;]) {</p>
+<blockquote>
+<div>html += &#8220;&lt;th&gt;&#8221; + data[&#8220;Headers&#8221;][idx] + &#8220;&lt;/th&gt;n&#8221;;</div></blockquote>
+<p>}
+for (var varName in data[&#8220;Data&#8221;]) {</p>
+<blockquote>
+<div><p>html += &#8220;&lt;tr&gt;n&#8221;;
+html += &#8220;&lt;td&gt;&#8221; + varName + &#8220;&lt;/td&gt;n&#8221;;
+for (var j in data[&#8220;Headers&#8221;]) {</p>
+<blockquote>
+<div><p>var header = data[&#8220;Headers&#8221;][j];
+var hData = data[&#8220;Data&#8221;][varName][header];
+if (header == &#8220;Plot&#8221; &amp;&amp; (hData !== &#8220;N/A&#8221; || hData.indexOf(&#8220;ERROR:&#8221;)!==-1)) {</p>
+<blockquote>
+<div>html += &#8220;&lt;td&gt;&#8221; + drawThumbnail(hData, 50) + &#8220;&lt;/td&gt;n&#8221;;</div></blockquote>
+<dl class="docutils">
+<dt>} else {</dt>
+<dd><dl class="first docutils">
+<dt>if (typeof hData == &#8216;number&#8217;) {</dt>
+<dd>hData = hData.toExponential(5);</dd>
+</dl>
+<p class="last">}
+html += &#8220;&lt;td&gt;&#8221; + hData + &#8220;&lt;/td&gt;n&#8221;;</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>}
+html += &#8220;&lt;/tr&gt;n&#8221;;</p>
+</div></blockquote>
+<p class="last">}
+html += &#8220;&lt;/table&gt;n&#8221;;
+html += &#8220;&lt;/div&gt;&#8221;;
+$(div).append(html);</p>
+</dd>
+</dl>
+<p>}</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Build a table</li>
+</ul>
+<p class="last"><a href="#id23"><span class="problematic" id="id24">*</span></a>/</p>
+</dd>
+<dt>function drawTable(data, div) {</dt>
+<dd><p class="first">html = &#8220;&lt;h3&gt;&#8221; + data[&#8220;Title&#8221;] + &#8220;&lt;/h3&gt;n&#8221;;
+html += &#8220;&lt;div class=&#8221;table&#8221;&gt;&#8221;;
+html += &#8220;&lt;table&gt;n&#8221;;
+for (var idx in data[&#8220;Headers&#8221;]) {</p>
+<blockquote>
+<div>html += &#8220;&lt;th&gt;&#8221; + data[&#8220;Headers&#8221;][idx] + &#8220;&lt;/th&gt;n&#8221;;</div></blockquote>
+<p>}</p>
+<p>html += &#8220;&lt;tr&gt;n&#8221;;
+for (var idx in data[&#8220;Headers&#8221;]) {</p>
+<blockquote>
+<div>html += &#8220;&lt;td&gt;&#8221; + data[&#8220;Data&#8221;][data[&#8220;Headers&#8221;][idx]] + &#8220;&lt;/td&gt;n&#8221;;</div></blockquote>
+<p class="last">}
+html += &#8220;&lt;/tr&gt;n&#8221;;
+html += &#8220;&lt;/table&gt;n&#8221;;
+html += &#8220;&lt;/div&gt;&#8221;;
+$(div).append(html);</p>
+</dd>
+</dl>
+<p>}</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Build a gallery</li>
+</ul>
+<p class="last"><a href="#id25"><span class="problematic" id="id26">*</span></a>/</p>
+</dd>
+<dt>function drawGallery(data, div) {</dt>
+<dd><p class="first">var html = &#8220;&lt;div class=&#8221;gallery&#8221;&gt;&#8221;;
+html += &#8220;&lt;h3&gt;&#8221; + data[&#8220;Title&#8221;] + &#8220;&lt;/h3&gt;&#8221;;
+html += &#8220;&lt;/div&gt;&#8221;;
+$(div).append(html);
+for (var idx in data[&#8220;Data&#8221;]) {</p>
+<blockquote>
+<div>img_elem = data[&#8220;Data&#8221;][idx];
+$(&#8221;.gallery&#8221;).append(&#8220;&lt;div id=img_&#8221;+idx+&#8221;&gt;&lt;/div&gt;&#8221;)
+drawImage(img_elem, $(&#8220;#img_&#8221;+idx));</div></blockquote>
+<p class="last">}</p>
+</dd>
+</dl>
+<p>}</p>
+<dl class="docutils">
+<dt>function drawImage(img_elem, div) {</dt>
+<dd>img_dir = window.location.href.substr(0,window.location.href.lastIndexOf(&#8216;/&#8217;)+1) + &#8220;imgs/&#8221;;
+var html = &#8220;&lt;p&gt;&#8221; + img_elem[&#8220;Title&#8221;] + &#8220;&lt;/p&gt;&#8221;;
+html += drawThumbnail(img_dir + img_elem[&#8220;Plot File&#8221;], 200);
+$(div).append(html);</dd>
+</dl>
+<p>}</p>
+<dl class="docutils">
+<dt>function drawThumbnail(path, size) {</dt>
+<dd>html = &#8220;&lt;a target=&#8221;_blank&#8221; href=&#8221;&#8221; + path + &#8220;&#8221;&gt;&#8221;;
+html += &#8220;&lt;img src=&#8221;&#8221; + path + &#8220;&#8221; style=&#8221;height: &#8221; + size + &#8220;px; overflow: hidden; position: relative&#8221;&gt;&#8221;;
+html += &#8220;&lt;/a&gt;&#8221;;
+return html;</dd>
+</dl>
+<p>}</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Load a json file into a variable</li>
+</ul>
+<p class="last"><a href="#id27"><span class="problematic" id="id28">*</span></a>/</p>
+</dd>
+<dt>function loadJSON(path) {</dt>
+<dd><p class="first">var data;
+$.ajax({</p>
+<blockquote>
+<div><p>&#8216;async&#8217;: false,
+&#8216;global&#8217;: false,
+&#8216;url&#8217;: path,
+&#8216;dataType&#8217;: &#8220;json&#8221;,
+&#8216;success&#8217;: function(json) {</p>
+<blockquote>
+<div>data = json;</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p class="last">});
+return data;</p>
+</dd>
+</dl>
+<p>}</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Recursively go through json data and search for the &#8220;Elements&#8221; list</li>
+</ul>
+<p class="last"><a href="#id29"><span class="problematic" id="id30">*</span></a>/</p>
+</dd>
+<dt>function getElements(json) {</dt>
+<dd><dl class="first docutils">
+<dt>if (json.hasOwnProperty(&#8220;Elements&#8221;)) {</dt>
+<dd>return json[&#8220;Elements&#8221;];</dd>
+<dt>} else {</dt>
+<dd><dl class="first docutils">
+<dt>for (section in json) {</dt>
+<dd>return getElements(json[section]);</dd>
+</dl>
+<p class="last">}</p>
+</dd>
+</dl>
+<p class="last">}</p>
+</dd>
+</dl>
+<p>}</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Contents</a></li>
+<li><a class="reference internal" href="#readme">README</a></li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/out/index.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Katherine Evans, Joseph Kennedy, Andrew Bennett.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="../_sources/out/index.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

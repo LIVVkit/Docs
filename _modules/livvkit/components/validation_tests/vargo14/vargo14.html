@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>livvkit.components.validation_tests.vargo14.vargo14 &mdash; LIVVKit 2.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '2.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="LIVVKit 2.0.0 documentation" href="../../../../../index.html" />
+    <link rel="up" title="livvkit" href="../../../../livvkit.html" />
+   
+  <link rel="stylesheet" href="../../../../../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for livvkit.components.validation_tests.vargo14.vargo14</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) 2015, UT-BATTELLE, LLC</span>
+<span class="c1"># All rights reserved.</span>
+<span class="c1"># </span>
+<span class="c1"># Redistribution and use in source and binary forms, with or without</span>
+<span class="c1"># modification, are permitted provided that the following conditions are met:</span>
+<span class="c1"># </span>
+<span class="c1"># 1. Redistributions of source code must retain the above copyright notice, this</span>
+<span class="c1"># list of conditions and the following disclaimer.</span>
+<span class="c1"># </span>
+<span class="c1"># 2. Redistributions in binary form must reproduce the above copyright notice,</span>
+<span class="c1"># this list of conditions and the following disclaimer in the documentation</span>
+<span class="c1"># and/or other materials provided with the distribution.</span>
+<span class="c1"># </span>
+<span class="c1"># 3. Neither the name of the copyright holder nor the names of its contributors</span>
+<span class="c1"># may be used to endorse or promote products derived from this software without</span>
+<span class="c1"># specific prior written permission.</span>
+<span class="c1"># </span>
+<span class="c1"># THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND</span>
+<span class="c1"># ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED</span>
+<span class="c1"># WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE</span>
+<span class="c1"># DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE</span>
+<span class="c1"># FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL</span>
+<span class="c1"># DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR</span>
+<span class="c1"># SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER</span>
+<span class="c1"># CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,</span>
+<span class="c1"># OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span>
+<span class="c1"># OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Analyze the ice sheet coverage.  For more information check documentation for </span>
+<span class="sd">the run() function.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">from</span> <span class="nn">netCDF4</span> <span class="kn">import</span> <span class="n">Dataset</span>
+
+<span class="kn">from</span> <span class="nn">livvkit.util</span> <span class="kn">import</span> <span class="n">functions</span>
+<span class="kn">from</span> <span class="nn">livvkit.util</span> <span class="kn">import</span> <span class="n">variables</span>
+<span class="kn">from</span> <span class="nn">livvkit.util.datastructures</span> <span class="kn">import</span> <span class="n">ElementHelper</span> 
+
+<div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../../../source/livvkit.components.validation_tests.vargo14.html#livvkit.components.validation_tests.vargo14.vargo14.run">[docs]</a><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runs the analysis of the coverage of the ice sheet over the land mass.</span>
+<span class="sd">    Produces both an overall coverage percentage metric and a coverage plot.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        name: The name of the test</span>
+<span class="sd">        config: A dictionary representation of the configuration file</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        A list of elements to </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">greenland_data</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">variables</span><span class="o">.</span><span class="n">cwd</span><span class="p">,</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;data_dir&#39;</span><span class="p">],</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;gl_data&#39;</span><span class="p">])</span> 
+    <span class="n">velocity_data</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">variables</span><span class="o">.</span><span class="n">cwd</span><span class="p">,</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;data_dir&#39;</span><span class="p">],</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;vel_data&#39;</span><span class="p">])</span>
+   
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">greenland_data</span><span class="p">)</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">velocity_data</span><span class="p">)):</span>
+        <span class="c1"># Add more handling here -- what do we want to return for failed tests</span>
+        <span class="k">return</span> <span class="n">ElementHelper</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;lvargo13&quot;</span><span class="p">,</span> <span class="s2">&quot;Could not find necessary data for validation!&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Generate the script</span>
+    <span class="n">output_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">variables</span><span class="o">.</span><span class="n">index_dir</span><span class="p">,</span> <span class="s1">&#39;validation&#39;</span><span class="p">,</span> <span class="s1">&#39;imgs&#39;</span><span class="p">)</span>
+    <span class="n">output_file_base</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s1">&#39;lvargo13&#39;</span><span class="p">)</span>
+    <span class="n">functions</span><span class="o">.</span><span class="n">mkdir_p</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span>
+
+    <span class="n">ncl_command</span> <span class="o">=</span> <span class="s1">&#39;ncl </span><span class="se">\&#39;</span><span class="s1">gl_data = addfile(&quot;&#39;</span><span class="o">+</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;data_dir&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;gl_data&#39;</span><span class="p">]</span> <span class="o">+</span><span class="s1">&#39;&quot;, &quot;r&quot;)</span><span class="se">\&#39;</span><span class="s1"> &#39;</span>  \
+                  <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">vel_data = addfile(&quot;&#39;</span><span class="o">+</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;data_dir&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;vel_data&#39;</span><span class="p">]</span> <span class="o">+</span><span class="s1">&#39;&quot;, &quot;r&quot;)</span><span class="se">\&#39;</span><span class="s1"> &#39;</span>  \
+                  <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">model_prefix = &quot;&#39;</span> \
+                  <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;data_dir&#39;</span><span class="p">],</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;model_prefix&#39;</span><span class="p">])</span> <span class="o">+</span><span class="s1">&#39;&quot;</span><span class="se">\&#39;</span><span class="s1"> &#39;</span>  \
+                  <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">model_suffix = &quot;&#39;</span><span class="o">+</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;model_suffix&#39;</span><span class="p">]</span> <span class="o">+</span><span class="s1">&#39;&quot;</span><span class="se">\&#39;</span><span class="s1"> &#39;</span>  \
+                  <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">model_start = &#39;</span><span class="o">+</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;model_start&#39;</span><span class="p">]</span> <span class="o">+</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1"> &#39;</span>  \
+                  <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">model_end = &#39;</span><span class="o">+</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;model_end&#39;</span><span class="p">]</span> <span class="o">+</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1"> &#39;</span>  \
+                  <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">plot_file_base = &quot;&#39;</span><span class="o">+</span> <span class="n">output_file_base</span> <span class="o">+</span><span class="s1">&#39;&quot;</span><span class="se">\&#39;</span><span class="s1"> &#39;</span> \
+                  <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">variables</span><span class="o">.</span><span class="n">cwd</span><span class="p">,</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;plot_script&#39;</span><span class="p">])</span>
+
+    <span class="c1"># Be cautious about running subprocesses</span>
+    <span class="n">call</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">ncl_command</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> 
+                            <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
+    <span class="n">stdOut</span><span class="p">,</span> <span class="n">stdErr</span> <span class="o">=</span> <span class="n">call</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">call</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    
+    <span class="c1">#TODO: Put some error checking here</span>
+
+    <span class="n">output_plots</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">output_file_base</span> <span class="o">+</span> <span class="s2">&quot;*.png&quot;</span><span class="p">)]</span>
+    <span class="n">plot_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">plot</span> <span class="ow">in</span> <span class="n">output_plots</span><span class="p">:</span>
+        <span class="n">plot_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ElementHelper</span><span class="o">.</span><span class="n">image_element</span><span class="p">(</span><span class="n">plot</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">plot</span><span class="p">))</span> 
+    <span class="k">return</span> <span class="n">ElementHelper</span><span class="o">.</span><span class="n">section</span><span class="p">(</span><span class="s2">&quot;lvargo13&quot;</span><span class="p">,</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">],</span> <span class="n">ElementHelper</span><span class="o">.</span><span class="n">gallery</span><span class="p">(</span><span class="s2">&quot;Plots&quot;</span><span class="p">,</span> <span class="n">plot_list</span><span class="p">))</span></div>
+
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../../index.html">Module code</a><ul>
+  <li><a href="../../../../livvkit.html">livvkit</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Katherine Evans, Joseph Kennedy, Andrew Bennett.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

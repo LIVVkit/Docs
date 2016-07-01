@@ -1,0 +1,98 @@
+BATS regression test output data
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The `build and test structure (BATS) <Build-and-test>`__ will output all
+the regression tests data to a ``PLATFORM-COMPILER`` subdirectory within
+either the default output directory (``reg_test/``) or one specified by
+the ``-o``/``--out-dir`` option (see `BATS options <BATS-options>`__).
+The output directory will have the structure:
+
+.. code:: sh
+
+    reg_test
+    └── titan-gnu
+        ├── CMakeCache.txt
+        ├── [jobs] 
+        │    ├── ...
+        │    └── ...
+        ├── [run_all_jobs.bash] 
+        ├── [clean_timing.bash] 
+        │
+        └── higher-order
+            ├── dome
+            │   ├── [timing] 
+            │   │    └── dome-t?.RESO.pPRC.*
+            │   └── dome.RESO.pPRC.*
+            ├── ismip-hom
+            │   ├── ismip-hom-a.RESO.pPRC.*
+            │   ├── ismip-hom-c.RESO.pPRC.*
+            │   ├── ismip-hom-f.0100.pPRC.*
+            ├── shelf
+            │   ├── shelf-circular.RESO.pPRC.*
+            │   ├── shelf-confined.RESO.pPRC.*
+            └── stream
+                └── stream.RESO.pPRC.*
+
+where ``[]`` indicates files and directories that appear optionally
+(detailed below), ``RESO`` is a four-digit number indicating the model
+resolution (units are test specific), and ``pPRC`` is an optional
+three-digit number, prefixed by a ``p``, indicating the number of
+processors used to run the model. The characters ``?`` and ``*`` are the
+regular expressions expansion characters.
+
+The ``CMakeCache.txt`` is a copy of the one that appears in the build
+directory (specified by the ``-b``/``--build-dir`` option). This is
+included so that a detailed comparison of a benchmark and test build can
+be preformed manually (not done by LIVVkit).
+
+The ``jobs`` directory (and all sub-files), ``run_all_jobs.bash``, and
+``clean_timing.bash`` files only appear on the supported high
+performance computers (HPCs) that use a batch job submission queue. The
+``jobs`` directory contains all the created batch job scripts. The
+``run_all_jobs.bash`` will submit all the batch job scripts in the
+``jobs`` folder.
+
+The ``timing`` directories (and all sub-files) are only created if the
+``--timing`` option was passed to BATS. This directory will contain 10
+unique sets of the performance tests -- indicated by the ``-t?`` in the
+sub-file names. On HPCs, the ``clean_timing.bash`` script will remove
+all but the ``*.cism_timing*`` output files, which eliminates redundant
+files and reduces the size of ``reg_test``. On regular personal
+computers (PCs), this directory will automatically be cleaned and
+contain all the ``*.results`` files which contain the timing data (note
+the difference in file extensions created by CISM on HPCs and PCs).
+
+The ``higher-order`` directory contains all the individual regression
+tests data. It's directory structure mirrors CISM. That is, the
+``runTEST.py`` script lives in ``tests/higher-order/TEST/`` within the
+CISM source code, and the output regression test data lives in the BATS
+``reg_test/higher-order/TEST/`` output directory.
+
+Each of the ``TEST`` subdirectories contains the data, and associated
+files, for every permutation of the ``TEST`` tests, and are uniquely
+defined by the ``TEST[-TYPE].RESO.pORC.`` prefix on all the files. Each
+individual permutation of a test will have this set of files associated
+with it:
+
+-  ``TEST[-TYPE].RESO.pORC.config`` -- the config file passed to the
+   CISM driver
+-  ``TEST[-TYPE].RESO.pORC.config.log`` -- a log of how CISM processed
+   the config file.
+-  ``TEST[-TYPE].RESO.pORC.config.oe`` -- all the CISM output for the
+   test
+-  ``TEST[-TYPE].RESO.pORC.nc`` -- the input data passed to CISM for the
+   test
+-  ``TEST[-TYPE].RESO.pORC.out.nc`` -- the data output by CISM for the
+   test
+-  ``[TEST[-TYPE].RESO.pORC.results]`` -- the test timing data on PCs
+-  ``[TEST[-TYPE].RESO.pORC.cism_timing*]`` -- the test timing data on
+   HPCs
+
+Additionally, if a ``*trillinosOptions.xml`` appears in the
+``tests/higher-order/TEST/`` directory from the CISM source parent, it
+is copied into the BATS ``reg_test/higher-order/TEST`` output directory.
+
+For more information on any particular one of these test files, see the
+`CISM <http://oceans11.lanl.gov/cism/documentation.html>`__ users manual
+and any ``README`` files in the ``tests/higher-order/TEST/`` directory
+(from the CISM source parent).

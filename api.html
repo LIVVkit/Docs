@@ -1,0 +1,681 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Numerics &mdash; LIVVKit 2.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="LIVVKit 2.0.0 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <hr class="docutils" />
+<div class="section" id="module-livvkit.components.numerics">
+<span id="numerics"></span><h1>Numerics<a class="headerlink" href="#module-livvkit.components.numerics" title="Permalink to this headline">¶</a></h1>
+<p>Numerics Test Base Module.</p>
+</div>
+<div class="section" id="module-livvkit.components.verification">
+<span id="verification"></span><h1>Verification<a class="headerlink" href="#module-livvkit.components.verification" title="Permalink to this headline">¶</a></h1>
+<p>Verification Test Base Module</p>
+<dl class="function">
+<dt id="livvkit.components.verification.bit_for_bit">
+<code class="descname">bit_for_bit</code><span class="sig-paren">(</span><em>model_path</em>, <em>bench_path</em>, <em>config</em>, <em>plot=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/livvkit/components/verification.html#bit_for_bit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.components.verification.bit_for_bit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether the given files have bit for bit solution matches
+on the given variable list.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>model_path</strong> &#8211; absolute path to the model dataset</li>
+<li><strong>bench_path</strong> &#8211; absolute path to the benchmark dataset</li>
+<li><strong>config</strong> &#8211; the configuration of the set of analyses</li>
+<li><strong>plot</strong> &#8211; a boolean of whether or not to generate plots</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A dictionary created by the ElementHelper object corresponding to
+the results of the bit for bit testing</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="livvkit.components.verification.diff_configurations">
+<code class="descname">diff_configurations</code><span class="sig-paren">(</span><em>model_config</em>, <em>bench_config</em>, <em>model_bundle</em>, <em>bench_bundle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/livvkit/components/verification.html#diff_configurations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.components.verification.diff_configurations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Description</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>model_config</strong> &#8211; a dictionary with the model configuration data</li>
+<li><strong>bench_config</strong> &#8211; a dictionary with the benchmark configuration data</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A dictionary created by the ElementHelper object corresponding to
+the results of the bit for bit testing</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="livvkit.components.verification.plot_bit_for_bit">
+<code class="descname">plot_bit_for_bit</code><span class="sig-paren">(</span><em>case</em>, <em>var_name</em>, <em>model_data</em>, <em>bench_data</em>, <em>diff_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/livvkit/components/verification.html#plot_bit_for_bit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.components.verification.plot_bit_for_bit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a bit for bit plot</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-livvkit.components.performance">
+<span id="performance"></span><h1>Performance<a class="headerlink" href="#module-livvkit.components.performance" title="Permalink to this headline">¶</a></h1>
+<p>Performance Test Base Module.</p>
+<dl class="function">
+<dt id="livvkit.components.performance.generate_scaling_plot">
+<code class="descname">generate_scaling_plot</code><span class="sig-paren">(</span><em>timing_data</em>, <em>title</em>, <em>description</em>, <em>plot_file</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/livvkit/components/performance.html#generate_scaling_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.components.performance.generate_scaling_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a scaling plot.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>timing_data</strong> &#8211; data returned from a bundle&#8217;s <a href="#id1"><span class="problematic" id="id2">*</span></a>_scaling method</li>
+<li><strong>tite</strong> &#8211; the title of the plot</li>
+<li><strong>description</strong> &#8211; a description of the plot</li>
+<li><strong>plot_file</strong> &#8211; the file to write out to</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">an image element containing the plot file and metadata</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="livvkit.components.performance.generate_timing_breakdown_plot">
+<code class="descname">generate_timing_breakdown_plot</code><span class="sig-paren">(</span><em>timing_stats</em>, <em>scaling_var</em>, <em>title</em>, <em>description</em>, <em>plot_file</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/livvkit/components/performance.html#generate_timing_breakdown_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.components.performance.generate_timing_breakdown_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Description</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>timing_stats</strong> &#8211; a dictionary of the form
+{proc_count : {model/bench : { var : { stat : val }}}}</li>
+<li><strong>scaling_var</strong> &#8211; the variable that accounts for the total runtime</li>
+<li><strong>title</strong> &#8211; the title of the plot</li>
+<li><strong>description</strong> &#8211; the description of the plot</li>
+<li><strong>plot_file</strong> &#8211; the file to write the plot out to</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">an image element containing the plot file and metadata</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="livvkit.components.performance.generate_timing_stats">
+<code class="descname">generate_timing_stats</code><span class="sig-paren">(</span><em>file_list</em>, <em>var_list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/livvkit/components/performance.html#generate_timing_stats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.components.performance.generate_timing_stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse all of the timing files, and generate some statistics
+about the run.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>model_dir</strong> &#8211; Path to the model output</li>
+<li><strong>bench_dir</strong> &#8211; Path to the benchmark data</li>
+<li><strong>config</strong> &#8211; A dictionary containing option specifications</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">[mean, min, max, mean, diff. from bench mean]</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">A LIVVDict containing values that have the form</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="livvkit.components.performance.parse_gptl">
+<code class="descname">parse_gptl</code><span class="sig-paren">(</span><em>file_path</em>, <em>var_list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/livvkit/components/performance.html#parse_gptl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.components.performance.parse_gptl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a GPTL timing file and extract some data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>file_path</strong> &#8211; the path to the GPTL timing file</li>
+<li><strong>var_list</strong> &#8211; a list of strings to look for in the file</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A LIVVDict containing key-value pairs of the livvkit
+and the times associated with them</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-livvkit.components.validation">
+<span id="validation"></span><h1>Validation<a class="headerlink" href="#module-livvkit.components.validation" title="Permalink to this headline">¶</a></h1>
+<p>Validation Test Base Module</p>
+</div>
+<div class="section" id="utilities">
+<h1>Utilities<a class="headerlink" href="#utilities" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="livvkit.util.datastructures.LIVVDict">
+<em class="property">class </em><code class="descname">LIVVDict</code><a class="reference internal" href="_modules/livvkit/util/datastructures.html#LIVVDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.datastructures.LIVVDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extension of the dictionary datastructure to allow for auto nesting.</p>
+<dl class="method">
+<dt id="livvkit.util.datastructures.LIVVDict.nested_assign">
+<code class="descname">nested_assign</code><span class="sig-paren">(</span><em>key_list</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/livvkit/util/datastructures.html#LIVVDict.nested_assign"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.datastructures.LIVVDict.nested_assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the value of nested LIVVDicts given a list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="livvkit.util.datastructures.LIVVDict.nested_insert">
+<code class="descname">nested_insert</code><span class="sig-paren">(</span><em>item_list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/livvkit/util/datastructures.html#LIVVDict.nested_insert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.datastructures.LIVVDict.nested_insert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a series of nested LIVVDicts given a list</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="livvkit.util.datastructures.ElementHelper">
+<em class="property">class </em><code class="descname">ElementHelper</code><a class="reference internal" href="_modules/livvkit/util/datastructures.html#ElementHelper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.datastructures.ElementHelper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper class to make building new display elements in the output
+files easier and less error prone.  This is more useful as a
+conceptual grouping of functions rather than a full fledged object.</p>
+<p>Implementing new elements is possible simply by adding new functions
+to this class.  They will be written out to the JSON files as sub-objects,
+which must be interpreted by the Javascript found in the resources
+directory.</p>
+<dl class="staticmethod">
+<dt id="livvkit.util.datastructures.ElementHelper.bit_for_bit">
+<em class="property">static </em><code class="descname">bit_for_bit</code><span class="sig-paren">(</span><em>title</em>, <em>headers</em>, <em>data_node</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/livvkit/util/datastructures.html#ElementHelper.bit_for_bit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.datastructures.ElementHelper.bit_for_bit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary representing a new bit for bit table element.
+Bit for bit elements can be thought of as tables, but require the
+special addition that a diff plot may need to be embedded within
+the table.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>title</strong> &#8211; The title to display</li>
+<li><strong>headers</strong> &#8211; Columns of the table</li>
+<li><strong>data_node</strong> &#8211; A dictionary with the form:
+{&#8220;var_name&#8221; : {&#8220;header : { &#8220;data&#8221; } } }</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A dictionary with the metadata specifying that it is to be
+rendered as a bit for bit table</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="livvkit.util.datastructures.ElementHelper.error">
+<em class="property">static </em><code class="descname">error</code><span class="sig-paren">(</span><em>title</em>, <em>error_msg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/livvkit/util/datastructures.html#ElementHelper.error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.datastructures.ElementHelper.error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Builds an error element.  Provides a way to show errors or other
+anomalous behavior in the web output.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>title</strong> &#8211; The title to display</li>
+<li><strong>error_msg</strong> &#8211; A description of the error or other helpful message</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A dictionary with the metadata specifying that it is to be
+rendered as an error element</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="livvkit.util.datastructures.ElementHelper.file_diff">
+<em class="property">static </em><code class="descname">file_diff</code><span class="sig-paren">(</span><em>title</em>, <em>diff_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/livvkit/util/datastructures.html#ElementHelper.file_diff"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.datastructures.ElementHelper.file_diff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Builds a file diff element.  This element can be used to check whether
+configuration files have changed or other similar checks.  Differences
+will be highlighted when rendered via Javascript.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>title</strong> &#8211; The title to display</li>
+<li><strong>diff_data</strong> &#8211; A dictionary of the form:
+{ &#8220;section_name&#8221; : { &#8220;variale_name&#8221; : [diff, val_1, val_2] } }</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A dictionary with the metadata specifying that it is to be
+rendered as a file diff element</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="livvkit.util.datastructures.ElementHelper.gallery">
+<em class="property">static </em><code class="descname">gallery</code><span class="sig-paren">(</span><em>title</em>, <em>image_elem_list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/livvkit/util/datastructures.html#ElementHelper.gallery"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.datastructures.ElementHelper.gallery" title="Permalink to this definition">¶</a></dt>
+<dd><p>Builds an image gallery out of a list of image elements. The
+gallery element is provided as a way of grouping images under
+a single heading and conserving space on the output page.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>title</strong> &#8211; The title to display</li>
+<li><strong>image_elem_list</strong> &#8211; The image elements to display.  If a single
+image element is given it will automatically be wrapped into
+a list.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A dictionary with the metadata specifying that it is to be
+rendered as an image gallery</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="livvkit.util.datastructures.ElementHelper.image_element">
+<em class="property">static </em><code class="descname">image_element</code><span class="sig-paren">(</span><em>title</em>, <em>desc</em>, <em>image_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/livvkit/util/datastructures.html#ElementHelper.image_element"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.datastructures.ElementHelper.image_element" title="Permalink to this definition">¶</a></dt>
+<dd><p>Builds an image element.  Image elements are primarily created
+and then wrapped into an image gallery element.  This is not required
+behavior, however and it&#8217;s independent usage should be allowed depending
+on the behavior required.</p>
+<p>The Javascript will search for the <cite>image_name</cite> in the component&#8217;s
+<cite>imgs</cite> directory when rendering.  For example, all verification images
+are output to <cite>vv_xxxx-xx-xx/verification/imgs</cite> and then the verification
+case&#8217;s output page will search for <cite>image_name</cite> within that directory.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>title</strong> &#8211; The title to display</li>
+<li><strong>desc</strong> &#8211; A description of the image or plot</li>
+<li><strong>image_name</strong> &#8211; The filename of the image</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A dictionary with the metadata specifying that it is to be
+rendered as an image element</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="livvkit.util.datastructures.ElementHelper.section">
+<em class="property">static </em><code class="descname">section</code><span class="sig-paren">(</span><em>title</em>, <em>description</em>, <em>elementList</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/livvkit/util/datastructures.html#ElementHelper.section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.datastructures.ElementHelper.section" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary representing a new section to display elements.
+This can be thought of as a simple container for displaying multiple
+types of information.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>title</strong> &#8211; The title to display</li>
+<li><strong>description</strong> &#8211; A description of the section</li>
+<li><strong>elementList</strong> &#8211; The list of elements to display. If a single element is
+given it will be wrapped in a list.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A dictionary with metadata specifying that it is to be rendered
+as a section containing multiple elements.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="livvkit.util.datastructures.ElementHelper.table">
+<em class="property">static </em><code class="descname">table</code><span class="sig-paren">(</span><em>title</em>, <em>headers</em>, <em>data_node</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/livvkit/util/datastructures.html#ElementHelper.table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.datastructures.ElementHelper.table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary representing a new table element.  Tables
+are specified with two main pieces of information, the headers
+and the data to put into the table.  Rendering of the table is
+the responsibility of the Javascript in the resources directory.
+When the data does not line up with the headers given this should
+be handled within the Javascript itself, not here.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>title</strong> &#8211; The title to display</li>
+<li><strong>headers</strong> &#8211; The columns to put into the table</li>
+<li><strong>data_node</strong> &#8211; A dictionary with the form:
+{&#8220;case&#8221; : {&#8220;subcase&#8221; : { &#8220;header&#8221; : &#8220;data&#8221; } } }</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A dictionary with the metadata specifying that it is to be
+rendered as a table.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="web-frontend">
+<h1>Web Frontend<a class="headerlink" href="#web-frontend" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="global-data">
+<h2>_global_ (data)<a class="headerlink" href="#global-data" title="Permalink to this headline">¶</a></h2>
+<dl class="data">
+<dt id="_global_">
+<code class="descname">_global_</code><a class="headerlink" href="#_global_" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="function">
+<dt id="drawNav">
+<code class="descname">drawNav</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#drawNav" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw the navigation sidebar</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="drawIndex">
+<code class="descname">drawIndex</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#drawIndex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generatees the summary content page</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="drawVerification">
+<code class="descname">drawVerification</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#drawVerification" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the verification content page</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="drawValidation">
+<code class="descname">drawValidation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#drawValidation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the validation content page</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="drawPerformance">
+<code class="descname">drawPerformance</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#drawPerformance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the performance content page</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="drawNumerics">
+<code class="descname">drawNumerics</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#drawNumerics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the numerics content page</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="drawSummary">
+<code class="descname">drawSummary</code><span class="sig-paren">(</span><em>data</em>, <em>div</em><span class="sig-paren">)</span><a class="headerlink" href="#drawSummary" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> &#8211; </li>
+<li><strong>div</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Build a table</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="drawError">
+<code class="descname">drawError</code><span class="sig-paren">(</span><em>data</em>, <em>div</em><span class="sig-paren">)</span><a class="headerlink" href="#drawError" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> &#8211; </li>
+<li><strong>div</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Build an error message</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="drawDiff">
+<code class="descname">drawDiff</code><span class="sig-paren">(</span><em>data</em>, <em>div</em><span class="sig-paren">)</span><a class="headerlink" href="#drawDiff" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> &#8211; </li>
+<li><strong>div</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Build a diff</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="drawBitForBit">
+<code class="descname">drawBitForBit</code><span class="sig-paren">(</span><em>data</em>, <em>div</em><span class="sig-paren">)</span><a class="headerlink" href="#drawBitForBit" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> &#8211; </li>
+<li><strong>div</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Build a bit for bit table</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="drawTable">
+<code class="descname">drawTable</code><span class="sig-paren">(</span><em>data</em>, <em>div</em><span class="sig-paren">)</span><a class="headerlink" href="#drawTable" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> &#8211; </li>
+<li><strong>div</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Build a table</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="drawGallery">
+<code class="descname">drawGallery</code><span class="sig-paren">(</span><em>data</em>, <em>div</em><span class="sig-paren">)</span><a class="headerlink" href="#drawGallery" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> &#8211; </li>
+<li><strong>div</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Build a gallery</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="loadJSON">
+<code class="descname">loadJSON</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#loadJSON" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>path</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Load a json file into a variable</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="getElements">
+<code class="descname">getElements</code><span class="sig-paren">(</span><em>json</em><span class="sig-paren">)</span><a class="headerlink" href="#getElements" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>json</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Recursively go through json data and search for the &#8220;Elements&#8221; list</p>
+</dd></dl>
+
+</dd></dl>
+
+<div class="footer container">
+Documentation generated by <a class="reference external" href="http://code.google.com/p/jsdoc-toolkit/">jsdoc-toolkit</a>  2.4.0 using <a class="reference external" href="http://code.google.com/p/jsdoc-toolkit-rst-template/">jsdoc-toolkit-rst-template</a></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Numerics</a></li>
+<li><a class="reference internal" href="#module-livvkit.components.verification">Verification</a></li>
+<li><a class="reference internal" href="#module-livvkit.components.performance">Performance</a></li>
+<li><a class="reference internal" href="#module-livvkit.components.validation">Validation</a></li>
+<li><a class="reference internal" href="#utilities">Utilities</a></li>
+<li><a class="reference internal" href="#web-frontend">Web Frontend</a><ul>
+<li><a class="reference internal" href="#global-data">_global_ (data)</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/api.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Katherine Evans, Joseph Kennedy, Andrew Bennett.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/api.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

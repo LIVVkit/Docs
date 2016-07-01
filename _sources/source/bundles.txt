@@ -1,0 +1,18 @@
+bundles package
+===============
+
+Subpackages
+-----------
+
+.. toctree::
+
+    bundles.CISM-albany
+    bundles.CISM-glissade
+
+Module contents
+---------------
+
+.. automodule:: bundles
+    :members:
+    :undoc-members:
+    :show-inheritance:

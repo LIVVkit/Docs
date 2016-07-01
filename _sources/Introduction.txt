@@ -1,0 +1,46 @@
+.. image:: ./imgs/livvkit.png
+    :width: 400px
+    :align: center
+    :alt: LIVVkit
+
+Installation
+~~~~~~~~~~~~
+To install LIVVkit via pip simply use:
+
+.. code:: sh
+    
+    pip install livvkit
+
+If you wish to get a copy of the source you can clone our Github repo:
+
+.. code:: sh
+
+    git clone https://github.com/LIVVkit/LIVVkit.git
+
+LIVVkit was designed to be used with `Python
+XXX <https://www.python.org/>`__. If you are using any other version of
+Python by default, use the command for Python XXX in place of any calls
+to ``python`` in this document (or any other LIVVkit Documentation). If
+you are not sure what version of Python you are running try running
+``python --version`` from a terminal.
+
+If you are having any troubles with dependencies, open an issue on the
+`issue tracker <https://github.com/LIVVkit/LIVVkit/issues>`__!
+
+Basic Usage
+~~~~~~~~~~~
+LIVVkit can be controlled via options specified at the command
+line. To see the full list of options, run:
+
+.. code:: sh
+
+    livv.py -h
+
+after installing via `pip` or
+
+.. code:: sh
+
+    python livv.py -h
+
+if you are running from a cloned repo.
+

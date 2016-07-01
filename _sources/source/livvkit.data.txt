@@ -1,0 +1,19 @@
+livvkit.data package
+====================
+
+Subpackages
+-----------
+
+.. toctree::
+
+    livvkit.data.numerics
+    livvkit.data.validation
+    livvkit.data.verification
+
+Module contents
+---------------
+
+.. automodule:: livvkit.data
+    :members:
+    :undoc-members:
+    :show-inheritance:

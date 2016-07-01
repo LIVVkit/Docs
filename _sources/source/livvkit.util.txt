@@ -1,0 +1,70 @@
+livvkit.util package
+====================
+
+Submodules
+----------
+
+livvkit.util.colormaps module
+-----------------------------
+
+.. automodule:: livvkit.util.colormaps
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+livvkit.util.datastructures module
+----------------------------------
+
+.. automodule:: livvkit.util.datastructures
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+livvkit.util.functions module
+-----------------------------
+
+.. automodule:: livvkit.util.functions
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+livvkit.util.netcdf module
+--------------------------
+
+.. automodule:: livvkit.util.netcdf
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+livvkit.util.options module
+---------------------------
+
+.. automodule:: livvkit.util.options
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+livvkit.util.scheduler module
+-----------------------------
+
+.. automodule:: livvkit.util.scheduler
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+livvkit.util.tests module
+-------------------------
+
+.. automodule:: livvkit.util.tests
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: livvkit.util
+    :members:
+    :undoc-members:
+    :show-inheritance:

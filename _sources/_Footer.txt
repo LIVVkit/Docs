@@ -1,0 +1,7 @@
+Acknowledgments
+~~~~~~~~~~~~~~~
+
+[[imgs/acknowledge\_box.png]]
+
+LIVVkit was developed under `PISCEES <http://www.scidac.gov/PISCEES/>`__, a BER/ASCR SciDAC Earth System Modeling project.
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''

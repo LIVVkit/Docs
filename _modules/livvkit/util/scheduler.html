@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>livvkit.util.scheduler &mdash; LIVVKit 2.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="LIVVKit 2.0.0 documentation" href="../../../index.html" />
+    <link rel="up" title="livvkit" href="../../livvkit.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for livvkit.util.scheduler</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) 2015, UT-BATTELLE, LLC</span>
+<span class="c1"># All rights reserved.</span>
+<span class="c1"># </span>
+<span class="c1"># Redistribution and use in source and binary forms, with or without</span>
+<span class="c1"># modification, are permitted provided that the following conditions are met:</span>
+<span class="c1"># </span>
+<span class="c1"># 1. Redistributions of source code must retain the above copyright notice, this</span>
+<span class="c1"># list of conditions and the following disclaimer.</span>
+<span class="c1"># </span>
+<span class="c1"># 2. Redistributions in binary form must reproduce the above copyright notice,</span>
+<span class="c1"># this list of conditions and the following disclaimer in the documentation</span>
+<span class="c1"># and/or other materials provided with the distribution.</span>
+<span class="c1"># </span>
+<span class="c1"># 3. Neither the name of the copyright holder nor the names of its contributors</span>
+<span class="c1"># may be used to endorse or promote products derived from this software without</span>
+<span class="c1"># specific prior written permission.</span>
+<span class="c1"># </span>
+<span class="c1"># THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND</span>
+<span class="c1"># ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED</span>
+<span class="c1"># WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE</span>
+<span class="c1"># DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE</span>
+<span class="c1"># FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL</span>
+<span class="c1"># DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR</span>
+<span class="c1"># SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER</span>
+<span class="c1"># CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,</span>
+<span class="c1"># OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span>
+<span class="c1"># OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Provides functions for scheduling the runs of tests.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">multiprocessing</span>
+
+<span class="kn">import</span> <span class="nn">livvkit</span>
+<span class="kn">import</span> <span class="nn">livvkit.components.numerics</span> 
+<span class="kn">import</span> <span class="nn">livvkit.components.verification</span> 
+<span class="kn">import</span> <span class="nn">livvkit.components.performance</span> 
+<span class="kn">import</span> <span class="nn">livvkit.components.validation</span> 
+
+<div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.scheduler.run">[docs]</a><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">run_type</span><span class="p">,</span> <span class="n">module</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Collects the analyses cases to be run and launches processes for each of </span>
+<span class="sd">    them.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        run_type: A string representation of the run type (eg. verification)</span>
+<span class="sd">        module: The module corresponding to the run.  Must have a run_suite function</span>
+<span class="sd">        config_path: The configuration for the module </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">tests</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="nb">dict</span><span class="p">)]</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; -----------------------------------------------------------------&quot;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;   Beginning &quot;</span> <span class="o">+</span> <span class="n">run_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot; test suite &quot;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; -----------------------------------------------------------------&quot;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">summary</span> <span class="o">=</span> <span class="n">launch_processes</span><span class="p">(</span><span class="n">tests</span><span class="p">,</span> <span class="n">module</span><span class="p">,</span> <span class="o">**</span><span class="n">config</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; -----------------------------------------------------------------&quot;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;   &quot;</span> <span class="o">+</span> <span class="n">run_type</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot; test suite complete &quot;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; -----------------------------------------------------------------&quot;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">summary</span></div>
+
+
+<div class="viewcode-block" id="launch_processes"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.scheduler.launch_processes">[docs]</a><span class="k">def</span> <span class="nf">launch_processes</span><span class="p">(</span><span class="n">tests</span><span class="p">,</span> <span class="n">run_module</span><span class="p">,</span> <span class="o">**</span><span class="n">config</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Helper method to launch processes and synch output &quot;&quot;&quot;</span>
+    <span class="n">livvkit</span><span class="o">.</span><span class="n">manager</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Manager</span><span class="p">()</span>
+    <span class="n">test_data</span> <span class="o">=</span> <span class="n">livvkit</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="n">dict</span><span class="p">()</span>
+    <span class="n">summary</span> <span class="o">=</span> <span class="n">run_module</span><span class="o">.</span><span class="n">_populate_metadata</span><span class="p">()</span>
+    <span class="n">process_handles</span> <span class="o">=</span> <span class="p">[</span><span class="n">multiprocessing</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">run_module</span><span class="o">.</span><span class="n">_run_suite</span><span class="p">,</span> 
+                       <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">config</span><span class="p">[</span><span class="n">test</span><span class="p">],</span> <span class="n">test_data</span><span class="p">))</span> <span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">tests</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">process_handles</span><span class="p">:</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">process_handles</span><span class="p">:</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+    <span class="n">summary</span><span class="p">[</span><span class="s2">&quot;Data&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">summary</span> </div>
+
+
+<div class="viewcode-block" id="summarize"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.scheduler.summarize">[docs]</a><span class="k">def</span> <span class="nf">summarize</span><span class="p">(</span><span class="n">summary</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Write the summary to a JSON file &quot;&quot;&quot;</span>
+    <span class="n">util</span><span class="o">.</span><span class="n">datastructures</span><span class="o">.</span><span class="n">mkdir_p</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">output_dir</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;index.json&quot;</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">summary</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span></div>
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  <li><a href="../../livvkit.html">livvkit</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Katherine Evans, Joseph Kennedy, Andrew Bennett.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

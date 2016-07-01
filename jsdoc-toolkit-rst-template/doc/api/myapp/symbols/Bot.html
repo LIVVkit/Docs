@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Bot (class) &mdash; LIVVKit 2.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '2.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="LIVVKit 2.0.0 documentation" href="../../../../../index.html" />
+   
+  <link rel="stylesheet" href="../../../../../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="bot-class">
+<h1>Bot (class)<a class="headerlink" href="#bot-class" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="Bot">
+<em class="property">class </em><code class="descname">Bot</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#Bot" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is a class with no other purpose
+but being an example and for testing.</p>
+<p>Second paragraph just to show off:</p>
+<ul class="simple">
+<li>One</li>
+<li>Two</li>
+</ul>
+<p>As for the HTML elements, template has a limited support
+for transforming them into <strong>bold</strong> and <em>italic</em>
+elements.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>string</em>) &#8211; Unique name for the bot</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Author:</th><td class="field-body"><p class="first last">Juha Mustonen</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">android</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Bot</span><span class="p">(</span><span class="s2">&quot;Android&quot;</span><span class="p">);</span>
+<span class="nx">android</span><span class="p">.</span><span class="nx">speak</span><span class="p">();</span>
+</pre></div>
+</div>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="c1">// Extend bot</span>
+<span class="nx">subapp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Bot</span><span class="p">;</span>
+<span class="nx">subapp</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">walk</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">direction</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<dl class="function">
+<dt id="Bot.talk">
+<code class="descclassname">Bot.</code><code class="descname">talk</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Bot.talk" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function really does the thing.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">bot</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Bot</span><span class="p">(</span><span class="s1">&#39;bot&#39;</span><span class="p">);</span>
+<span class="nx">bot</span><span class="p">.</span><span class="nx">talk</span><span class="p">({</span><span class="nx">x</span><span class="o">:</span><span class="mi">123</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span><span class="mi">2</span><span class="p">});</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="Bot.walk">
+<code class="descclassname">Bot.</code><code class="descname">walk</code><span class="sig-paren">(</span><em>direction</em><span class="sig-paren">)</span><a class="headerlink" href="#Bot.walk" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>direction</strong> (<a class="reference internal" href="Direction.html#Direction" title="Direction"><em>Direction</em></a>) &#8211; X and Y coordiates</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This function really does the thing.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">bot</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Bot</span><span class="p">(</span><span class="s1">&#39;bot&#39;</span><span class="p">);</span>
+<span class="nx">bot</span><span class="p">.</span><span class="nx">walk</span><span class="p">({</span><span class="nx">x</span><span class="o">:</span><span class="mi">123</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span><span class="mi">2</span><span class="p">});</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="footer container">
+Documentation generated by <a class="reference external" href="http://code.google.com/p/jsdoc-toolkit/">jsdoc-toolkit</a>  2.4.0 using <a class="reference external" href="http://code.google.com/p/jsdoc-toolkit-rst-template/">jsdoc-toolkit-rst-template</a></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../../../_sources/jsdoc-toolkit-rst-template/doc/api/myapp/symbols/Bot.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Katherine Evans, Joseph Kennedy, Andrew Bennett.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="../../../../../_sources/jsdoc-toolkit-rst-template/doc/api/myapp/symbols/Bot.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

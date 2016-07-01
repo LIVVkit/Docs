@@ -1,0 +1,30 @@
+bundles.CISM-glissade package
+=============================
+
+Submodules
+----------
+
+bundles.CISM-glissade.performance module
+----------------------------------------
+
+.. automodule:: bundles.CISM-glissade.performance
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+bundles.CISM-glissade.verification module
+-----------------------------------------
+
+.. automodule:: bundles.CISM-glissade.verification
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: bundles.CISM-glissade
+    :members:
+    :undoc-members:
+    :show-inheritance:

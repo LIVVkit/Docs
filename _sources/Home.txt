@@ -1,0 +1,115 @@
+[[imgs/livvkit.png]]
+
+About LIVVkit
+~~~~~~~~~~~~~
+
+LIVVkit (Land Ice Verification & Validation) is a python based
+`V&V <VV>`__ toolkit for computational ice sheet models. It aims to
+provide the following capabilities:
+
+**`Model V&V <VV#model-vv>`__** \* Numerical verification \* Physical
+validation
+
+**`Software V&V <VV#software-vv>`__** \* Code verification \*
+Performance validation
+
+Within LIVVkit, these capabilities are broken into four components:
+
++---------------------------------------+-------------------------------------------+
+| Model V&V                             | Software V&V                              |
++=======================================+===========================================+
+| `Numerics <LIVVkit-numerics>`__       | `Verification <LIVVkit-verification>`__   |
++---------------------------------------+-------------------------------------------+
+| `Validation <LIVVkit-validation>`__   | `Performance <LIVVkit-performance>`__     |
++---------------------------------------+-------------------------------------------+
+
+Currently, LIVVkit is being developed and used in conjunction with the
+Community Ice Sheet Model
+(`CISM <http://oceans11.lanl.gov/cism/documentation.html>`__), but is
+designed to be extensible to other models.
+
+Install
+~~~~~~~
+
+Get a copy of LIVVkit by cloning this repo:
+
+.. code:: sh
+
+    git clone https://github.com/LIVVkit/LIVVkit.git
+
+LIVVkit was designed to be used with `Python
+2.7 <https://www.python.org/>`__. If you are using any other version of
+Python by default, use the command for Python 2.7 in place of any calls
+to ``python`` in this document (or any other LIVVkit Documentation). If
+you are not sure what version of Python you are running try running
+``python --version`` from a terminal.
+
+LIVVkit has some python package dependencies and some external package
+dependencies. The required packages to use LIVVkit are:
+
++-------------------------------------------------------------------------+---------------------------------------------------------------------------------------+
+| Python Packages                                                         | External Packages                                                                     |
++=========================================================================+=======================================================================================+
+| `python-numpy <https://pypi.python.org/pypi/numpy/1.9.2>`__             | `NetCDF 4.3.0+ <http://www.unidata.ucar.edu/software/netcdf/>`__                      |
++-------------------------------------------------------------------------+---------------------------------------------------------------------------------------+
+| `python-netCDF4 <https://pypi.python.org/pypi/netCDF4>`__               | `NCO (NetCDF Operators) 4.4.0 <http://nco.sourceforge.net/>`__                        |
++-------------------------------------------------------------------------+---------------------------------------------------------------------------------------+
+| `python-matplotlib <https://pypi.python.org/pypi/matplotlib/1.4.3>`__   | `HDF5 1.8.6 <https://www.hdfgroup.org/HDF5/>`__                                       |
++-------------------------------------------------------------------------+---------------------------------------------------------------------------------------+
+| `python-jinja2 <https://pypi.python.org/pypi/Jinja2/2.7.3>`__           | `NCL (NCAR Command Language + graphics library) 6.1.2 <http://www.ncl.ucar.edu/>`__   |
++-------------------------------------------------------------------------+---------------------------------------------------------------------------------------+
+
+If you have a working install of CISM, you'll likely already have
+everything you need besides `NCL <http://www.ncl.ucar.edu/>`__, which
+you must install manually. LIVVkit will automatically install any
+missing python packages in your ``$HOME/.local`` directory.
+
+For more information about installing any of these dependencies, check
+the links for each specific package. You may also be able to refer to
+the installation instructions found in the
+`CISM <http://oceans11.lanl.gov/cism/documentation.html>`__ manual.
+
+If you are having any troubles with dependencies, open an issue on the
+`issue tracker <https://github.com/LIVVkit/LIVVkit/issues>`__!
+
+`Usage <Usage>`__
+~~~~~~~~~~~~~~~~~
+
+LIVVkit is primarily controlled via options specified at the command
+line. To see the full list of options, run:
+
+.. code:: sh
+
+    ./livv.py -h
+
+or
+
+.. code:: sh
+
+    python livv.py -h
+
+The are three main use cases for LIVV:
+
+-  `User <Workflow-user>`__ -- verification of an install against a set
+   of benchmark data
+-  `Developer <Workflow-developer>`__ -- verification and validation of
+   model changes over time
+-  `Scientist <Workflow-scientist>`__ -- validation of model results
+   against observational and model generated data
+
+Click the above links to see their workflows. The `usage <Usage>`__ page
+has a discussion of LIVVkits options, advanced usage, and workflows.
+
+Development
+~~~~~~~~~~~
+
+LIVVkit is currently under active development. See our `development
+roadmap <Development-roadmap>`__.
+
+For feature request, questions, bug reporting, or other issues, use the
+`Issue Tracker <https://github.com/LIVVkit/LIVVkit/issues>`__.
+
+Reporting bugs
+~~~~~~~~~~~~~~
+
+Use the `Issue Tracker <https://github.com/LIVVkit/LIVVkit/issues>`__.

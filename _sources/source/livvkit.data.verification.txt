@@ -1,0 +1,22 @@
+livvkit.data.verification package
+=================================
+
+Submodules
+----------
+
+livvkit.data.verification.self_verification module
+--------------------------------------------------
+
+.. automodule:: livvkit.data.verification.self_verification
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: livvkit.data.verification
+    :members:
+    :undoc-members:
+    :show-inheritance:

@@ -1,0 +1,249 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>CISM’s build and test structure (BATS) &mdash; LIVVKit 2.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="LIVVKit 2.0.0 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="cism-s-build-and-test-structure-bats">
+<h1>CISM&#8217;s build and test structure (BATS)<a class="headerlink" href="#cism-s-build-and-test-structure-bats" title="Permalink to this headline">¶</a></h1>
+<p>The build and test structure (BATS) is intended to allow users and
+developers of
+<a class="reference external" href="http://oceans11.lanl.gov/cism/documentation.html">CISM</a> to quickly
+generate a set of regression tests for use with the Land Ice Validation
+and Verification toolkit (LIVVkit).</p>
+<p>BATS is a <a class="reference external" href="https://www.python.org/">Python 2.7</a> module that is
+primarily controlled by command line options. BATS requires:</p>
+<p>Python Packages * <a class="reference external" href="https://pypi.python.org/pypi/numpy">python-numpy</a>
+* <a class="reference external" href="https://pypi.python.org/pypi/scipy">python-scipy</a> *
+<a class="reference external" href="https://pypi.python.org/pypi/netCDF4">python-netCDF4</a> *
+<a class="reference external" href="https://pypi.python.org/pypi/matplotlib">python-matplotlib</a></p>
+<p>External Packages * <a class="reference external" href="http://www.unidata.ucar.edu/software/netcdf/">NetCDF
+4.3.0+</a> * <a class="reference external" href="http://nco.sourceforge.net/">NCO (NetCDF
+Operators) 4.4.0</a> * <a class="reference external" href="https://www.hdfgroup.org/HDF5/">HDF5
+1.8.6</a></p>
+<p>If you have a working install of CISM, and you installed the suggested
+packages in the
+<a class="reference external" href="http://oceans11.lanl.gov/cism/documentation.html">CISM</a> users
+manual, you&#8217;ll likely already have everything you need. If you haven&#8217;t
+previously built CISM on your machine, we suggest following the
+installation instructions as they are laid out in the users manual
+first.</p>
+<p>(Note: on some High Performance Computing platforms, a
+<code class="docutils literal"><span class="pre">setup_PLATFORM.bash</span></code> script has been provided which will attempt to
+load the needed modules.)</p>
+<p>If you are having any troubles with dependencies, open an issue on the
+<a class="reference external" href="https://github.com/LIVVkit/LIVVkit/issues">LIVVkit issue tracker</a>!</p>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>BATS is located within CISM source code. If the location of your CISM
+source code is stored in the environment variable <code class="docutils literal"><span class="pre">CISM</span></code>, you can go
+to the BATS location by:</p>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span>cd $CISM/tests/regression/
+</pre></div>
+</div>
+<p>There you will find the main BATS run script <code class="docutils literal"><span class="pre">build_and_test.py</span></code>. BATS
+is primarily controlled via options specified at the command line. To
+see the full list of options, run:</p>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">build_and_test</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">h</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">build_and_test</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">h</span>
+</pre></div>
+</div>
+<p>Each LIVVkit workflow, listed on the <a class="reference external" href="Usage">LIVVkit usage</a> page,
+shows how BATS is used to generate data for LIVVkit, and the commands
+used. We suggest looking at the workflows first to get a general idea of
+how BATS will be used.</p>
+</div>
+<div class="section" id="how-bats-works">
+<h2>How BATS works<a class="headerlink" href="#how-bats-works" title="Permalink to this headline">¶</a></h2>
+<p>BATS works very similar to how you would build CISM and run one or more
+CISM tests. BATS will build a version of CISM, and then either run a set
+of regression tests if you are using a personal computer (PC), or setup
+a series of regression tests and generate a job submission script if you
+are using a high performance computer (HPC).</p>
+<p>That is, if CISM is located in <code class="docutils literal"><span class="pre">$CISM</span></code> on ORNL&#8217;s HPC platform titan,
+for example, and you want to run the <code class="docutils literal"><span class="pre">$CISM/higher-order/dome</span></code> test
+using the gnu compiler, you would typically build CISM by:</p>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span>cd $CISM/builds/titan-gnu/
+source titan-gnu-cmake
+make -j 8
+</pre></div>
+</div>
+<p>which would build a parallel version of CISM into the
+<code class="docutils literal"><span class="pre">$CISM/builds/titan-gnu/cism_driver/</span></code> directory. Then you would go to
+the dome test directory, create a link to the CISM driver, and run the
+test:</p>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span>cd $CISM/tests/higher-order/dome
+ls -s $CISM/builds/titan-gnu/cism_driver/cism_driver cism_driver
+./runDome.py
+</pre></div>
+</div>
+<p>You would then have to repeat this process for each individual test
+you&#8217;d like to run. BATS, however, automates these steps. On titan,
+running BATS like so</p>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span>cd $CISM/tests/regression/
+source setup_titan.bash
+./build_and_test.py -p titan -c gnu -b ./build
+</pre></div>
+</div>
+<p>will result in BATS generating all the CMake build file into <code class="docutils literal"><span class="pre">build</span></code>,
+and building CISM into the directory <code class="docutils literal"><span class="pre">build/cism_driver/</span></code>. BATS will
+then run a set of CISM&#8217;s higher-order tests:</p>
+<ul class="simple">
+<li>Dome (at a variety of resolutions and processor counts)</li>
+<li>Circular Shelf</li>
+<li>Confined Shelf</li>
+<li>ISMIP-HOM a and c (at 20 and 80 km resolutions)</li>
+<li>ISMIP-HOM f</li>
+<li>Stream</li>
+</ul>
+<p>All of the files associated with each test will be output to a directory
+called <code class="docutils literal"><span class="pre">reg_test/titan-gnu/</span></code> which has a directory structure that
+mirrors CISM&#8217;s test directory structure:</p>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span>reg_test/
+   └── PLATFORM-COMPILER/
+       ├── CMakeCache.txt
+       ├── higher-order/
+       │    ├── dome/
+       │    │   ├── dome.RESO.pPRC.*
+       │    │   └── timing/
+       │    │       └── dome-t?.RESO.pPRC.*
+       │    ├── ismip-hom
+       │    │   ├── ismip-hom-a.RESO.pPRC.*
+       │    │   ├── ismip-hom-c.RESO.pPRC.*
+       │    │   └── ismip-hom-f.0100.pPRC.*
+       │    ├── shelf
+       │    │   ├── shelf-circular.RESO.pPRC.*
+       │    │   └── shelf-confined.RESO.pPRC.*
+       │    └── stream
+       │        └── stream.RESO.pPRC.*
+   --------------------------------------------
+       ├── Jobs/
+       │    ├── platform_job.small
+       │    ├── platform_job.small_timing_?
+       │    ├── platform_job.large
+       │    └── platform_job.large_timing_?
+       ├── submit_all_jobs.bash
+       └── clean_timing.bash
+</pre></div>
+</div>
+<p>where <code class="docutils literal"><span class="pre">RESO</span></code> is a four-digit number indicating the model resolution
+(units are test specific), and <code class="docutils literal"><span class="pre">pPRC</span></code> is an optional three-digit
+number, prefixed by a <code class="docutils literal"><span class="pre">p</span></code>, indicating the number of processors used to
+run the model. Everything below the dashed line will only appear on HPC
+systems. <code class="docutils literal"><span class="pre">submit_all_jobs.bash</span></code> will submit all the jobs in the
+<code class="docutils literal"><span class="pre">jobs/</span></code> directory and <code class="docutils literal"><span class="pre">clean_timing.bash</span></code> will clean out any
+<code class="docutils literal"><span class="pre">higher-order/*/timing/</span></code> directory such that only the timing files
+remain (to be used once all jobs have finished). This
+<code class="docutils literal"><span class="pre">reg_test/titan-gnu/</span></code> directory is formatted to be used with LIVVkit
+directly.</p>
+<p>BATS is designed to be flexible and work with any LIVVkit usage
+scenario. In order to do that, BATS provides a number of options to
+configure which system you are using, when/where/how CISM is built, the
+destination of the output directory, and which tests are run. For more
+information on these topics, see:</p>
+<ul class="simple">
+<li>Detailed discussion of <a class="reference external" href="BATS-options">BATS options</a></li>
+<li><a class="reference external" href="CISM-out-of-source-builds">Out-of-source builds</a></li>
+<li><a class="reference external" href="BATS-reg-test">The reg_test directory</a> structure</li>
+<li><a class="reference external" href="Usage">LIVVkit usage</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">CISM&#8217;s build and test structure (BATS)</a><ul>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#how-bats-works">How BATS works</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/Build-and-test.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Katherine Evans, Joseph Kennedy, Andrew Bennett.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/Build-and-test.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

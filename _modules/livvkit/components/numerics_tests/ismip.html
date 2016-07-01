@@ -1,0 +1,233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>livvkit.components.numerics_tests.ismip &mdash; LIVVKit 2.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '2.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="LIVVKit 2.0.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="livvkit" href="../../../livvkit.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for livvkit.components.numerics_tests.ismip</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) 2015, UT-BATTELLE, LLC</span>
+<span class="c1"># All rights reserved.</span>
+<span class="c1"># </span>
+<span class="c1"># Redistribution and use in source and binary forms, with or without</span>
+<span class="c1"># modification, are permitted provided that the following conditions are met:</span>
+<span class="c1"># </span>
+<span class="c1"># 1. Redistributions of source code must retain the above copyright notice, this</span>
+<span class="c1"># list of conditions and the following disclaimer.</span>
+<span class="c1"># </span>
+<span class="c1"># 2. Redistributions in binary form must reproduce the above copyright notice,</span>
+<span class="c1"># this list of conditions and the following disclaimer in the documentation</span>
+<span class="c1"># and/or other materials provided with the distribution.</span>
+<span class="c1"># </span>
+<span class="c1"># 3. Neither the name of the copyright holder nor the names of its contributors</span>
+<span class="c1"># may be used to endorse or promote products derived from this software without</span>
+<span class="c1"># specific prior written permission.</span>
+<span class="c1"># </span>
+<span class="c1"># THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND</span>
+<span class="c1"># ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED</span>
+<span class="c1"># WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE</span>
+<span class="c1"># DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE</span>
+<span class="c1"># FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL</span>
+<span class="c1"># DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR</span>
+<span class="c1"># SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER</span>
+<span class="c1"># CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,</span>
+<span class="c1"># OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span>
+<span class="c1"># OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Utilities to provide numerical verification for the ISMIP test cases</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">scipy</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="kn">import</span> <span class="nn">livvkit</span>
+<span class="kn">from</span> <span class="nn">livvkit.util.datastructures</span> <span class="kn">import</span> <span class="n">ElementHelper</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">__file__</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.py&#39;</span><span class="p">,</span><span class="s1">&#39;.json&#39;</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">setup</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="n">case_color</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;bench&#39;</span><span class="p">:</span> <span class="s1">&#39;#d7191c&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;test&#39;</span><span class="p">:</span>  <span class="s1">&#39;#fc8d59&#39;</span> <span class="p">}</span>
+
+<span class="n">line_style</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;bench&#39;</span><span class="p">:</span> <span class="s1">&#39;o-&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;test&#39;</span><span class="p">:</span>  <span class="s1">&#39;-&#39;</span>  <span class="p">}</span>
+
+<div class="viewcode-block" id="get_case_length"><a class="viewcode-back" href="../../../../source/livvkit.components.numerics_tests.html#livvkit.components.numerics_tests.ismip.get_case_length">[docs]</a><span class="k">def</span> <span class="nf">get_case_length</span><span class="p">(</span><span class="n">case</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">case</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">:]))</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="hom"><a class="viewcode-back" href="../../../../source/livvkit.components.numerics_tests.html#livvkit.components.numerics_tests.ismip.hom">[docs]</a><span class="k">def</span> <span class="nf">hom</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">analysis_data</span><span class="p">):</span>
+    <span class="c1">#FIXME:</span>
+    <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Verify ISMIP-HOM model data against ISMIP&#39;s datasets </span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        model_path: Absolute path to the model data set</span>
+<span class="sd">        bench_path: Absolute path to the benchmark data set</span>
+<span class="sd">        config: A dictionary containing configuration options</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A result of the differences between the model and benchmark</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+   
+    <span class="n">exp</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">exp</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]:</span>
+        <span class="n">coord</span> <span class="o">=</span> <span class="s1">&#39;x_hat&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">coord</span> <span class="o">=</span> <span class="s1">&#39;y_hat&#39;</span>
+
+    <span class="n">lengths</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span>
+        <span class="p">[</span> <span class="n">get_case_length</span><span class="p">(</span><span class="n">case</span><span class="p">)</span> <span class="k">for</span> <span class="n">case</span> <span class="ow">in</span> <span class="n">analysis_data</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="p">]</span>
+        <span class="p">))</span>
+
+    <span class="n">plot_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">pattern</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">setup</span><span class="p">[</span><span class="n">exp</span><span class="p">][</span><span class="s1">&#39;pattern&#39;</span><span class="p">])):</span>
+        <span class="n">fig_label</span> <span class="o">=</span> <span class="n">pattern</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">lengths</span><span class="p">):</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">setup</span><span class="p">[</span><span class="n">exp</span><span class="p">][</span><span class="s1">&#39;xlabel&#39;</span><span class="p">][</span><span class="n">p</span><span class="p">])</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">setup</span><span class="p">[</span><span class="n">exp</span><span class="p">][</span><span class="s1">&#39;ylabel&#39;</span><span class="p">][</span><span class="n">p</span><span class="p">])</span>
+            
+            <span class="k">if</span> <span class="n">exp</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">]:</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">l</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39; km&#39;</span><span class="p">)</span>
+                <span class="n">plot_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;plot_dir&quot;</span><span class="p">],</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;_&#39;</span><span class="o">+</span><span class="n">fig_label</span><span class="o">+</span><span class="s1">&#39;_&#39;</span><span class="o">+</span><span class="n">l</span><span class="o">+</span><span class="s1">&#39;.png&#39;</span> <span class="p">)</span>
+                <span class="n">title</span> <span class="o">=</span> <span class="n">fig_label</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;. &#39;</span><span class="o">+</span><span class="n">fig_label</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;: &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">l</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39; km&#39;</span>
+                <span class="n">recreate_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                        <span class="n">livvkit</span><span class="o">.</span><span class="n">cwd</span><span class="p">,</span> <span class="n">setup</span><span class="p">[</span><span class="n">exp</span><span class="p">][</span><span class="s2">&quot;data_dir&quot;</span><span class="p">],</span> <span class="n">pattern</span>
+                        <span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;???&#39;</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;No-Slip Bed&#39;</span><span class="p">)</span>
+                <span class="n">plot_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;plot_dir&quot;</span><span class="p">],</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;_&#39;</span><span class="o">+</span><span class="n">fig_label</span><span class="o">+</span><span class="s1">&#39;_000.png&#39;</span> <span class="p">)</span>
+                <span class="n">title</span> <span class="o">=</span> <span class="n">fig_label</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;. &#39;</span><span class="o">+</span><span class="n">fig_label</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]</span><span class="o">+</span><span class="s1">&#39;: No-Slip Bed&#39;</span>
+                <span class="n">recreate_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                        <span class="n">livvkit</span><span class="o">.</span><span class="n">cwd</span><span class="p">,</span> <span class="n">setup</span><span class="p">[</span><span class="n">exp</span><span class="p">][</span><span class="s2">&quot;data_dir&quot;</span><span class="p">],</span> <span class="n">pattern</span>
+                        <span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;???&#39;</span><span class="p">,</span> <span class="s1">&#39;000&#39;</span><span class="p">)</span>
+
+
+            <span class="n">axis</span><span class="p">,</span> <span class="n">fs_amin</span><span class="p">,</span> <span class="n">fs_amax</span><span class="p">,</span> <span class="n">fs_mean</span><span class="p">,</span> <span class="n">ho_amin</span><span class="p">,</span> <span class="n">ho_amax</span><span class="p">,</span> <span class="n">ho_mean</span> <span class="o">=</span> \
+                <span class="n">numpy</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">recreate_file</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">missing_values</span><span class="o">=</span><span class="s1">&#39;nan&#39;</span><span class="p">,</span> <span class="n">unpack</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+            
+            <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">ho_amin</span><span class="p">,</span> <span class="n">ho_amax</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">fs_amin</span><span class="p">,</span> <span class="n">fs_amax</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+            
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">fs_mean</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Full stokes&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">ho_mean</span><span class="p">,</span> <span class="s1">&#39;g-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Higher order&#39;</span><span class="p">)</span>
+
+            
+            <span class="n">analysis</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">analysis_data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">:]):</span>
+                    <span class="n">analysis</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">analysis_data</span><span class="p">[</span><span class="n">a</span><span class="p">]</span>
+
+            <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">analysis</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">analysis</span><span class="p">[</span><span class="n">a</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">analysis</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">model</span><span class="p">][</span><span class="n">coord</span><span class="p">],</span> <span class="n">analysis</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">model</span><span class="p">][</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;plot_vars&#39;</span><span class="p">][</span><span class="n">p</span><span class="p">]],</span> 
+                                <span class="n">line_style</span><span class="p">[</span><span class="n">model</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">case_color</span><span class="p">[</span><span class="n">model</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">a</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">+</span><span class="n">model</span><span class="p">)</span>
+
+            <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+            
+            <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">plot_file</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+            <span class="n">plot_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">ElementHelper</span><span class="o">.</span><span class="n">image_element</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">plot_file</span><span class="p">))</span> <span class="p">)</span>
+
+    
+    <span class="k">return</span> <span class="n">plot_list</span></div>
+
+
+
+<div class="viewcode-block" id="populate_metadata"><a class="viewcode-back" href="../../../../source/livvkit.components.numerics_tests.html#livvkit.components.numerics_tests.ismip.populate_metadata">[docs]</a><span class="k">def</span> <span class="nf">populate_metadata</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; Provide some top level information for the summary &quot;&quot;&quot;</span>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;Type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Summary&quot;</span>
+    <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;Title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Numerics&quot;</span>
+    <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;Headers&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Test1&quot;</span><span class="p">,</span> <span class="s2">&quot;Test2&quot;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">metadata</span></div>
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../index.html">Module code</a><ul>
+  <li><a href="../../../livvkit.html">livvkit</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Katherine Evans, Joseph Kennedy, Andrew Bennett.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

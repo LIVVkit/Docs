@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>BATS regression test output data &mdash; LIVVKit 2.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="LIVVKit 2.0.0 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="bats-regression-test-output-data">
+<h1>BATS regression test output data<a class="headerlink" href="#bats-regression-test-output-data" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference external" href="Build-and-test">build and test structure (BATS)</a> will output all
+the regression tests data to a <code class="docutils literal"><span class="pre">PLATFORM-COMPILER</span></code> subdirectory within
+either the default output directory (<code class="docutils literal"><span class="pre">reg_test/</span></code>) or one specified by
+the <code class="docutils literal"><span class="pre">-o</span></code>/<code class="docutils literal"><span class="pre">--out-dir</span></code> option (see <a class="reference external" href="BATS-options">BATS options</a>).
+The output directory will have the structure:</p>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span>reg_test
+└── titan-gnu
+    ├── CMakeCache.txt
+    ├── [jobs]
+    │    ├── ...
+    │    └── ...
+    ├── [run_all_jobs.bash]
+    ├── [clean_timing.bash]
+    │
+    └── higher-order
+        ├── dome
+        │   ├── [timing]
+        │   │    └── dome-t?.RESO.pPRC.*
+        │   └── dome.RESO.pPRC.*
+        ├── ismip-hom
+        │   ├── ismip-hom-a.RESO.pPRC.*
+        │   ├── ismip-hom-c.RESO.pPRC.*
+        │   ├── ismip-hom-f.0100.pPRC.*
+        ├── shelf
+        │   ├── shelf-circular.RESO.pPRC.*
+        │   ├── shelf-confined.RESO.pPRC.*
+        └── stream
+            └── stream.RESO.pPRC.*
+</pre></div>
+</div>
+<p>where <code class="docutils literal"><span class="pre">[]</span></code> indicates files and directories that appear optionally
+(detailed below), <code class="docutils literal"><span class="pre">RESO</span></code> is a four-digit number indicating the model
+resolution (units are test specific), and <code class="docutils literal"><span class="pre">pPRC</span></code> is an optional
+three-digit number, prefixed by a <code class="docutils literal"><span class="pre">p</span></code>, indicating the number of
+processors used to run the model. The characters <code class="docutils literal"><span class="pre">?</span></code> and <code class="docutils literal"><span class="pre">*</span></code> are the
+regular expressions expansion characters.</p>
+<p>The <code class="docutils literal"><span class="pre">CMakeCache.txt</span></code> is a copy of the one that appears in the build
+directory (specified by the <code class="docutils literal"><span class="pre">-b</span></code>/<code class="docutils literal"><span class="pre">--build-dir</span></code> option). This is
+included so that a detailed comparison of a benchmark and test build can
+be preformed manually (not done by LIVVkit).</p>
+<p>The <code class="docutils literal"><span class="pre">jobs</span></code> directory (and all sub-files), <code class="docutils literal"><span class="pre">run_all_jobs.bash</span></code>, and
+<code class="docutils literal"><span class="pre">clean_timing.bash</span></code> files only appear on the supported high
+performance computers (HPCs) that use a batch job submission queue. The
+<code class="docutils literal"><span class="pre">jobs</span></code> directory contains all the created batch job scripts. The
+<code class="docutils literal"><span class="pre">run_all_jobs.bash</span></code> will submit all the batch job scripts in the
+<code class="docutils literal"><span class="pre">jobs</span></code> folder.</p>
+<p>The <code class="docutils literal"><span class="pre">timing</span></code> directories (and all sub-files) are only created if the
+<code class="docutils literal"><span class="pre">--timing</span></code> option was passed to BATS. This directory will contain 10
+unique sets of the performance tests &#8211; indicated by the <code class="docutils literal"><span class="pre">-t?</span></code> in the
+sub-file names. On HPCs, the <code class="docutils literal"><span class="pre">clean_timing.bash</span></code> script will remove
+all but the <code class="docutils literal"><span class="pre">*.cism_timing*</span></code> output files, which eliminates redundant
+files and reduces the size of <code class="docutils literal"><span class="pre">reg_test</span></code>. On regular personal
+computers (PCs), this directory will automatically be cleaned and
+contain all the <code class="docutils literal"><span class="pre">*.results</span></code> files which contain the timing data (note
+the difference in file extensions created by CISM on HPCs and PCs).</p>
+<p>The <code class="docutils literal"><span class="pre">higher-order</span></code> directory contains all the individual regression
+tests data. It&#8217;s directory structure mirrors CISM. That is, the
+<code class="docutils literal"><span class="pre">runTEST.py</span></code> script lives in <code class="docutils literal"><span class="pre">tests/higher-order/TEST/</span></code> within the
+CISM source code, and the output regression test data lives in the BATS
+<code class="docutils literal"><span class="pre">reg_test/higher-order/TEST/</span></code> output directory.</p>
+<p>Each of the <code class="docutils literal"><span class="pre">TEST</span></code> subdirectories contains the data, and associated
+files, for every permutation of the <code class="docutils literal"><span class="pre">TEST</span></code> tests, and are uniquely
+defined by the <code class="docutils literal"><span class="pre">TEST[-TYPE].RESO.pORC.</span></code> prefix on all the files. Each
+individual permutation of a test will have this set of files associated
+with it:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">TEST[-TYPE].RESO.pORC.config</span></code> &#8211; the config file passed to the
+CISM driver</li>
+<li><code class="docutils literal"><span class="pre">TEST[-TYPE].RESO.pORC.config.log</span></code> &#8211; a log of how CISM processed
+the config file.</li>
+<li><code class="docutils literal"><span class="pre">TEST[-TYPE].RESO.pORC.config.oe</span></code> &#8211; all the CISM output for the
+test</li>
+<li><code class="docutils literal"><span class="pre">TEST[-TYPE].RESO.pORC.nc</span></code> &#8211; the input data passed to CISM for the
+test</li>
+<li><code class="docutils literal"><span class="pre">TEST[-TYPE].RESO.pORC.out.nc</span></code> &#8211; the data output by CISM for the
+test</li>
+<li><code class="docutils literal"><span class="pre">[TEST[-TYPE].RESO.pORC.results]</span></code> &#8211; the test timing data on PCs</li>
+<li><code class="docutils literal"><span class="pre">[TEST[-TYPE].RESO.pORC.cism_timing*]</span></code> &#8211; the test timing data on
+HPCs</li>
+</ul>
+<p>Additionally, if a <code class="docutils literal"><span class="pre">*trillinosOptions.xml</span></code> appears in the
+<code class="docutils literal"><span class="pre">tests/higher-order/TEST/</span></code> directory from the CISM source parent, it
+is copied into the BATS <code class="docutils literal"><span class="pre">reg_test/higher-order/TEST</span></code> output directory.</p>
+<p>For more information on any particular one of these test files, see the
+<a class="reference external" href="http://oceans11.lanl.gov/cism/documentation.html">CISM</a> users manual
+and any <code class="docutils literal"><span class="pre">README</span></code> files in the <code class="docutils literal"><span class="pre">tests/higher-order/TEST/</span></code> directory
+(from the CISM source parent).</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/BATS-reg-test.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Katherine Evans, Joseph Kennedy, Andrew Bennett.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/BATS-reg-test.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
