@@ -118,30 +118,99 @@
 <span class="sd">    directory.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="ElementHelper.section"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.datastructures.ElementHelper.section">[docs]</a>    <span class="k">def</span> <span class="nf">section</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">elementList</span><span class="p">):</span>
+<div class="viewcode-block" id="ElementHelper.page"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.datastructures.ElementHelper.page">[docs]</a>    <span class="k">def</span> <span class="nf">page</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">element_list</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">tab_list</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; </span>
-<span class="sd">        Returns a dictionary representing a new section to display elements.</span>
+<span class="sd">        Returns a dictionary representing a new page to display elements.</span>
 <span class="sd">        This can be thought of as a simple container for displaying multiple</span>
-<span class="sd">        types of information.</span>
+<span class="sd">        types of information. The ``section`` method can be used to create</span>
+<span class="sd">        separate tabs.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            title: The title to display </span>
 <span class="sd">            description: A description of the section</span>
-<span class="sd">            elementList: The list of elements to display. If a single element is</span>
-<span class="sd">                         given it will be wrapped in a list.</span>
+<span class="sd">            element_list: The list of elements to display. If a single element is</span>
+<span class="sd">                          given it will be wrapped in a list.</span>
+<span class="sd">            tab_list: A list of tabs to display.  </span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            A dictionary with metadata specifying that it is to be rendered</span>
-<span class="sd">            as a section containing multiple elements.</span>
+<span class="sd">            as a page containing multiple elements and/or tabs.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">page</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">page</span><span class="p">[</span><span class="s2">&quot;Type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Page&quot;</span>
+        <span class="n">page</span><span class="p">[</span><span class="s2">&quot;Title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">title</span>
+        <span class="n">page</span><span class="p">[</span><span class="s2">&quot;Description&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="n">page</span><span class="p">[</span><span class="s2">&quot;Data&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">element_list</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element_list</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span> 
+                <span class="n">page</span><span class="p">[</span><span class="s2">&quot;Data&quot;</span><span class="p">][</span><span class="s2">&quot;Elements&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">element_list</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">page</span><span class="p">[</span><span class="s2">&quot;Data&quot;</span><span class="p">][</span><span class="s2">&quot;Elements&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">element_list</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">tab_list</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tab_list</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="n">page</span><span class="p">[</span><span class="s2">&quot;Data&quot;</span><span class="p">][</span><span class="s2">&quot;Tabs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tab_list</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">page</span><span class="p">[</span><span class="s2">&quot;Data&quot;</span><span class="p">][</span><span class="s2">&quot;Tabs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">tab_list</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">page</span> </div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ElementHelper.tab"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.datastructures.ElementHelper.tab">[docs]</a>    <span class="k">def</span> <span class="nf">tab</span><span class="p">(</span><span class="n">tab_name</span><span class="p">,</span> <span class="n">element_list</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">section_list</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        Returns a dictionary representing a new tab to display elements.</span>
+<span class="sd">        This can be thought of as a simple container for displaying multiple</span>
+<span class="sd">        types of information. </span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            tab_name: The title to display </span>
+<span class="sd">            description: A description of the section</span>
+<span class="sd">            element_list: The list of elements to display. If a single element is</span>
+<span class="sd">                          given it will be wrapped in a list.</span>
+<span class="sd">            section_list: A list of sections to display.  </span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A dictionary with metadata specifying that it is to be rendered</span>
+<span class="sd">            as a page containing multiple elements and/or tab.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tab</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">tab</span><span class="p">[</span><span class="s2">&quot;Type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Tab&quot;</span>
+        <span class="n">tab</span><span class="p">[</span><span class="s2">&quot;Title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tab_name</span> 
+        <span class="k">if</span> <span class="n">element_list</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element_list</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span> 
+                <span class="n">tab</span><span class="p">[</span><span class="s2">&quot;Elements&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">element_list</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">tab</span><span class="p">[</span><span class="s2">&quot;Elements&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">element_list</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">section_list</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">section_list</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="n">tab</span><span class="p">[</span><span class="s2">&quot;Sections&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">section_list</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="s2">&quot;Elements&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sect</span><span class="p">):</span> 
+                    <span class="n">tab</span><span class="p">[</span><span class="s2">&quot;Elements&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">element_list</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">tab</span><span class="p">[</span><span class="s2">&quot;Elements&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element_list</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">tab</span> </div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ElementHelper.section"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.datastructures.ElementHelper.section">[docs]</a>    <span class="k">def</span> <span class="nf">section</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">element_list</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a dictionary representing a new section.  Sections</span>
+<span class="sd">        contain a list of elements that are displayed seperately from </span>
+<span class="sd">        the global elements on the page.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            tab_name: The title of the section to be displayed</span>
+<span class="sd">            element_list: The list of elements to display within the section</span>
+<span class="sd">    </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            A dictionary with metadata specifying that it is to be rendered as </span>
+<span class="sd">            a section containing multiple elements</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">sect</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">sect</span><span class="p">[</span><span class="s2">&quot;Type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Section&quot;</span>
-        <span class="n">sect</span><span class="p">[</span><span class="s2">&quot;Title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">title</span>
-        <span class="n">sect</span><span class="p">[</span><span class="s2">&quot;Description&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">description</span>
-        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">elementList</span><span class="p">)</span> <span class="o">==</span> <span class="nb">list</span><span class="p">:</span>
-            <span class="n">sect</span><span class="p">[</span><span class="s2">&quot;Elements&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">elementList</span>
+        <span class="n">sect</span><span class="p">[</span><span class="s2">&quot;Title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">title</span> 
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element_list</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">sect</span><span class="p">[</span><span class="s2">&quot;Elements&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">element_list</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">sect</span><span class="p">[</span><span class="s2">&quot;Elements&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">elementList</span><span class="p">]</span>
+            <span class="n">sect</span><span class="p">[</span><span class="s2">&quot;Elements&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">element_list</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">sect</span></div>
 
     <span class="nd">@staticmethod</span>
@@ -157,7 +226,7 @@
 <span class="sd">        Args:</span>
 <span class="sd">            title: The title to display</span>
 <span class="sd">            headers: The columns to put into the table</span>
-<span class="sd">            data_node: A dictionary with the form:</span>
+<span class="sd">            data_node: A dictionary with the form::</span>
 <span class="sd">                {&quot;case&quot; : {&quot;subcase&quot; : { &quot;header&quot; : &quot;data&quot; } } }</span>
 
 <span class="sd">        Returns:</span>

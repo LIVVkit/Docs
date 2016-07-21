@@ -118,6 +118,11 @@
 
 <div class="viewcode-block" id="init"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.options.init">[docs]</a><span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="n">options</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Initialize some defaults &quot;&quot;&quot;</span>
+    
+    <span class="c1">#Set matlplotlib&#39;s backend so LIVVkit can plot to files. </span>
+    <span class="kn">import</span> <span class="nn">matplotlib</span>
+    <span class="n">matplotlib</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;agg&#39;</span><span class="p">)</span>
+    
     <span class="n">livvkit</span><span class="o">.</span><span class="n">resource_dir</span>   <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">resources</span><span class="o">.</span><span class="n">__path__</span><span class="p">)</span> 
     <span class="n">livvkit</span><span class="o">.</span><span class="n">output_dir</span>     <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">options</span><span class="o">.</span><span class="n">out_dir</span><span class="p">)</span>
     <span class="n">livvkit</span><span class="o">.</span><span class="n">img_dir</span>        <span class="o">=</span> <span class="n">livvkit</span><span class="o">.</span><span class="n">output_dir</span> <span class="o">+</span> <span class="s2">&quot;/imgs&quot;</span>
@@ -196,7 +201,7 @@
         <span class="k">print</span><span class="p">(</span><span class="s2">&quot;    Use either one or both of the --verification and&quot;</span><span class="p">)</span>
         <span class="k">print</span><span class="p">(</span><span class="s2">&quot;    --validation options to run tests.  For more &quot;</span><span class="p">)</span>
         <span class="k">print</span><span class="p">(</span><span class="s2">&quot;    information use the --help option, view the README&quot;</span><span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;    or check https://github.com/LIVVkit/LIVVkit/wiki&quot;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;    or check https://livvkit.github.io/Docs/&quot;</span><span class="p">)</span>
         <span class="k">print</span><span class="p">(</span><span class="s2">&quot;----------------------------------------------------------&quot;</span><span class="p">)</span>
         <span class="k">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
         <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>

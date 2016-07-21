@@ -79,6 +79,7 @@
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span> 
 
 <span class="kn">import</span> <span class="nn">livvkit</span>
+<span class="kn">from</span> <span class="nn">livvkit.util.datastructures</span> <span class="kn">import</span> <span class="n">LIVVDict</span>
 
 <div class="viewcode-block" id="mkdir_p"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.functions.mkdir_p">[docs]</a><span class="k">def</span> <span class="nf">mkdir_p</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -97,6 +98,40 @@
     <span class="n">tmp</span> <span class="o">=</span> <span class="n">dict1</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">tmp</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">dict2</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">tmp</span></div>
+
+
+<div class="viewcode-block" id="get_leaves"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.functions.get_leaves">[docs]</a><span class="k">def</span> <span class="nf">get_leaves</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Get the leaves of a nested dictionary &quot;&quot;&quot;</span>
+    <span class="n">leaves</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="nb">issubclass</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">val</span><span class="p">),</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">leaves</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">get_leaves</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">val</span>
+    <span class="k">return</span> <span class="n">leaves</span></div>
+
+
+<div class="viewcode-block" id="parse_gptl"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.functions.parse_gptl">[docs]</a><span class="k">def</span> <span class="nf">parse_gptl</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">var_list</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read a GPTL timing file and extract some data.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        file_path: the path to the GPTL timing file</span>
+<span class="sd">        var_list: a list of strings to look for in the file</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A LIVVDict containing key-value pairs of the livvkit</span>
+<span class="sd">        and the times associated with them</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">timing_result</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">var_list</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                        <span class="n">timing_result</span><span class="p">[</span><span class="n">var</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">4</span><span class="p">])</span><span class="o">/</span><span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">2</span><span class="p">])</span>
+                        <span class="k">break</span>
+    <span class="k">return</span> <span class="n">timing_result</span></div>
 
 
 <div class="viewcode-block" id="find_file"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.functions.find_file">[docs]</a><span class="k">def</span> <span class="nf">find_file</span><span class="p">(</span><span class="n">search_dir</span><span class="p">,</span> <span class="n">file_pattern</span><span class="p">):</span>

@@ -194,11 +194,12 @@ rendered as an image element</p>
 </dd></dl>
 
 <dl class="staticmethod">
-<dt id="livvkit.util.datastructures.ElementHelper.section">
-<em class="property">static </em><code class="descname">section</code><span class="sig-paren">(</span><em>title</em>, <em>description</em>, <em>elementList</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/datastructures.html#ElementHelper.section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.datastructures.ElementHelper.section" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a dictionary representing a new section to display elements.
+<dt id="livvkit.util.datastructures.ElementHelper.page">
+<em class="property">static </em><code class="descname">page</code><span class="sig-paren">(</span><em>title</em>, <em>description</em>, <em>element_list=None</em>, <em>tab_list=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/datastructures.html#ElementHelper.page"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.datastructures.ElementHelper.page" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary representing a new page to display elements.
 This can be thought of as a simple container for displaying multiple
-types of information.</p>
+types of information. The <code class="docutils literal"><span class="pre">section</span></code> method can be used to create
+separate tabs.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -206,13 +207,65 @@ types of information.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>title</strong> &#8211; The title to display</li>
 <li><strong>description</strong> &#8211; A description of the section</li>
-<li><strong>elementList</strong> &#8211; The list of elements to display. If a single element is
+<li><strong>element_list</strong> &#8211; The list of elements to display. If a single element is
 given it will be wrapped in a list.</li>
+<li><strong>tab_list</strong> &#8211; A list of tabs to display.</li>
 </ul>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A dictionary with metadata specifying that it is to be rendered
-as a section containing multiple elements.</p>
+as a page containing multiple elements and/or tabs.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="livvkit.util.datastructures.ElementHelper.section">
+<em class="property">static </em><code class="descname">section</code><span class="sig-paren">(</span><em>title</em>, <em>element_list</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/datastructures.html#ElementHelper.section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.datastructures.ElementHelper.section" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary representing a new section.  Sections
+contain a list of elements that are displayed seperately from
+the global elements on the page.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>tab_name</strong> &#8211; The title of the section to be displayed</li>
+<li><strong>element_list</strong> &#8211; The list of elements to display within the section</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A dictionary with metadata specifying that it is to be rendered as
+a section containing multiple elements</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="livvkit.util.datastructures.ElementHelper.tab">
+<em class="property">static </em><code class="descname">tab</code><span class="sig-paren">(</span><em>tab_name</em>, <em>element_list=None</em>, <em>section_list=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/datastructures.html#ElementHelper.tab"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.datastructures.ElementHelper.tab" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary representing a new tab to display elements.
+This can be thought of as a simple container for displaying multiple
+types of information.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>tab_name</strong> &#8211; The title to display</li>
+<li><strong>description</strong> &#8211; A description of the section</li>
+<li><strong>element_list</strong> &#8211; The list of elements to display. If a single element is
+given it will be wrapped in a list.</li>
+<li><strong>section_list</strong> &#8211; A list of sections to display.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A dictionary with metadata specifying that it is to be rendered
+as a page containing multiple elements and/or tab.</p>
 </td>
 </tr>
 </tbody>
@@ -235,7 +288,7 @@ be handled within the Javascript itself, not here.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>title</strong> &#8211; The title to display</li>
 <li><strong>headers</strong> &#8211; The columns to put into the table</li>
-<li><strong>data_node</strong> &#8211; A dictionary with the form:
+<li><strong>data_node</strong> &#8211; A dictionary with the form::
 {&#8220;case&#8221; : {&#8220;subcase&#8221; : { &#8220;header&#8221; : &#8220;data&#8221; } } }</li>
 </ul>
 </td>
@@ -309,6 +362,12 @@ the file to find</li>
 </dd></dl>
 
 <dl class="function">
+<dt id="livvkit.util.functions.get_leaves">
+<code class="descname">get_leaves</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/functions.html#get_leaves"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.functions.get_leaves" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the leaves of a nested dictionary</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="livvkit.util.functions.merge_dicts">
 <code class="descname">merge_dicts</code><span class="sig-paren">(</span><em>dict1</em>, <em>dict2</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/functions.html#merge_dicts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.functions.merge_dicts" title="Permalink to this definition">¶</a></dt>
 <dd><p>Merge two dictionaries and return the result</p>
@@ -318,6 +377,28 @@ the file to find</li>
 <dt id="livvkit.util.functions.mkdir_p">
 <code class="descname">mkdir_p</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/functions.html#mkdir_p"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.functions.mkdir_p" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make parent directories as needed and no error if existing. Works like <cite>mkdir -p</cite>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="livvkit.util.functions.parse_gptl">
+<code class="descname">parse_gptl</code><span class="sig-paren">(</span><em>file_path</em>, <em>var_list</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/functions.html#parse_gptl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.functions.parse_gptl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a GPTL timing file and extract some data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>file_path</strong> &#8211; the path to the GPTL timing file</li>
+<li><strong>var_list</strong> &#8211; a list of strings to look for in the file</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A LIVVDict containing key-value pairs of the livvkit
+and the times associated with them</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
