@@ -8,7 +8,7 @@ Subpackages
 
     livvkit.components.validation_tests.coverage
     livvkit.components.validation_tests.lvargo13
-    livvkit.components.validation_tests.vargo14
+    livvkit.components.validation_tests.template
 
 Module contents
 ---------------

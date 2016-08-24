@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Philosophy &mdash; LIVVKit 2.0.0 documentation</title>
+    <title>Philosophy &#8212; LIVVkit 2.0.0 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -24,11 +24,12 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="LIVVKit 2.0.0 documentation" href="index.html" />
+    <link rel="top" title="LIVVkit 2.0.0 documentation" href="index.html" />
     <link rel="next" title="Design" href="Design.html" />
     <link rel="prev" title="Getting Started" href="Basics.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
@@ -45,7 +46,7 @@
 <div class="section" id="philosophy">
 <h1>Philosophy<a class="headerlink" href="#philosophy" title="Permalink to this headline">¶</a></h1>
 <p>Verification and validation (V&amp;V) is a set of techniques that are used
-to quantify confidence and build credibility in <em>something</em>. That
+to build and quantify confidence in <em>something</em>. That
 something can be a <em>numerical model</em> or a piece of <em>software</em>, and
 validating and verifying each of these requires the use of a different
 set of techniques.</p>
@@ -54,15 +55,15 @@ set of techniques.</p>
 <p>Numerical models are typically used by scientists to make predictions
 about the physical world. V&amp;V of a numerical model consists of:</p>
 <ul class="simple">
-<li><strong>Numerical verification</strong> &#8211; the process of comparing the
+<li><strong>Numerical verification</strong> the process of comparing the
 <em>approximate numerical</em> prediction against an <em>analytical</em>
 prediction, or in the case of a sufficiently complex problem, against
 highly accurate <em>community benchmark</em> solutions. This is inherently a
-<strong>math</strong> problem <a class="reference external" href="VV#references">1,2</a> that is represented by the
+<strong>math</strong> problem <a class="footnote-reference" href="#roache1998" id="id1">[1]</a> <a class="footnote-reference" href="#oberkampf2010" id="id2">[2]</a> that is represented by the
 question, &#8220;Are we solving the equations correctly?&#8221;</li>
 <li><strong>Physical validation</strong> &#8211; the process of comparing the <em>numerical</em>
 predictions against <em>natural</em> phenomena. This is inherently a
-<strong>physics</strong> problem <a class="reference external" href="VV#references">1,2</a> that is represented by
+<strong>physics</strong> problem <a class="footnote-reference" href="#roache1998" id="id3">[1]</a> <a class="footnote-reference" href="#oberkampf2010" id="id4">[2]</a> that is represented by
 the question, &#8220;Are we using the right physics?&#8221;</li>
 </ul>
 </div>
@@ -75,11 +76,11 @@ piece of software consists of:</p>
 <li><strong>Code verification</strong> &#8211; the process of determining the software&#8217;s
 implementation, and it&#8217;s associated data, accurately represent the
 developers&#8217; specifications. This is inherently an <strong>engineering</strong>
-problem <a class="reference external" href="VV#references">2</a> that is represented by the question,
+problem <a class="footnote-reference" href="#oberkampf2010" id="id5">[2]</a> that is represented by the question,
 &#8220;did we build what <em>we</em> wanted?&#8221;</li>
 <li><strong>Performance validation</strong> &#8211; the process of determining how <em>well</em>
 the software is able to be used for its intended task. This is
-inherently an <strong>design</strong> problem <a class="reference external" href="VV#references">2</a> that is
+inherently an <strong>design</strong> problem <a class="footnote-reference" href="#oberkampf2010" id="id6">[2]</a> that is
 represented by the question, &#8220;did we build what the <em>users</em> wanted?&#8221;</li>
 </ul>
 </div>
@@ -96,10 +97,19 @@ code-base.</p>
 </div>
 <div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
-<p>[1] Roache., P.J. (1998). Verification and Validation in Computational
-Science and Engineering. Hermosa Publishers, Albuquerque, New Mexico.</p>
-<p>[2] Oberkampf, W. L., &amp; Roy, C. J. (2010). Verification and Validation
-in Scientific Computing. Cambridge University Press.</p>
+<table class="docutils footnote" frame="void" id="roache1998" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id3">2</a>)</em> Roache., P.J. (1998). Verification and Validation in Computational Science and Engineering. Hermosa Publishers, Albuquerque, New Mexico.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="oberkampf2010" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id4">2</a>, <a class="fn-backref" href="#id5">3</a>, <a class="fn-backref" href="#id6">4</a>)</em> Oberkampf, W. L., &amp; Roy, C. J. (2010). Verification and Validation
+in Scientific Computing. Cambridge University Press.</td></tr>
+</tbody>
+</table>
 </div>
 </div>
 
@@ -138,8 +148,8 @@ in Scientific Computing. Cambridge University Press.</p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
@@ -150,11 +160,11 @@ in Scientific Computing. Cambridge University Press.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2016, Katherine Evans, Joseph Kennedy, Andrew Bennett.
+      &copy;2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |
       <a href="_sources/Philosophy.txt"

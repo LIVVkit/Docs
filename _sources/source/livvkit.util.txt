@@ -4,6 +4,22 @@ livvkit.util package
 Submodules
 ----------
 
+livvkit.util.LIVVDict module
+----------------------------
+
+.. automodule:: livvkit.util.LIVVDict
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+livvkit.util.TexHelper module
+-----------------------------
+
+.. automodule:: livvkit.util.TexHelper
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 livvkit.util.colormaps module
 -----------------------------
 
@@ -12,10 +28,10 @@ livvkit.util.colormaps module
     :undoc-members:
     :show-inheritance:
 
-livvkit.util.datastructures module
-----------------------------------
+livvkit.util.elements module
+----------------------------
 
-.. automodule:: livvkit.util.datastructures
+.. automodule:: livvkit.util.elements
     :members:
     :undoc-members:
     :show-inheritance:
@@ -40,22 +56,6 @@ livvkit.util.options module
 ---------------------------
 
 .. automodule:: livvkit.util.options
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-livvkit.util.scheduler module
------------------------------
-
-.. automodule:: livvkit.util.scheduler
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-livvkit.util.tests module
--------------------------
-
-.. automodule:: livvkit.util.tests
     :members:
     :undoc-members:
     :show-inheritance:

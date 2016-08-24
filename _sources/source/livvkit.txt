@@ -12,6 +12,18 @@ Subpackages
     livvkit.resources
     livvkit.util
 
+Submodules
+----------
+
+livvkit.scheduler module
+------------------------
+
+.. automodule:: livvkit.scheduler
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
 Module contents
 ---------------
 

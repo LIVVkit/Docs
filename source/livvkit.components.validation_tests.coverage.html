@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>livvkit.components.validation_tests.coverage package &mdash; LIVVKit 2.0.0 documentation</title>
+    <title>livvkit.components.validation_tests.coverage package &#8212; LIVVkit 2.0.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -24,9 +24,10 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="LIVVKit 2.0.0 documentation" href="../index.html" />
+    <link rel="top" title="LIVVkit 2.0.0 documentation" href="../index.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
@@ -44,8 +45,56 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="livvkit-components-validation-tests-coverage-coverage-module">
-<h2>livvkit.components.validation_tests.coverage.coverage module<a class="headerlink" href="#livvkit-components-validation-tests-coverage-coverage-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-livvkit.components.validation_tests.coverage.coverage">
+<span id="livvkit-components-validation-tests-coverage-coverage-module"></span><h2>livvkit.components.validation_tests.coverage.coverage module<a class="headerlink" href="#module-livvkit.components.validation_tests.coverage.coverage" title="Permalink to this headline">¶</a></h2>
+<p>Analyze the ice sheet coverage.  For more information check documentation for
+the run() function.</p>
+<dl class="function">
+<dt id="livvkit.components.validation_tests.coverage.coverage.plot_coverage">
+<code class="descclassname">livvkit.components.validation_tests.coverage.coverage.</code><code class="descname">plot_coverage</code><span class="sig-paren">(</span><em>plot_file</em>, <em>model_data</em>, <em>bench_data</em>, <em>output_file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/components/validation_tests/coverage/coverage.html#plot_coverage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.components.validation_tests.coverage.coverage.plot_coverage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the ncl script to generate the plots for percent ice sheet
+coverage.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>plot_file</strong> &#8211; Location of the ncl script to generate the coverage plot</li>
+<li><strong>model_data</strong> &#8211; The dataset with the model output</li>
+<li><strong>bench_data</strong> &#8211; The dataset with the benchmark output</li>
+<li><strong>output_file</strong> &#8211; The full path of where to write the plot to</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">N/A</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="livvkit.components.validation_tests.coverage.coverage.run">
+<code class="descclassname">livvkit.components.validation_tests.coverage.coverage.</code><code class="descname">run</code><span class="sig-paren">(</span><em>name</em>, <em>config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/components/validation_tests/coverage/coverage.html#run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.components.validation_tests.coverage.coverage.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the analysis of the coverage of the ice sheet over the land mass.
+Produces both an overall coverage percentage metric and a coverage plot.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> &#8211; The name of the test</li>
+<li><strong>config</strong> &#8211; A dictionary representation of the configuration file</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">An elements.page with the list of elements to display</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </div>
 <div class="section" id="module-livvkit.components.validation_tests.coverage">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-livvkit.components.validation_tests.coverage" title="Permalink to this headline">¶</a></h2>
@@ -62,7 +111,7 @@
   <ul>
 <li><a class="reference internal" href="#">livvkit.components.validation_tests.coverage package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#livvkit-components-validation-tests-coverage-coverage-module">livvkit.components.validation_tests.coverage.coverage module</a></li>
+<li><a class="reference internal" href="#module-livvkit.components.validation_tests.coverage.coverage">livvkit.components.validation_tests.coverage.coverage module</a></li>
 <li><a class="reference internal" href="#module-livvkit.components.validation_tests.coverage">Module contents</a></li>
 </ul>
 </li>
@@ -84,8 +133,8 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
@@ -96,11 +145,11 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2016, Katherine Evans, Joseph Kennedy, Andrew Bennett.
+      &copy;2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |
       <a href="../_sources/source/livvkit.components.validation_tests.coverage.txt"

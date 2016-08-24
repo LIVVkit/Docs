@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>livvkit.util.functions &mdash; LIVVKit 2.0.0 documentation</title>
+    <title>livvkit.util.functions &#8212; LIVVkit 2.0.0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -24,10 +24,11 @@
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="LIVVKit 2.0.0 documentation" href="../../../index.html" />
+    <link rel="top" title="LIVVkit 2.0.0 documentation" href="../../../index.html" />
     <link rel="up" title="livvkit" href="../../livvkit.html" />
    
   <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
@@ -41,7 +42,7 @@
           <div class="body" role="main">
             
   <h1>Source code for livvkit.util.functions</h1><div class="highlight"><pre>
-<span></span><span class="c1"># Copyright (c) 2015, UT-BATTELLE, LLC</span>
+<span></span><span class="c1"># Copyright (c) 2015,2016, UT-BATTELLE, LLC</span>
 <span class="c1"># All rights reserved.</span>
 <span class="c1"># </span>
 <span class="c1"># Redistribution and use in source and binary forms, with or without</span>
@@ -76,10 +77,9 @@
 <span class="kn">import</span> <span class="nn">errno</span>
 <span class="kn">import</span> <span class="nn">shutil</span>
 <span class="kn">import</span> <span class="nn">fnmatch</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span> 
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">datetime</span> 
 
 <span class="kn">import</span> <span class="nn">livvkit</span>
-<span class="kn">from</span> <span class="nn">livvkit.util.datastructures</span> <span class="kn">import</span> <span class="n">LIVVDict</span>
 
 <div class="viewcode-block" id="mkdir_p"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.functions.mkdir_p">[docs]</a><span class="k">def</span> <span class="nf">mkdir_p</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -120,7 +120,7 @@
 <span class="sd">        var_list: a list of strings to look for in the file</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        A LIVVDict containing key-value pairs of the livvkit</span>
+<span class="sd">        A dict containing key-value pairs of the livvkit</span>
 <span class="sd">        and the times associated with them</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">timing_result</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
@@ -216,8 +216,8 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Check if we need to back up an old run</span>
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">index_dir</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;-------------------------------------------------------------------&quot;</span><span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Previous output data found in output directory!&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-------------------------------------------------------------------&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Previous output data found in output directory!&#39;</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">index_dir</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="s2">&quot;data.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
             <span class="n">prev_time</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="s2">&quot;_&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
@@ -226,12 +226,12 @@
         <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
             <span class="n">prev_time</span> <span class="o">=</span> <span class="s2">&quot;bkd_&quot;</span><span class="o">+</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">_%H%M%S&quot;</span><span class="p">)</span>
             <span class="n">prev_comment</span> <span class="o">=</span> <span class="s2">&quot;Warning: could not find previous runtime and comment.&quot;</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;   Backing up data to:&#39;</span><span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;   &#39;</span> <span class="o">+</span> <span class="n">livvkit</span><span class="o">.</span><span class="n">index_dir</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="n">prev_time</span><span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;-------------------------------------------------------------------&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   Backing up data to:&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   &#39;</span> <span class="o">+</span> <span class="n">livvkit</span><span class="o">.</span><span class="n">index_dir</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="n">prev_time</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-------------------------------------------------------------------&quot;</span><span class="p">)</span>
         <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">index_dir</span><span class="p">,</span> <span class="n">livvkit</span><span class="o">.</span><span class="n">index_dir</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="n">prev_time</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;-------------------------------------------------------------------&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-------------------------------------------------------------------&quot;</span><span class="p">)</span>
 
     <span class="c1"># Copy over js, css, &amp; imgs directories from source</span>
     <span class="n">mkdir_p</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">website_dir</span><span class="p">)</span>
@@ -244,6 +244,12 @@
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">index_dir</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="s2">&quot;data.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">comment</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Optional"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.functions.Optional">[docs]</a><span class="k">def</span> <span class="nf">Optional</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">func_wrapper</span><span class="p">():</span>
+        <span class="k">return</span> 
+    <span class="k">return</span> <span class="n">func_wrapper</span></div>
 
 </pre></div>
 
@@ -265,8 +271,8 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
@@ -277,11 +283,11 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2016, Katherine Evans, Joseph Kennedy, Andrew Bennett.
+      &copy;2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
     </div>
 

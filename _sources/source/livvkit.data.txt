@@ -8,7 +8,6 @@ Subpackages
 
     livvkit.data.numerics
     livvkit.data.validation
-    livvkit.data.verification
 
 Module contents
 ---------------

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Conventions &mdash; LIVVKit 2.0.0 documentation</title>
+    <title>Conventions &#8212; LIVVkit 2.0.0 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -24,9 +24,10 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="LIVVKit 2.0.0 documentation" href="index.html" />
+    <link rel="top" title="LIVVkit 2.0.0 documentation" href="index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
@@ -86,18 +87,13 @@ guidelines</a>.</p>
 <div class="section" id="tips">
 <h1>Tips<a class="headerlink" href="#tips" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li>Each source file containing functions that are called by the main
-<code class="docutils literal"><span class="pre">livv.py</span></code> script should have the license header. (There should be a
-script to fix when this is forgotten in util).</li>
-<li>Global variables should be stored in the module <code class="docutils literal"><span class="pre">util.variables</span></code>.
-When adding new global variables list them in that module with some
-basic default value so that it is easy for others to see which
-variables may be used by outside modules.</li>
-<li>When refering to system paths use the <code class="docutils literal"><span class="pre">os.sep</span></code> variable instead of
+<li>Each source file containing functions that are called by the main <code class="docutils literal"><span class="pre">livv.py</span></code> script should have
+the license header. (There should be a script to fix when this is forgotten in util).</li>
+<li>Global variables should be stored in the module <code class="docutils literal"><span class="pre">util.variables</span></code>.  When adding new global
+variables list them in that module with some basic default value so that it is easy for others to
+see which variables may be used by outside modules.</li>
+<li>When refering to system paths use the <code class="docutils literal"><span class="pre">os.sep</span></code> variable or <code class="docutils literal"><span class="pre">os.path.join()</span></code> instead of
 relying on whichever version of path separator your system uses.</li>
-<li>If you are adding new test cases that should be run by default they
-should be added to the xxxTests variable that corresponds to the
-branch of LIVV you are working on.</li>
 </ul>
 </div>
 
@@ -129,8 +125,8 @@ branch of LIVV you are working on.</li>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
@@ -141,11 +137,11 @@ branch of LIVV you are working on.</li>
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2016, Katherine Evans, Joseph Kennedy, Andrew Bennett.
+      &copy;2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |
       <a href="_sources/Code-Guidelines.txt"

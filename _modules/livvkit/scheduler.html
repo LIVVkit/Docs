@@ -6,28 +6,29 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>livvkit.util.scheduler &mdash; LIVVKit 2.0.0 documentation</title>
+    <title>livvkit.scheduler &#8212; LIVVkit 2.0.0 documentation</title>
     
-    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../../',
+        URL_ROOT:    '../../',
         VERSION:     '2.0.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="LIVVKit 2.0.0 documentation" href="../../../index.html" />
-    <link rel="up" title="livvkit" href="../../livvkit.html" />
+    <link rel="top" title="LIVVkit 2.0.0 documentation" href="../../index.html" />
+    <link rel="up" title="livvkit" href="../livvkit.html" />
    
-  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
@@ -40,8 +41,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <h1>Source code for livvkit.util.scheduler</h1><div class="highlight"><pre>
-<span></span><span class="c1"># Copyright (c) 2015, UT-BATTELLE, LLC</span>
+  <h1>Source code for livvkit.scheduler</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) 2015,2016, UT-BATTELLE, LLC</span>
 <span class="c1"># All rights reserved.</span>
 <span class="c1"># </span>
 <span class="c1"># Redistribution and use in source and binary forms, with or without</span>
@@ -81,7 +82,7 @@
 <span class="kn">import</span> <span class="nn">livvkit.components.performance</span> 
 <span class="kn">import</span> <span class="nn">livvkit.components.validation</span> 
 
-<div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.scheduler.run">[docs]</a><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">run_type</span><span class="p">,</span> <span class="n">module</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+<div class="viewcode-block" id="run"><a class="viewcode-back" href="../../source/livvkit.html#livvkit.scheduler.run">[docs]</a><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">run_type</span><span class="p">,</span> <span class="n">module</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Collects the analyses cases to be run and launches processes for each of </span>
 <span class="sd">    them.</span>
@@ -92,19 +93,19 @@
 <span class="sd">        config_path: The configuration for the module </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">tests</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="nb">dict</span><span class="p">)]</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; -----------------------------------------------------------------&quot;</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;   Beginning &quot;</span> <span class="o">+</span> <span class="n">run_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot; test suite &quot;</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; -----------------------------------------------------------------&quot;</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; -----------------------------------------------------------------&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Beginning &quot;</span> <span class="o">+</span> <span class="n">run_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot; test suite &quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; -----------------------------------------------------------------&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
     <span class="n">summary</span> <span class="o">=</span> <span class="n">launch_processes</span><span class="p">(</span><span class="n">tests</span><span class="p">,</span> <span class="n">module</span><span class="p">,</span> <span class="o">**</span><span class="n">config</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; -----------------------------------------------------------------&quot;</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;   &quot;</span> <span class="o">+</span> <span class="n">run_type</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot; test suite complete &quot;</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; -----------------------------------------------------------------&quot;</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; -----------------------------------------------------------------&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   &quot;</span> <span class="o">+</span> <span class="n">run_type</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot; test suite complete &quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; -----------------------------------------------------------------&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">summary</span></div>
 
 
-<div class="viewcode-block" id="launch_processes"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.scheduler.launch_processes">[docs]</a><span class="k">def</span> <span class="nf">launch_processes</span><span class="p">(</span><span class="n">tests</span><span class="p">,</span> <span class="n">run_module</span><span class="p">,</span> <span class="o">**</span><span class="n">config</span><span class="p">):</span>
+<div class="viewcode-block" id="launch_processes"><a class="viewcode-back" href="../../source/livvkit.html#livvkit.scheduler.launch_processes">[docs]</a><span class="k">def</span> <span class="nf">launch_processes</span><span class="p">(</span><span class="n">tests</span><span class="p">,</span> <span class="n">run_module</span><span class="p">,</span> <span class="o">**</span><span class="n">config</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Helper method to launch processes and synch output &quot;&quot;&quot;</span>
     <span class="n">livvkit</span><span class="o">.</span><span class="n">manager</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Manager</span><span class="p">()</span>
     <span class="n">test_data</span> <span class="o">=</span> <span class="n">livvkit</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="n">dict</span><span class="p">()</span>
@@ -119,7 +120,7 @@
     <span class="k">return</span> <span class="n">summary</span> </div>
 
 
-<div class="viewcode-block" id="summarize"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.scheduler.summarize">[docs]</a><span class="k">def</span> <span class="nf">summarize</span><span class="p">(</span><span class="n">summary</span><span class="p">):</span>
+<div class="viewcode-block" id="summarize"><a class="viewcode-back" href="../../source/livvkit.html#livvkit.scheduler.summarize">[docs]</a><span class="k">def</span> <span class="nf">summarize</span><span class="p">(</span><span class="n">summary</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Write the summary to a JSON file &quot;&quot;&quot;</span>
     <span class="n">util</span><span class="o">.</span><span class="n">datastructures</span><span class="o">.</span><span class="n">mkdir_p</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">output_dir</span><span class="p">)</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;index.json&quot;</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
@@ -134,9 +135,9 @@
         <div class="sphinxsidebarwrapper"><div class="relations">
 <h3>Related Topics</h3>
 <ul>
-  <li><a href="../../../index.html">Documentation overview</a><ul>
-  <li><a href="../../index.html">Module code</a><ul>
-  <li><a href="../../livvkit.html">livvkit</a><ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  <li><a href="../livvkit.html">livvkit</a><ul>
   </ul></li>
   </ul></li>
   </ul></li>
@@ -144,9 +145,9 @@
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
-    <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
@@ -157,11 +158,11 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2016, Katherine Evans, Joseph Kennedy, Andrew Bennett.
+      &copy;2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
     </div>
 
