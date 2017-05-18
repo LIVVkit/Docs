@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Design Overview &#8212; LIVVkit 2.0.3 documentation</title>
+    
+    <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/sidebar.js"></script>
+    <link rel="top" title="LIVVkit 2.0.3 documentation" href="index.html" />
+    <link rel="next" title="Advanced installation" href="install.html" />
+    <link rel="prev" title="Introduction to V&amp;V" href="vv-intro.html" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <link rel="shortcut icon" type="image/png" href="_static/favicon.png" />
+    <meta name="viewport" content="width=device-width,initial-scale=0.8">
+    
+    
+
+  </head>
+  <body role="document">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
+        <li><a href="index.html">LIVVkit 2.0.3 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    
+        <div class="badge">
+            <a href="https://github.com/LIVVkit/LIVVkit">Fork me on GitHub</a>
+            <img src="_static/right-red@2x.png">
+        </div>
+    
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="figure align-center">
+<a class="reference internal image-reference" href="_images/livvkit.png"><img alt="LIVVkit" src="_images/livvkit.png" style="width: 400px;" /></a>
+</div>
+<div class="section" id="design-overview">
+<h1>Design Overview<a class="headerlink" href="#design-overview" title="Permalink to this headline">¶</a></h1>
+<p>As detailed in <a class="reference internal" href="ref.html#kennedy2017" id="id1">[Kennedy2017]</a>, LIVVkit is intended to be a comprehensive V&amp;V toolkit for regular and
+automated testing &#8211; that is, testing models as they develop. It is designed to be <em>used</em> by model
+developers/users to build their confidence in the model. Additionally, it is expected that the
+testing output will be <em>viewed</em> and examined by a wider audience in order to enhance the credibility
+of the model.</p>
+<p>Therefore, LIVVkit strives to meet these core <strong>usage requirements</strong>:</p>
+<dl class="docutils">
+<dt><strong>Usable</strong></dt>
+<dd>LIVVkit should be easy to start using with no new technical skills needed (for a typical ice sheet
+modeler/developer).</dd>
+<dt><strong>Portable</strong></dt>
+<dd>LIVVkit should work where the models are developed; from laptops to HPCs.</dd>
+<dt><strong>Flexible</strong></dt>
+<dd>LIVVkit should accommodate multiple use cases and integrate into developers&#8217; workflow patterns.</dd>
+<dt><strong>Extensible</strong></dt>
+<dd>LIVVkit should be able to accommodate new models, tests, and methods of analysis easily to keep
+pace with future developments.</dd>
+<dt><strong>Nimble</strong></dt>
+<dd>LIVVkit should be able to perform the desired sets of analyses with minimal overhead and time to
+results.</dd>
+</dl>
+<p>Similarly, LIVVkit strives to meet these core <strong>output requirements</strong>:</p>
+<dl class="docutils">
+<dt><strong>Informative</strong></dt>
+<dd>The analysis results should be described in a quantified manner, using appropriate metrics that
+indicate the degree of certainty, <em>and</em> provide the necessary context to make the figures, metrics
+and other results understandable.</dd>
+<dt><strong>Shareable</strong></dt>
+<dd>The results should be easy to share, publish, and examine using common tools.</dd>
+</dl>
+<p>If you find LIVVkit isn&#8217;t working for you, meeting these requirements, or have other suggestions for
+improvement, please let us know by <a class="reference external" href="https://github.com/livvkit/livvkit/issues">opening an issue on github</a>.</p>
+<div class="section" id="architecture">
+<h2>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-center" id="id3">
+<img alt="Schematic of LIVVkit's architecture and program flow." src="_images/layout.png" />
+<p class="caption"><span class="caption-text">Schematic of LIVVkit’s architecture and program flow <a class="reference internal" href="ref.html#kennedy2017" id="id2">[Kennedy2017]</a>. The light blue computers
+indicate where the user will interact with LIVVkit, first using the livv interface and then
+finally viewing the web output. The green boxes indicate core LIVVkit functionality, the black
+boxes are the different analyses which are executed in parallel, and the blue and purple boxes
+represent the ice-sheet model description bundles and any extensions analyses that may have been
+requested, respectively. Programmatically, the livv interface is used to schedule a series of
+analyses; the scheduler then pulls the requested analysis codes from the required bundles,
+components, and extensions; and executes the analyses. As each analysis finishes, some
+high-level summary information will be displayed on the command line through the interface and
+fully detailed information will be collated into the output website. Once all analyses are
+finished, the interface will inform the user and the results of all the analyses can be viewed
+on the output website.</span></p>
+</div>
+<div class="section" id="components">
+<h3>Components<a class="headerlink" href="#components" title="Permalink to this headline">¶</a></h3>
+<p>The major components of LIVVkit are:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">livv</span></code></dt>
+<dd>The LIVVkit command-line interface where users will primarily interact with LIVVkit, and request
+the desired V&amp;V analyses.</dd>
+<dt><a class="reference internal" href="source/livvkit.html#module-livvkit.scheduler" title="livvkit.scheduler"><code class="xref py py-mod docutils literal"><span class="pre">livvkit.scheduler</span></code></a></dt>
+<dd>The scheduler will then launch all of the V&amp;V analyses in parallel and will collate the output
+when done.</dd>
+<dt><a class="reference internal" href="source/livvkit.components.html#module-livvkit.components" title="livvkit.components"><code class="xref py py-mod docutils literal"><span class="pre">livvkit.components</span></code></a></dt>
+<dd>A package containing the
+<a class="reference internal" href="source/livvkit.components.html#module-livvkit.components.numerics" title="livvkit.components.numerics"><code class="xref py py-mod docutils literal"><span class="pre">numerics</span></code></a>,
+<a class="reference internal" href="source/livvkit.components.html#module-livvkit.components.verification" title="livvkit.components.verification"><code class="xref py py-mod docutils literal"><span class="pre">verification</span></code></a>,
+<a class="reference internal" href="source/livvkit.components.html#module-livvkit.components.performance" title="livvkit.components.performance"><code class="xref py py-mod docutils literal"><span class="pre">performance</span></code></a>, and
+<a class="reference internal" href="source/livvkit.components.html#module-livvkit.components.validation" title="livvkit.components.validation"><code class="xref py py-mod docutils literal"><span class="pre">validation</span></code></a> components, which control the different types of
+verification and validation analyses (see the <a class="reference internal" href="vv-intro.html"><span class="doc">Introduction to V&amp;V</span></a>).</dd>
+<dt><a class="reference internal" href="source/livvkit.bundles.html#module-livvkit.bundles" title="livvkit.bundles"><code class="xref py py-mod docutils literal"><span class="pre">livvkit.bundles</span></code></a></dt>
+<dd>A package containing any model specific code bundles, which are used to completely encapsulate a
+particular ice sheet model&#8217;s unique behavior. At its core, a bundle is simply a set of
+configuration files and Python modules. The configuration files describe paths, variable names,
+and the types of analysis available to LIVVkit, and the Python modules provide the methods to
+handle ice sheet model specific behavior (e.g., parsing input/log files and reshaping data
+sets).</dd>
+<dt><strong>Utilities</strong></dt>
+<dd><p class="first">All the functionality that falls outside the V&amp;V paradigm is contained in:</p>
+<ul class="last simple">
+<li><a class="reference internal" href="source/livvkit.util.html#module-livvkit.util" title="livvkit.util"><code class="xref py py-mod docutils literal"><span class="pre">livvkit.util</span></code></a>: utility classes and functions for dealing with general LIVVkit data
+manipulations, JSON element skeletons for output data, general I/O, etc.</li>
+<li><a class="reference internal" href="source/livvkit.resources.html#module-livvkit.resources" title="livvkit.resources"><code class="xref py py-mod docutils literal"><span class="pre">livvkit.resources</span></code></a>: HTML, CSS, Javascript, and image resources for generating the
+output website.</li>
+<li><a class="reference internal" href="source/livvkit.data.html#module-livvkit.data" title="livvkit.data"><code class="xref py py-mod docutils literal"><span class="pre">livvkit.data</span></code></a>: static data used by different built in V&amp;V analyses, and allows users to
+link in directories containing data for custom extensions.</li>
+</ul>
+</dd>
+</dl>
+<p>See <a class="reference internal" href="api.html"><span class="doc">API</span></a> and/or <a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a> for a detailed list and description of LIVVkit&#8217;s components.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+    <a id="sidebar-anchor"></a>
+    
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script><h3><a href="index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vv-intro.html">Introduction to V&amp;V</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Design Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#architecture">Architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#components">Components</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Advanced installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extend.html">Extending Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ref.html">References and indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/design.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="install.html" title="Advanced installation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="vv-intro.html" title="Introduction to V&amp;V"
+             accesskey="P">previous</a> |</li>
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

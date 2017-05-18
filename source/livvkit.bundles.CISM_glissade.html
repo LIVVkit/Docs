@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>livvkit.bundles.CISM_glissade package &#8212; LIVVkit 2.0.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/sidebar.js"></script>
+    <link rel="top" title="LIVVkit 2.0.3 documentation" href="../index.html" />
+    <link rel="up" title="livvkit.bundles package" href="livvkit.bundles.html" />
+    <link rel="next" title="livvkit.components package" href="livvkit.components.html" />
+    <link rel="prev" title="livvkit.bundles package" href="livvkit.bundles.html" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <link rel="shortcut icon" type="image/png" href="../_static/favicon.png" />
+    <meta name="viewport" content="width=device-width,initial-scale=0.8">
+    
+    
+
+  </head>
+  <body role="document">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
+        <li><a href="../index.html">LIVVkit 2.0.3 documentation</a> &#187;</li>
+          <li><a href="../api.html" >API</a> &#187;</li>
+          <li><a href="modules.html" >livvkit</a> &#187;</li>
+          <li><a href="livvkit.html" >livvkit package</a> &#187;</li>
+          <li><a href="livvkit.bundles.html" accesskey="U">livvkit.bundles package</a> &#187;</li> 
+      </ul>
+    </div>
+    
+        <div class="badge">
+            <a href="https://github.com/LIVVkit/LIVVkit">Fork me on GitHub</a>
+            <img src="../_static/right-red@2x.png">
+        </div>
+    
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="livvkit-bundles-cism-glissade-package">
+<h1>livvkit.bundles.CISM_glissade package<a class="headerlink" href="#livvkit-bundles-cism-glissade-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-livvkit.bundles.CISM_glissade.numerics">
+<span id="livvkit-bundles-cism-glissade-numerics-module"></span><h2>livvkit.bundles.CISM_glissade.numerics module<a class="headerlink" href="#module-livvkit.bundles.CISM_glissade.numerics" title="Permalink to this headline">¶</a></h2>
+<p>CISM_glissade module for numerics analysis</p>
+<dl class="class">
+<dt id="livvkit.bundles.CISM_glissade.numerics.DataGrid">
+<em class="property">class </em><code class="descclassname">livvkit.bundles.CISM_glissade.numerics.</code><code class="descname">DataGrid</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/bundles/CISM_glissade/numerics.html#DataGrid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.bundles.CISM_glissade.numerics.DataGrid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Class to handle the CISM_glissade grids, which are cell-centered grids.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="livvkit.bundles.CISM_glissade.numerics.RotatedGrid">
+<em class="property">class </em><code class="descclassname">livvkit.bundles.CISM_glissade.numerics.</code><code class="descname">RotatedGrid</code><span class="sig-paren">(</span><em>alpha</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/bundles/CISM_glissade/numerics.html#RotatedGrid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.bundles.CISM_glissade.numerics.RotatedGrid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>For the ISMIP-HOM f tests, CISM computes the flow of a glacier down an
+inclined plane:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">z</span>
+<span class="o">^</span>
+<span class="o">|</span>
+<span class="o">*</span> <span class="o">.</span>
+<span class="o">.</span>    <span class="o">.</span>
+<span class="o">.</span>        <span class="o">.</span>
+<span class="o">*</span>           <span class="o">.</span>
+<span class="o">|</span> <span class="o">.</span>             <span class="o">.</span>
+<span class="o">|</span>    <span class="o">.</span>     <span class="n">ICE</span>      <span class="o">.</span>
+<span class="o">|</span>        <span class="o">.</span>              <span class="o">.</span>
+<span class="o">|</span>            <span class="o">.</span>             <span class="o">.</span>
+<span class="o">|</span>  <span class="n">BED</span>           <span class="o">.</span>            <span class="o">.</span>
+<span class="o">|</span>                    <span class="o">.</span>           <span class="o">*</span>
+<span class="o">|</span>                       <span class="o">.</span>        <span class="o">.</span>
+<span class="o">|</span>                          <span class="o">.</span>     <span class="o">.</span>
+<span class="o">|</span>                             <span class="o">.</span>  <span class="o">.</span>
+<span class="o">|</span>                                <span class="o">*</span>
+<span class="o">|</span>                                <span class="o">|</span>
+<span class="o">|</span>                                <span class="o">|</span>
+<span class="o">|</span>                                <span class="o">|</span>
+<span class="mi">0</span><span class="o">-------------------------------------&gt;</span><span class="n">x</span>
+</pre></div>
+</div>
+<p>The origin is at point 0 in the above figure, and the topmost point of the
+glacier is at x=0, z=7 (in km). The slope is 3 degrees. The ice is 1000 m
+tall and flows down the inclined plane.</p>
+<p>ISMIP-HOM, however, defines the coordinate system with the origin located at
+the topmost point of the glacier (0,7) with the x&#8217; axis pointing down slope
+and z&#8217; pointing perpendicular to the slope. So the coordinate system is
+shifted, and rotated by a=3 degrees from the CISM glissade grid.</p>
+<p>An additional complication is that the surface is computed in CISM on the
+standard grid, but velocities are computed on a staggered, grid.</p>
+<p>This class converts the CISM_glissade coordinate system to the ISMIP-HOM
+coordinate system.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="livvkit.bundles.CISM_glissade.numerics.get_plot_data">
+<code class="descclassname">livvkit.bundles.CISM_glissade.numerics.</code><code class="descname">get_plot_data</code><span class="sig-paren">(</span><em>test_file</em>, <em>bench_file</em>, <em>setup</em>, <em>config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/bundles/CISM_glissade/numerics.html#get_plot_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.bundles.CISM_glissade.numerics.get_plot_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-livvkit.bundles.CISM_glissade.verification">
+<span id="livvkit-bundles-cism-glissade-verification-module"></span><h2>livvkit.bundles.CISM_glissade.verification module<a class="headerlink" href="#module-livvkit.bundles.CISM_glissade.verification" title="Permalink to this headline">¶</a></h2>
+<p>Provides CISM_glissade specific verification tools</p>
+<dl class="function">
+<dt id="livvkit.bundles.CISM_glissade.verification.parse_config">
+<code class="descclassname">livvkit.bundles.CISM_glissade.verification.</code><code class="descname">parse_config</code><span class="sig-paren">(</span><em>file_path</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/bundles/CISM_glissade/verification.html#parse_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.bundles.CISM_glissade.verification.parse_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the CISM configuration file to a python dictionary</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>file_path</strong> &#8211; absolute path to the configuration file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A dictionary representation of the given file</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="livvkit.bundles.CISM_glissade.verification.parse_log">
+<code class="descclassname">livvkit.bundles.CISM_glissade.verification.</code><code class="descname">parse_log</code><span class="sig-paren">(</span><em>file_path</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/bundles/CISM_glissade/verification.html#parse_log"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.bundles.CISM_glissade.verification.parse_log" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse a CISM output log and extract some information.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>file_path</strong> &#8211; absolute path to the log file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A dictionary created by the elements object corresponding to
+the results of the bit for bit testing</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-livvkit.bundles.CISM_glissade">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-livvkit.bundles.CISM_glissade" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+    <a id="sidebar-anchor"></a>
+    
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script><h3><a href="../index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vv-intro.html">Introduction to V&amp;V</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design.html">Design Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Advanced installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../extend.html">Extending Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev.html">Development</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html">livvkit</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="livvkit.html">livvkit package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#web-frontend">Web Frontend</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ref.html">References and indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/source/livvkit.bundles.CISM_glissade.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="livvkit.components.html" title="livvkit.components package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="livvkit.bundles.html" title="livvkit.bundles package"
+             accesskey="P">previous</a> |</li>
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

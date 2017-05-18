@@ -1,20 +1,19 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>livvkit.util.elements &#8212; LIVVkit 2.0.0 documentation</title>
+    <title>livvkit.util.elements &#8212; LIVVkit 2.0.3 documentation</title>
     
-    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '2.0.0',
+        VERSION:     '2.0.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,16 +23,32 @@
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="LIVVkit 2.0.0 documentation" href="../../../index.html" />
+    <script type="text/javascript" src="../../../_static/sidebar.js"></script>
+    <link rel="top" title="LIVVkit 2.0.3 documentation" href="../../../index.html" />
     <link rel="up" title="livvkit" href="../../livvkit.html" />
-   
-  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <link rel="shortcut icon" type="image/png" href="../../../_static/favicon.png" />
+    <meta name="viewport" content="width=device-width,initial-scale=0.8">
+    
+    
 
   </head>
   <body role="document">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
+        <li><a href="../../../index.html">LIVVkit 2.0.3 documentation</a> &#187;</li>
+          <li><a href="../../index.html" >Module code</a> &#187;</li>
+          <li><a href="../../livvkit.html" accesskey="U">livvkit</a> &#187;</li> 
+      </ul>
+    </div>
+    
+        <div class="badge">
+            <a href="https://github.com/LIVVkit/LIVVkit">Fork me on GitHub</a>
+            <img src="../../../_static/right-red@2x.png">
+        </div>
+    
   
 
     <div class="document">
@@ -44,21 +59,21 @@
   <h1>Source code for livvkit.util.elements</h1><div class="highlight"><pre>
 <span></span><span class="c1"># Copyright (c) 2015,2016, UT-BATTELLE, LLC</span>
 <span class="c1"># All rights reserved.</span>
-<span class="c1"># </span>
+<span class="c1">#</span>
 <span class="c1"># Redistribution and use in source and binary forms, with or without</span>
 <span class="c1"># modification, are permitted provided that the following conditions are met:</span>
-<span class="c1"># </span>
+<span class="c1">#</span>
 <span class="c1"># 1. Redistributions of source code must retain the above copyright notice, this</span>
 <span class="c1"># list of conditions and the following disclaimer.</span>
-<span class="c1"># </span>
+<span class="c1">#</span>
 <span class="c1"># 2. Redistributions in binary form must reproduce the above copyright notice,</span>
 <span class="c1"># this list of conditions and the following disclaimer in the documentation</span>
 <span class="c1"># and/or other materials provided with the distribution.</span>
-<span class="c1"># </span>
+<span class="c1">#</span>
 <span class="c1"># 3. Neither the name of the copyright holder nor the names of its contributors</span>
 <span class="c1"># may be used to endorse or promote products derived from this software without</span>
 <span class="c1"># specific prior written permission.</span>
-<span class="c1"># </span>
+<span class="c1">#</span>
 <span class="c1"># THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND</span>
 <span class="c1"># ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED</span>
 <span class="c1"># WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE</span>
@@ -69,27 +84,32 @@
 <span class="c1"># CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,</span>
 <span class="c1"># OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span>
 <span class="c1"># OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Module to help building new display elements in the output</span>
-<span class="sd">files easier and less error prone.  </span>
+<span class="sd">files easier and less error prone.</span>
 
 <span class="sd">Implementing new elements is possible simply by adding new functions</span>
-<span class="sd">They will be written out to the JSON files as sub-objects, which must </span>
+<span class="sd">They will be written out to the JSON files as sub-objects, which must</span>
 <span class="sd">be interpreted by the Javascript found in the resources directory.</span>
 <span class="sd">&quot;&quot;&quot;</span>
+
+
 <div class="viewcode-block" id="page"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.elements.page">[docs]</a><span class="k">def</span> <span class="nf">page</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">element_list</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tab_list</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; </span>
+    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns a dictionary representing a new page to display elements.</span>
 <span class="sd">    This can be thought of as a simple container for displaying multiple</span>
 <span class="sd">    types of information. The ``section`` method can be used to create</span>
 <span class="sd">    separate tabs.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        title: The title to display </span>
+<span class="sd">        title: The title to display</span>
 <span class="sd">        description: A description of the section</span>
 <span class="sd">        element_list: The list of elements to display. If a single element is</span>
 <span class="sd">                      given it will be wrapped in a list.</span>
-<span class="sd">        tab_list: A list of tabs to display.  </span>
+<span class="sd">        tab_list: A list of tabs to display.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        A dictionary with metadata specifying that it is to be rendered</span>
@@ -101,7 +121,7 @@
     <span class="n">page</span><span class="p">[</span><span class="s2">&quot;Description&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">description</span>
     <span class="n">page</span><span class="p">[</span><span class="s2">&quot;Data&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">if</span> <span class="n">element_list</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element_list</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span> 
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element_list</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="n">page</span><span class="p">[</span><span class="s2">&quot;Data&quot;</span><span class="p">][</span><span class="s2">&quot;Elements&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">element_list</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">page</span><span class="p">[</span><span class="s2">&quot;Data&quot;</span><span class="p">][</span><span class="s2">&quot;Elements&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">element_list</span><span class="p">]</span>
@@ -110,21 +130,21 @@
             <span class="n">page</span><span class="p">[</span><span class="s2">&quot;Data&quot;</span><span class="p">][</span><span class="s2">&quot;Tabs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tab_list</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">page</span><span class="p">[</span><span class="s2">&quot;Data&quot;</span><span class="p">][</span><span class="s2">&quot;Tabs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">tab_list</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">page</span> </div>
+    <span class="k">return</span> <span class="n">page</span></div>
 
 
 <div class="viewcode-block" id="tab"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.elements.tab">[docs]</a><span class="k">def</span> <span class="nf">tab</span><span class="p">(</span><span class="n">tab_name</span><span class="p">,</span> <span class="n">element_list</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">section_list</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; </span>
+    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns a dictionary representing a new tab to display elements.</span>
 <span class="sd">    This can be thought of as a simple container for displaying multiple</span>
-<span class="sd">    types of information. </span>
+<span class="sd">    types of information.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        tab_name: The title to display </span>
+<span class="sd">        tab_name: The title to display</span>
 <span class="sd">        description: A description of the section</span>
 <span class="sd">        element_list: The list of elements to display. If a single element is</span>
 <span class="sd">                      given it will be wrapped in a list.</span>
-<span class="sd">        section_list: A list of sections to display.  </span>
+<span class="sd">        section_list: A list of sections to display.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        A dictionary with metadata specifying that it is to be rendered</span>
@@ -132,9 +152,9 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">tab</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">tab</span><span class="p">[</span><span class="s2">&quot;Type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Tab&quot;</span>
-    <span class="n">tab</span><span class="p">[</span><span class="s2">&quot;Title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tab_name</span> 
+    <span class="n">tab</span><span class="p">[</span><span class="s2">&quot;Title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tab_name</span>
     <span class="k">if</span> <span class="n">element_list</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element_list</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span> 
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element_list</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="n">tab</span><span class="p">[</span><span class="s2">&quot;Elements&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">element_list</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">tab</span><span class="p">[</span><span class="s2">&quot;Elements&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">element_list</span><span class="p">]</span>
@@ -142,17 +162,17 @@
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">section_list</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="n">tab</span><span class="p">[</span><span class="s2">&quot;Sections&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">section_list</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="p">(</span><span class="s2">&quot;Elements&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sect</span><span class="p">):</span> 
+            <span class="k">if</span> <span class="p">(</span><span class="s2">&quot;Elements&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">section_list</span><span class="p">):</span>
                 <span class="n">tab</span><span class="p">[</span><span class="s2">&quot;Elements&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">element_list</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">tab</span><span class="p">[</span><span class="s2">&quot;Elements&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element_list</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">tab</span> </div>
+    <span class="k">return</span> <span class="n">tab</span></div>
 
 
 <div class="viewcode-block" id="section"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.elements.section">[docs]</a><span class="k">def</span> <span class="nf">section</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">element_list</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns a dictionary representing a new section.  Sections</span>
-<span class="sd">    contain a list of elements that are displayed seperately from </span>
+<span class="sd">    contain a list of elements that are displayed seperately from</span>
 <span class="sd">    the global elements on the page.</span>
 
 <span class="sd">    Args:</span>
@@ -160,12 +180,12 @@
 <span class="sd">        element_list: The list of elements to display within the section</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        A dictionary with metadata specifying that it is to be rendered as </span>
+<span class="sd">        A dictionary with metadata specifying that it is to be rendered as</span>
 <span class="sd">        a section containing multiple elements</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">sect</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">sect</span><span class="p">[</span><span class="s2">&quot;Type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Section&quot;</span>
-    <span class="n">sect</span><span class="p">[</span><span class="s2">&quot;Title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">title</span> 
+    <span class="n">sect</span><span class="p">[</span><span class="s2">&quot;Title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">title</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element_list</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
         <span class="n">sect</span><span class="p">[</span><span class="s2">&quot;Elements&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">element_list</span>
     <span class="k">else</span><span class="p">:</span>
@@ -176,8 +196,8 @@
 <div class="viewcode-block" id="table"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.elements.table">[docs]</a><span class="k">def</span> <span class="nf">table</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">data_node</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns a dictionary representing a new table element.  Tables</span>
-<span class="sd">    are specified with two main pieces of information, the headers </span>
-<span class="sd">    and the data to put into the table.  Rendering of the table is </span>
+<span class="sd">    are specified with two main pieces of information, the headers</span>
+<span class="sd">    and the data to put into the table.  Rendering of the table is</span>
 <span class="sd">    the responsibility of the Javascript in the resources directory.</span>
 <span class="sd">    When the data does not line up with the headers given this should</span>
 <span class="sd">    be handled within the Javascript itself, not here.</span>
@@ -200,12 +220,39 @@
     <span class="k">return</span> <span class="n">tb</span></div>
 
 
+<div class="viewcode-block" id="vtable"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.elements.vtable">[docs]</a><span class="k">def</span> <span class="nf">vtable</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">data_node</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns a dictionary representing a new table element.  Tables</span>
+<span class="sd">    are specified with two main pieces of information, the headers</span>
+<span class="sd">    and the data to put into the table.  Rendering of the table is</span>
+<span class="sd">    the responsibility of the Javascript in the resources directory.</span>
+<span class="sd">    When the data does not line up with the headers given this should</span>
+<span class="sd">    be handled within the Javascript itself, not here.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        title: The title to display</span>
+<span class="sd">        headers: The columns to put into the table</span>
+<span class="sd">        data_node: A dictionary with the form::</span>
+<span class="sd">            {&quot;case&quot; : {&quot;subcase&quot; : { &quot;header&quot; : &quot;data&quot; } } }</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A dictionary with the metadata specifying that it is to be</span>
+<span class="sd">        rendered as a table.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">tb</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">tb</span><span class="p">[</span><span class="s2">&quot;Type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Vertical Table&quot;</span>
+    <span class="n">tb</span><span class="p">[</span><span class="s2">&quot;Title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">title</span>
+    <span class="n">tb</span><span class="p">[</span><span class="s2">&quot;Headers&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">headers</span>
+    <span class="n">tb</span><span class="p">[</span><span class="s2">&quot;Data&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_node</span>
+    <span class="k">return</span> <span class="n">tb</span></div>
+
+
 <div class="viewcode-block" id="bit_for_bit"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.elements.bit_for_bit">[docs]</a><span class="k">def</span> <span class="nf">bit_for_bit</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">data_node</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; </span>
+    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns a dictionary representing a new bit for bit table element.</span>
 <span class="sd">    Bit for bit elements can be thought of as tables, but require the</span>
-<span class="sd">    special addition that a diff plot may need to be embedded within </span>
-<span class="sd">    the table.  </span>
+<span class="sd">    special addition that a diff plot may need to be embedded within</span>
+<span class="sd">    the table.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        title: The title to display</span>
@@ -226,8 +273,8 @@
 
 
 <div class="viewcode-block" id="gallery"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.elements.gallery">[docs]</a><span class="k">def</span> <span class="nf">gallery</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">image_elem_list</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; </span>
-<span class="sd">    Builds an image gallery out of a list of image elements. The </span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Builds an image gallery out of a list of image elements. The</span>
 <span class="sd">    gallery element is provided as a way of grouping images under</span>
 <span class="sd">    a single heading and conserving space on the output page.</span>
 
@@ -249,15 +296,15 @@
 
 
 <div class="viewcode-block" id="image"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.elements.image">[docs]</a><span class="k">def</span> <span class="nf">image</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">desc</span><span class="p">,</span> <span class="n">image_name</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; </span>
+    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Builds an image element.  Image elements are primarily created</span>
 <span class="sd">    and then wrapped into an image gallery element.  This is not required</span>
 <span class="sd">    behavior, however and it&#39;s independent usage should be allowed depending</span>
-<span class="sd">    on the behavior required.  </span>
-<span class="sd">    </span>
-<span class="sd">    The Javascript will search for the `image_name` in the component&#39;s </span>
-<span class="sd">    `imgs` directory when rendering.  For example, all verification images </span>
-<span class="sd">    are output to `vv_xxxx-xx-xx/verification/imgs` and then the verification </span>
+<span class="sd">    on the behavior required.</span>
+
+<span class="sd">    The Javascript will search for the `image_name` in the component&#39;s</span>
+<span class="sd">    `imgs` directory when rendering.  For example, all verification images</span>
+<span class="sd">    are output to `vv_xxxx-xx-xx/verification/imgs` and then the verification</span>
 <span class="sd">    case&#39;s output page will search for `image_name` within that directory.</span>
 
 <span class="sd">    Args:</span>
@@ -278,8 +325,8 @@
 
 
 <div class="viewcode-block" id="file_diff"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.elements.file_diff">[docs]</a><span class="k">def</span> <span class="nf">file_diff</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">diff_data</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; </span>
-<span class="sd">    Builds a file diff element.  This element can be used to check whether </span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Builds a file diff element.  This element can be used to check whether</span>
 <span class="sd">    configuration files have changed or other similar checks.  Differences</span>
 <span class="sd">    will be highlighted when rendered via Javascript.</span>
 
@@ -289,7 +336,7 @@
 <span class="sd">            { &quot;section_name&quot; : { &quot;variale_name&quot; : [diff, val_1, val_2] } }</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        A dictionary with the metadata specifying that it is to be </span>
+<span class="sd">        A dictionary with the metadata specifying that it is to be</span>
 <span class="sd">        rendered as a file diff element</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">fd</span> <span class="o">=</span> <span class="p">{}</span>
@@ -300,8 +347,8 @@
 
 
 <div class="viewcode-block" id="error"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.elements.error">[docs]</a><span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">error_msg</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; </span>
-<span class="sd">    Builds an error element.  Provides a way to show errors or other </span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Builds an error element.  Provides a way to show errors or other</span>
 <span class="sd">    anomalous behavior in the web output.</span>
 
 <span class="sd">    Args:</span>
@@ -317,25 +364,16 @@
     <span class="n">err</span><span class="p">[</span><span class="s2">&quot;Title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">title</span>
     <span class="n">err</span><span class="p">[</span><span class="s2">&quot;Message&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">error_msg</span>
     <span class="k">return</span> <span class="n">err</span></div>
-
-
 </pre></div>
 
           </div>
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper"><div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../../../index.html">Documentation overview</a><ul>
-  <li><a href="../../index.html">Module code</a><ul>
-  <li><a href="../../livvkit.html">livvkit</a><ul>
-  </ul></li>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
+        <div class="sphinxsidebarwrapper">
+    <a id="sidebar-anchor"></a>
+    
+
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../search.html" method="get">
@@ -345,22 +383,39 @@
       <input type="hidden" name="area" value="default" />
     </form>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script type="text/javascript">$('#searchbox').show(0);</script><h3><a href="../../../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../vv-intro.html">Introduction to V&amp;V</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../design.html">Design Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Advanced installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../extend.html">Extending Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ref.html">References and indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">Frequently Asked Questions</a></li>
+</ul>
+
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
-      
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+      </ul>
     </div>
 
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
   </body>
 </html>

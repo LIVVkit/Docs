@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Getting Started &#8212; LIVVkit 2.0.3 documentation</title>
+    
+    <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/sidebar.js"></script>
+    <link rel="top" title="LIVVkit 2.0.3 documentation" href="index.html" />
+    <link rel="next" title="Introduction to V&amp;V" href="vv-intro.html" />
+    <link rel="prev" title="Introduction" href="index.html" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <link rel="shortcut icon" type="image/png" href="_static/favicon.png" />
+    <meta name="viewport" content="width=device-width,initial-scale=0.8">
+    
+    
+
+  </head>
+  <body role="document">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
+        <li><a href="index.html">LIVVkit 2.0.3 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    
+        <div class="badge">
+            <a href="https://github.com/LIVVkit/LIVVkit">Fork me on GitHub</a>
+            <img src="_static/right-red@2x.png">
+        </div>
+    
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="figure align-center">
+<a class="reference internal image-reference" href="_images/livvkit.png"><img alt="LIVVkit" src="_images/livvkit.png" style="width: 400px;" /></a>
+</div>
+<div class="section" id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<p>Ready to jump right in?</p>
+<div class="section" id="quick-installation">
+<h2>Quick Installation<a class="headerlink" href="#quick-installation" title="Permalink to this headline">¶</a></h2>
+<p>The latest LIVVkit release can be installed via <a class="reference external" href="https://pip.pypa.io/en/stable/">Python pip</a>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>pip isntall --user livvkit
+</pre></div>
+</div>
+<p>or <a class="reference external" href="https://conda.io/docs/download.html">Anaconda/Miniconda</a>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>conda install -c jhkennedy livvkit
+</pre></div>
+</div>
+<p>LIVVkit was designed to be Python 2 and 3 compatible, so either version will work, but Python 3 is
+recommended. If you&#8217;re having problems installing LIVVkit, see our detailed <a class="reference internal" href="install.html"><span class="doc">Advanced installation</span></a> page, or
+<a class="reference external" href="https://github.com/livvkit/livvkit/issues">open an issue on github</a>.</p>
+</div>
+<div class="section" id="basic-usage">
+<h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h2>
+<p>LIVVkit provides a command-line interface called <code class="docutils literal"><span class="pre">livv</span></code>. To see the full list of options and verify
+your installation, run:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>livv -h
+</pre></div>
+</div>
+<div class="section" id="verification">
+<h3>Verification<a class="headerlink" href="#verification" title="Permalink to this headline">¶</a></h3>
+<p>To run the verification suite you will need a set of model <em>test</em> and <em>reference</em> data. Download
+the example dataset (799 MB):</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>wget jhkennedy.org/sites/default/files/LIVVkit/livvkit2.0.0_example_dataset.tar.gz
+tar -zxvf livvkit2.0.0_example_dataset.tar.gz
+</pre></div>
+</div>
+<p>Then, for ease, export the path to the two dataset directories:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> livvkit2.0.0_example_dataset
+<span class="nb">export</span> <span class="nv">REF</span><span class="o">=</span><span class="nv">$PWD</span>/cism-2.0.0-ref/titan-gnu/CISM_glissade
+<span class="nb">export</span> <span class="nv">TEST</span><span class="o">=</span><span class="nv">$PWD</span>/cism-2.0.6-test/titan-gnu/CISM_glissade
+</pre></div>
+</div>
+<p>To run the suite use:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>livv --verify <span class="nv">$TEST</span> <span class="nv">$REF</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>livv -v <span class="nv">$TEST</span> <span class="nv">$REF</span>
+</pre></div>
+</div>
+<p>LIVVkit will run the verification suite, report a summary of the results on the command line, and
+produce an output website in the created <code class="docutils literal"><span class="pre">vv_$YEAR_$MONTH_DAY</span></code> directory (you can change the
+output directory with the <code class="docutils literal"><span class="pre">-o/--output</span></code> option). You can view the output website by opening
+<code class="docutils literal"><span class="pre">vv_$YEAR_$MONTH_DAY/index.html</span></code> in your favorite web browser.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">LIVVkit outputs the full path to the index page at the end of each run so it&#8217;s easy type into
+your browser&#8217;s address bar (prefix this path with a <code class="docutils literal"><span class="pre">file://</span></code> on most browsers).</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><strong>Trouble viewing the output?</strong> Your browser may have disabled javascript for local files (a
+security risk). See our <a class="reference internal" href="faq.html"><span class="doc">Frequently Asked Questions</span></a> for a work around.</p>
+</div>
+</div>
+<div class="section" id="validation">
+<h3>Validation<a class="headerlink" href="#validation" title="Permalink to this headline">¶</a></h3>
+<p>LIVVkit is extensible to more in-depth or larger validation analyses. A template validation module
+is available To run a validation extension. First, find the location of LIVVkit on your system:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">LIVV</span><span class="o">=</span><span class="k">$(</span>dirname <span class="sb">`</span>python -c <span class="s2">&quot;import livvkit; print(livvkit.__file__)&quot;</span><span class="sb">`</span><span class="k">)</span>
+<span class="nb">echo</span> <span class="nv">$LIVV</span>
+</pre></div>
+</div>
+<p>Now, to run the validation template, pass the <code class="docutils literal"><span class="pre">-V/--validate</span></code> option the template extension&#8217;s
+configuration file (a JSON file). Use:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>livv --validate <span class="nv">$LIVV</span>/components/validation_tests/template/template.json
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>livv -V <span class="nv">$LIVV</span>/components/validation_tests/template/template.json
+</pre></div>
+</div>
+<p>LIVVkit will run the validation template, report a summary of the results on the command line, and
+produce an output website in the created <code class="docutils literal"><span class="pre">vv_$YEAR_$MONTH_DAY</span></code> directory (you can change the
+output directory with the <code class="docutils literal"><span class="pre">-o/--output</span></code> option). You can view the output website by opening
+<code class="docutils literal"><span class="pre">vv_$YEAR_$MONTH_DAY/index.html</span></code> in your favorite web browser.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">LIVVkit outputs the full path to the index page at the end of each run so it&#8217;s easy type into
+your browser&#8217;s address bar (prefix this path with a <code class="docutils literal"><span class="pre">file://</span></code> on most browsers).</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><strong>Trouble viewing the output?</strong> Your browser may have disabled javascript for local files (a
+security risk). See our <a class="reference internal" href="faq.html"><span class="doc">Frequently Asked Questions</span></a> for a work around.</p>
+</div>
+</div>
+<div class="section" id="advanced">
+<h3>Advanced<a class="headerlink" href="#advanced" title="Permalink to this headline">¶</a></h3>
+<p>Both the verification and validation commands can be executed at the same time and all results will
+be placed into the same website. Additionally, you can pass the <code class="docutils literal"><span class="pre">-V/validate</span></code> option multiple
+JSON configuration files, and it will run all of them.</p>
+<p>For more information, see <a class="reference internal" href="install.html"><span class="doc">Advanced installation</span></a>, <a class="reference internal" href="usage.html"><span class="doc">Usage</span></a>, and <a class="reference internal" href="dev.html"><span class="doc">Development</span></a>.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+    <a id="sidebar-anchor"></a>
+    
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script><h3><a href="index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#quick-installation">Quick Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#basic-usage">Basic Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#verification">Verification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#validation">Validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#advanced">Advanced</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vv-intro.html">Introduction to V&amp;V</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design.html">Design Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Advanced installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extend.html">Extending Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ref.html">References and indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/quickstart.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="vv-intro.html" title="Introduction to V&amp;V"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Introduction"
+             accesskey="P">previous</a> |</li>
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

@@ -1,20 +1,19 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>livvkit.util package &#8212; LIVVkit 2.0.0 documentation</title>
+    <title>livvkit.util package &#8212; LIVVkit 2.0.3 documentation</title>
     
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.0.0',
+        VERSION:     '2.0.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,15 +23,35 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="LIVVkit 2.0.0 documentation" href="../index.html" />
-   
-  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+    <script type="text/javascript" src="../_static/sidebar.js"></script>
+    <link rel="top" title="LIVVkit 2.0.3 documentation" href="../index.html" />
+    <link rel="up" title="livvkit package" href="livvkit.html" />
+    <link rel="next" title="livvkit.resources.js.common module" href="../jsdoc-toolkit-rst-template/symbols/_global_.html" />
+    <link rel="prev" title="livvkit.resources package" href="livvkit.resources.html" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <link rel="shortcut icon" type="image/png" href="../_static/favicon.png" />
+    <meta name="viewport" content="width=device-width,initial-scale=0.8">
+    
+    
 
   </head>
   <body role="document">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
+        <li><a href="../index.html">LIVVkit 2.0.3 documentation</a> &#187;</li>
+          <li><a href="../api.html" >API</a> &#187;</li>
+          <li><a href="modules.html" >livvkit</a> &#187;</li>
+          <li><a href="livvkit.html" accesskey="U">livvkit package</a> &#187;</li> 
+      </ul>
+    </div>
+    
+        <div class="badge">
+            <a href="https://github.com/LIVVkit/LIVVkit">Fork me on GitHub</a>
+            <img src="../_static/right-red@2x.png">
+        </div>
+    
   
 
     <div class="document">
@@ -69,7 +88,10 @@
 </div>
 <div class="section" id="module-livvkit.util.TexHelper">
 <span id="livvkit-util-texhelper-module"></span><h2>livvkit.util.TexHelper module<a class="headerlink" href="#module-livvkit.util.TexHelper" title="Permalink to this headline">¶</a></h2>
-<p>TODO</p>
+<p>The TexHelper module provides capabilities to convert LIVVkits output
+from JSON to tex files.  It does not convert the tex files to any finished
+output.   For example, if you want a PDF you will still have to pass the
+tex files through pdflatex.</p>
 <dl class="function">
 <dt id="livvkit.util.TexHelper.main">
 <code class="descclassname">livvkit.util.TexHelper.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/TexHelper.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.TexHelper.main" title="Permalink to this definition">¶</a></dt>
@@ -78,59 +100,95 @@
 <dl class="function">
 <dt id="livvkit.util.TexHelper.translate_bit_for_bit">
 <code class="descclassname">livvkit.util.TexHelper.</code><code class="descname">translate_bit_for_bit</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/TexHelper.html#translate_bit_for_bit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.TexHelper.translate_bit_for_bit" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Translates data where data[&#8220;Type&#8221;]==&#8221;Bit for Bit&#8221;</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="livvkit.util.TexHelper.translate_error">
 <code class="descclassname">livvkit.util.TexHelper.</code><code class="descname">translate_error</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/TexHelper.html#translate_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.TexHelper.translate_error" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Translates data where data[&#8220;Type&#8221;]==&#8221;Error&#8221;</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="livvkit.util.TexHelper.translate_file_diff">
 <code class="descclassname">livvkit.util.TexHelper.</code><code class="descname">translate_file_diff</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/TexHelper.html#translate_file_diff"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.TexHelper.translate_file_diff" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Translates data where data[&#8220;Type&#8221;]==&#8221;Diff&#8221;</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="livvkit.util.TexHelper.translate_gallery">
 <code class="descclassname">livvkit.util.TexHelper.</code><code class="descname">translate_gallery</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/TexHelper.html#translate_gallery"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.TexHelper.translate_gallery" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Translates data where data[&#8220;Type&#8221;]==&#8221;Gallery&#8221;</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="livvkit.util.TexHelper.translate_image">
 <code class="descclassname">livvkit.util.TexHelper.</code><code class="descname">translate_image</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/TexHelper.html#translate_image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.TexHelper.translate_image" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Translates data where data[&#8220;Type&#8221;]==&#8221;Image&#8221;</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="livvkit.util.TexHelper.translate_page">
 <code class="descclassname">livvkit.util.TexHelper.</code><code class="descname">translate_page</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/TexHelper.html#translate_page"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.TexHelper.translate_page" title="Permalink to this definition">¶</a></dt>
-<dd><p>TODO</p>
+<dd><p>Translates data elements with data[&#8216;Type&#8217;] = &#8216;page&#8217;.  This is the
+top level of translation that occurs, and delegates the translation
+of other element types contained on a page to their proper functions.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="livvkit.util.TexHelper.translate_section">
 <code class="descclassname">livvkit.util.TexHelper.</code><code class="descname">translate_section</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/TexHelper.html#translate_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.TexHelper.translate_section" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Translates data where data[&#8220;Type&#8221;]==&#8221;Section&#8221;</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="livvkit.util.TexHelper.translate_summary">
 <code class="descclassname">livvkit.util.TexHelper.</code><code class="descname">translate_summary</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/TexHelper.html#translate_summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.TexHelper.translate_summary" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Translates data where data[&#8220;Type&#8221;]==&#8221;Summary&#8221;</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="livvkit.util.TexHelper.translate_tab">
 <code class="descclassname">livvkit.util.TexHelper.</code><code class="descname">translate_tab</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/TexHelper.html#translate_tab"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.TexHelper.translate_tab" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Translates data where data[&#8220;Type&#8221;]==&#8221;Tab&#8221;</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="livvkit.util.TexHelper.translate_table">
 <code class="descclassname">livvkit.util.TexHelper.</code><code class="descname">translate_table</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/TexHelper.html#translate_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.TexHelper.translate_table" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Translates data where data[&#8220;Type&#8221;]==&#8221;Table&#8221;</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="livvkit.util.TexHelper.write_tex">
 <code class="descclassname">livvkit.util.TexHelper.</code><code class="descname">write_tex</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/TexHelper.html#write_tex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.TexHelper.write_tex" title="Permalink to this definition">¶</a></dt>
-<dd><p>TODO</p>
+<dd><p>Finds all of the output data files, and writes them out to .tex</p>
 </dd></dl>
+
+</div>
+<div class="section" id="module-livvkit.util.cat">
+<span id="livvkit-util-cat-module"></span><h2>livvkit.util.cat module<a class="headerlink" href="#module-livvkit.util.cat" title="Permalink to this headline">¶</a></h2>
+<p>Custom Argparse Types:
+A collctions of functions which can be used as custom argparse types.</p>
+<dl class="function">
+<dt id="livvkit.util.cat.abs_creation_dir">
+<code class="descclassname">livvkit.util.cat.</code><code class="descname">abs_creation_dir</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/cat.html#abs_creation_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.cat.abs_creation_dir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="livvkit.util.cat.abs_existing_dir">
+<code class="descclassname">livvkit.util.cat.</code><code class="descname">abs_existing_dir</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/cat.html#abs_existing_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.cat.abs_existing_dir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="livvkit.util.cat.abs_existing_file">
+<code class="descclassname">livvkit.util.cat.</code><code class="descname">abs_existing_file</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/cat.html#abs_existing_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.cat.abs_existing_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="livvkit.util.cat.json_file">
+<code class="descclassname">livvkit.util.cat.</code><code class="descname">json_file</code><span class="sig-paren">(</span><em>f</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/cat.html#json_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.cat.json_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </div>
 <div class="section" id="module-livvkit.util.colormaps">
@@ -139,11 +197,6 @@
 </div>
 <div class="section" id="module-livvkit.util.elements">
 <span id="livvkit-util-elements-module"></span><h2>livvkit.util.elements module<a class="headerlink" href="#module-livvkit.util.elements" title="Permalink to this headline">¶</a></h2>
-<p>Module to help building new display elements in the output
-files easier and less error prone.</p>
-<p>Implementing new elements is possible simply by adding new functions
-They will be written out to the JSON files as sub-objects, which must
-be interpreted by the Javascript found in the resources directory.</p>
 <dl class="function">
 <dt id="livvkit.util.elements.bit_for_bit">
 <code class="descclassname">livvkit.util.elements.</code><code class="descname">bit_for_bit</code><span class="sig-paren">(</span><em>title</em>, <em>headers</em>, <em>data_node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/elements.html#bit_for_bit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.elements.bit_for_bit" title="Permalink to this definition">¶</a></dt>
@@ -383,15 +436,39 @@ rendered as a table.</p>
 </table>
 </dd></dl>
 
+<dl class="function">
+<dt id="livvkit.util.elements.vtable">
+<code class="descclassname">livvkit.util.elements.</code><code class="descname">vtable</code><span class="sig-paren">(</span><em>title</em>, <em>headers</em>, <em>data_node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/elements.html#vtable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.elements.vtable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary representing a new table element.  Tables
+are specified with two main pieces of information, the headers
+and the data to put into the table.  Rendering of the table is
+the responsibility of the Javascript in the resources directory.
+When the data does not line up with the headers given this should
+be handled within the Javascript itself, not here.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>title</strong> &#8211; The title to display</li>
+<li><strong>headers</strong> &#8211; The columns to put into the table</li>
+<li><strong>data_node</strong> &#8211; A dictionary with the form::
+{&#8220;case&#8221; : {&#8220;subcase&#8221; : { &#8220;header&#8221; : &#8220;data&#8221; } } }</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A dictionary with the metadata specifying that it is to be
+rendered as a table.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </div>
 <div class="section" id="module-livvkit.util.functions">
 <span id="livvkit-util-functions-module"></span><h2>livvkit.util.functions module<a class="headerlink" href="#module-livvkit.util.functions" title="Permalink to this headline">¶</a></h2>
 <p>Module to hold LIVV specific functions</p>
-<dl class="function">
-<dt id="livvkit.util.functions.Optional">
-<code class="descclassname">livvkit.util.functions.</code><code class="descname">Optional</code><span class="sig-paren">(</span><em>func</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/functions.html#Optional"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.functions.Optional" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
 <dl class="function">
 <dt id="livvkit.util.functions.collect_cases">
 <code class="descclassname">livvkit.util.functions.</code><code class="descname">collect_cases</code><span class="sig-paren">(</span><em>data_dir</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/functions.html#collect_cases"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.functions.collect_cases" title="Permalink to this definition">¶</a></dt>
@@ -426,6 +503,11 @@ the file to find</li>
 </tbody>
 </table>
 </dd></dl>
+
+<dl class="function">
+<dt id="livvkit.util.functions.format_doc">
+<code class="descclassname">livvkit.util.functions.</code><code class="descname">format_doc</code><span class="sig-paren">(</span><em>doc</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/functions.html#format_doc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.functions.format_doc" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="function">
 <dt id="livvkit.util.functions.get_leaves">
@@ -475,7 +557,7 @@ and the times associated with them</p>
 
 <dl class="function">
 <dt id="livvkit.util.functions.setup_output">
-<code class="descclassname">livvkit.util.functions.</code><code class="descname">setup_output</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/functions.html#setup_output"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.functions.setup_output" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">livvkit.util.functions.</code><code class="descname">setup_output</code><span class="sig-paren">(</span><em>cssd=None</em>, <em>jsd=None</em>, <em>imgd=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/functions.html#setup_output"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.functions.setup_output" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set up the directory structure for the output.  Copies old run
 data into a timestamped directory and sets up the new directory</p>
 </dd></dl>
@@ -512,6 +594,14 @@ data into a timestamped directory and sets up the new directory</p>
 </dd></dl>
 
 </div>
+<div class="section" id="module-livvkit.util.make_tex">
+<span id="livvkit-util-make-tex-module"></span><h2>livvkit.util.make_tex module<a class="headerlink" href="#module-livvkit.util.make_tex" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="livvkit.util.make_tex.main">
+<code class="descclassname">livvkit.util.make_tex.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/make_tex.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.make_tex.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
 <div class="section" id="module-livvkit.util.netcdf">
 <span id="livvkit-util-netcdf-module"></span><h2>livvkit.util.netcdf module<a class="headerlink" href="#module-livvkit.util.netcdf" title="Permalink to this headline">¶</a></h2>
 <p>Helper functions for dealing with netcdf datasets</p>
@@ -542,8 +632,8 @@ indicates the run did not complete.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="livvkit.util.options.parse">
-<code class="descclassname">livvkit.util.options.</code><code class="descname">parse</code><span class="sig-paren">(</span><em>args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/options.html#parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.options.parse" title="Permalink to this definition">¶</a></dt>
+<dt id="livvkit.util.options.parse_args">
+<code class="descclassname">livvkit.util.options.</code><code class="descname">parse_args</code><span class="sig-paren">(</span><em>args=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/options.html#parse_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.options.parse_args" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handles the parsing of options for LIVV&#8217;s command line interface</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -567,35 +657,9 @@ indicates the run did not complete.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">livvkit.util package</a><ul>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-livvkit.util.LIVVDict">livvkit.util.LIVVDict module</a></li>
-<li><a class="reference internal" href="#module-livvkit.util.TexHelper">livvkit.util.TexHelper module</a></li>
-<li><a class="reference internal" href="#module-livvkit.util.colormaps">livvkit.util.colormaps module</a></li>
-<li><a class="reference internal" href="#module-livvkit.util.elements">livvkit.util.elements module</a></li>
-<li><a class="reference internal" href="#module-livvkit.util.functions">livvkit.util.functions module</a></li>
-<li><a class="reference internal" href="#module-livvkit.util.netcdf">livvkit.util.netcdf module</a></li>
-<li><a class="reference internal" href="#module-livvkit.util.options">livvkit.util.options module</a></li>
-<li><a class="reference internal" href="#module-livvkit.util">Module contents</a></li>
-</ul>
-</li>
-</ul>
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../index.html">Documentation overview</a><ul>
-  </ul></li>
-</ul>
-</div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="../_sources/source/livvkit.util.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
+    <a id="sidebar-anchor"></a>
+    
+
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -605,25 +669,59 @@ indicates the run did not complete.</p>
       <input type="hidden" name="area" value="default" />
     </form>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script type="text/javascript">$('#searchbox').show(0);</script><h3><a href="../index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vv-intro.html">Introduction to V&amp;V</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design.html">Design Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Advanced installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../extend.html">Extending Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev.html">Development</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html">livvkit</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="livvkit.html">livvkit package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#web-frontend">Web Frontend</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ref.html">References and indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/source/livvkit.util.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
-      
-      |
-      <a href="../_sources/source/livvkit.util.txt"
-          rel="nofollow">Page source</a>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../jsdoc-toolkit-rst-template/symbols/_global_.html" title="livvkit.resources.js.common module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="livvkit.resources.html" title="livvkit.resources package"
+             accesskey="P">previous</a> |</li>
+      </ul>
     </div>
 
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
   </body>
 </html>

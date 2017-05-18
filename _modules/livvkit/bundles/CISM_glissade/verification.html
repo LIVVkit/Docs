@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>livvkit.bundles.CISM_glissade.verification &#8212; LIVVkit 2.0.3 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '2.0.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../../../_static/sidebar.js"></script>
+    <link rel="top" title="LIVVkit 2.0.3 documentation" href="../../../../index.html" />
+    <link rel="up" title="livvkit" href="../../../livvkit.html" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <link rel="shortcut icon" type="image/png" href="../../../../_static/favicon.png" />
+    <meta name="viewport" content="width=device-width,initial-scale=0.8">
+    
+    
+
+  </head>
+  <body role="document">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
+        <li><a href="../../../../index.html">LIVVkit 2.0.3 documentation</a> &#187;</li>
+          <li><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li><a href="../../../livvkit.html" accesskey="U">livvkit</a> &#187;</li> 
+      </ul>
+    </div>
+    
+        <div class="badge">
+            <a href="https://github.com/LIVVkit/LIVVkit">Fork me on GitHub</a>
+            <img src="../../../../_static/right-red@2x.png">
+        </div>
+    
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for livvkit.bundles.CISM_glissade.verification</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) 2015,2016, UT-BATTELLE, LLC</span>
+<span class="c1"># All rights reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># Redistribution and use in source and binary forms, with or without</span>
+<span class="c1"># modification, are permitted provided that the following conditions are met:</span>
+<span class="c1">#</span>
+<span class="c1"># 1. Redistributions of source code must retain the above copyright notice, this</span>
+<span class="c1"># list of conditions and the following disclaimer.</span>
+<span class="c1">#</span>
+<span class="c1"># 2. Redistributions in binary form must reproduce the above copyright notice,</span>
+<span class="c1"># this list of conditions and the following disclaimer in the documentation</span>
+<span class="c1"># and/or other materials provided with the distribution.</span>
+<span class="c1">#</span>
+<span class="c1"># 3. Neither the name of the copyright holder nor the names of its contributors</span>
+<span class="c1"># may be used to endorse or promote products derived from this software without</span>
+<span class="c1"># specific prior written permission.</span>
+<span class="c1">#</span>
+<span class="c1"># THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND</span>
+<span class="c1"># ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED</span>
+<span class="c1"># WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE</span>
+<span class="c1"># DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE</span>
+<span class="c1"># FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL</span>
+<span class="c1"># DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR</span>
+<span class="c1"># SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER</span>
+<span class="c1"># CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,</span>
+<span class="c1"># OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span>
+<span class="c1"># OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Provides CISM_glissade specific verification tools</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span>
+<span class="kn">import</span> <span class="nn">six</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">six.moves.configparser</span> <span class="k">import</span> <span class="n">ConfigParser</span>
+
+<span class="kn">from</span> <span class="nn">livvkit.util</span> <span class="k">import</span> <span class="n">elements</span>
+
+
+<div class="viewcode-block" id="parse_log"><a class="viewcode-back" href="../../../../source/livvkit.bundles.CISM_glissade.html#livvkit.bundles.CISM_glissade.verification.parse_log">[docs]</a><span class="k">def</span> <span class="nf">parse_log</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Parse a CISM output log and extract some information.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        file_path: absolute path to the log file</span>
+
+<span class="sd">    Return:</span>
+<span class="sd">        A dictionary created by the elements object corresponding to</span>
+<span class="sd">        the results of the bit for bit testing</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">elements</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Output Log&quot;</span><span class="p">,</span> <span class="s2">&quot;Could not open file: &quot;</span> <span class="o">+</span> <span class="n">file_path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Converged Iterations&quot;</span><span class="p">,</span>
+               <span class="s2">&quot;Avg. Iterations to Converge&quot;</span><span class="p">,</span>
+               <span class="s2">&quot;Processor Count&quot;</span><span class="p">,</span>
+               <span class="s2">&quot;Dycore Type&quot;</span><span class="p">]</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">dycore_types</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;0&quot;</span><span class="p">:</span> <span class="s2">&quot;Glide&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="s2">&quot;Glam&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;2&quot;</span><span class="p">:</span> <span class="s2">&quot;Glissade&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;3&quot;</span><span class="p">:</span> <span class="s2">&quot;Albany_felix&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;4&quot;</span><span class="p">:</span> <span class="s2">&quot;BISICLES&quot;</span><span class="p">}</span>
+        <span class="n">curr_step</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">proc_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">iter_number</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">converged_iters</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">iters_to_converge</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">split</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+            <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;CISM dycore type&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;=&#39;</span><span class="p">:</span>
+                    <span class="n">dycore_type</span> <span class="o">=</span> <span class="n">dycore_types</span><span class="p">[</span><span class="nb">next</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">dycore_type</span> <span class="o">=</span> <span class="n">dycore_types</span><span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+            <span class="k">elif</span> <span class="p">(</span><span class="s1">&#39;total procs&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">):</span>
+                <span class="n">proc_count</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="p">(</span><span class="s1">&#39;Nonlinear Solver Step&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">):</span>
+                <span class="n">curr_step</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">4</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="p">(</span><span class="s1">&#39;Compute ice velocities, time = &#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">):</span>
+                <span class="n">converged_iters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">curr_step</span><span class="p">)</span>
+                <span class="n">curr_step</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="p">(</span><span class="s1">&#39;&quot;SOLVE_STATUS_CONVERGED&quot;&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">):</span>
+                <span class="n">split</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+                <span class="n">iters_to_converge</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">split</span><span class="p">[</span><span class="n">split</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;&quot;SOLVE_STATUS_CONVERGED&quot;&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]))</span>
+            <span class="k">elif</span> <span class="p">(</span><span class="s2">&quot;Compute dH/dt&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">):</span>
+                <span class="n">iters_to_converge</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">iter_number</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">split</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+                <span class="n">iter_number</span> <span class="o">=</span> <span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">iters_to_converge</span> <span class="o">==</span> <span class="p">[]:</span>
+            <span class="n">iters_to_converge</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">iter_number</span><span class="p">))</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;Dycore Type&quot;</span><span class="p">:</span> <span class="n">dycore_type</span><span class="p">,</span>
+        <span class="s2">&quot;Processor Count&quot;</span><span class="p">:</span> <span class="n">proc_count</span><span class="p">,</span>
+        <span class="s2">&quot;Converged Iterations&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">converged_iters</span><span class="p">),</span>
+        <span class="s2">&quot;Avg. Iterations to Converge&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">iters_to_converge</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">elements</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="s2">&quot;Output Log&quot;</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="parse_config"><a class="viewcode-back" href="../../../../source/livvkit.bundles.CISM_glissade.html#livvkit.bundles.CISM_glissade.verification.parse_config">[docs]</a><span class="k">def</span> <span class="nf">parse_config</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert the CISM configuration file to a python dictionary</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        file_path: absolute path to the configuration file</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A dictionary representation of the given file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{}</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">ConfigParser</span><span class="p">()</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+    <span class="c1"># Strip out inline comments</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">parser</span><span class="o">.</span><span class="n">_sections</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">six</span><span class="o">.</span><span class="n">iterkeys</span><span class="p">(</span><span class="n">parser</span><span class="o">.</span><span class="n">_sections</span><span class="p">[</span><span class="n">s</span><span class="p">]):</span>
+            <span class="n">parser</span><span class="o">.</span><span class="n">_sections</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">_sections</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="n">v</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">parser</span><span class="o">.</span><span class="n">_sections</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+    <a id="sidebar-anchor"></a>
+    
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script><h3><a href="../../../../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../quickstart.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../vv-intro.html">Introduction to V&amp;V</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../design.html">Design Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../install.html">Advanced installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../extend.html">Extending Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dev.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref.html">References and indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq.html">Frequently Asked Questions</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

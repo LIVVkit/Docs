@@ -20,6 +20,14 @@ livvkit.util.TexHelper module
     :undoc-members:
     :show-inheritance:
 
+livvkit.util.cat module
+-----------------------
+
+.. automodule:: livvkit.util.cat
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 livvkit.util.colormaps module
 -----------------------------
 
@@ -40,6 +48,14 @@ livvkit.util.functions module
 -----------------------------
 
 .. automodule:: livvkit.util.functions
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+livvkit.util.make_tex module
+----------------------------
+
+.. automodule:: livvkit.util.make_tex
     :members:
     :undoc-members:
     :show-inheritance:

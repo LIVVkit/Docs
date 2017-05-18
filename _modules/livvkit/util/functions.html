@@ -1,20 +1,19 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>livvkit.util.functions &#8212; LIVVkit 2.0.0 documentation</title>
+    <title>livvkit.util.functions &#8212; LIVVkit 2.0.3 documentation</title>
     
-    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '2.0.0',
+        VERSION:     '2.0.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,16 +23,32 @@
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="LIVVkit 2.0.0 documentation" href="../../../index.html" />
+    <script type="text/javascript" src="../../../_static/sidebar.js"></script>
+    <link rel="top" title="LIVVkit 2.0.3 documentation" href="../../../index.html" />
     <link rel="up" title="livvkit" href="../../livvkit.html" />
-   
-  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <link rel="shortcut icon" type="image/png" href="../../../_static/favicon.png" />
+    <meta name="viewport" content="width=device-width,initial-scale=0.8">
+    
+    
 
   </head>
   <body role="document">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
+        <li><a href="../../../index.html">LIVVkit 2.0.3 documentation</a> &#187;</li>
+          <li><a href="../../index.html" >Module code</a> &#187;</li>
+          <li><a href="../../livvkit.html" accesskey="U">livvkit</a> &#187;</li> 
+      </ul>
+    </div>
+    
+        <div class="badge">
+            <a href="https://github.com/LIVVkit/LIVVkit">Fork me on GitHub</a>
+            <img src="../../../_static/right-red@2x.png">
+        </div>
+    
   
 
     <div class="document">
@@ -44,21 +59,21 @@
   <h1>Source code for livvkit.util.functions</h1><div class="highlight"><pre>
 <span></span><span class="c1"># Copyright (c) 2015,2016, UT-BATTELLE, LLC</span>
 <span class="c1"># All rights reserved.</span>
-<span class="c1"># </span>
+<span class="c1">#</span>
 <span class="c1"># Redistribution and use in source and binary forms, with or without</span>
 <span class="c1"># modification, are permitted provided that the following conditions are met:</span>
-<span class="c1"># </span>
+<span class="c1">#</span>
 <span class="c1"># 1. Redistributions of source code must retain the above copyright notice, this</span>
 <span class="c1"># list of conditions and the following disclaimer.</span>
-<span class="c1"># </span>
+<span class="c1">#</span>
 <span class="c1"># 2. Redistributions in binary form must reproduce the above copyright notice,</span>
 <span class="c1"># this list of conditions and the following disclaimer in the documentation</span>
 <span class="c1"># and/or other materials provided with the distribution.</span>
-<span class="c1"># </span>
+<span class="c1">#</span>
 <span class="c1"># 3. Neither the name of the copyright holder nor the names of its contributors</span>
 <span class="c1"># may be used to endorse or promote products derived from this software without</span>
 <span class="c1"># specific prior written permission.</span>
-<span class="c1"># </span>
+<span class="c1">#</span>
 <span class="c1"># THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND</span>
 <span class="c1"># ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED</span>
 <span class="c1"># WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE</span>
@@ -70,16 +85,24 @@
 <span class="c1"># OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span>
 <span class="c1"># OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Module to hold LIVV specific functions </span>
+<span class="sd">Module to hold LIVV specific functions</span>
 <span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span>
+
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">errno</span>
 <span class="kn">import</span> <span class="nn">shutil</span>
 <span class="kn">import</span> <span class="nn">fnmatch</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">datetime</span> 
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">datetime</span>
+
+<span class="kn">import</span> <span class="nn">json_tricks</span>
+<span class="kn">import</span> <span class="nn">markdown</span>
+<span class="kn">import</span> <span class="nn">bleach</span>
+<span class="kn">from</span> <span class="nn">bleach_whitelist.bleach_whitelist</span> <span class="k">import</span> <span class="n">markdown_tags</span><span class="p">,</span> <span class="n">markdown_attrs</span>
 
 <span class="kn">import</span> <span class="nn">livvkit</span>
+
 
 <div class="viewcode-block" id="mkdir_p"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.functions.mkdir_p">[docs]</a><span class="k">def</span> <span class="nf">mkdir_p</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -87,10 +110,11 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span> <span class="c1"># Python &gt;2.5</span>
+    <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>  <span class="c1"># Python &gt;2.5</span>
         <span class="k">if</span> <span class="n">exc</span><span class="o">.</span><span class="n">errno</span> <span class="o">==</span> <span class="n">errno</span><span class="o">.</span><span class="n">EEXIST</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
             <span class="k">pass</span>
-        <span class="k">else</span><span class="p">:</span> <span class="k">raise</span></div>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span></div>
 
 
 <div class="viewcode-block" id="merge_dicts"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.functions.merge_dicts">[docs]</a><span class="k">def</span> <span class="nf">merge_dicts</span><span class="p">(</span><span class="n">dict1</span><span class="p">,</span> <span class="n">dict2</span><span class="p">):</span>
@@ -135,23 +159,23 @@
 
 
 <div class="viewcode-block" id="find_file"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.functions.find_file">[docs]</a><span class="k">def</span> <span class="nf">find_file</span><span class="p">(</span><span class="n">search_dir</span><span class="p">,</span> <span class="n">file_pattern</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; </span>
+    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Search for a file in a directory, and return the first match.</span>
 <span class="sd">    If the file is not found return an empty string</span>
-<span class="sd">   </span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        search_dir: The root directory to search in</span>
-<span class="sd">        file_pattern: A unix-style wildcard pattern representing </span>
+<span class="sd">        file_pattern: A unix-style wildcard pattern representing</span>
 <span class="sd">            the file to find</span>
-<span class="sd">    </span>
-<span class="sd">    Returns: </span>
+
+<span class="sd">    Returns:</span>
 <span class="sd">        The path to the file if it was found, otherwise an empty string</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">dirnames</span><span class="p">,</span> <span class="n">fnames</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">search_dir</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">fnames</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">fnmatch</span><span class="o">.</span><span class="n">fnmatch</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">file_pattern</span><span class="p">):</span>
                     <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">fname</span><span class="p">)</span>
-    <span class="k">return</span> <span class="s2">&quot;&quot;</span> </div>
+    <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="sort_processor_counts"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.functions.sort_processor_counts">[docs]</a><span class="k">def</span> <span class="nf">sort_processor_counts</span><span class="p">(</span><span class="n">p_string</span><span class="p">):</span>
@@ -194,38 +218,37 @@
         <span class="k">return</span>
     <span class="k">elif</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
         <span class="n">mkdir_p</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">file_name</span><span class="p">),</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span></div>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">file_name</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">json_tricks</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">primitives</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="collect_cases"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.functions.collect_cases">[docs]</a><span class="k">def</span> <span class="nf">collect_cases</span><span class="p">(</span><span class="n">data_dir</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Find all cases and subcases of a particular run type &quot;&quot;&quot;</span>
-    <span class="n">cases</span> <span class="o">=</span> <span class="p">{}</span> 
+    <span class="n">cases</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">data_dir</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">dirs</span><span class="p">:</span>
-            <span class="n">split_case</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">relpath</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">data_dir</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">split_case</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cases</span><span class="p">:</span> <span class="n">cases</span><span class="p">[</span><span class="n">split_case</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">split_case</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">relpath</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">split_case</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cases</span><span class="p">:</span>
+                <span class="n">cases</span><span class="p">[</span><span class="n">split_case</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="n">cases</span><span class="p">[</span><span class="n">split_case</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">split_case</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span>
     <span class="k">return</span> <span class="n">cases</span></div>
 
 
-<div class="viewcode-block" id="setup_output"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.functions.setup_output">[docs]</a><span class="k">def</span> <span class="nf">setup_output</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot; </span>
-<span class="sd">    Set up the directory structure for the output.  Copies old run </span>
-<span class="sd">    data into a timestamped directory and sets up the new directory </span>
+<div class="viewcode-block" id="setup_output"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.functions.setup_output">[docs]</a><span class="k">def</span> <span class="nf">setup_output</span><span class="p">(</span><span class="n">cssd</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">jsd</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">imgd</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set up the directory structure for the output.  Copies old run</span>
+<span class="sd">    data into a timestamped directory and sets up the new directory</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Check if we need to back up an old run</span>
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">index_dir</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-------------------------------------------------------------------&quot;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Previous output data found in output directory!&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  Previous output data found in output directory!&#39;</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">index_dir</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="s2">&quot;data.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
-            <span class="n">prev_time</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="s2">&quot;_&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
-            <span class="n">prev_comment</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+            <span class="n">prev_time</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
             <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
             <span class="n">prev_time</span> <span class="o">=</span> <span class="s2">&quot;bkd_&quot;</span><span class="o">+</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">_%H%M%S&quot;</span><span class="p">)</span>
-            <span class="n">prev_comment</span> <span class="o">=</span> <span class="s2">&quot;Warning: could not find previous runtime and comment.&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   Backing up data to:&#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   &#39;</span> <span class="o">+</span> <span class="n">livvkit</span><span class="o">.</span><span class="n">index_dir</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="n">prev_time</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-------------------------------------------------------------------&quot;</span><span class="p">)</span>
@@ -234,11 +257,24 @@
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-------------------------------------------------------------------&quot;</span><span class="p">)</span>
 
     <span class="c1"># Copy over js, css, &amp; imgs directories from source</span>
-    <span class="n">mkdir_p</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">website_dir</span><span class="p">)</span>
-    <span class="n">shutil</span><span class="o">.</span><span class="n">copytree</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">resource_dir</span><span class="p">,</span><span class="s2">&quot;css&quot;</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">index_dir</span><span class="p">,</span><span class="s2">&quot;css&quot;</span><span class="p">))</span>
-    <span class="n">shutil</span><span class="o">.</span><span class="n">copytree</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">resource_dir</span><span class="p">,</span><span class="s2">&quot;js&quot;</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">index_dir</span><span class="p">,</span><span class="s2">&quot;js&quot;</span><span class="p">))</span>
-    <span class="n">shutil</span><span class="o">.</span><span class="n">copytree</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">resource_dir</span><span class="p">,</span><span class="s2">&quot;imgs&quot;</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">index_dir</span><span class="p">,</span><span class="s2">&quot;imgs&quot;</span><span class="p">))</span>
-    <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">resource_dir</span><span class="p">,</span> <span class="s2">&quot;index.html&quot;</span><span class="p">),</span> 
+    <span class="k">if</span> <span class="n">cssd</span><span class="p">:</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">copytree</span><span class="p">(</span><span class="n">cssd</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">index_dir</span><span class="p">,</span> <span class="s2">&quot;css&quot;</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">copytree</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">resource_dir</span><span class="p">,</span> <span class="s2">&quot;css&quot;</span><span class="p">),</span>
+                        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">index_dir</span><span class="p">,</span> <span class="s2">&quot;css&quot;</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">jsd</span><span class="p">:</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">copytree</span><span class="p">(</span><span class="n">jsd</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">index_dir</span><span class="p">,</span> <span class="s2">&quot;js&quot;</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">copytree</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">resource_dir</span><span class="p">,</span> <span class="s2">&quot;js&quot;</span><span class="p">),</span>
+                        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">index_dir</span><span class="p">,</span> <span class="s2">&quot;js&quot;</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">imgd</span><span class="p">:</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">copytree</span><span class="p">(</span><span class="n">imgd</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">index_dir</span><span class="p">,</span> <span class="s2">&quot;js&quot;</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">copytree</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">resource_dir</span><span class="p">,</span> <span class="s2">&quot;imgs&quot;</span><span class="p">),</span>
+                        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">index_dir</span><span class="p">,</span> <span class="s2">&quot;imgs&quot;</span><span class="p">))</span>
+
+    <span class="c1"># Get the index template from the resource directory</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">resource_dir</span><span class="p">,</span> <span class="s2">&quot;index.html&quot;</span><span class="p">),</span>
                 <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">index_dir</span><span class="p">,</span> <span class="s2">&quot;index.html&quot;</span><span class="p">))</span>
     <span class="c1"># Record when this data was recorded so we can make nice backups</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">index_dir</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="s2">&quot;data.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
@@ -246,28 +282,23 @@
         <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">comment</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Optional"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.functions.Optional">[docs]</a><span class="k">def</span> <span class="nf">Optional</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">func_wrapper</span><span class="p">():</span>
-        <span class="k">return</span> 
-    <span class="k">return</span> <span class="n">func_wrapper</span></div>
-
+<div class="viewcode-block" id="format_doc"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.functions.format_doc">[docs]</a><span class="k">def</span> <span class="nf">format_doc</span><span class="p">(</span><span class="n">doc</span><span class="p">):</span>
+    <span class="n">doc</span> <span class="o">=</span> <span class="n">markdown</span><span class="o">.</span><span class="n">markdown</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+    <span class="n">doc</span> <span class="o">=</span> <span class="n">bleach</span><span class="o">.</span><span class="n">clean</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span>
+                       <span class="n">tags</span><span class="o">=</span><span class="n">markdown_tags</span><span class="p">,</span>
+                       <span class="n">attributes</span><span class="o">=</span><span class="n">markdown_attrs</span><span class="p">,</span>
+                       <span class="p">)</span>
+    <span class="k">return</span> <span class="n">doc</span></div>
 </pre></div>
 
           </div>
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper"><div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../../../index.html">Documentation overview</a><ul>
-  <li><a href="../../index.html">Module code</a><ul>
-  <li><a href="../../livvkit.html">livvkit</a><ul>
-  </ul></li>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
+        <div class="sphinxsidebarwrapper">
+    <a id="sidebar-anchor"></a>
+    
+
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../search.html" method="get">
@@ -277,22 +308,39 @@
       <input type="hidden" name="area" value="default" />
     </form>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script type="text/javascript">$('#searchbox').show(0);</script><h3><a href="../../../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../vv-intro.html">Introduction to V&amp;V</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../design.html">Design Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Advanced installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../extend.html">Extending Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ref.html">References and indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">Frequently Asked Questions</a></li>
+</ul>
+
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
-      
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+      </ul>
     </div>
 
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
   </body>
 </html>

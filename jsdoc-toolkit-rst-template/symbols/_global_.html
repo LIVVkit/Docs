@@ -1,20 +1,19 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>_global_ (data) &#8212; LIVVkit 2.0.0 documentation</title>
+    <title>livvkit.resources.js.common module &#8212; LIVVkit 2.0.3 documentation</title>
     
-    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '2.0.0',
+        VERSION:     '2.0.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,15 +23,33 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="LIVVkit 2.0.0 documentation" href="../../index.html" />
-   
-  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+    <script type="text/javascript" src="../../_static/sidebar.js"></script>
+    <link rel="top" title="LIVVkit 2.0.3 documentation" href="../../index.html" />
+    <link rel="up" title="API" href="../../api.html" />
+    <link rel="next" title="References and indices" href="../../ref.html" />
+    <link rel="prev" title="livvkit.util package" href="../../source/livvkit.util.html" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <link rel="shortcut icon" type="image/png" href="../../_static/favicon.png" />
+    <meta name="viewport" content="width=device-width,initial-scale=0.8">
+    
+    
 
   </head>
   <body role="document">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
+        <li><a href="../../index.html">LIVVkit 2.0.3 documentation</a> &#187;</li>
+          <li><a href="../../api.html" accesskey="U">API</a> &#187;</li> 
+      </ul>
+    </div>
+    
+        <div class="badge">
+            <a href="https://github.com/LIVVkit/LIVVkit">Fork me on GitHub</a>
+            <img src="../../_static/right-red@2x.png">
+        </div>
+    
   
 
     <div class="document">
@@ -40,8 +57,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="global-data">
-<h1>_global_ (data)<a class="headerlink" href="#global-data" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="livvkit-resources-js-common-module">
+<h1>livvkit.resources.js.common module<a class="headerlink" href="#livvkit-resources-js-common-module" title="Permalink to this headline">¶</a></h1>
 <dl class="data">
 <dt id="_global_">
 <code class="descname">_global_</code><a class="headerlink" href="#_global_" title="Permalink to this definition">¶</a></dt>
@@ -72,9 +89,9 @@ appropriate dataset.</p>
 </ul>
 </li>
 <li><strong>div</strong> (<em>string</em>) &#8211; <ul>
-<li>The name of the div to draw to.  Should be referenced as a string that</li>
+<li>The name of the div to draw to.  Should be referenced as a string that
+determines whether it is a class or id (ie include # or .)</li>
 </ul>
-<p>determines whether it is a class or id (ie include # or .)</p>
 </li>
 </ul>
 </td>
@@ -82,6 +99,31 @@ appropriate dataset.</p>
 </tbody>
 </table>
 <p>Build a summary and adds it to the div.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="drawValSummary">
+<code class="descname">drawValSummary</code><span class="sig-paren">(</span><em>data</em>, <em>div</em><span class="sig-paren">)</span><a class="headerlink" href="#drawValSummary" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> (<em>Object</em>) &#8211; <ul>
+<li>The data representing the summary.  Determined by data[&#8220;Type&#8221;] = &#8220;Summary&#8221;</li>
+</ul>
+</li>
+<li><strong>div</strong> (<em>string</em>) &#8211; <ul>
+<li>The name of the div to draw to.  Should be referenced as a string that
+determines whether it is a class or id (ie include # or .)</li>
+</ul>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Build a validation extension summary and adds it to the div.</p>
 </dd></dl>
 
 <dl class="function">
@@ -97,9 +139,9 @@ appropriate dataset.</p>
 </ul>
 </li>
 <li><strong>div</strong> (<em>string</em>) &#8211; <ul>
-<li>The name of the div to draw to.  Should be referenced as a string that</li>
+<li>The name of the div to draw to.  Should be referenced as a string that
+determines whether it is a class or id (ie include # or .)</li>
 </ul>
-<p>determines whether it is a class or id (ie include # or .)</p>
 </li>
 </ul>
 </td>
@@ -122,9 +164,9 @@ appropriate dataset.</p>
 </ul>
 </li>
 <li><strong>div</strong> (<em>string</em>) &#8211; <ul>
-<li>The name of the div to draw to.  Should be referenced as a string that</li>
+<li>The name of the div to draw to.  Should be referenced as a string that
+determines whether it is a class or id (ie include # or .)</li>
 </ul>
-<p>determines whether it is a class or id (ie include # or .)</p>
 </li>
 </ul>
 </td>
@@ -143,14 +185,14 @@ appropriate dataset.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
 <li><strong>data</strong> (<em>Object</em>) &#8211; <ul>
-<li>The data representing the table.  Determined by</li>
+<li>The data representing the table.  Determined by
+data[&#8220;Type&#8221;] = &#8220;Bit for Bit&#8221;</li>
 </ul>
-<p>data[&#8220;Type&#8221;] = &#8220;Bit for Bit&#8221;</p>
 </li>
 <li><strong>div</strong> (<em>string</em>) &#8211; <ul>
-<li>The name of the div to draw to.  Should be referenced as a string that</li>
+<li>The name of the div to draw to.  Should be referenced as a string that
+determines whether it is a class or id (ie include # or .)</li>
 </ul>
-<p>determines whether it is a class or id (ie include # or .)</p>
 </li>
 </ul>
 </td>
@@ -173,9 +215,9 @@ appropriate dataset.</p>
 </ul>
 </li>
 <li><strong>div</strong> (<em>string</em>) &#8211; <ul>
-<li>The name of the div to draw to.  Should be referenced as a string that</li>
+<li>The name of the div to draw to.  Should be referenced as a string that
+determines whether it is a class or id (ie include # or .)</li>
 </ul>
-<p>determines whether it is a class or id (ie include # or .)</p>
 </li>
 </ul>
 </td>
@@ -183,6 +225,31 @@ appropriate dataset.</p>
 </tbody>
 </table>
 <p>Build a table</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="drawVTable">
+<code class="descname">drawVTable</code><span class="sig-paren">(</span><em>data</em>, <em>div</em><span class="sig-paren">)</span><a class="headerlink" href="#drawVTable" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> (<em>Object</em>) &#8211; <ul>
+<li>The data representing the table.  Determined by data[&#8220;Type&#8221;] = &#8220;Vertical Table&#8221;</li>
+</ul>
+</li>
+<li><strong>div</strong> (<em>string</em>) &#8211; <ul>
+<li>The name of the div to draw to.  Should be referenced as a string that
+determines whether it is a class or id (ie include # or .)</li>
+</ul>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Build a vertical table</p>
 </dd></dl>
 
 <dl class="function">
@@ -198,9 +265,9 @@ appropriate dataset.</p>
 </ul>
 </li>
 <li><strong>div</strong> (<em>string</em>) &#8211; <ul>
-<li>The name of the div to draw to.  Should be referenced as a string that</li>
+<li>The name of the div to draw to.  Should be referenced as a string that
+determines whether it is a class or id (ie include # or .)</li>
 </ul>
-<p>determines whether it is a class or id (ie include # or .)</p>
 </li>
 </ul>
 </td>
@@ -223,9 +290,9 @@ appropriate dataset.</p>
 </ul>
 </li>
 <li><strong>div</strong> (<em>string</em>) &#8211; <ul>
-<li>The name of the div to draw to.  Should be referenced as a string that</li>
+<li>The name of the div to draw to.  Should be referenced as a string that
+determines whether it is a class or id (ie include # or .)</li>
 </ul>
-<p>determines whether it is a class or id (ie include # or .)</p>
 </li>
 </ul>
 </td>
@@ -295,20 +362,10 @@ Documentation generated by <a class="reference external" href="http://code.googl
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper"><div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../../index.html">Documentation overview</a><ul>
-  </ul></li>
-</ul>
-</div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="../../_sources/jsdoc-toolkit-rst-template/symbols/_global_.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
+        <div class="sphinxsidebarwrapper">
+    <a id="sidebar-anchor"></a>
+    
+
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
@@ -318,25 +375,59 @@ Documentation generated by <a class="reference external" href="http://code.googl
       <input type="hidden" name="area" value="default" />
     </form>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script type="text/javascript">$('#searchbox').show(0);</script><h3><a href="../../index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vv-intro.html">Introduction to V&amp;V</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../design.html">Design Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Advanced installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../extend.html">Extending Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev.html">Development</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../api.html">API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../source/modules.html">livvkit</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../api.html#web-frontend">Web Frontend</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">livvkit.resources.js.common module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../ref.html">References and indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions</a></li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/jsdoc-toolkit-rst-template/symbols/_global_.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
-      
-      |
-      <a href="../../_sources/jsdoc-toolkit-rst-template/symbols/_global_.txt"
-          rel="nofollow">Page source</a>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../ref.html" title="References and indices"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../../source/livvkit.util.html" title="livvkit.util package"
+             accesskey="P">previous</a> |</li>
+      </ul>
     </div>
 
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
   </body>
 </html>

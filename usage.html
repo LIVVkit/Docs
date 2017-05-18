@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Usage &#8212; LIVVkit 2.0.3 documentation</title>
+    
+    <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/sidebar.js"></script>
+    <link rel="top" title="LIVVkit 2.0.3 documentation" href="index.html" />
+    <link rel="next" title="Extending Components" href="extend.html" />
+    <link rel="prev" title="Advanced installation" href="install.html" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <link rel="shortcut icon" type="image/png" href="_static/favicon.png" />
+    <meta name="viewport" content="width=device-width,initial-scale=0.8">
+    
+    
+
+  </head>
+  <body role="document">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
+        <li><a href="index.html">LIVVkit 2.0.3 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    
+        <div class="badge">
+            <a href="https://github.com/LIVVkit/LIVVkit">Fork me on GitHub</a>
+            <img src="_static/right-red@2x.png">
+        </div>
+    
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="figure align-center">
+<a class="reference internal image-reference" href="_images/livvkit.png"><img alt="LIVVkit" src="_images/livvkit.png" style="width: 400px;" /></a>
+</div>
+<div class="section" id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
+<p>LIVVkit is intended to be integrated into a model&#8217;s development cycle. A public-private version of
+<a class="reference external" href="https://www.atlassian.com/git/tutorials/comparing-workflows#gitflow-workflow">GitFlow</a> is a
+common development cycle used by many scientific modeling groups, and LIVVkit would be integrated
+into the development process like:</p>
+<div class="figure align-center" id="id2">
+<a class="reference internal image-reference" href="_images/workflow.png"><img alt="Development cycle" src="_images/workflow.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-text">Schematic of the public-private development cycle used by many scientfic modeling groups
+<a class="reference internal" href="ref.html#kennedy2017" id="id1">[Kennedy2017]</a>. A feature branch is created (<code class="docutils literal"><span class="pre">d124</span></code>, green path) from the current development
+branch (light purple path) and incremental changes are made (<code class="docutils literal"><span class="pre">f001</span></code>&#8211;<code class="docutils literal"><span class="pre">f003</span></code>). These changes
+frequently undergo the standard set of LIVVkit verification tests (dashed cyan circles). Once
+the feature is complete and tested (<code class="docutils literal"><span class="pre">f003</span></code>), it is ready to be merged into develop (which
+includes the new features <code class="docutils literal"><span class="pre">d125</span></code>&#8211;<code class="docutils literal"><span class="pre">d126</span></code>) and a pull request will be opened by the developer
+(dashed arrow).  At this point, the integrators merge the feature into a local copy of the
+development branch and the full set of LIVVkit integration tests are started (filled cyan
+circle). Once passed, the feature is merged into develop (<code class="docutils literal"><span class="pre">d127</span></code>) and the pull request is
+closed. After enough features have been developed, the development branch will be merged into
+the private master branch (<code class="docutils literal"><span class="pre">m120</span></code>, right purple path), given a version tag (<code class="docutils literal"><span class="pre">v1.2.0</span></code>), and
+pushed to the mirrored master branch on the public repository (left purple path).</span></p>
+</div>
+<div class="section" id="standard-verification-and-integration-tests">
+<h2>Standard verification and integration tests<a class="headerlink" href="#standard-verification-and-integration-tests" title="Permalink to this headline">¶</a></h2>
+<p>The standard verification and integration tests are performed by comparing a regression test
+dataset, <code class="docutils literal"><span class="pre">$TEST</span></code>, against a  reference dataset, <code class="docutils literal"><span class="pre">$REF</span></code>. The datasets follows a somewhat rigid
+leaf-node structure which allows the testing dataset to be more human-friendly than just a bunch of
+files and still fully describe the tests. This directory structure is, for example, created by
+CISM&#8217;s Build and Test Structure (BATS).</p>
+<div class="section" id="model-output-livvkit-input-hierarchy">
+<span id="input-hierarchy"></span><h3>Model Output/LIVVkit Input Hierarchy<a class="headerlink" href="#model-output-livvkit-input-hierarchy" title="Permalink to this headline">¶</a></h3>
+<p>The directory layout of the model output should be as follows:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>BUNDLE
+    ├── <span class="o">[</span>METADATA<span class="o">]</span>
+    └── TEST
+        ├── VARIANT
+        │    ├── sRESO*
+        │    │   ├── pPROC
+        │    │   │   ├── <span class="o">[</span>zSIZE*<span class="o">]</span>
+        │    │   │   ├── ...
+        ...
+</pre></div>
+</div>
+<p>where <code class="docutils literal"><span class="pre">[]</span></code> indicates an optional directory, <code class="docutils literal"><span class="pre">BUNDLE</span></code> indicate the specific ice-sheet model used
+(including variant names; e.g., <code class="docutils literal"><span class="pre">CISM_glissade</span></code>), <code class="docutils literal"><span class="pre">METADATA</span></code> indicates any directories that
+contain information in addition to the testing data  (e.g., job submission scripts, CMakeCache.txt),
+<code class="docutils literal"><span class="pre">TEST</span></code> indicates a particular type of test (e.g., <code class="docutils literal"><span class="pre">shelf</span></code>, <code class="docutils literal"><span class="pre">dome</span></code>, <code class="docutils literal"><span class="pre">ismip-hom</span></code>), <code class="docutils literal"><span class="pre">VARIANT</span></code>
+indicates any variant of that test (e.g., <code class="docutils literal"><span class="pre">ismip-hom-a</span></code>), <code class="docutils literal"><span class="pre">sRESO</span></code> indicates the grid resolution,
+<code class="docutils literal"><span class="pre">pPROC</span></code> indicate the number of processors used to run the test, and <code class="docutils literal"><span class="pre">zSIZE</span></code> indicates the domain
+size used in the test.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The percise meaning of any <code class="docutils literal"><span class="pre">*</span></code>-ed directory name may be variable from test to test, but
+will generally follow the definition given here.</p>
+</div>
+</div>
+<div class="section" id="standard-verification-analysis">
+<h3>Standard verification  analysis<a class="headerlink" href="#standard-verification-analysis" title="Permalink to this headline">¶</a></h3>
+<p>The standard verification analysis typically compares a regression test dataset with a reference
+dataset. Because these datasets can be quickly generated and analyzed (<span class="math">\(\Delta t \lesssim\)</span> a
+coffee break), they can (and should) be run frequently.</p>
+<p>When a developer makes a new feature branch, they would first generate a reference dataset on their
+development machine.</p>
+<p>For a CISM developer working on a Linux laptop/desktop, using the GNU compiler, and outputting the
+datasets to a <code class="docutils literal"><span class="pre">reg_ref</span></code> directory, this would look like:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="nv">$CISM</span>
+git checkout -b feature-branch
+
+<span class="nb">cd</span> tests/regression/
+./build_and_test.py -p linux-gnu -o reg_ref
+<span class="nb">export</span> <span class="nv">REF</span><span class="o">=</span><span class="nv">$PWD</span>/reg_ref/linux-gnu/CISM_glissade
+</pre></div>
+</div>
+<p>When a change is made to the model and the developer is ready to test their code, they
+will then generate a test dataset on their development machine.</p>
+<p>Again for a CISM developer working on a Linux laptop/desktop, using the GNU compiler, and outputting the
+datasets to a <code class="docutils literal"><span class="pre">reg_test</span></code> directory, this would look like:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># ... A change to CISM ...</span>
+
+<span class="nb">cd</span> <span class="nv">$CISM</span>/tests/regression/
+./build_and_test.py -p linux-gnu -o reg_test
+<span class="nb">export</span> <span class="nv">TEST</span><span class="o">=</span><span class="nv">$PWD</span>/reg_test/linux-gnu/CISM_glissade
+</pre></div>
+</div>
+<p>Then, the testing results can be compared to a reference dataset with LIVVkit:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="nv">$LIVV</span>
+./livv --verify <span class="nv">$TEST</span> <span class="nv">$REF</span>
+</pre></div>
+</div>
+<p>LIVVkit will run the verification suite, report a summary of the results on the command line, and
+produce an output website in the created <code class="docutils literal"><span class="pre">vv_$YEAR_$MONTH_DAY</span></code> directory  (or one specified with
+the <code class="docutils literal"><span class="pre">-o/--output</span></code> option). The output website can be viewed in the developers preferred web
+browser by by opening <code class="docutils literal"><span class="pre">vv_$YEAR_$MONTH_DAY/index.html</span></code>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">LIVVkit outputs the full path to the index page at the end of each run so it&#8217;s easy type into the
+browser&#8217;s address bar (prefix this path with a <code class="docutils literal"><span class="pre">file://</span></code> on most browsers).</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><strong>Trouble viewing the output?</strong> Your browser may have disabled javascript for local files (a
+security risk). See our <a class="reference internal" href="faq.html"><span class="doc">Frequently Asked Questions</span></a> for a work around.</p>
+</div>
+<p>Once the feature is developed, and the developer is happy with the testing results, she/he would
+push the feature branch to the development repository and open a pull request, kicking off a
+integration analysis by the model integrator(s). Additionally, the output directory may
+compressed and uploaded to Github for viewing by the integration team (every output website is
+portable).</p>
+</div>
+<div class="section" id="integration-analysis">
+<h3>Integration analysis<a class="headerlink" href="#integration-analysis" title="Permalink to this headline">¶</a></h3>
+<p>Upon receiving a pull request for a new feature, a model&#8217;s integration team will typically initiate
+a more substantial test of the new feature, often on the target production machine(s).</p>
+<p>First, the integrator would checkout the code base on the production machine, and generate a
+reference dataset for the current state of the development branch:</p>
+<p>For a CISM integrator working on the supercomputer Titan at <a class="reference external" href="https://www.olcf.ornl.gov/">OLCF</a>,
+using the GNU compiler, and outputting the datasets to a <code class="docutils literal"><span class="pre">reg_ref</span></code> directory, this would look
+like:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="nv">$CISM</span>
+git checkout develop
+
+<span class="nb">cd</span> tests/regression/
+./build_and_test.py -b ref_build -p titan-gnu --timing -o reg_ref
+<span class="nb">export</span> <span class="nv">REF</span><span class="o">=</span><span class="nv">$PWD</span>/reg_ref/linux-gnu/CISM_glissade
+
+<span class="nb">cd</span> reg_ref/titan-gnu/CISM_glissade
+./submit-all-jobs.bash
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For CISM, BATS recognizes a set of platforms that requires job sumission scripts,
+automatically sets up the jobs, and creates a submission script. Also, by specifying the
+<code class="docutils literal"><span class="pre">--timing</span></code> option, a much larger set of tests are run, including repeat runs for performance
+variability.</p>
+</div>
+<p>Once those jobs are submitted, the integrator can attempt to merge in the feature branch. After all
+conflicts are resolved, a test dataset would be generated.</p>
+<p>Again, for a CISM integrator working on the supercomputer Titan at <a class="reference external" href="https://www.olcf.ornl.gov/">OLCF</a>, using the GNU compiler, and outputting the datasets to a
+<code class="docutils literal"><span class="pre">reg_test</span></code> directory, this would look like:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="nv">$CISM</span>
+git merge feature-branch
+
+<span class="c1"># ... resolve any conflicts ...</span>
+
+<span class="nb">cd</span> <span class="nv">$CISM</span>/tests/regression
+./build_and_test.py -b test_build -p titan-gnu --timing -o reg_test
+<span class="nb">export</span> <span class="nv">TEST</span><span class="o">=</span><span class="nv">$PWD</span>/reg_test/linux-gnu/CISM_glissade
+
+<span class="nb">cd</span> reg_test/titan-gnu/CISM_glissade
+./submit-all-jobs.bash
+</pre></div>
+</div>
+<p>Then once all the jobs were finished, the testing results can be compared to a reference dataset.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="nv">$LIVV</span>
+./livv --verify <span class="nv">$TEST</span> <span class="nv">$REF</span>
+</pre></div>
+</div>
+<p>LIVVkit will run the verification suite, report a summary of the results on the command line, and
+produce an output website in the created <code class="docutils literal"><span class="pre">vv_$YEAR_$MONTH_DAY</span></code> directory  (or one specified with
+the <code class="docutils literal"><span class="pre">-o/--output</span></code> option). Because there is no web browser on Titan, the integrator would then
+copy the output directory (and all contents) to their local machine and view the output website in the integrators
+preferred web browser by by opening <code class="docutils literal"><span class="pre">vv_$YEAR_$MONTH_DAY/index.html</span></code>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><strong>Trouble viewing the output?</strong> Your browser may have disabled javascript for local files (a
+security risk). See our <a class="reference internal" href="faq.html"><span class="doc">Frequently Asked Questions</span></a> for a work around.</p>
+</div>
+<p>Additionally, the output directory may compressed and uploaded to Github for viewing by the rest of
+the integration team and the feature developer (every output website is portable). If test results
+aren&#8217;t satisfactory, this provides a valuable resource for the developer to make the necessary
+changes to their feature.</p>
+<p>Once testing results are satisfactory, the integration team may do a similar comparison to the
+latest release in order to track changes over a longer period of development and analyze the model
+for creep, or run a series of extended validation analyses.</p>
+</div>
+<div class="section" id="extended-validation-analyses">
+<h3>Extended validation analyses<a class="headerlink" href="#extended-validation-analyses" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A set of standard ice sheet model validation analyses are currently being developed and will be
+released soon (along with the ncessary observational data). Check back soon! Until then, see
+<a class="reference internal" href="extend.html"><span class="doc">Extending Components</span></a> for how to develop your own validation analysis.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+    <a id="sidebar-anchor"></a>
+    
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script><h3><a href="index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vv-intro.html">Introduction to V&amp;V</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design.html">Design Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Advanced installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#standard-verification-and-integration-tests">Standard verification and integration tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#model-output-livvkit-input-hierarchy">Model Output/LIVVkit Input Hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#standard-verification-analysis">Standard verification  analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#integration-analysis">Integration analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#extended-validation-analyses">Extended validation analyses</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="extend.html">Extending Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ref.html">References and indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/usage.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="extend.html" title="Extending Components"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="install.html" title="Advanced installation"
+             accesskey="P">previous</a> |</li>
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

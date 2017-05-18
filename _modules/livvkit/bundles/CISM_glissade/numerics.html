@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>livvkit.bundles.CISM_glissade.numerics &#8212; LIVVkit 2.0.3 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '2.0.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../../../_static/sidebar.js"></script>
+    <link rel="top" title="LIVVkit 2.0.3 documentation" href="../../../../index.html" />
+    <link rel="up" title="livvkit" href="../../../livvkit.html" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <link rel="shortcut icon" type="image/png" href="../../../../_static/favicon.png" />
+    <meta name="viewport" content="width=device-width,initial-scale=0.8">
+    
+    
+
+  </head>
+  <body role="document">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
+        <li><a href="../../../../index.html">LIVVkit 2.0.3 documentation</a> &#187;</li>
+          <li><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li><a href="../../../livvkit.html" accesskey="U">livvkit</a> &#187;</li> 
+      </ul>
+    </div>
+    
+        <div class="badge">
+            <a href="https://github.com/LIVVkit/LIVVkit">Fork me on GitHub</a>
+            <img src="../../../../_static/right-red@2x.png">
+        </div>
+    
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for livvkit.bundles.CISM_glissade.numerics</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) 2015,2016, UT-BATTELLE, LLC</span>
+<span class="c1"># All rights reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># Redistribution and use in source and binary forms, with or without</span>
+<span class="c1"># modification, are permitted provided that the following conditions are met:</span>
+<span class="c1">#</span>
+<span class="c1"># 1. Redistributions of source code must retain the above copyright notice, this</span>
+<span class="c1"># list of conditions and the following disclaimer.</span>
+<span class="c1">#</span>
+<span class="c1"># 2. Redistributions in binary form must reproduce the above copyright notice,</span>
+<span class="c1"># this list of conditions and the following disclaimer in the documentation</span>
+<span class="c1"># and/or other materials provided with the distribution.</span>
+<span class="c1">#</span>
+<span class="c1"># 3. Neither the name of the copyright holder nor the names of its contributors</span>
+<span class="c1"># may be used to endorse or promote products derived from this software without</span>
+<span class="c1"># specific prior written permission.</span>
+<span class="c1">#</span>
+<span class="c1"># THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND</span>
+<span class="c1"># ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED</span>
+<span class="c1"># WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE</span>
+<span class="c1"># DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE</span>
+<span class="c1"># FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL</span>
+<span class="c1"># DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR</span>
+<span class="c1"># SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER</span>
+<span class="c1"># CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,</span>
+<span class="c1"># OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span>
+<span class="c1"># OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">CISM_glissade module for numerics analysis</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span>
+
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">netCDF4</span> <span class="k">import</span> <span class="n">Dataset</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="k">import</span> <span class="n">interpolate</span>
+
+
+<div class="viewcode-block" id="DataGrid"><a class="viewcode-back" href="../../../../source/livvkit.bundles.CISM_glissade.html#livvkit.bundles.CISM_glissade.numerics.DataGrid">[docs]</a><span class="k">class</span> <span class="nc">DataGrid</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class to handle the CISM_glissade grids, which are cell-centered grids.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;y1&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ny</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">[:]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># NOTE: cell centered grids, hence the dy.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Ly</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">dy</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;x1&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">[:]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># NOTE: cell centered grids, hence the dx.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Lx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">dx</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_hat</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">[:]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">Ly</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x_hat</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">[:]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">Lx</span></div>
+
+
+<div class="viewcode-block" id="RotatedGrid"><a class="viewcode-back" href="../../../../source/livvkit.bundles.CISM_glissade.html#livvkit.bundles.CISM_glissade.numerics.RotatedGrid">[docs]</a><span class="k">class</span> <span class="nc">RotatedGrid</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    For the ISMIP-HOM f tests, CISM computes the flow of a glacier down an</span>
+<span class="sd">    inclined plane:</span>
+
+<span class="sd">    ::</span>
+
+<span class="sd">        z</span>
+<span class="sd">        ^</span>
+<span class="sd">        |</span>
+<span class="sd">        * .</span>
+<span class="sd">        .    .</span>
+<span class="sd">        .        .</span>
+<span class="sd">        *           .</span>
+<span class="sd">        | .             .</span>
+<span class="sd">        |    .     ICE      .</span>
+<span class="sd">        |        .              .</span>
+<span class="sd">        |            .             .</span>
+<span class="sd">        |  BED           .            .</span>
+<span class="sd">        |                    .           *</span>
+<span class="sd">        |                       .        .</span>
+<span class="sd">        |                          .     .</span>
+<span class="sd">        |                             .  .</span>
+<span class="sd">        |                                *</span>
+<span class="sd">        |                                |</span>
+<span class="sd">        |                                |</span>
+<span class="sd">        |                                |</span>
+<span class="sd">        0-------------------------------------&gt;x</span>
+
+
+<span class="sd">    The origin is at point 0 in the above figure, and the topmost point of the</span>
+<span class="sd">    glacier is at x=0, z=7 (in km). The slope is 3 degrees. The ice is 1000 m</span>
+<span class="sd">    tall and flows down the inclined plane.</span>
+
+<span class="sd">    ISMIP-HOM, however, defines the coordinate system with the origin located at</span>
+<span class="sd">    the topmost point of the glacier (0,7) with the x&#39; axis pointing down slope</span>
+<span class="sd">    and z&#39; pointing perpendicular to the slope. So the coordinate system is</span>
+<span class="sd">    shifted, and rotated by a=3 degrees from the CISM glissade grid.</span>
+
+<span class="sd">    An additional complication is that the surface is computed in CISM on the</span>
+<span class="sd">    standard grid, but velocities are computed on a staggered, grid.</span>
+
+<span class="sd">    This class converts the CISM_glissade coordinate system to the ISMIP-HOM</span>
+<span class="sd">    coordinate system.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="n">alpha</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y0</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;y0&#39;</span><span class="p">][:]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x0</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;x0&#39;</span><span class="p">][:]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">usurf_ustag</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;usurf&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">,:,:]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">usurf_stag</span> <span class="o">=</span> <span class="p">(</span>  <span class="bp">self</span><span class="o">.</span><span class="n">usurf_ustag</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span> <span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">usurf_ustag</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span> <span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                           <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">usurf_ustag</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">usurf_ustag</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="p">])</span> <span class="o">/</span> <span class="mf">4.0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">usurf</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x0</span><span class="p">)</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">usurf_stag</span><span class="o">-</span><span class="mf">7000.0</span><span class="p">)</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">uvel_stag</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;uvel&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,:,:]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vvel_stag</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;uvel&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,:,:]</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">wvel_ustag</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;wvel_ho&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,:,:]</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">wvel_ustag</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;wvel&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,:,:]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wvel_stag</span> <span class="o">=</span> <span class="p">(</span>  <span class="bp">self</span><span class="o">.</span><span class="n">wvel_ustag</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span> <span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">wvel_ustag</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span> <span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                          <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">wvel_ustag</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">wvel_ustag</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="p">])</span> <span class="o">/</span> <span class="mf">4.0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">uvel</span> <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">uvel_stag</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">wvel_stag</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vvel</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">uvel_stag</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">wvel_stag</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x0</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
+                  <span class="o">+</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">usurf_stag</span><span class="p">[</span><span class="mi">20</span><span class="p">,:]</span><span class="o">-</span><span class="mf">7000.0</span><span class="p">)</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
+                  <span class="p">)</span><span class="o">/</span><span class="mf">1000.0</span> <span class="o">-</span> <span class="mf">50.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y0</span><span class="o">/</span><span class="mf">1000.0</span> <span class="o">-</span> <span class="mf">50.0</span></div>
+
+
+<div class="viewcode-block" id="get_plot_data"><a class="viewcode-back" href="../../../../source/livvkit.bundles.CISM_glissade.html#livvkit.bundles.CISM_glissade.numerics.get_plot_data">[docs]</a><span class="k">def</span> <span class="nf">get_plot_data</span><span class="p">(</span><span class="n">test_file</span><span class="p">,</span> <span class="n">bench_file</span><span class="p">,</span> <span class="n">setup</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+    <span class="n">test_plot_data</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">bench_plot_data</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">exp</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">test_data</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">test_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+    <span class="n">bench_data</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">bench_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+
+    <span class="n">test</span> <span class="o">=</span> <span class="n">DataGrid</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
+    <span class="n">bench</span> <span class="o">=</span> <span class="n">DataGrid</span><span class="p">(</span><span class="n">bench_data</span><span class="p">)</span>
+
+    <span class="n">x_coord</span> <span class="o">=</span> <span class="n">setup</span><span class="p">[</span><span class="s1">&#39;interp_points&#39;</span><span class="p">]</span>
+    <span class="n">y_coord</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">setup</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">setup</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_coord</span><span class="p">))</span>
+
+    <span class="n">test_plot_data</span><span class="p">[</span><span class="s1">&#39;y_hat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_coord</span>
+    <span class="n">test_plot_data</span><span class="p">[</span><span class="s1">&#39;x_hat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_coord</span>
+    <span class="n">bench_plot_data</span><span class="p">[</span><span class="s1">&#39;y_hat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_coord</span>
+    <span class="n">bench_plot_data</span><span class="p">[</span><span class="s1">&#39;x_hat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_coord</span>
+
+    <span class="k">if</span> <span class="n">exp</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]:</span>
+        <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;interp_vars&#39;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">var</span> <span class="o">==</span> <span class="s1">&#39;usurf&#39;</span><span class="p">:</span>
+                <span class="c1"># regular 2d linear interp. but faster.</span>
+                <span class="n">test2plot</span> <span class="o">=</span> <span class="n">interpolate</span><span class="o">.</span><span class="n">RectBivariateSpline</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">y_hat</span><span class="p">,</span> <span class="n">test</span><span class="o">.</span><span class="n">x_hat</span><span class="p">,</span>
+                                                            <span class="n">test_data</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">,:,:],</span>
+                                                            <span class="n">kx</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ky</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">bench2plot</span> <span class="o">=</span> <span class="n">interpolate</span><span class="o">.</span><span class="n">RectBivariateSpline</span><span class="p">(</span><span class="n">bench</span><span class="o">.</span><span class="n">y_hat</span><span class="p">,</span> <span class="n">bench</span><span class="o">.</span><span class="n">x_hat</span><span class="p">,</span>
+                                                             <span class="n">bench_data</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">,:,:],</span>
+                                                             <span class="n">kx</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ky</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># regular 2d linear interp. but faster.</span>
+                <span class="n">test2plot</span> <span class="o">=</span> <span class="n">interpolate</span><span class="o">.</span><span class="n">RectBivariateSpline</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">y_hat</span><span class="p">,</span> <span class="n">test</span><span class="o">.</span><span class="n">x_hat</span><span class="p">,</span>
+                                                            <span class="n">test_data</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,:,:],</span>
+                                                            <span class="n">kx</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ky</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">bench2plot</span> <span class="o">=</span> <span class="n">interpolate</span><span class="o">.</span><span class="n">RectBivariateSpline</span><span class="p">(</span><span class="n">bench</span><span class="o">.</span><span class="n">y_hat</span><span class="p">,</span> <span class="n">bench</span><span class="o">.</span><span class="n">x_hat</span><span class="p">,</span>
+                                                             <span class="n">bench_data</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,:,:],</span>
+                                                             <span class="n">kx</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ky</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+            <span class="n">test_plot_data</span><span class="p">[</span><span class="n">var</span><span class="p">]</span> <span class="o">=</span> <span class="n">test2plot</span><span class="p">(</span><span class="n">y_coord</span><span class="p">,</span> <span class="n">x_coord</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">bench_plot_data</span><span class="p">[</span><span class="n">var</span><span class="p">]</span> <span class="o">=</span> <span class="n">bench2plot</span><span class="p">(</span><span class="n">y_coord</span><span class="p">,</span> <span class="n">x_coord</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="n">test_plot_data</span><span class="p">[</span><span class="s1">&#39;velnorm_extend&#39;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">test_plot_data</span><span class="p">[</span><span class="s1">&#39;uvel_extend&#39;</span><span class="p">],</span>
+                          <span class="n">test_plot_data</span><span class="p">[</span><span class="s1">&#39;vvel_extend&#39;</span><span class="p">]</span> <span class="p">]),</span>
+                <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">bench_plot_data</span><span class="p">[</span><span class="s1">&#39;velnorm_extend&#39;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">bench_plot_data</span><span class="p">[</span><span class="s1">&#39;uvel_extend&#39;</span><span class="p">],</span>
+                          <span class="n">bench_plot_data</span><span class="p">[</span><span class="s1">&#39;vvel_extend&#39;</span><span class="p">]</span> <span class="p">]),</span>
+                <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>  <span class="c1"># f</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="o">-</span><span class="mf">3.0</span><span class="p">)</span>
+
+        <span class="n">test_rotated</span> <span class="o">=</span> <span class="n">RotatedGrid</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">test_data</span><span class="p">)</span>
+        <span class="n">bench_rotated</span> <span class="o">=</span> <span class="n">RotatedGrid</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">bench_data</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;interp_vars&#39;</span><span class="p">]:</span>
+            <span class="c1"># regular 2d linear interp. but faster.</span>
+            <span class="n">test2plot</span> <span class="o">=</span> <span class="n">interpolate</span><span class="o">.</span><span class="n">RectBivariateSpline</span><span class="p">(</span><span class="n">test_rotated</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">test_rotated</span><span class="o">.</span><span class="n">y</span><span class="p">,</span>
+                                                        <span class="nb">getattr</span><span class="p">(</span><span class="n">test_rotated</span><span class="p">,</span> <span class="n">var</span><span class="p">),</span>
+                                                        <span class="n">kx</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ky</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">bench2plot</span> <span class="o">=</span> <span class="n">interpolate</span><span class="o">.</span><span class="n">RectBivariateSpline</span><span class="p">(</span><span class="n">bench_rotated</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">bench_rotated</span><span class="o">.</span><span class="n">y</span><span class="p">,</span>
+                                                         <span class="nb">getattr</span><span class="p">(</span><span class="n">bench_rotated</span><span class="p">,</span> <span class="n">var</span><span class="p">),</span>
+                                                         <span class="n">kx</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ky</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+            <span class="n">test_plot_data</span><span class="p">[</span><span class="n">var</span><span class="p">]</span> <span class="o">=</span> <span class="n">test2plot</span><span class="p">(</span><span class="n">y_coord</span><span class="p">,</span> <span class="n">x_coord</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">bench_plot_data</span><span class="p">[</span><span class="n">var</span><span class="p">]</span> <span class="o">=</span> <span class="n">bench2plot</span><span class="p">(</span><span class="n">y_coord</span><span class="p">,</span> <span class="n">x_coord</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="n">test_plot_data</span><span class="p">[</span><span class="s1">&#39;velnorm&#39;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">test_plot_data</span><span class="p">[</span><span class="s1">&#39;uvel&#39;</span><span class="p">],</span>
+                          <span class="n">test_plot_data</span><span class="p">[</span><span class="s1">&#39;vvel&#39;</span><span class="p">]</span> <span class="p">]),</span>
+                <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">bench_plot_data</span><span class="p">[</span><span class="s1">&#39;velnorm&#39;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">bench_plot_data</span><span class="p">[</span><span class="s1">&#39;uvel&#39;</span><span class="p">],</span>
+                          <span class="n">bench_plot_data</span><span class="p">[</span><span class="s1">&#39;vvel&#39;</span><span class="p">]</span> <span class="p">]),</span>
+                <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;test&#39;</span><span class="p">:</span> <span class="n">test_plot_data</span><span class="p">,</span> <span class="s1">&#39;bench&#39;</span><span class="p">:</span> <span class="n">bench_plot_data</span><span class="p">}</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+    <a id="sidebar-anchor"></a>
+    
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script><h3><a href="../../../../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../quickstart.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../vv-intro.html">Introduction to V&amp;V</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../design.html">Design Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../install.html">Advanced installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../extend.html">Extending Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dev.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref.html">References and indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq.html">Frequently Asked Questions</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

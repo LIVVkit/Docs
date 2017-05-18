@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Introduction to V&amp;V &#8212; LIVVkit 2.0.3 documentation</title>
+    
+    <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/sidebar.js"></script>
+    <link rel="top" title="LIVVkit 2.0.3 documentation" href="index.html" />
+    <link rel="next" title="Design Overview" href="design.html" />
+    <link rel="prev" title="Getting Started" href="quickstart.html" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <link rel="shortcut icon" type="image/png" href="_static/favicon.png" />
+    <meta name="viewport" content="width=device-width,initial-scale=0.8">
+    
+    
+
+  </head>
+  <body role="document">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
+        <li><a href="index.html">LIVVkit 2.0.3 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    
+        <div class="badge">
+            <a href="https://github.com/LIVVkit/LIVVkit">Fork me on GitHub</a>
+            <img src="_static/right-red@2x.png">
+        </div>
+    
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="figure align-center">
+<a class="reference internal image-reference" href="_images/livvkit.png"><img alt="LIVVkit" src="_images/livvkit.png" style="width: 400px;" /></a>
+</div>
+<p>This page provides a brief introduction to verification and validation (V&amp;V) for scientific models
+&#8211; mostly to solidify the terminology we&#8217;ll be using. We highly recommend reading our open access
+publication in <a class="reference external" href="http://agupubs.onlinelibrary.wiley.com/hub/journal/10.1002/(ISSN)1942-2466/">JAMES</a> for a detailed
+discussion of V&amp;V and its application in LIVVkit <a class="reference internal" href="ref.html#kennedy2017" id="id1">[Kennedy2017]</a>. For a very in depth discussion
+of V&amp;V for scientific computing, we recommend <a class="reference internal" href="ref.html#oberkampf2010" id="id2">[Oberkampf2010]</a>.</p>
+<div class="section" id="introduction-to-v-v">
+<h1>Introduction to V&amp;V<a class="headerlink" href="#introduction-to-v-v" title="Permalink to this headline">¶</a></h1>
+<p>Verification and validation (V&amp;V) is a set of techniques that are used to build and quantify
+confidence in <em>something</em>. That something can be a <em>numerical model</em> or a piece of <em>software</em>, and
+building confidence in each of these will require the use of specialized teniques.</p>
+<div class="section" id="model-v-v">
+<h2>Model V&amp;V<a class="headerlink" href="#model-v-v" title="Permalink to this headline">¶</a></h2>
+<p>Numerical models are typically used by scientists to make predictions about the physical world. V&amp;V
+of a numerical model consists of:</p>
+<dl class="docutils">
+<dt><strong>Numerical verification</strong></dt>
+<dd>The process of comparing the <em>approximate numerical</em> prediction against an <em>analytical</em>
+prediction, or in the case of a sufficiently complex problem, against highly accurate <em>community
+benchmark</em> solutions. This is inherently a <strong>math</strong> problem <a class="reference internal" href="ref.html#oberkampf2010" id="id3">[Oberkampf2010]</a> <a class="reference internal" href="ref.html#roache1998" id="id4">[Roache1998]</a> that
+is represented by the question, &#8220;Are we solving the equations correctly?&#8221;</dd>
+<dt><strong>Physical validation</strong></dt>
+<dd>The process of comparing the <em>numerical</em> predictions against <em>natural</em> phenomena. This is
+inherently a <strong>physics</strong> problem <a class="reference internal" href="ref.html#oberkampf2010" id="id5">[Oberkampf2010]</a> <a class="reference internal" href="ref.html#roache1998" id="id6">[Roache1998]</a> that is represented by the
+question, &#8220;Are we using the right physics?&#8221;</dd>
+</dl>
+</div>
+<div class="section" id="software-v-v">
+<h2>Software V&amp;V<a class="headerlink" href="#software-v-v" title="Permalink to this headline">¶</a></h2>
+<p>Software, on the other hand, is a <em>tool</em> made by a set of developers which is to be used for a set
+of specific tasks by a <em>user</em>. V&amp;V of a piece of software consists of:</p>
+<dl class="docutils">
+<dt><strong>Code verification</strong></dt>
+<dd>The process of determining the software&#8217;s implementation, and it&#8217;s associated data, accurately
+represent the developers&#8217; specifications. This is inherently an <strong>engineering</strong> problem
+<a class="reference internal" href="ref.html#oberkampf2010" id="id7">[Oberkampf2010]</a> that is represented by the question, &#8220;did we build what <em>we</em> wanted?&#8221;</dd>
+<dt><strong>Performance validation</strong></dt>
+<dd>The process of determining how <em>well</em> the software is able to be
+used for its intended task. This is inherently an <strong>design</strong> problem <a class="reference internal" href="ref.html#oberkampf2010" id="id8">[Oberkampf2010]</a> that is
+represented by the question, &#8220;did we build what the <em>users</em> wanted?&#8221;</dd>
+</dl>
+</div>
+<div class="section" id="scientific-model-v-v">
+<h2>Scientific model V&amp;V<a class="headerlink" href="#scientific-model-v-v" title="Permalink to this headline">¶</a></h2>
+<p>Any <em>scientific model</em> (e.g., an ice sheet model) is a blend of the underlying numerical models used
+to make the prediction, and the software that is used to drive the numerical models. Therefore,
+validation and verification of any scientific model requires the use of both (numerical) model V&amp;V
+and software V&amp;V. These two types of V&amp;V techniques should be viewed as a complimentary process, as
+the numerical and software code are intrinsically linked and live within the same code-base.</p>
+</div>
+<div class="section" id="on-confidence-and-credibility">
+<h2>On confidence and credibility<a class="headerlink" href="#on-confidence-and-credibility" title="Permalink to this headline">¶</a></h2>
+<p>Confidence is (or at least should be) needed for <em>users</em> and <em>developers</em> to trust their modeling
+and simulation (M&amp;S) results, and to transmit them to the wider scientific community,
+policy/decision makers, and other stakeholders.</p>
+<p>However, for those results to be <em>used</em> people outside the core user and development community, the
+model must have an adequate level of credibility &#8211; it much be trusted outside of the core
+community. This is especially important when the results or predictions are used to inform policies
+that may affect affect the economic and general well-being of citizens.</p>
+<p>Importantly, <strong>confidence within the core community is not enough.</strong> Credibility relies on the M&amp;S
+results being <em>reproducible</em>, the model being well-described and thoroughly tested, and all the
+information relating to the development and testing of the model being <em>transparent</em> and easily
+<em>discoverable</em> <a class="reference internal" href="ref.html#kennedy2017" id="id9">[Kennedy2017]</a>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+    <a id="sidebar-anchor"></a>
+    
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script><h3><a href="index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction to V&amp;V</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#model-v-v">Model V&amp;V</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#software-v-v">Software V&amp;V</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scientific-model-v-v">Scientific model V&amp;V</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#on-confidence-and-credibility">On confidence and credibility</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="design.html">Design Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Advanced installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extend.html">Extending Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ref.html">References and indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/vv-intro.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="design.html" title="Design Overview"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="quickstart.html" title="Getting Started"
+             accesskey="P">previous</a> |</li>
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>
