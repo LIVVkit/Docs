@@ -1,30 +1,28 @@
 <!DOCTYPE html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>API &#8212; LIVVkit 2.0.3 documentation</title>
-    
+    <title>API &#8212; LIVVkit 2.1.0 documentation</title>
     <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2.0.3',
+        VERSION:     '2.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="_static/sidebar.js"></script>
-    <link rel="top" title="LIVVkit 2.0.3 documentation" href="index.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="livvkit" href="source/modules.html" />
     <link rel="prev" title="Development" href="dev.html" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
@@ -34,12 +32,12 @@
     
 
   </head>
-  <body role="document">
+  <body>
     <div class="related">
       <h3>Navigation</h3>
       <ul>
         <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
-        <li><a href="index.html">LIVVkit 2.0.3 documentation</a> &#187;</li> 
+        <li><a href="index.html">LIVVkit 2.1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     
@@ -125,10 +123,6 @@
 <li class="toctree-l7"><a class="reference internal" href="source/livvkit.data.numerics.html#module-livvkit.data.numerics">Module contents</a></li>
 </ul>
 </li>
-<li class="toctree-l6"><a class="reference internal" href="source/livvkit.data.validation.html">livvkit.data.validation package</a><ul>
-<li class="toctree-l7"><a class="reference internal" href="source/livvkit.data.validation.html#module-livvkit.data.validation">Module contents</a></li>
-</ul>
-</li>
 </ul>
 </li>
 <li class="toctree-l5"><a class="reference internal" href="source/livvkit.data.html#module-livvkit.data">Module contents</a></li>
@@ -142,7 +136,6 @@
 <li class="toctree-l5"><a class="reference internal" href="source/livvkit.util.html#submodules">Submodules</a></li>
 <li class="toctree-l5"><a class="reference internal" href="source/livvkit.util.html#module-livvkit.util.LIVVDict">livvkit.util.LIVVDict module</a></li>
 <li class="toctree-l5"><a class="reference internal" href="source/livvkit.util.html#module-livvkit.util.TexHelper">livvkit.util.TexHelper module</a></li>
-<li class="toctree-l5"><a class="reference internal" href="source/livvkit.util.html#module-livvkit.util.cat">livvkit.util.cat module</a></li>
 <li class="toctree-l5"><a class="reference internal" href="source/livvkit.util.html#module-livvkit.util.colormaps">livvkit.util.colormaps module</a></li>
 <li class="toctree-l5"><a class="reference internal" href="source/livvkit.util.html#module-livvkit.util.elements">livvkit.util.elements module</a></li>
 <li class="toctree-l5"><a class="reference internal" href="source/livvkit.util.html#module-livvkit.util.functions">livvkit.util.functions module</a></li>
@@ -165,11 +158,266 @@
 </div>
 <div class="section" id="web-frontend">
 <h2>Web Frontend<a class="headerlink" href="#web-frontend" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="jsdoc-toolkit-rst-template/symbols/_global_.html">livvkit.resources.js.common module</a></li>
+<dl class="function">
+<dt id="drawNav">
+<code class="descname">drawNav</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#drawNav" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draws the navigation sidebar by looking at the index.json data and appends the
+list of resultant pages to the nav div.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="drawContent">
+<code class="descname">drawContent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#drawContent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draws content to the page by looking at the name of the page and loading the
+appropriate dataset.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="drawError">
+<code class="descname">drawError</code><span class="sig-paren">(</span><em>data</em>, <em>div</em><span class="sig-paren">)</span><a class="headerlink" href="#drawError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build an error message and appends it to the div.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> (<em>Object</em>) – The error element data.  Determined by having data[“Type”] = “Error”</li>
+<li><strong>div</strong> (<em>string</em>) – The name of the div to draw to.  Should be referenced as a string that determines whether it is a class or id (ie include # or .)</li>
 </ul>
-</div>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="drawSummary">
+<code class="descname">drawSummary</code><span class="sig-paren">(</span><em>data</em>, <em>div</em><span class="sig-paren">)</span><a class="headerlink" href="#drawSummary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build a summary and adds it to the div.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> (<em>Object</em>) – The data representing the summary.  Determined by data[“Type”] = “Summary”</li>
+<li><strong>div</strong> (<em>string</em>) – The name of the div to draw to.  Should be referenced as a string that determines whether it is a class or id (ie include # or .)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="drawValSummary">
+<code class="descname">drawValSummary</code><span class="sig-paren">(</span><em>data</em>, <em>div</em><span class="sig-paren">)</span><a class="headerlink" href="#drawValSummary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build a validation extension summary and adds it to the div.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> (<em>Object</em>) – The data representing the summary.  Determined by data[“Type”] = “Summary”</li>
+<li><strong>div</strong> (<em>string</em>) – The name of the div to draw to.  Should be referenced as a string that determines whether it is a class or id (ie include # or .)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="drawDiff">
+<code class="descname">drawDiff</code><span class="sig-paren">(</span><em>data</em>, <em>div</em><span class="sig-paren">)</span><a class="headerlink" href="#drawDiff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build a file diff</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> (<em>Object</em>) – The data representing the table.  Determined by data[“Type”] = “Diff”</li>
+<li><strong>div</strong> (<em>string</em>) – The name of the div to draw to.  Should be referenced as a string that determines whether it is a class or id (ie include # or .)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="drawBitForBit">
+<code class="descname">drawBitForBit</code><span class="sig-paren">(</span><em>data</em>, <em>div</em><span class="sig-paren">)</span><a class="headerlink" href="#drawBitForBit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build a bit for bit table</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> (<em>Object</em>) – The data representing the table.  Determined by data[“Type”] = “Bit for Bit”</li>
+<li><strong>div</strong> (<em>string</em>) – The name of the div to draw to.  Should be referenced as a string that determines whether it is a class or id (ie include # or .)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="drawGallery">
+<code class="descname">drawGallery</code><span class="sig-paren">(</span><em>data</em>, <em>div</em><span class="sig-paren">)</span><a class="headerlink" href="#drawGallery" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build a gallery</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> (<em>Object</em>) – The data representing the table.  Determined by data[“Type”] = “Gallery”</li>
+<li><strong>div</strong> (<em>string</em>) – The name of the div to draw to.  Should be referenced as a string that determines whether it is a class or id (ie include # or .)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="drawImage">
+<code class="descname">drawImage</code><span class="sig-paren">(</span><em>img_elem</em>, <em>div</em><span class="sig-paren">)</span><a class="headerlink" href="#drawImage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw an image</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> (<em>Object</em>) – The data representing the image.  Determined by data[“Type”] = “Image”</li>
+<li><strong>div</strong> (<em>string</em>) – The name of the div to draw to.  Should be referenced as a string that determines whether it is a class or id (ie include # or .)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="drawLightbox">
+<code class="descname">drawLightbox</code><span class="sig-paren">(</span><em>img_elem</em><span class="sig-paren">)</span><a class="headerlink" href="#drawLightbox" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw an image thumbnail with a link to open the image in a lightbox</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first simple">
+<li><strong>img_elem</strong> (<em>dictionary</em>) – Dictionary describing the image location, title, album, and caption</li>
+<li><strong>size</strong> (<em>number</em>) – The desired height to draw</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">the html to embed into another element</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="drawThumbnail">
+<code class="descname">drawThumbnail</code><span class="sig-paren">(</span><em>img_elem</em>, <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#drawThumbnail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw an image thumbnail with a link to open in a new tab</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first simple">
+<li><strong>path</strong> (<em>string</em>) – The location of the image to thumbnail-size</li>
+<li><strong>size</strong> (<em>number</em>) – The desired height to draw</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">the html to embed into another element</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="drawTable">
+<code class="descname">drawTable</code><span class="sig-paren">(</span><em>data</em>, <em>div</em><span class="sig-paren">)</span><a class="headerlink" href="#drawTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build a table</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> (<em>Object</em>) – The data representing the table.  Determined by data[“Type”] = “Table”</li>
+<li><strong>div</strong> (<em>string</em>) – The name of the div to draw to.  Should be referenced as a string that determines whether it is a class or id (ie include # or .)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="drawVTable">
+<code class="descname">drawVTable</code><span class="sig-paren">(</span><em>data</em>, <em>div</em><span class="sig-paren">)</span><a class="headerlink" href="#drawVTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build a vertical table</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> (<em>Object</em>) – The data representing the table.  Determined by data[“Type”] = “Vertical Table”</li>
+<li><strong>div</strong> (<em>string</em>) – The name of the div to draw to.  Should be referenced as a string that determines whether it is a class or id (ie include # or .)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="drawVHTable">
+<code class="descname">drawVHTable</code><span class="sig-paren">(</span><em>data</em>, <em>div</em><span class="sig-paren">)</span><a class="headerlink" href="#drawVHTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build a table with horizontal and vertical headers and add it to the div.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> (<em>Object</em>) – The data representing the summary.  Determined by data[“Type”] = “HVTable”</li>
+<li><strong>div</strong> (<em>string</em>) – The name of the div to draw to.  Should be referenced as a string that determines whether it is a class or id (ie include # or .)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="drawHTML">
+<code class="descname">drawHTML</code><span class="sig-paren">(</span><em>data</em>, <em>div</em><span class="sig-paren">)</span><a class="headerlink" href="#drawHTML" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw HTML element</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> (<em>Object</em>) – The data representing the html element. Determined by data[“Type”] = “HTML”</li>
+<li><strong>div</strong> (<em>string</em>) – The name of the div to draw to.  Should be referenced as a string that determines whether it is a class or id (ie include # or .)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="loadJSON">
+<code class="descname">loadJSON</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#loadJSON" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load a json file into a variable</p>
+</dd></dl>
+
 </div>
 </div>
 
@@ -193,19 +441,16 @@
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script><h3><a href="index.html">Table Of Contents</a></h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vv-intro.html">Introduction to V&amp;V</a></li>
 <li class="toctree-l1"><a class="reference internal" href="design.html">Design Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="install.html">Advanced installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="extend.html">Extending Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extend.html">Extensions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dev.html">Development</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="source/modules.html">livvkit</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#web-frontend">Web Frontend</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="jsdoc-toolkit-rst-template/symbols/_global_.html">livvkit.resources.js.common module</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#web-frontend">Web Frontend</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="ref.html">References and indices</a></li>
@@ -215,7 +460,7 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/api.txt"
+      <li><a href="_sources/api.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -243,7 +488,7 @@
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
     </div>
   </body>
 </html>

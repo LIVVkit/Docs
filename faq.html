@@ -1,30 +1,28 @@
 <!DOCTYPE html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Frequently Asked Questions &#8212; LIVVkit 2.0.3 documentation</title>
-    
+    <title>Frequently Asked Questions &#8212; LIVVkit 2.1.0 documentation</title>
     <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2.0.3',
+        VERSION:     '2.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="_static/sidebar.js"></script>
-    <link rel="top" title="LIVVkit 2.0.3 documentation" href="index.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="References and indices" href="ref.html" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <link rel="shortcut icon" type="image/png" href="_static/favicon.png" />
@@ -33,12 +31,12 @@
     
 
   </head>
-  <body role="document">
+  <body>
     <div class="related">
       <h3>Navigation</h3>
       <ul>
         <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
-        <li><a href="index.html">LIVVkit 2.0.3 documentation</a> &#187;</li> 
+        <li><a href="index.html">LIVVkit 2.1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     
@@ -65,21 +63,33 @@
 (<code class="docutils literal"><span class="pre">file://</span></code>) due to possible security risks. As of writing this (2017/05/11), Firefox and Safari
 will still display the output websites appropriately, but Chrome will not (IE/Edge untested), and
 Firefox is slated to disable access in an upcoming release.</p>
-<p>Fortunately, there is an easy workaround! Python comes with a built in HTTP server, which can be
-used to serve the website, and will run the javascript. First, move into the output website
-directory (typically <code class="docutils literal"><span class="pre">cd</span> <span class="pre">vv_$YEAR_$MONTH_$DAY</span></code>), and launch the server. Use either:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">python2</span> <span class="o">-</span><span class="n">m</span> <span class="n">SimpleHTTPServer</span>
+<p>Fortunately, there is an easy workaround! LIVVkit now has a <code class="docutils literal"><span class="pre">-s/--serve</span> <span class="pre">SERVE</span></code> option which will
+fire up a local HTTP server, and serve the website over port <code class="docutils literal"><span class="pre">SERVE</span></code> (8000 is the default port).
+LIVVkit will display the web address to view the website from; the default address will be
+<code class="docutils literal"><span class="pre">http://localhost:8000/vv_YYYY-MM-DD/index.html</span></code> where <code class="docutils literal"><span class="pre">YYYY</span></code>, <code class="docutils literal"><span class="pre">MM</span></code>, and <code class="docutils literal"><span class="pre">DD</span></code> are the
+current year, month, and day, respectively.</p>
+<p><em>Note, this will capture your terminal until you’re done using the server (use</em> <code class="docutils literal"><span class="pre">ctrl+c</span></code> <em>to kill
+it).</em></p>
+<p>Alternatively, or for viewing previously generated websites, Python comes with a built in HTTP
+server, which can be used to serve the website, and will run the javascript. First, move into the
+output website directory (typically <code class="docutils literal"><span class="pre">cd</span> <span class="pre">vv_YYYY_MM_DD</span></code>), and launch the server. Use either:</p>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">python2</span> <span class="o">-</span><span class="n">m</span> <span class="n">SimpleHTTPServer</span> <span class="n">SERVE</span>
 </pre></div>
 </div>
 <p>or</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">http</span><span class="o">.</span><span class="n">server</span>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">http</span><span class="o">.</span><span class="n">server</span> <span class="n">SERVE</span>
 </pre></div>
 </div>
-<p><em>Note, this will capture your terminal until you&#8217;re done using the server (use</em> <code class="docutils literal"><span class="pre">ctrl+c</span></code> <em>to kill
+<p>Where <code class="docutils literal"><span class="pre">SERVE</span></code> is port to serve the website over (8000 is the default port).</p>
+<p><em>Note, this will capture your terminal until you’re done using the server (use</em> <code class="docutils literal"><span class="pre">ctrl+c</span></code> <em>to kill
 it).</em></p>
-<p>Now, open your favorite web browser and navigate to <code class="docutils literal"><span class="pre">http://localhost:8000/index.html</span></code>. You
-should now be able to see the contents of the website. If you&#8217;re still having problems, <a class="reference external" href="https://github.com/livvkit/livvkit/issues">open an
-issue on github</a> and we&#8217;ll help you out!</p>
+<p>Now, open your favorite web browser and navigate to either <code class="docutils literal"><span class="pre">http://localhost:8000/index.html</span></code> or
+<code class="docutils literal"><span class="pre">http://127.0.0.1:8000/index.html</span></code> (adjust the port as necessary). You should now be able to see
+the contents of the website.  When you rerun LIVVkit, you’ll want to clear the browser’s cache of
+the output website when you reload the page. In most broswers, you can do that by using the
+<code class="docutils literal"><span class="pre">ctrl+F5</span></code> or <code class="docutils literal"><span class="pre">ctrl+shit+R</span></code> keyboard commands on Windows/Linux, or <code class="docutils literal"><span class="pre">cmd+F5</span></code> or <code class="docutils literal"><span class="pre">cmd+shit+R</span></code>
+on Mac.</p>
+<p>If you’re still having problems, <a class="reference external" href="https://github.com/livvkit/livvkit/issues">open an issue on github</a> and we’ll help you out!</p>
 </div>
 </div>
 
@@ -103,12 +113,12 @@ issue on github</a> and we&#8217;ll help you out!</p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script><h3><a href="index.html">Table Of Contents</a></h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vv-intro.html">Introduction to V&amp;V</a></li>
 <li class="toctree-l1"><a class="reference internal" href="design.html">Design Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="install.html">Advanced installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="extend.html">Extending Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extend.html">Extensions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dev.html">Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ref.html">References and indices</a></li>
@@ -121,7 +131,7 @@ issue on github</a> and we&#8217;ll help you out!</p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/faq.txt"
+      <li><a href="_sources/faq.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -146,7 +156,7 @@ issue on github</a> and we&#8217;ll help you out!</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
     </div>
   </body>
 </html>

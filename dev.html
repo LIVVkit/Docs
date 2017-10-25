@@ -1,32 +1,30 @@
 <!DOCTYPE html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Development &#8212; LIVVkit 2.0.3 documentation</title>
-    
+    <title>Development &#8212; LIVVkit 2.1.0 documentation</title>
     <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2.0.3',
+        VERSION:     '2.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="_static/sidebar.js"></script>
-    <link rel="top" title="LIVVkit 2.0.3 documentation" href="index.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="API" href="api.html" />
-    <link rel="prev" title="Extending Components" href="extend.html" />
+    <link rel="prev" title="Extensions" href="extend.html" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <link rel="shortcut icon" type="image/png" href="_static/favicon.png" />
     <meta name="viewport" content="width=device-width,initial-scale=0.8">
@@ -34,12 +32,12 @@
     
 
   </head>
-  <body role="document">
+  <body>
     <div class="related">
       <h3>Navigation</h3>
       <ul>
         <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
-        <li><a href="index.html">LIVVkit 2.0.3 documentation</a> &#187;</li> 
+        <li><a href="index.html">LIVVkit 2.1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     
@@ -60,10 +58,36 @@
 </div>
 <div class="section" id="development">
 <h1>Development<a class="headerlink" href="#development" title="Permalink to this headline">¶</a></h1>
+<p>LIVVkit is publicly developed within the <a class="reference external" href="https://github.com/LIVVkit">LIVVkit</a> project on GitHub
+and releases are packaged and distributed on <a class="reference external" href="https://pypi.python.org/pypi/livvkit">PyPI</a> and
+<a class="reference external" href="https://anaconda.org/jhkennedy/livvkit">Anaconda Cloud</a>.</p>
+<div class="section" id="workflow">
+<h2>Workflow<a class="headerlink" href="#workflow" title="Permalink to this headline">¶</a></h2>
+<p>There are two encouraged ways to contribute to the development of LIVVkit:</p>
+<div class="section" id="become-a-core-developer">
+<h3>1. Become a core developer<a class="headerlink" href="#become-a-core-developer" title="Permalink to this headline">¶</a></h3>
+<p>If you have many contributions and are planning on being an active developer, you may request to
+become a core developer by contacting <a class="reference external" href="mailto:kennedyjh&#37;&#52;&#48;ornl&#46;gov">Joseph H<span>&#46;</span> Kennedy</a> and briefely
+describing your intended contribution goals. Once approved, you will be given push access to the
+<code class="docutils literal"><span class="pre">LIVVkit/LIVVkit</span></code> repository (and any other needed repositories).</p>
+<p>When developing the code, please follow the <a class="reference external" href="https://www.atlassian.com/git/tutorials/comparing-workflows#gitflow-workflow">GitFlow workflow</a> and make all your
+changes in a feature branch. Feature branches should follow the <code class="docutils literal"><span class="pre">#-username-feature</span></code> naming
+convention, where <code class="docutils literal"><span class="pre">#</span></code> indicates the issue  being addressed (optional).</p>
+<p>If you have any questions, concerns, requests, etc., open an issue in our <a class="reference external" href="https://github.com/LIVVkit/LIVVkit/issues">issues queue</a>, and we will help you out.</p>
+</div>
+<div class="section" id="for-outside-contributions">
+<h3>2. For outside contributions<a class="headerlink" href="#for-outside-contributions" title="Permalink to this headline">¶</a></h3>
+<p>For one-off or infrequent contributions, please use the <a class="reference external" href="https://www.atlassian.com/git/tutorials/comparing-workflows#forking-workflow">Forking Workflow</a> to add
+contributions to LIVVkit.</p>
+<p>First, go to the <a class="reference external" href="https://github.com/LIVVkit/LIVVkit">LIVVkit github page</a> and push the <code class="docutils literal"><span class="pre">Fork</span></code>
+button on the top right of the page. This will create a fork of LIVVkit in your profile page. Clone
+the fork, make your changes, merge them to development branch, and then submit a pull request to our
+public repository.</p>
+<p>If you have any questions, concerns, requests, etc., open an issue in our <a class="reference external" href="https://github.com/LIVVkit/LIVVkit/issues">public issues queue</a>, and we will help you out.</p>
+</div>
+</div>
 <div class="section" id="code-guidelines">
 <h2>Code Guidelines<a class="headerlink" href="#code-guidelines" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="conventions">
-<h3>Conventions<a class="headerlink" href="#conventions" title="Permalink to this headline">¶</a></h3>
 <p>A sample code snippet below highlights most of our coding conventions.
 For conventions not covered in the snippet follow <a class="reference external" href="https://www.python.org/dev/peps/">PEP
 guidelines</a>.</p>
@@ -107,7 +131,7 @@ guidelines</a>.</p>
 </div>
 </div>
 <div class="section" id="tips">
-<h3>Tips<a class="headerlink" href="#tips" title="Permalink to this headline">¶</a></h3>
+<h2>Tips<a class="headerlink" href="#tips" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Each source file containing functions that are called by the main <code class="docutils literal"><span class="pre">livv.py</span></code> script should have
 the license header. (There should be a script to fix when this is forgotten in util).</li>
@@ -117,7 +141,6 @@ see which variables may be used by outside modules.</li>
 <li>When refering to system paths use the <code class="docutils literal"><span class="pre">os.sep</span></code> variable or <code class="docutils literal"><span class="pre">os.path.join()</span></code> instead of
 relying on whichever version of path separator your system uses.</li>
 </ul>
-</div>
 </div>
 <div class="section" id="building-the-documentation">
 <h2>Building the documentation<a class="headerlink" href="#building-the-documentation" title="Permalink to this headline">¶</a></h2>
@@ -149,7 +172,7 @@ running:</p>
 <p class="last">If you run this command you will need to regenerate all the auto-generated files! <code class="docutils literal"><span class="pre">make</span> <span class="pre">clean</span></code> will
 only remove the old website and leave the autogenerated files in place.</p>
 </div>
-<p>Then, auto-generate the documentation of LIVVkit&#8217;s python source code:</p>
+<p>Then, auto-generate the documentation of LIVVkit’s python source code:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>sphinx-apidoc -f -o source/ ../livvkit/
 </pre></div>
 </div>
@@ -165,19 +188,19 @@ will need to be regenerated as well:</p>
 <li><code class="docutils literal"><span class="pre">jsdoc-toolkit-rst-template/symbols/_global_.rst</span></code></li>
 </ul>
 <p>Only the <code class="docutils literal"><span class="pre">_global_.rst</span></code> file is used in the LIVVkit documentation, and the other two can be
-removed (Sphinx will warn you that they aren&#8217;t included in the <code class="docutils literal"><span class="pre">toctree</span></code>; it&#8217;s best to remove
+removed (Sphinx will warn you that they aren’t included in the <code class="docutils literal"><span class="pre">toctree</span></code>; it’s best to remove
 them).</p>
 <p>Now, open the <code class="docutils literal"><span class="pre">_global_.rst</span></code> file, and edit the title from <code class="docutils literal"><span class="pre">_global_</span> <span class="pre">(data)</span></code> to
 <code class="docutils literal"><span class="pre">livvkit.resources.js.common</span> <span class="pre">module</span></code>.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Unfortunately, the <code class="docutils literal"><span class="pre">jsdoc-toolkit</span></code> doesn&#8217;t make clean reStructuredText files, and Sphinx will
+<p class="last">Unfortunately, the <code class="docutils literal"><span class="pre">jsdoc-toolkit</span></code> doesn’t make clean reStructuredText files, and Sphinx will
 warn you about syntax errors. You will need to manually edit the <code class="docutils literal"><span class="pre">_global_.rst</span></code> file to fix
 the syntax. Typically, the errors are because multi-line bulletpoints in the document have the
 continuing text aligned with the bullet, instead of after the bullet and whitespace (see the
 <a class="reference external" href="http://docutils.sourceforge.net/docs/user/rst/quickref.html#bullet-lists">docutils quck reference</a>).</p>
 </div>
-<p>Now you&#8217;re ready to make the docs website again:</p>
+<p>Now you’re ready to make the docs website again:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>make html
 </pre></div>
 </div>
@@ -209,18 +232,20 @@ continuing text aligned with the bullet, instead of after the bullet and whitesp
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script><h3><a href="index.html">Table Of Contents</a></h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vv-intro.html">Introduction to V&amp;V</a></li>
 <li class="toctree-l1"><a class="reference internal" href="design.html">Design Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="install.html">Advanced installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="extend.html">Extending Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extend.html">Extensions</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Development</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#code-guidelines">Code Guidelines</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#conventions">Conventions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tips">Tips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#workflow">Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#become-a-core-developer">1. Become a core developer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#for-outside-contributions">2. For outside contributions</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#code-guidelines">Code Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tips">Tips</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#building-the-documentation">Building the documentation</a></li>
 </ul>
 </li>
@@ -232,7 +257,7 @@ continuing text aligned with the bullet, instead of after the bullet and whitesp
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/dev.txt"
+      <li><a href="_sources/dev.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -253,14 +278,14 @@ continuing text aligned with the bullet, instead of after the bullet and whitesp
           <a href="api.html" title="API"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="extend.html" title="Extending Components"
+          <a href="extend.html" title="Extensions"
              accesskey="P">previous</a> |</li>
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
     </div>
   </body>
 </html>

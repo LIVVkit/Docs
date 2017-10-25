@@ -1,31 +1,29 @@
 <!DOCTYPE html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Design Overview &#8212; LIVVkit 2.0.3 documentation</title>
-    
+    <title>Design Overview &#8212; LIVVkit 2.1.0 documentation</title>
     <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2.0.3',
+        VERSION:     '2.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="_static/sidebar.js"></script>
-    <link rel="top" title="LIVVkit 2.0.3 documentation" href="index.html" />
-    <link rel="next" title="Advanced installation" href="install.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="install.html" />
     <link rel="prev" title="Introduction to V&amp;V" href="vv-intro.html" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <link rel="shortcut icon" type="image/png" href="_static/favicon.png" />
@@ -34,12 +32,12 @@
     
 
   </head>
-  <body role="document">
+  <body>
     <div class="related">
       <h3>Navigation</h3>
       <ul>
         <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
-        <li><a href="index.html">LIVVkit 2.0.3 documentation</a> &#187;</li> 
+        <li><a href="index.html">LIVVkit 2.1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     
@@ -61,7 +59,7 @@
 <div class="section" id="design-overview">
 <h1>Design Overview<a class="headerlink" href="#design-overview" title="Permalink to this headline">¶</a></h1>
 <p>As detailed in <a class="reference internal" href="ref.html#kennedy2017" id="id1">[Kennedy2017]</a>, LIVVkit is intended to be a comprehensive V&amp;V toolkit for regular and
-automated testing &#8211; that is, testing models as they develop. It is designed to be <em>used</em> by model
+automated testing – that is, testing models as they develop. It is designed to be <em>used</em> by model
 developers/users to build their confidence in the model. Additionally, it is expected that the
 testing output will be <em>viewed</em> and examined by a wider audience in order to enhance the credibility
 of the model.</p>
@@ -73,7 +71,7 @@ modeler/developer).</dd>
 <dt><strong>Portable</strong></dt>
 <dd>LIVVkit should work where the models are developed; from laptops to HPCs.</dd>
 <dt><strong>Flexible</strong></dt>
-<dd>LIVVkit should accommodate multiple use cases and integrate into developers&#8217; workflow patterns.</dd>
+<dd>LIVVkit should accommodate multiple use cases and integrate into developers’ workflow patterns.</dd>
 <dt><strong>Extensible</strong></dt>
 <dd>LIVVkit should be able to accommodate new models, tests, and methods of analysis easily to keep
 pace with future developments.</dd>
@@ -90,7 +88,7 @@ and other results understandable.</dd>
 <dt><strong>Shareable</strong></dt>
 <dd>The results should be easy to share, publish, and examine using common tools.</dd>
 </dl>
-<p>If you find LIVVkit isn&#8217;t working for you, meeting these requirements, or have other suggestions for
+<p>If you find LIVVkit isn’t working for you, meeting these requirements, or have other suggestions for
 improvement, please let us know by <a class="reference external" href="https://github.com/livvkit/livvkit/issues">opening an issue on github</a>.</p>
 <div class="section" id="architecture">
 <h2>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h2>
@@ -128,7 +126,7 @@ when done.</dd>
 verification and validation analyses (see the <a class="reference internal" href="vv-intro.html"><span class="doc">Introduction to V&amp;V</span></a>).</dd>
 <dt><a class="reference internal" href="source/livvkit.bundles.html#module-livvkit.bundles" title="livvkit.bundles"><code class="xref py py-mod docutils literal"><span class="pre">livvkit.bundles</span></code></a></dt>
 <dd>A package containing any model specific code bundles, which are used to completely encapsulate a
-particular ice sheet model&#8217;s unique behavior. At its core, a bundle is simply a set of
+particular ice sheet model’s unique behavior. At its core, a bundle is simply a set of
 configuration files and Python modules. The configuration files describe paths, variable names,
 and the types of analysis available to LIVVkit, and the Python modules provide the methods to
 handle ice sheet model specific behavior (e.g., parsing input/log files and reshaping data
@@ -145,7 +143,7 @@ link in directories containing data for custom extensions.</li>
 </ul>
 </dd>
 </dl>
-<p>See <a class="reference internal" href="api.html"><span class="doc">API</span></a> and/or <a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a> for a detailed list and description of LIVVkit&#8217;s components.</p>
+<p>See <a class="reference internal" href="api.html"><span class="doc">API</span></a> and/or <a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a> for a detailed list and description of LIVVkit’s components.</p>
 </div>
 </div>
 </div>
@@ -170,7 +168,7 @@ link in directories containing data for custom extensions.</li>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script><h3><a href="index.html">Table Of Contents</a></h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vv-intro.html">Introduction to V&amp;V</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Design Overview</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#architecture">Architecture</a><ul>
@@ -179,9 +177,9 @@ link in directories containing data for custom extensions.</li>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="install.html">Advanced installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="extend.html">Extending Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extend.html">Extensions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dev.html">Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ref.html">References and indices</a></li>
@@ -191,7 +189,7 @@ link in directories containing data for custom extensions.</li>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/design.txt"
+      <li><a href="_sources/design.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -209,7 +207,7 @@ link in directories containing data for custom extensions.</li>
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="install.html" title="Advanced installation"
+          <a href="install.html" title="Installation"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="vv-intro.html" title="Introduction to V&amp;V"
@@ -219,7 +217,7 @@ link in directories containing data for custom extensions.</li>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
     </div>
   </body>
 </html>

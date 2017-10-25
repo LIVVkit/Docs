@@ -1,32 +1,30 @@
 <!DOCTYPE html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Usage &#8212; LIVVkit 2.0.3 documentation</title>
-    
+    <title>Usage &#8212; LIVVkit 2.1.0 documentation</title>
     <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2.0.3',
+        VERSION:     '2.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="_static/sidebar.js"></script>
-    <link rel="top" title="LIVVkit 2.0.3 documentation" href="index.html" />
-    <link rel="next" title="Extending Components" href="extend.html" />
-    <link rel="prev" title="Advanced installation" href="install.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Extensions" href="extend.html" />
+    <link rel="prev" title="Installation" href="install.html" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <link rel="shortcut icon" type="image/png" href="_static/favicon.png" />
     <meta name="viewport" content="width=device-width,initial-scale=0.8">
@@ -34,12 +32,12 @@
     
 
   </head>
-  <body role="document">
+  <body>
     <div class="related">
       <h3>Navigation</h3>
       <ul>
         <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
-        <li><a href="index.html">LIVVkit 2.0.3 documentation</a> &#187;</li> 
+        <li><a href="index.html">LIVVkit 2.1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     
@@ -60,7 +58,7 @@
 </div>
 <div class="section" id="usage">
 <h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
-<p>LIVVkit is intended to be integrated into a model&#8217;s development cycle. A public-private version of
+<p>LIVVkit is intended to be integrated into a model’s development cycle. A public-private version of
 <a class="reference external" href="https://www.atlassian.com/git/tutorials/comparing-workflows#gitflow-workflow">GitFlow</a> is a
 common development cycle used by many scientific modeling groups, and LIVVkit would be integrated
 into the development process like:</p>
@@ -68,10 +66,10 @@ into the development process like:</p>
 <a class="reference internal image-reference" href="_images/workflow.png"><img alt="Development cycle" src="_images/workflow.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-text">Schematic of the public-private development cycle used by many scientfic modeling groups
 <a class="reference internal" href="ref.html#kennedy2017" id="id1">[Kennedy2017]</a>. A feature branch is created (<code class="docutils literal"><span class="pre">d124</span></code>, green path) from the current development
-branch (light purple path) and incremental changes are made (<code class="docutils literal"><span class="pre">f001</span></code>&#8211;<code class="docutils literal"><span class="pre">f003</span></code>). These changes
+branch (light purple path) and incremental changes are made (<code class="docutils literal"><span class="pre">f001</span></code>–<code class="docutils literal"><span class="pre">f003</span></code>). These changes
 frequently undergo the standard set of LIVVkit verification tests (dashed cyan circles). Once
 the feature is complete and tested (<code class="docutils literal"><span class="pre">f003</span></code>), it is ready to be merged into develop (which
-includes the new features <code class="docutils literal"><span class="pre">d125</span></code>&#8211;<code class="docutils literal"><span class="pre">d126</span></code>) and a pull request will be opened by the developer
+includes the new features <code class="docutils literal"><span class="pre">d125</span></code>–<code class="docutils literal"><span class="pre">d126</span></code>) and a pull request will be opened by the developer
 (dashed arrow).  At this point, the integrators merge the feature into a local copy of the
 development branch and the full set of LIVVkit integration tests are started (filled cyan
 circle). Once passed, the feature is merged into develop (<code class="docutils literal"><span class="pre">d127</span></code>) and the pull request is
@@ -85,7 +83,7 @@ pushed to the mirrored master branch on the public repository (left purple path)
 dataset, <code class="docutils literal"><span class="pre">$TEST</span></code>, against a  reference dataset, <code class="docutils literal"><span class="pre">$REF</span></code>. The datasets follows a somewhat rigid
 leaf-node structure which allows the testing dataset to be more human-friendly than just a bunch of
 files and still fully describe the tests. This directory structure is, for example, created by
-CISM&#8217;s Build and Test Structure (BATS).</p>
+CISM’s Build and Test Structure (BATS).</p>
 <div class="section" id="model-output-livvkit-input-hierarchy">
 <span id="input-hierarchy"></span><h3>Model Output/LIVVkit Input Hierarchy<a class="headerlink" href="#model-output-livvkit-input-hierarchy" title="Permalink to this headline">¶</a></h3>
 <p>The directory layout of the model output should be as follows:</p>
@@ -152,8 +150,8 @@ the <code class="docutils literal"><span class="pre">-o/--output</span></code> o
 browser by by opening <code class="docutils literal"><span class="pre">vv_$YEAR_$MONTH_DAY/index.html</span></code>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">LIVVkit outputs the full path to the index page at the end of each run so it&#8217;s easy type into the
-browser&#8217;s address bar (prefix this path with a <code class="docutils literal"><span class="pre">file://</span></code> on most browsers).</p>
+<p class="last">LIVVkit outputs the full path to the index page at the end of each run so it’s easy type into the
+browser’s address bar (prefix this path with a <code class="docutils literal"><span class="pre">file://</span></code> on most browsers).</p>
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -168,7 +166,7 @@ portable).</p>
 </div>
 <div class="section" id="integration-analysis">
 <h3>Integration analysis<a class="headerlink" href="#integration-analysis" title="Permalink to this headline">¶</a></h3>
-<p>Upon receiving a pull request for a new feature, a model&#8217;s integration team will typically initiate
+<p>Upon receiving a pull request for a new feature, a model’s integration team will typically initiate
 a more substantial test of the new feature, often on the target production machine(s).</p>
 <p>First, the integrator would checkout the code base on the production machine, and generate a
 reference dataset for the current state of the development branch:</p>
@@ -227,7 +225,7 @@ security risk). See our <a class="reference internal" href="faq.html"><span clas
 </div>
 <p>Additionally, the output directory may compressed and uploaded to Github for viewing by the rest of
 the integration team and the feature developer (every output website is portable). If test results
-aren&#8217;t satisfactory, this provides a valuable resource for the developer to make the necessary
+aren’t satisfactory, this provides a valuable resource for the developer to make the necessary
 changes to their feature.</p>
 <p>Once testing results are satisfactory, the integration team may do a similar comparison to the
 latest release in order to track changes over a longer period of development and analyze the model
@@ -239,7 +237,7 @@ for creep, or run a series of extended validation analyses.</p>
 <p class="first admonition-title">Note</p>
 <p class="last">A set of standard ice sheet model validation analyses are currently being developed and will be
 released soon (along with the ncessary observational data). Check back soon! Until then, see
-<a class="reference internal" href="extend.html"><span class="doc">Extending Components</span></a> for how to develop your own validation analysis.</p>
+<a class="reference internal" href="extend.html"><span class="doc">Extensions</span></a> for how to develop your own validation analysis.</p>
 </div>
 </div>
 </div>
@@ -265,10 +263,10 @@ released soon (along with the ncessary observational data). Check back soon! Unt
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script><h3><a href="index.html">Table Of Contents</a></h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vv-intro.html">Introduction to V&amp;V</a></li>
 <li class="toctree-l1"><a class="reference internal" href="design.html">Design Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="install.html">Advanced installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#standard-verification-and-integration-tests">Standard verification and integration tests</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#model-output-livvkit-input-hierarchy">Model Output/LIVVkit Input Hierarchy</a></li>
@@ -279,7 +277,7 @@ released soon (along with the ncessary observational data). Check back soon! Unt
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="extend.html">Extending Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extend.html">Extensions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dev.html">Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ref.html">References and indices</a></li>
@@ -289,7 +287,7 @@ released soon (along with the ncessary observational data). Check back soon! Unt
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/usage.txt"
+      <li><a href="_sources/usage.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -307,17 +305,17 @@ released soon (along with the ncessary observational data). Check back soon! Unt
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="extend.html" title="Extending Components"
+          <a href="extend.html" title="Extensions"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="install.html" title="Advanced installation"
+          <a href="install.html" title="Installation"
              accesskey="P">previous</a> |</li>
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
     </div>
   </body>
 </html>

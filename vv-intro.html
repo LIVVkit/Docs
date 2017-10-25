@@ -1,32 +1,30 @@
 <!DOCTYPE html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Introduction to V&amp;V &#8212; LIVVkit 2.0.3 documentation</title>
-    
+    <title>Introduction to V&amp;V &#8212; LIVVkit 2.1.0 documentation</title>
     <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2.0.3',
+        VERSION:     '2.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="_static/sidebar.js"></script>
-    <link rel="top" title="LIVVkit 2.0.3 documentation" href="index.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Design Overview" href="design.html" />
-    <link rel="prev" title="Getting Started" href="quickstart.html" />
+    <link rel="prev" title="Quick Start" href="quickstart.html" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <link rel="shortcut icon" type="image/png" href="_static/favicon.png" />
     <meta name="viewport" content="width=device-width,initial-scale=0.8">
@@ -34,12 +32,12 @@
     
 
   </head>
-  <body role="document">
+  <body>
     <div class="related">
       <h3>Navigation</h3>
       <ul>
         <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
-        <li><a href="index.html">LIVVkit 2.0.3 documentation</a> &#187;</li> 
+        <li><a href="index.html">LIVVkit 2.1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     
@@ -59,7 +57,7 @@
 <a class="reference internal image-reference" href="_images/livvkit.png"><img alt="LIVVkit" src="_images/livvkit.png" style="width: 400px;" /></a>
 </div>
 <p>This page provides a brief introduction to verification and validation (V&amp;V) for scientific models
-&#8211; mostly to solidify the terminology we&#8217;ll be using. We highly recommend reading our open access
+– mostly to solidify the terminology we’ll be using. We highly recommend reading our open access
 publication in <a class="reference external" href="http://agupubs.onlinelibrary.wiley.com/hub/journal/10.1002/(ISSN)1942-2466/">JAMES</a> for a detailed
 discussion of V&amp;V and its application in LIVVkit <a class="reference internal" href="ref.html#kennedy2017" id="id1">[Kennedy2017]</a>. For a very in depth discussion
 of V&amp;V for scientific computing, we recommend <a class="reference internal" href="ref.html#oberkampf2010" id="id2">[Oberkampf2010]</a>.</p>
@@ -77,11 +75,11 @@ of a numerical model consists of:</p>
 <dd>The process of comparing the <em>approximate numerical</em> prediction against an <em>analytical</em>
 prediction, or in the case of a sufficiently complex problem, against highly accurate <em>community
 benchmark</em> solutions. This is inherently a <strong>math</strong> problem <a class="reference internal" href="ref.html#oberkampf2010" id="id3">[Oberkampf2010]</a> <a class="reference internal" href="ref.html#roache1998" id="id4">[Roache1998]</a> that
-is represented by the question, &#8220;Are we solving the equations correctly?&#8221;</dd>
+is represented by the question, “Are we solving the equations correctly?”</dd>
 <dt><strong>Physical validation</strong></dt>
 <dd>The process of comparing the <em>numerical</em> predictions against <em>natural</em> phenomena. This is
 inherently a <strong>physics</strong> problem <a class="reference internal" href="ref.html#oberkampf2010" id="id5">[Oberkampf2010]</a> <a class="reference internal" href="ref.html#roache1998" id="id6">[Roache1998]</a> that is represented by the
-question, &#8220;Are we using the right physics?&#8221;</dd>
+question, “Are we using the right physics?”</dd>
 </dl>
 </div>
 <div class="section" id="software-v-v">
@@ -90,13 +88,13 @@ question, &#8220;Are we using the right physics?&#8221;</dd>
 of specific tasks by a <em>user</em>. V&amp;V of a piece of software consists of:</p>
 <dl class="docutils">
 <dt><strong>Code verification</strong></dt>
-<dd>The process of determining the software&#8217;s implementation, and it&#8217;s associated data, accurately
-represent the developers&#8217; specifications. This is inherently an <strong>engineering</strong> problem
-<a class="reference internal" href="ref.html#oberkampf2010" id="id7">[Oberkampf2010]</a> that is represented by the question, &#8220;did we build what <em>we</em> wanted?&#8221;</dd>
+<dd>The process of determining the software’s implementation, and it’s associated data, accurately
+represent the developers’ specifications. This is inherently an <strong>engineering</strong> problem
+<a class="reference internal" href="ref.html#oberkampf2010" id="id7">[Oberkampf2010]</a> that is represented by the question, “did we build what <em>we</em> wanted?”</dd>
 <dt><strong>Performance validation</strong></dt>
 <dd>The process of determining how <em>well</em> the software is able to be
 used for its intended task. This is inherently an <strong>design</strong> problem <a class="reference internal" href="ref.html#oberkampf2010" id="id8">[Oberkampf2010]</a> that is
-represented by the question, &#8220;did we build what the <em>users</em> wanted?&#8221;</dd>
+represented by the question, “did we build what the <em>users</em> wanted?”</dd>
 </dl>
 </div>
 <div class="section" id="scientific-model-v-v">
@@ -113,7 +111,7 @@ the numerical and software code are intrinsically linked and live within the sam
 and simulation (M&amp;S) results, and to transmit them to the wider scientific community,
 policy/decision makers, and other stakeholders.</p>
 <p>However, for those results to be <em>used</em> people outside the core user and development community, the
-model must have an adequate level of credibility &#8211; it much be trusted outside of the core
+model must have an adequate level of credibility – it much be trusted outside of the core
 community. This is especially important when the results or predictions are used to inform policies
 that may affect affect the economic and general well-being of citizens.</p>
 <p>Importantly, <strong>confidence within the core community is not enough.</strong> Credibility relies on the M&amp;S
@@ -143,7 +141,7 @@ information relating to the development and testing of the model being <em>trans
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script><h3><a href="index.html">Table Of Contents</a></h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction to V&amp;V</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#model-v-v">Model V&amp;V</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#software-v-v">Software V&amp;V</a></li>
@@ -152,9 +150,9 @@ information relating to the development and testing of the model being <em>trans
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="design.html">Design Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="install.html">Advanced installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="extend.html">Extending Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extend.html">Extensions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dev.html">Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ref.html">References and indices</a></li>
@@ -164,7 +162,7 @@ information relating to the development and testing of the model being <em>trans
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/vv-intro.txt"
+      <li><a href="_sources/vv-intro.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -185,14 +183,14 @@ information relating to the development and testing of the model being <em>trans
           <a href="design.html" title="Design Overview"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="quickstart.html" title="Getting Started"
+          <a href="quickstart.html" title="Quick Start"
              accesskey="P">previous</a> |</li>
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
     </div>
   </body>
 </html>

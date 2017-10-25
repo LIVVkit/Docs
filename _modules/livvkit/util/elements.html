@@ -1,31 +1,28 @@
 <!DOCTYPE html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>livvkit.util.elements &#8212; LIVVkit 2.0.3 documentation</title>
-    
+    <title>livvkit.util.elements &#8212; LIVVkit 2.1.0 documentation</title>
     <link rel="stylesheet" href="../../../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '2.0.3',
+        VERSION:     '2.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="../../../_static/sidebar.js"></script>
-    <link rel="top" title="LIVVkit 2.0.3 documentation" href="../../../index.html" />
-    <link rel="up" title="livvkit" href="../../livvkit.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <link rel="shortcut icon" type="image/png" href="../../../_static/favicon.png" />
     <meta name="viewport" content="width=device-width,initial-scale=0.8">
@@ -33,12 +30,12 @@
     
 
   </head>
-  <body role="document">
+  <body>
     <div class="related">
       <h3>Navigation</h3>
       <ul>
         <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
-        <li><a href="../../../index.html">LIVVkit 2.0.3 documentation</a> &#187;</li>
+        <li><a href="../../../index.html">LIVVkit 2.1.0 documentation</a> &#187;</li>
           <li><a href="../../index.html" >Module code</a> &#187;</li>
           <li><a href="../../livvkit.html" accesskey="U">livvkit</a> &#187;</li> 
       </ul>
@@ -57,7 +54,7 @@
           <div class="body" role="main">
             
   <h1>Source code for livvkit.util.elements</h1><div class="highlight"><pre>
-<span></span><span class="c1"># Copyright (c) 2015,2016, UT-BATTELLE, LLC</span>
+<span></span><span class="c1"># Copyright (c) 2015-2017, UT-BATTELLE, LLC</span>
 <span class="c1"># All rights reserved.</span>
 <span class="c1">#</span>
 <span class="c1"># Redistribution and use in source and binary forms, with or without</span>
@@ -95,6 +92,17 @@
 <span class="sd">They will be written out to the JSON files as sub-objects, which must</span>
 <span class="sd">be interpreted by the Javascript found in the resources directory.</span>
 <span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="book"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.elements.book">[docs]</a><span class="k">def</span> <span class="nf">book</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">page_dict</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+    <span class="n">book</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;Book&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Title&#39;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
+            <span class="s1">&#39;Description&#39;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
+            <span class="p">}</span>
+    <span class="k">if</span> <span class="n">page_dict</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">book</span><span class="p">[</span><span class="s1">&#39;Data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">page_dict</span>
+
+    <span class="k">return</span> <span class="n">book</span></div>
 
 
 <div class="viewcode-block" id="page"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.elements.page">[docs]</a><span class="k">def</span> <span class="nf">page</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">element_list</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tab_list</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -295,7 +303,7 @@
     <span class="k">return</span> <span class="n">gal</span></div>
 
 
-<div class="viewcode-block" id="image"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.elements.image">[docs]</a><span class="k">def</span> <span class="nf">image</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">desc</span><span class="p">,</span> <span class="n">image_name</span><span class="p">):</span>
+<div class="viewcode-block" id="image"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.elements.image">[docs]</a><span class="k">def</span> <span class="nf">image</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">desc</span><span class="p">,</span> <span class="n">image_name</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Builds an image element.  Image elements are primarily created</span>
 <span class="sd">    and then wrapped into an image gallery element.  This is not required</span>
@@ -311,6 +319,8 @@
 <span class="sd">        title: The title to display</span>
 <span class="sd">        desc: A description of the image or plot</span>
 <span class="sd">        image_name: The filename of the image</span>
+<span class="sd">        group: (optional) Title of lightbox group to join</span>
+<span class="sd">        Height: (optional) Hight of image thumbnail to draw</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        A dictionary with the metadata specifying that it is to be</span>
@@ -321,6 +331,10 @@
     <span class="n">ie</span><span class="p">[</span><span class="s2">&quot;Title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">title</span>
     <span class="n">ie</span><span class="p">[</span><span class="s2">&quot;Desciption&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">desc</span>
     <span class="n">ie</span><span class="p">[</span><span class="s2">&quot;Plot File&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">image_name</span>
+    <span class="k">if</span> <span class="n">group</span><span class="p">:</span>
+        <span class="n">ie</span><span class="p">[</span><span class="s2">&quot;Group&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">group</span>
+    <span class="k">if</span> <span class="n">height</span><span class="p">:</span>
+        <span class="n">ie</span><span class="p">[</span><span class="s2">&quot;Height&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">height</span>
     <span class="k">return</span> <span class="n">ie</span></div>
 
 
@@ -364,6 +378,23 @@
     <span class="n">err</span><span class="p">[</span><span class="s2">&quot;Title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">title</span>
     <span class="n">err</span><span class="p">[</span><span class="s2">&quot;Message&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">error_msg</span>
     <span class="k">return</span> <span class="n">err</span></div>
+
+<div class="viewcode-block" id="html"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.elements.html">[docs]</a><span class="k">def</span> <span class="nf">html</span><span class="p">(</span><span class="n">html_data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Builds a raw HTML element.  Provides a way to directly display some HTML.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        html_data: The HTML to display </span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A dictionary with the metadata specifying that it is to be</span>
+<span class="sd">        rendered directly as HTML</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">html_el</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">html_el</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;HTML&#39;</span>
+    <span class="n">html_el</span><span class="p">[</span><span class="s1">&#39;Data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">html_data</span>
+    <span class="k">return</span> <span class="n">html_el</span></div>
+
 </pre></div>
 
           </div>
@@ -385,12 +416,12 @@
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script><h3><a href="../../../index.html">Table Of Contents</a></h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../vv-intro.html">Introduction to V&amp;V</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design.html">Design Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Advanced installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../extend.html">Extending Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../extend.html">Extensions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../dev.html">Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../ref.html">References and indices</a></li>
@@ -415,7 +446,7 @@
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
     </div>
   </body>
 </html>

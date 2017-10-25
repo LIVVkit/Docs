@@ -1,30 +1,28 @@
 <!DOCTYPE html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Advanced installation &#8212; LIVVkit 2.0.3 documentation</title>
-    
+    <title>Installation &#8212; LIVVkit 2.1.0 documentation</title>
     <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2.0.3',
+        VERSION:     '2.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="_static/sidebar.js"></script>
-    <link rel="top" title="LIVVkit 2.0.3 documentation" href="index.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Usage" href="usage.html" />
     <link rel="prev" title="Design Overview" href="design.html" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
@@ -34,12 +32,12 @@
     
 
   </head>
-  <body role="document">
+  <body>
     <div class="related">
       <h3>Navigation</h3>
       <ul>
         <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
-        <li><a href="index.html">LIVVkit 2.0.3 documentation</a> &#187;</li> 
+        <li><a href="index.html">LIVVkit 2.1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     
@@ -55,56 +53,39 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="advanced-installation">
-<h1>Advanced installation<a class="headerlink" href="#advanced-installation" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="latest-release">
-<h2>Latest release<a class="headerlink" href="#latest-release" title="Permalink to this headline">¶</a></h2>
+  <div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="basic">
+<h2>Basic<a class="headerlink" href="#basic" title="Permalink to this headline">¶</a></h2>
 <p>The latest LIVVkit release can be installed via <a class="reference external" href="https://pip.pypa.io/en/stable/">Python pip</a>:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>pip install --user livvkit
+<div class="highlight-bash"><div class="highlight"><pre><span></span>pip isntall --user livvkit
 </pre></div>
 </div>
-<p>Via <a class="reference external" href="https://conda.io/docs/download.html">Anaconda/Miniconda</a>:</p>
+<p>or <a class="reference external" href="https://conda.io/docs/download.html">Anaconda/Miniconda</a>:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>conda install -c jhkennedy livvkit
 </pre></div>
 </div>
-<p>Or by cloning the source from:</p>
+<p>LIVVkit was designed to be Python 2 and 3 compatible, so either version will work, but Python 3 is
+preferred (and highly recommended). If you’re having problems installing LIVVkit, try the advanced
+installation below, and/or <a class="reference external" href="https://github.com/livvkit/livvkit/issues">open an issue on github</a>.</p>
+</div>
+<div class="section" id="advanced">
+<h2>Advanced<a class="headerlink" href="#advanced" title="Permalink to this headline">¶</a></h2>
+<p>In order to extend or contribute to LIVVkit, we recommend installing LIVVkit from the source code.
+First, clone the source from GitHub:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>git clone https://github.com/LIVVkit/LIVVkit.git
 </pre></div>
 </div>
-<p>LIVVkit was designed to be Python 2 and 3 compatible, so either version will work, but Python 3 is
-recommended. If you&#8217;re having problems installing LIVVkit, see our detailed <a class="reference internal" href="#"><span class="doc">Advanced installation</span></a> page, or
-<a class="reference external" href="https://github.com/livvkit/livvkit/issues">open an issue on github</a>.</p>
-</div>
-<div class="section" id="for-development">
-<h2>For development<a class="headerlink" href="#for-development" title="Permalink to this headline">¶</a></h2>
-<p>LIVVkit uses a public-private development model. The main development happens in a private
-repository under the Department of Energy&#8217;s  <a class="reference external" href="https://github.com/ACME-climate">ACME</a> project on
-GitHub. The LIVVkit codebase is periodically released to public the <a class="reference external" href="https://github.com/LIVVkit">LIVVkit</a> project on GitHub, and provided as a package on <a class="reference external" href="https://pypi.python.org/pypi/livvkit">PyPI</a> and <a class="reference external" href="https://anaconda.org/jhkennedy/livvkit">Anaconda Cloud</a>.</p>
-<p>There are two encouraged ways to contribute to the development of LIVVkit:</p>
-</div>
-<div class="section" id="for-acme-developers">
-<h2>1. For ACME developers<a class="headerlink" href="#for-acme-developers" title="Permalink to this headline">¶</a></h2>
-<p>First, contact <a class="reference external" href="mailto:kennedyjh&#37;&#52;&#48;ornl&#46;gov">Joseph H<span>&#46;</span> Kennedy</a> and ask to be added to the
-<code class="docutils literal"><span class="pre">ACME-Climate/LIVV</span></code> repository. Once you have access to the repository, clone the code and
-checkout the development branch:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>git clone https://github.com/ACME-Climate/LIVV.git
-git checkout develop
+<p>Then, you can install an “editable” version of LIVVkit into your python environment by:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> LIVVkit
+pip install -e .
 </pre></div>
 </div>
-<p>When developing the code, please follow the <a class="reference external" href="https://www.atlassian.com/git/tutorials/comparing-workflows#gitflow-workflow">GitFlow workflow</a> and make all your
-changes in a feature branch. Feature branches should follow the <code class="docutils literal"><span class="pre">username/feature</span></code> naming
-convention.</p>
-<p>If you have any questions, concerns, requests, etc., open an issue in our <a class="reference external" href="https://github.com/ACME-Climate/LIVV/issues">private issues queue</a>, and we will help you out.</p>
-</div>
-<div class="section" id="for-non-acme-developers">
-<h2>2. For non-ACME developers<a class="headerlink" href="#for-non-acme-developers" title="Permalink to this headline">¶</a></h2>
-<p>Please use the <a class="reference external" href="https://www.atlassian.com/git/tutorials/comparing-workflows#forking-workflow">Forking Workflow</a> to add
-contributions to LIVVkit.</p>
-<p>First, go to the <a class="reference external" href="https://github.com/LIVVkit/LIVVkit">LIVVkit github page</a> and push the <code class="docutils literal"><span class="pre">Fork</span></code>
-button on the top right of the page. This will create a fork of LIVVkit in your profile page. Clone
-the fork, make your changes, merge them to development branch, and then submit a pull request to our
-public repository.</p>
-<p>If you have any questions, concerns, requests, etc., open an issue in our <a class="reference external" href="https://github.com/LIVVkit/LIVVkit/issues">public issues queue</a>, and we will help you out.</p>
+<p>This will allow you to checkout different versions of LIVVkit, make changes, etc. and have those
+changes immediately reflected in your python environment.</p>
+<p>LIVVkit was designed to be Python 2 and 3 compatible, so it should install into an environment using
+either but Python 3 is preferred (and highly recommended). If you’re having problems installing
+LIVVkit, <a class="reference external" href="https://github.com/livvkit/livvkit/issues">open an issue on github</a>.</p>
 </div>
 </div>
 
@@ -128,18 +109,16 @@ public repository.</p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script><h3><a href="index.html">Table Of Contents</a></h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vv-intro.html">Introduction to V&amp;V</a></li>
 <li class="toctree-l1"><a class="reference internal" href="design.html">Design Overview</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Advanced installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#latest-release">Latest release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#for-development">For development</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#for-acme-developers">1. For ACME developers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#for-non-acme-developers">2. For non-ACME developers</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#basic">Basic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#advanced">Advanced</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="extend.html">Extending Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extend.html">Extensions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dev.html">Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ref.html">References and indices</a></li>
@@ -149,7 +128,7 @@ public repository.</p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/install.txt"
+      <li><a href="_sources/install.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -177,7 +156,7 @@ public repository.</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
     </div>
   </body>
 </html>
