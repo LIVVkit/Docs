@@ -3,13 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Tips &#8212; LIVVkit 2.1.0 documentation</title>
+    <title>Tips &#8212; LIVVkit 2.1.2 documentation</title>
     <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2.1.0',
+        VERSION:     '2.1.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -35,7 +35,7 @@
       <h3>Navigation</h3>
       <ul>
         <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
-        <li><a href="index.html">LIVVkit 2.1.0 documentation</a> &#187;</li> 
+        <li><a href="index.html">LIVVkit 2.1.2 documentation</a> &#187;</li> 
       </ul>
     </div>
     
@@ -51,34 +51,46 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <p>A sample code snippet below highlights most of our coding conventions.
-For conventions not covered in the snippet follow <a class="reference external" href="https://www.python.org/dev/peps/">PEP
-guidelines</a>.</p>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># LICENSE #</span>
-<span class="c1"># HEADER #</span>
+  <p>Until <a class="reference external" href="https://github.com/LIVVkit/LIVVkit/milestone/3">LIVVkit 3.0</a>
+is released, all code should be written as python 2 and 3 compatible
+code – see <a class="reference external" href="http://python-future.org/compatible_idioms.html">http://python-future.org/compatible_idioms.html</a>.  Additionally, We
+generally follow <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">PEP 8 guidelines</a>
+as presented at <a class="reference external" href="http://pep8.org/">pep8.org</a>, with the exception of line lengths:
+lines have a soft limit of 100 characters and a hard limit of 120 characters when
+extra length improves readability.  See of a very nice presentation of the PEP 8
+style guide.  A sample code snippet below highlights most of our
+coding conventions.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># coding=utf-8</span>
+<span class="c1"># LICENSE...</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Description of file</span>
+<span class="sd">Description of module</span>
 <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span>
+
 <span class="kn">import</span> <span class="nn">pymodule</span>
 <span class="kn">import</span> <span class="nn">pymodule2</span>
 
 <span class="kn">import</span> <span class="nn">livvmodule</span>
 
-<span class="k">class</span> <span class="nc">ClassName</span><span class="p">(</span><span class="n">Object</span><span class="p">):</span>
+
+<span class="k">class</span> <span class="nc">ClassName</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Class descriptions</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Constructor &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span>          <span class="o">=</span> <span class="s2">&quot;value&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">auto</span>         <span class="o">=</span> <span class="s2">&quot;nalue&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">bagger</span>       <span class="o">=</span> <span class="s2">&quot;salue&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="s2">&quot;value&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">auto</span> <span class="o">=</span> <span class="s2">&quot;nalue&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bagger</span> <span class="o">=</span> <span class="s2">&quot;salue&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">autocrummify</span> <span class="o">=</span> <span class="s2">&quot;dalue&quot;</span>
 
 
     <span class="nd">@functionAnnotation</span>
-    <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="n">baz</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bar</span><span class="p">,</span> <span class="n">baz</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        A description of foo.</span>
 
@@ -130,8 +142,9 @@ relying on whichever version of path separator your system uses.</li>
 <li class="toctree-l1"><a class="reference internal" href="design.html">Design Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="extend.html">Extensions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dev.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lex.html">LIVVkit Extensions (LEX)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundles.html">Model Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contrib.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ref.html">References and indices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
@@ -162,7 +175,7 @@ relying on whichever version of path separator your system uses.</li>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
     </div>
   </body>
 </html>

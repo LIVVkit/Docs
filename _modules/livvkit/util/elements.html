@@ -3,13 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>livvkit.util.elements &#8212; LIVVkit 2.1.0 documentation</title>
+    <title>livvkit.util.elements &#8212; LIVVkit 2.1.2 documentation</title>
     <link rel="stylesheet" href="../../../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '2.1.0',
+        VERSION:     '2.1.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -35,9 +35,8 @@
       <h3>Navigation</h3>
       <ul>
         <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
-        <li><a href="../../../index.html">LIVVkit 2.1.0 documentation</a> &#187;</li>
-          <li><a href="../../index.html" >Module code</a> &#187;</li>
-          <li><a href="../../livvkit.html" accesskey="U">livvkit</a> &#187;</li> 
+        <li><a href="../../../index.html">LIVVkit 2.1.2 documentation</a> &#187;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>
     
@@ -54,7 +53,8 @@
           <div class="body" role="main">
             
   <h1>Source code for livvkit.util.elements</h1><div class="highlight"><pre>
-<span></span><span class="c1"># Copyright (c) 2015-2017, UT-BATTELLE, LLC</span>
+<span></span><span class="c1"># coding=utf-8</span>
+<span class="c1"># Copyright (c) 2015-2018, UT-BATTELLE, LLC</span>
 <span class="c1"># All rights reserved.</span>
 <span class="c1">#</span>
 <span class="c1"># Redistribution and use in source and binary forms, with or without</span>
@@ -82,8 +82,6 @@
 <span class="c1"># OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span>
 <span class="c1"># OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span>
 
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span>
-
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Module to help building new display elements in the output</span>
 <span class="sd">files easier and less error prone.</span>
@@ -93,16 +91,19 @@
 <span class="sd">be interpreted by the Javascript found in the resources directory.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span>
+
+
 <div class="viewcode-block" id="book"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.elements.book">[docs]</a><span class="k">def</span> <span class="nf">book</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">page_dict</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
-    <span class="n">book</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;Book&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;Title&#39;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
-            <span class="s1">&#39;Description&#39;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
-            <span class="p">}</span>
+    <span class="n">_book</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;Book&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;Title&#39;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
+             <span class="s1">&#39;Description&#39;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
+             <span class="p">}</span>
     <span class="k">if</span> <span class="n">page_dict</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">book</span><span class="p">[</span><span class="s1">&#39;Data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">page_dict</span>
+        <span class="n">_book</span><span class="p">[</span><span class="s1">&#39;Data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">page_dict</span>
 
-    <span class="k">return</span> <span class="n">book</span></div>
+    <span class="k">return</span> <span class="n">_book</span></div>
 
 
 <div class="viewcode-block" id="page"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.elements.page">[docs]</a><span class="k">def</span> <span class="nf">page</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">element_list</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tab_list</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -123,22 +124,24 @@
 <span class="sd">        A dictionary with metadata specifying that it is to be rendered</span>
 <span class="sd">        as a page containing multiple elements and/or tabs.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">page</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">page</span><span class="p">[</span><span class="s2">&quot;Type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Page&quot;</span>
-    <span class="n">page</span><span class="p">[</span><span class="s2">&quot;Title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">title</span>
-    <span class="n">page</span><span class="p">[</span><span class="s2">&quot;Description&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">description</span>
-    <span class="n">page</span><span class="p">[</span><span class="s2">&quot;Data&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">_page</span> <span class="o">=</span> <span class="p">{</span>
+             <span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;Page&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;Title&#39;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
+             <span class="s1">&#39;Description&#39;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
+             <span class="s1">&#39;Data&#39;</span><span class="p">:</span> <span class="p">{},</span>
+             <span class="p">}</span>
+
     <span class="k">if</span> <span class="n">element_list</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element_list</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="n">page</span><span class="p">[</span><span class="s2">&quot;Data&quot;</span><span class="p">][</span><span class="s2">&quot;Elements&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">element_list</span>
+            <span class="n">_page</span><span class="p">[</span><span class="s1">&#39;Data&#39;</span><span class="p">][</span><span class="s1">&#39;Elements&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">element_list</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">page</span><span class="p">[</span><span class="s2">&quot;Data&quot;</span><span class="p">][</span><span class="s2">&quot;Elements&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">element_list</span><span class="p">]</span>
+            <span class="n">_page</span><span class="p">[</span><span class="s1">&#39;Data&#39;</span><span class="p">][</span><span class="s1">&#39;Elements&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">element_list</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">tab_list</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tab_list</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="n">page</span><span class="p">[</span><span class="s2">&quot;Data&quot;</span><span class="p">][</span><span class="s2">&quot;Tabs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tab_list</span>
+            <span class="n">_page</span><span class="p">[</span><span class="s1">&#39;Data&#39;</span><span class="p">][</span><span class="s1">&#39;Tabs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tab_list</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">page</span><span class="p">[</span><span class="s2">&quot;Data&quot;</span><span class="p">][</span><span class="s2">&quot;Tabs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">tab_list</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">page</span></div>
+            <span class="n">_page</span><span class="p">[</span><span class="s1">&#39;Data&#39;</span><span class="p">][</span><span class="s1">&#39;Tabs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">tab_list</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">_page</span></div>
 
 
 <div class="viewcode-block" id="tab"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.elements.tab">[docs]</a><span class="k">def</span> <span class="nf">tab</span><span class="p">(</span><span class="n">tab_name</span><span class="p">,</span> <span class="n">element_list</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">section_list</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -149,7 +152,6 @@
 
 <span class="sd">    Args:</span>
 <span class="sd">        tab_name: The title to display</span>
-<span class="sd">        description: A description of the section</span>
 <span class="sd">        element_list: The list of elements to display. If a single element is</span>
 <span class="sd">                      given it will be wrapped in a list.</span>
 <span class="sd">        section_list: A list of sections to display.</span>
@@ -158,46 +160,50 @@
 <span class="sd">        A dictionary with metadata specifying that it is to be rendered</span>
 <span class="sd">        as a page containing multiple elements and/or tab.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">tab</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">tab</span><span class="p">[</span><span class="s2">&quot;Type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Tab&quot;</span>
-    <span class="n">tab</span><span class="p">[</span><span class="s2">&quot;Title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tab_name</span>
+    <span class="n">_tab</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;Tab&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Title&#39;</span><span class="p">:</span> <span class="n">tab_name</span><span class="p">,</span>
+            <span class="p">}</span>
+
     <span class="k">if</span> <span class="n">element_list</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element_list</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="n">tab</span><span class="p">[</span><span class="s2">&quot;Elements&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">element_list</span>
+            <span class="n">_tab</span><span class="p">[</span><span class="s1">&#39;Elements&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">element_list</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">tab</span><span class="p">[</span><span class="s2">&quot;Elements&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">element_list</span><span class="p">]</span>
+            <span class="n">_tab</span><span class="p">[</span><span class="s1">&#39;Elements&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">element_list</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">section_list</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">section_list</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="n">tab</span><span class="p">[</span><span class="s2">&quot;Sections&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">section_list</span>
+            <span class="n">_tab</span><span class="p">[</span><span class="s1">&#39;Sections&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">section_list</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="p">(</span><span class="s2">&quot;Elements&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">section_list</span><span class="p">):</span>
-                <span class="n">tab</span><span class="p">[</span><span class="s2">&quot;Elements&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">element_list</span>
+            <span class="k">if</span> <span class="s1">&#39;Elements&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">section_list</span><span class="p">:</span>
+                <span class="n">_tab</span><span class="p">[</span><span class="s1">&#39;Elements&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">element_list</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">tab</span><span class="p">[</span><span class="s2">&quot;Elements&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element_list</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">tab</span></div>
+                <span class="n">_tab</span><span class="p">[</span><span class="s1">&#39;Elements&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element_list</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_tab</span></div>
 
 
 <div class="viewcode-block" id="section"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.elements.section">[docs]</a><span class="k">def</span> <span class="nf">section</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">element_list</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns a dictionary representing a new section.  Sections</span>
-<span class="sd">    contain a list of elements that are displayed seperately from</span>
+<span class="sd">    contain a list of elements that are displayed separately from</span>
 <span class="sd">    the global elements on the page.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        tab_name: The title of the section to be displayed</span>
+<span class="sd">        title: The title of the section to be displayed</span>
 <span class="sd">        element_list: The list of elements to display within the section</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        A dictionary with metadata specifying that it is to be rendered as</span>
 <span class="sd">        a section containing multiple elements</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">sect</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">sect</span><span class="p">[</span><span class="s2">&quot;Type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Section&quot;</span>
-    <span class="n">sect</span><span class="p">[</span><span class="s2">&quot;Title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">title</span>
+    <span class="n">sect</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;Section&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Title&#39;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
+            <span class="p">}</span>
+
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element_list</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-        <span class="n">sect</span><span class="p">[</span><span class="s2">&quot;Elements&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">element_list</span>
+        <span class="n">sect</span><span class="p">[</span><span class="s1">&#39;Elements&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">element_list</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">sect</span><span class="p">[</span><span class="s2">&quot;Elements&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">element_list</span><span class="p">]</span>
+        <span class="n">sect</span><span class="p">[</span><span class="s1">&#39;Elements&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">element_list</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">sect</span></div>
 
 
@@ -214,17 +220,18 @@
 <span class="sd">        title: The title to display</span>
 <span class="sd">        headers: The columns to put into the table</span>
 <span class="sd">        data_node: A dictionary with the form::</span>
-<span class="sd">            {&quot;case&quot; : {&quot;subcase&quot; : { &quot;header&quot; : &quot;data&quot; } } }</span>
+<span class="sd">            {&#39;case&#39; : {&#39;subcase&#39; : { &#39;header&#39; : data } } }</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        A dictionary with the metadata specifying that it is to be</span>
 <span class="sd">        rendered as a table.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">tb</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">tb</span><span class="p">[</span><span class="s2">&quot;Type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Table&quot;</span>
-    <span class="n">tb</span><span class="p">[</span><span class="s2">&quot;Title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">title</span>
-    <span class="n">tb</span><span class="p">[</span><span class="s2">&quot;Headers&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">headers</span>
-    <span class="n">tb</span><span class="p">[</span><span class="s2">&quot;Data&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_node</span>
+    <span class="n">tb</span> <span class="o">=</span> <span class="p">{</span>
+          <span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;Table&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;Title&#39;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
+          <span class="s1">&#39;Headers&#39;</span><span class="p">:</span> <span class="n">headers</span><span class="p">,</span>
+          <span class="s1">&#39;Data&#39;</span><span class="p">:</span> <span class="n">data_node</span><span class="p">,</span>
+          <span class="p">}</span>
     <span class="k">return</span> <span class="n">tb</span></div>
 
 
@@ -241,17 +248,18 @@
 <span class="sd">        title: The title to display</span>
 <span class="sd">        headers: The columns to put into the table</span>
 <span class="sd">        data_node: A dictionary with the form::</span>
-<span class="sd">            {&quot;case&quot; : {&quot;subcase&quot; : { &quot;header&quot; : &quot;data&quot; } } }</span>
+<span class="sd">            {&#39;case&#39; : {&#39;subcase&#39; : { &#39;header&#39; : data } } }</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        A dictionary with the metadata specifying that it is to be</span>
 <span class="sd">        rendered as a table.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">tb</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">tb</span><span class="p">[</span><span class="s2">&quot;Type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Vertical Table&quot;</span>
-    <span class="n">tb</span><span class="p">[</span><span class="s2">&quot;Title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">title</span>
-    <span class="n">tb</span><span class="p">[</span><span class="s2">&quot;Headers&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">headers</span>
-    <span class="n">tb</span><span class="p">[</span><span class="s2">&quot;Data&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_node</span>
+    <span class="n">tb</span> <span class="o">=</span> <span class="p">{</span>
+          <span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;Vertical Table&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;Title&#39;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
+          <span class="s1">&#39;Headers&#39;</span><span class="p">:</span> <span class="n">headers</span><span class="p">,</span>
+          <span class="s1">&#39;Data&#39;</span><span class="p">:</span> <span class="n">data_node</span><span class="p">,</span>
+          <span class="p">}</span>
     <span class="k">return</span> <span class="n">tb</span></div>
 
 
@@ -266,17 +274,18 @@
 <span class="sd">        title: The title to display</span>
 <span class="sd">        headers: Columns of the table</span>
 <span class="sd">        data_node: A dictionary with the form:</span>
-<span class="sd">            {&quot;var_name&quot; : {&quot;header : { &quot;data&quot; } } }</span>
+<span class="sd">            {&#39;var_name&#39; : {&#39;header : { data } } }</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        A dictionary with the metadata specifying that it is to be</span>
 <span class="sd">        rendered as a bit for bit table</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">b4b</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">b4b</span><span class="p">[</span><span class="s2">&quot;Type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Bit for Bit&quot;</span>
-    <span class="n">b4b</span><span class="p">[</span><span class="s2">&quot;Title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">title</span>
-    <span class="n">b4b</span><span class="p">[</span><span class="s2">&quot;Headers&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">headers</span>
-    <span class="n">b4b</span><span class="p">[</span><span class="s2">&quot;Data&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_node</span>
+    <span class="n">b4b</span> <span class="o">=</span> <span class="p">{</span>
+           <span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;Bit for Bit&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;Title&#39;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
+           <span class="s1">&#39;Headers&#39;</span><span class="p">:</span> <span class="n">headers</span><span class="p">,</span>
+           <span class="s1">&#39;Data&#39;</span><span class="p">:</span> <span class="n">data_node</span><span class="p">,</span>
+           <span class="p">}</span>
     <span class="k">return</span> <span class="n">b4b</span></div>
 
 
@@ -296,10 +305,11 @@
 <span class="sd">        A dictionary with the metadata specifying that it is to be</span>
 <span class="sd">        rendered as an image gallery</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">gal</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">gal</span><span class="p">[</span><span class="s2">&quot;Type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Gallery&quot;</span>
-    <span class="n">gal</span><span class="p">[</span><span class="s2">&quot;Title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">title</span>
-    <span class="n">gal</span><span class="p">[</span><span class="s2">&quot;Data&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">image_elem_list</span>
+    <span class="n">gal</span> <span class="o">=</span> <span class="p">{</span>
+           <span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;Gallery&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;Title&#39;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
+           <span class="s1">&#39;Data&#39;</span><span class="p">:</span> <span class="n">image_elem_list</span><span class="p">,</span>
+           <span class="p">}</span>
     <span class="k">return</span> <span class="n">gal</span></div>
 
 
@@ -320,21 +330,22 @@
 <span class="sd">        desc: A description of the image or plot</span>
 <span class="sd">        image_name: The filename of the image</span>
 <span class="sd">        group: (optional) Title of lightbox group to join</span>
-<span class="sd">        Height: (optional) Hight of image thumbnail to draw</span>
+<span class="sd">        height: (optional) Height of image thumbnail to draw</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        A dictionary with the metadata specifying that it is to be</span>
 <span class="sd">        rendered as an image element</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">ie</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">ie</span><span class="p">[</span><span class="s2">&quot;Type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Image&quot;</span>
-    <span class="n">ie</span><span class="p">[</span><span class="s2">&quot;Title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">title</span>
-    <span class="n">ie</span><span class="p">[</span><span class="s2">&quot;Desciption&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">desc</span>
-    <span class="n">ie</span><span class="p">[</span><span class="s2">&quot;Plot File&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">image_name</span>
+    <span class="n">ie</span> <span class="o">=</span> <span class="p">{</span>
+          <span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;Image&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;Title&#39;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
+          <span class="s1">&#39;Description&#39;</span><span class="p">:</span> <span class="n">desc</span><span class="p">,</span>
+          <span class="s1">&#39;Plot File&#39;</span><span class="p">:</span> <span class="n">image_name</span><span class="p">,</span>
+          <span class="p">}</span>
     <span class="k">if</span> <span class="n">group</span><span class="p">:</span>
-        <span class="n">ie</span><span class="p">[</span><span class="s2">&quot;Group&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">group</span>
+        <span class="n">ie</span><span class="p">[</span><span class="s1">&#39;Group&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">group</span>
     <span class="k">if</span> <span class="n">height</span><span class="p">:</span>
-        <span class="n">ie</span><span class="p">[</span><span class="s2">&quot;Height&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">height</span>
+        <span class="n">ie</span><span class="p">[</span><span class="s1">&#39;Height&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">height</span>
     <span class="k">return</span> <span class="n">ie</span></div>
 
 
@@ -347,16 +358,17 @@
 <span class="sd">    Args:</span>
 <span class="sd">        title: The title to display</span>
 <span class="sd">        diff_data: A dictionary of the form:</span>
-<span class="sd">            { &quot;section_name&quot; : { &quot;variale_name&quot; : [diff, val_1, val_2] } }</span>
+<span class="sd">            { &#39;section_name&#39; : { &#39;variable_name&#39; : [diff, val_1, val_2] } }</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        A dictionary with the metadata specifying that it is to be</span>
 <span class="sd">        rendered as a file diff element</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">fd</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">fd</span><span class="p">[</span><span class="s2">&quot;Type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Diff&quot;</span>
-    <span class="n">fd</span><span class="p">[</span><span class="s2">&quot;Title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">title</span>
-    <span class="n">fd</span><span class="p">[</span><span class="s2">&quot;Data&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">diff_data</span>
+    <span class="n">fd</span> <span class="o">=</span> <span class="p">{</span>
+          <span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;Diff&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;Title&#39;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
+          <span class="s1">&#39;Data&#39;</span><span class="p">:</span> <span class="n">diff_data</span><span class="p">,</span>
+          <span class="p">}</span>
     <span class="k">return</span> <span class="n">fd</span></div>
 
 
@@ -373,11 +385,13 @@
 <span class="sd">        A dictionary with the metadata specifying that it is to be</span>
 <span class="sd">        rendered as an error element</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">err</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">err</span><span class="p">[</span><span class="s2">&quot;Type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Error&quot;</span>
-    <span class="n">err</span><span class="p">[</span><span class="s2">&quot;Title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">title</span>
-    <span class="n">err</span><span class="p">[</span><span class="s2">&quot;Message&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">error_msg</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="p">{</span>
+           <span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;Error&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;Title&#39;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
+           <span class="s1">&#39;Message&#39;</span><span class="p">:</span> <span class="n">error_msg</span><span class="p">,</span>
+           <span class="p">}</span>
     <span class="k">return</span> <span class="n">err</span></div>
+
 
 <div class="viewcode-block" id="html"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.elements.html">[docs]</a><span class="k">def</span> <span class="nf">html</span><span class="p">(</span><span class="n">html_data</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -390,11 +404,11 @@
 <span class="sd">        A dictionary with the metadata specifying that it is to be</span>
 <span class="sd">        rendered directly as HTML</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">html_el</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">html_el</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;HTML&#39;</span>
-    <span class="n">html_el</span><span class="p">[</span><span class="s1">&#39;Data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">html_data</span>
+    <span class="n">html_el</span> <span class="o">=</span> <span class="p">{</span>
+               <span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;HTML&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;Data&#39;</span><span class="p">:</span> <span class="n">html_data</span><span class="p">,</span>
+               <span class="p">}</span>
     <span class="k">return</span> <span class="n">html_el</span></div>
-
 </pre></div>
 
           </div>
@@ -421,8 +435,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../design.html">Design Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../extend.html">Extensions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../dev.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../lex.html">LIVVkit Extensions (LEX)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bundles.html">Model Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contrib.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../ref.html">References and indices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../faq.html">Frequently Asked Questions</a></li>
@@ -446,7 +461,7 @@
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
     </div>
   </body>
 </html>

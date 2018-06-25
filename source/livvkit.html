@@ -3,13 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>livvkit package &#8212; LIVVkit 2.1.0 documentation</title>
+    <title>livvkit package &#8212; LIVVkit 2.1.2 documentation</title>
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.1.0',
+        VERSION:     '2.1.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -37,7 +37,7 @@
       <h3>Navigation</h3>
       <ul>
         <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
-        <li><a href="../index.html">LIVVkit 2.1.0 documentation</a> &#187;</li>
+        <li><a href="../index.html">LIVVkit 2.1.2 documentation</a> &#187;</li>
           <li><a href="../api.html" >API</a> &#187;</li>
           <li><a href="modules.html" accesskey="U">livvkit</a> &#187;</li> 
       </ul>
@@ -81,31 +81,6 @@
 <li class="toctree-l4"><a class="reference internal" href="livvkit.components.numerics_tests.html#submodules">Submodules</a></li>
 <li class="toctree-l4"><a class="reference internal" href="livvkit.components.numerics_tests.html#module-livvkit.components.numerics_tests.ismip">livvkit.components.numerics_tests.ismip module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="livvkit.components.numerics_tests.html#module-livvkit.components.numerics_tests">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="livvkit.components.validation_tests.html">livvkit.components.validation_tests package</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="livvkit.components.validation_tests.html#subpackages">Subpackages</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="livvkit.components.validation_tests.coverage.html">livvkit.components.validation_tests.coverage package</a><ul>
-<li class="toctree-l6"><a class="reference internal" href="livvkit.components.validation_tests.coverage.html#submodules">Submodules</a></li>
-<li class="toctree-l6"><a class="reference internal" href="livvkit.components.validation_tests.coverage.html#module-livvkit.components.validation_tests.coverage.coverage">livvkit.components.validation_tests.coverage.coverage module</a></li>
-<li class="toctree-l6"><a class="reference internal" href="livvkit.components.validation_tests.coverage.html#module-livvkit.components.validation_tests.coverage">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l5"><a class="reference internal" href="livvkit.components.validation_tests.lvargo13.html">livvkit.components.validation_tests.lvargo13 package</a><ul>
-<li class="toctree-l6"><a class="reference internal" href="livvkit.components.validation_tests.lvargo13.html#submodules">Submodules</a></li>
-<li class="toctree-l6"><a class="reference internal" href="livvkit.components.validation_tests.lvargo13.html#module-livvkit.components.validation_tests.lvargo13.lvargo13">livvkit.components.validation_tests.lvargo13.lvargo13 module</a></li>
-<li class="toctree-l6"><a class="reference internal" href="livvkit.components.validation_tests.lvargo13.html#module-livvkit.components.validation_tests.lvargo13">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l5"><a class="reference internal" href="livvkit.components.validation_tests.template.html">livvkit.components.validation_tests.template package</a><ul>
-<li class="toctree-l6"><a class="reference internal" href="livvkit.components.validation_tests.template.html#submodules">Submodules</a></li>
-<li class="toctree-l6"><a class="reference internal" href="livvkit.components.validation_tests.template.html#module-livvkit.components.validation_tests.template.template">livvkit.components.validation_tests.template.template module</a></li>
-<li class="toctree-l6"><a class="reference internal" href="livvkit.components.validation_tests.template.html#module-livvkit.components.validation_tests.template">Module contents</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="livvkit.components.validation_tests.html#module-livvkit.components.validation_tests">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -158,7 +133,7 @@
 <dl class="function">
 <dt id="livvkit.scheduler.launch_processes">
 <code class="descclassname">livvkit.scheduler.</code><code class="descname">launch_processes</code><span class="sig-paren">(</span><em>tests</em>, <em>run_module</em>, <em>group=True</em>, <em>**config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/scheduler.html#launch_processes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.scheduler.launch_processes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Helper method to launch processes and synch output</p>
+<dd><p>Helper method to launch processes and sync output</p>
 </dd></dl>
 
 <dl class="function">
@@ -173,7 +148,7 @@ them.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>run_type</strong> – A string representation of the run type (eg. verification)</li>
 <li><strong>module</strong> – The module corresponding to the run.  Must have a run_suite function</li>
-<li><strong>config_path</strong> – The configuration for the module</li>
+<li><strong>config</strong> – The configuration for the module</li>
 </ul>
 </td>
 </tr>
@@ -190,12 +165,6 @@ them.</p>
 <div class="section" id="module-livvkit">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-livvkit" title="Permalink to this headline">¶</a></h2>
 <p>Storage for global variables.  These are set upon startup in the options module</p>
-<dl class="function">
-<dt id="livvkit.print_vars">
-<code class="descclassname">livvkit.</code><code class="descname">print_vars</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit.html#print_vars"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.print_vars" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print out the variables that are contained in this module</p>
-</dd></dl>
-
 </div>
 </div>
 
@@ -224,8 +193,9 @@ them.</p>
 <li class="toctree-l1"><a class="reference internal" href="../design.html">Design Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../extend.html">Extensions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../dev.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lex.html">LIVVkit Extensions (LEX)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">Model Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contrib.html">Contributing</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="modules.html">livvkit</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">livvkit package</a></li>
@@ -269,7 +239,7 @@ them.</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
     </div>
   </body>
 </html>

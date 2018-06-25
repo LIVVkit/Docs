@@ -3,13 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>livvkit.util package &#8212; LIVVkit 2.1.0 documentation</title>
+    <title>livvkit.util package &#8212; LIVVkit 2.1.2 documentation</title>
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.1.0',
+        VERSION:     '2.1.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -37,7 +37,7 @@
       <h3>Navigation</h3>
       <ul>
         <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
-        <li><a href="../index.html">LIVVkit 2.1.0 documentation</a> &#187;</li>
+        <li><a href="../index.html">LIVVkit 2.1.2 documentation</a> &#187;</li>
           <li><a href="../api.html" >API</a> &#187;</li>
           <li><a href="modules.html" >livvkit</a> &#187;</li>
           <li><a href="livvkit.html" accesskey="U">livvkit package</a> &#187;</li> 
@@ -67,7 +67,7 @@
 <dt id="livvkit.util.LIVVDict.LIVVDict">
 <em class="property">class </em><code class="descclassname">livvkit.util.LIVVDict.</code><code class="descname">LIVVDict</code><a class="reference internal" href="../_modules/livvkit/util/LIVVDict.html#LIVVDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.LIVVDict.LIVVDict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">dict</span></code></p>
-<p>Extension of the dictionary datastructure to allow for auto nesting.</p>
+<p>Extension of the dictionary data structure to allow for auto nesting.</p>
 <dl class="method">
 <dt id="livvkit.util.LIVVDict.LIVVDict.nested_assign">
 <code class="descname">nested_assign</code><span class="sig-paren">(</span><em>key_list</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/LIVVDict.html#LIVVDict.nested_assign"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.LIVVDict.LIVVDict.nested_assign" title="Permalink to this definition">¶</a></dt>
@@ -169,6 +169,11 @@ of other element types contained on a page to their proper functions.</p>
 </div>
 <div class="section" id="module-livvkit.util.elements">
 <span id="livvkit-util-elements-module"></span><h2>livvkit.util.elements module<a class="headerlink" href="#module-livvkit.util.elements" title="Permalink to this headline">¶</a></h2>
+<p>Module to help building new display elements in the output
+files easier and less error prone.</p>
+<p>Implementing new elements is possible simply by adding new functions
+They will be written out to the JSON files as sub-objects, which must
+be interpreted by the Javascript found in the resources directory.</p>
 <dl class="function">
 <dt id="livvkit.util.elements.bit_for_bit">
 <code class="descclassname">livvkit.util.elements.</code><code class="descname">bit_for_bit</code><span class="sig-paren">(</span><em>title</em>, <em>headers</em>, <em>data_node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/elements.html#bit_for_bit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.elements.bit_for_bit" title="Permalink to this definition">¶</a></dt>
@@ -184,7 +189,7 @@ the table.</p>
 <li><strong>title</strong> – The title to display</li>
 <li><strong>headers</strong> – Columns of the table</li>
 <li><strong>data_node</strong> – A dictionary with the form:
-{“var_name” : {“header : { “data” } } }</li>
+{‘var_name’ : {‘header : { data } } }</li>
 </ul>
 </td>
 </tr>
@@ -237,7 +242,7 @@ will be highlighted when rendered via Javascript.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>title</strong> – The title to display</li>
 <li><strong>diff_data</strong> – A dictionary of the form:
-{ “section_name” : { “variale_name” : [diff, val_1, val_2] } }</li>
+{ ‘section_name’ : { ‘variable_name’ : [diff, val_1, val_2] } }</li>
 </ul>
 </td>
 </tr>
@@ -312,7 +317,7 @@ case’s output page will search for <cite>image_name</cite> within that directo
 <li><strong>desc</strong> – A description of the image or plot</li>
 <li><strong>image_name</strong> – The filename of the image</li>
 <li><strong>group</strong> – (optional) Title of lightbox group to join</li>
-<li><strong>Height</strong> – (optional) Hight of image thumbnail to draw</li>
+<li><strong>height</strong> – (optional) Height of image thumbnail to draw</li>
 </ul>
 </td>
 </tr>
@@ -356,14 +361,14 @@ as a page containing multiple elements and/or tabs.</p>
 <dt id="livvkit.util.elements.section">
 <code class="descclassname">livvkit.util.elements.</code><code class="descname">section</code><span class="sig-paren">(</span><em>title</em>, <em>element_list</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/elements.html#section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.elements.section" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a dictionary representing a new section.  Sections
-contain a list of elements that are displayed seperately from
+contain a list of elements that are displayed separately from
 the global elements on the page.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>tab_name</strong> – The title of the section to be displayed</li>
+<li><strong>title</strong> – The title of the section to be displayed</li>
 <li><strong>element_list</strong> – The list of elements to display within the section</li>
 </ul>
 </td>
@@ -388,7 +393,6 @@ types of information.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>tab_name</strong> – The title to display</li>
-<li><strong>description</strong> – A description of the section</li>
 <li><strong>element_list</strong> – The list of elements to display. If a single element is
 given it will be wrapped in a list.</li>
 <li><strong>section_list</strong> – A list of sections to display.</li>
@@ -421,7 +425,7 @@ be handled within the Javascript itself, not here.</p>
 <li><strong>headers</strong> – The columns to put into the table</li>
 <li><strong>data_node</strong> – <dl class="docutils">
 <dt>A dictionary with the form::</dt>
-<dd>{“case” : {“subcase” : { “header” : “data” } } }</dd>
+<dd>{‘case’ : {‘subcase’ : { ‘header’ : data } } }</dd>
 </dl>
 </li>
 </ul>
@@ -453,7 +457,7 @@ be handled within the Javascript itself, not here.</p>
 <li><strong>headers</strong> – The columns to put into the table</li>
 <li><strong>data_node</strong> – <dl class="docutils">
 <dt>A dictionary with the form::</dt>
-<dd>{“case” : {“subcase” : { “header” : “data” } } }</dd>
+<dd>{‘case’ : {‘subcase’ : { ‘header’ : data } } }</dd>
 </dl>
 </li>
 </ul>
@@ -470,7 +474,7 @@ rendered as a table.</p>
 </div>
 <div class="section" id="module-livvkit.util.functions">
 <span id="livvkit-util-functions-module"></span><h2>livvkit.util.functions module<a class="headerlink" href="#module-livvkit.util.functions" title="Permalink to this headline">¶</a></h2>
-<p>Module to hold LIVV specific functions</p>
+<p>Module to hold LIVVkit specific functions</p>
 <dl class="function">
 <dt id="livvkit.util.functions.collect_cases">
 <code class="descclassname">livvkit.util.functions.</code><code class="descname">collect_cases</code><span class="sig-paren">(</span><em>data_dir</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/functions.html#collect_cases"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.functions.collect_cases" title="Permalink to this definition">¶</a></dt>
@@ -504,18 +508,6 @@ the file to find</li>
 </tr>
 </tbody>
 </table>
-</dd></dl>
-
-<dl class="function">
-<dt id="livvkit.util.functions.get_leaves">
-<code class="descclassname">livvkit.util.functions.</code><code class="descname">get_leaves</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/functions.html#get_leaves"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.functions.get_leaves" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the leaves of a nested dictionary</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="livvkit.util.functions.merge_dicts">
-<code class="descclassname">livvkit.util.functions.</code><code class="descname">merge_dicts</code><span class="sig-paren">(</span><em>dict1</em>, <em>dict2</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/functions.html#merge_dicts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.functions.merge_dicts" title="Permalink to this definition">¶</a></dt>
-<dd><p>Merge two dictionaries and return the result</p>
 </dd></dl>
 
 <dl class="function">
@@ -611,7 +603,7 @@ data into a timestamped directory and sets up the new directory</p>
 <dl class="function">
 <dt id="livvkit.util.netcdf.has_time">
 <code class="descclassname">livvkit.util.netcdf.</code><code class="descname">has_time</code><span class="sig-paren">(</span><em>dataset</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/util/netcdf.html#has_time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.util.netcdf.has_time" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check netCDF files time dimension for emptyness. This likely
+<dd><p>Check netCDF files time dimension for emptiness. This likely
 indicates the run did not complete.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -679,8 +671,9 @@ indicates the run did not complete.</p>
 <li class="toctree-l1"><a class="reference internal" href="../design.html">Design Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../extend.html">Extensions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../dev.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lex.html">LIVVkit Extensions (LEX)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">Model Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contrib.html">Contributing</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="modules.html">livvkit</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="livvkit.html">livvkit package</a></li>
@@ -724,7 +717,7 @@ indicates the run did not complete.</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
     </div>
   </body>
 </html>

@@ -3,13 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Development &#8212; LIVVkit 2.1.0 documentation</title>
+    <title>Contributing &#8212; LIVVkit 2.1.2 documentation</title>
     <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2.1.0',
+        VERSION:     '2.1.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -24,7 +24,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="API" href="api.html" />
-    <link rel="prev" title="Extensions" href="extend.html" />
+    <link rel="prev" title="Model Bundles" href="bundles.html" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <link rel="shortcut icon" type="image/png" href="_static/favicon.png" />
     <meta name="viewport" content="width=device-width,initial-scale=0.8">
@@ -37,7 +37,7 @@
       <h3>Navigation</h3>
       <ul>
         <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
-        <li><a href="index.html">LIVVkit 2.1.0 documentation</a> &#187;</li> 
+        <li><a href="index.html">LIVVkit 2.1.2 documentation</a> &#187;</li> 
       </ul>
     </div>
     
@@ -56,8 +56,8 @@
   <div class="figure align-center">
 <a class="reference internal image-reference" href="_images/livvkit.png"><img alt="LIVVkit" src="_images/livvkit.png" style="width: 400px;" /></a>
 </div>
-<div class="section" id="development">
-<h1>Development<a class="headerlink" href="#development" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="contributing">
+<h1>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h1>
 <p>LIVVkit is publicly developed within the <a class="reference external" href="https://github.com/LIVVkit">LIVVkit</a> project on GitHub
 and releases are packaged and distributed on <a class="reference external" href="https://pypi.python.org/pypi/livvkit">PyPI</a> and
 <a class="reference external" href="https://anaconda.org/jhkennedy/livvkit">Anaconda Cloud</a>.</p>
@@ -88,34 +88,46 @@ public repository.</p>
 </div>
 <div class="section" id="code-guidelines">
 <h2>Code Guidelines<a class="headerlink" href="#code-guidelines" title="Permalink to this headline">¶</a></h2>
-<p>A sample code snippet below highlights most of our coding conventions.
-For conventions not covered in the snippet follow <a class="reference external" href="https://www.python.org/dev/peps/">PEP
-guidelines</a>.</p>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># LICENSE #</span>
-<span class="c1"># HEADER #</span>
+<p>Until <a class="reference external" href="https://github.com/LIVVkit/LIVVkit/milestone/3">LIVVkit 3.0</a>
+is released, all code should be written as python 2 and 3 compatible
+code – see <a class="reference external" href="http://python-future.org/compatible_idioms.html">http://python-future.org/compatible_idioms.html</a>.  Additionally, We
+generally follow <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">PEP 8 guidelines</a>
+as presented at <a class="reference external" href="http://pep8.org/">pep8.org</a>, with the exception of line lengths:
+lines have a soft limit of 100 characters and a hard limit of 120 characters when
+extra length improves readability.  See of a very nice presentation of the PEP 8
+style guide.  A sample code snippet below highlights most of our
+coding conventions.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># coding=utf-8</span>
+<span class="c1"># LICENSE...</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Description of file</span>
+<span class="sd">Description of module</span>
 <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span>
+
 <span class="kn">import</span> <span class="nn">pymodule</span>
 <span class="kn">import</span> <span class="nn">pymodule2</span>
 
 <span class="kn">import</span> <span class="nn">livvmodule</span>
 
-<span class="k">class</span> <span class="nc">ClassName</span><span class="p">(</span><span class="n">Object</span><span class="p">):</span>
+
+<span class="k">class</span> <span class="nc">ClassName</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Class descriptions</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Constructor &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span>          <span class="o">=</span> <span class="s2">&quot;value&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">auto</span>         <span class="o">=</span> <span class="s2">&quot;nalue&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">bagger</span>       <span class="o">=</span> <span class="s2">&quot;salue&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="s2">&quot;value&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">auto</span> <span class="o">=</span> <span class="s2">&quot;nalue&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bagger</span> <span class="o">=</span> <span class="s2">&quot;salue&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">autocrummify</span> <span class="o">=</span> <span class="s2">&quot;dalue&quot;</span>
 
 
     <span class="nd">@functionAnnotation</span>
-    <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="n">baz</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bar</span><span class="p">,</span> <span class="n">baz</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        A description of foo.</span>
 
@@ -146,17 +158,15 @@ relying on whichever version of path separator your system uses.</li>
 <h2>Building the documentation<a class="headerlink" href="#building-the-documentation" title="Permalink to this headline">¶</a></h2>
 <p>To build this documentation you will need to install some additional tools:</p>
 <ul class="simple">
+<li><a class="reference external" href="http://usejsdoc.org">JSDoc</a></li>
 <li><a class="reference external" href="http://www.sphinx-doc.org">sphinx</a></li>
-<li><a class="reference external" href="https://pypi.python.org/pypi/sphinx-api-any">sphinx-api-any</a></li>
+<li><a class="reference external" href="https://pypi.python.org/pypi/sphinx-api-any">sphinx-js</a></li>
 <li><a class="reference external" href="https://pypi.python.org/pypi/sphinx_py3doc_enhanced_theme">sphinx-py3doc-enhanced-theme</a></li>
-<li><a class="reference external" href="https://code.google.com/archive/p/jsdoc-toolkit/">jsdoc-toolkit</a></li>
 </ul>
-<p>Use <code class="docutils literal"><span class="pre">pip</span></code> to install the Sphinx packages (<code class="docutils literal"><span class="pre">sphinx</span></code> itself can be installed
+<p>We recommend you use <code class="docutils literal"><span class="pre">npm</span></code>, a <a class="reference external" href="https://www.npmjs.com/get-npm">Javascript package manager</a>, to install
+<code class="docutils literal"><span class="pre">JSDoc</span></code> and <code class="docutils literal"><span class="pre">pip</span></code> to install the Sphinx packages (<code class="docutils literal"><span class="pre">sphinx</span></code> itself can be installed
 via <code class="docutils literal"><span class="pre">conda</span></code> as well, but the others will still need <code class="docutils literal"><span class="pre">pip</span></code>).</p>
-<blockquote>
-<div>For <code class="docutils literal"><span class="pre">jsdoc-toolkit</span></code>, download the <a class="reference external" href="https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/jsdoc-toolkit/jsdoc_toolkit-2.4.0.zip">source</a>,
-extract it, and put the <code class="docutils literal"><span class="pre">jsdoc-toolkit</span></code> subdirectory into your <code class="docutils literal"><span class="pre">/opt</span></code> directory.</div></blockquote>
-<p>To build the current version of the documentation website, simply:</p>
+<p>To build the current version of the documentation website, simply run:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>make html
 </pre></div>
 </div>
@@ -176,38 +186,13 @@ only remove the old website and leave the autogenerated files in place.</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>sphinx-apidoc -f -o source/ ../livvkit/
 </pre></div>
 </div>
-<p>Because Sphinx only generates documentation for the Python source code, the javascript documentation
-will need to be regenerated as well:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>ant -buildfile jsdoc-toolkit-rst-template/build.xml build
-</pre></div>
-</div>
-<p>which will generate three files:</p>
-<ul class="simple">
-<li><code class="docutils literal"><span class="pre">jsdoc-toolkit-rst-template/index.rst</span></code></li>
-<li><code class="docutils literal"><span class="pre">jsdoc-toolkit-rst-template/files.rst</span></code></li>
-<li><code class="docutils literal"><span class="pre">jsdoc-toolkit-rst-template/symbols/_global_.rst</span></code></li>
-</ul>
-<p>Only the <code class="docutils literal"><span class="pre">_global_.rst</span></code> file is used in the LIVVkit documentation, and the other two can be
-removed (Sphinx will warn you that they aren’t included in the <code class="docutils literal"><span class="pre">toctree</span></code>; it’s best to remove
-them).</p>
-<p>Now, open the <code class="docutils literal"><span class="pre">_global_.rst</span></code> file, and edit the title from <code class="docutils literal"><span class="pre">_global_</span> <span class="pre">(data)</span></code> to
-<code class="docutils literal"><span class="pre">livvkit.resources.js.common</span> <span class="pre">module</span></code>.</p>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Unfortunately, the <code class="docutils literal"><span class="pre">jsdoc-toolkit</span></code> doesn’t make clean reStructuredText files, and Sphinx will
-warn you about syntax errors. You will need to manually edit the <code class="docutils literal"><span class="pre">_global_.rst</span></code> file to fix
-the syntax. Typically, the errors are because multi-line bulletpoints in the document have the
-continuing text aligned with the bullet, instead of after the bullet and whitespace (see the
-<a class="reference external" href="http://docutils.sourceforge.net/docs/user/rst/quickref.html#bullet-lists">docutils quck reference</a>).</p>
-</div>
 <p>Now you’re ready to make the docs website again:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>make html
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">You can use the <code class="docutils literal"><span class="pre">generate_docs.sh</span></code> script to perform these steps (other than fixing the
-<code class="docutils literal"><span class="pre">_global_.rst</span></code> syntax). <strong>Use this script with caution!</strong></p>
+<p class="last">You can use the <code class="docutils literal"><span class="pre">generate_docs.sh</span></code> script to perform these steps.</p>
 </div>
 </div>
 </div>
@@ -237,8 +222,9 @@ continuing text aligned with the bullet, instead of after the bullet and whitesp
 <li class="toctree-l1"><a class="reference internal" href="design.html">Design Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="extend.html">Extensions</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Development</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="lex.html">LIVVkit Extensions (LEX)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundles.html">Model Bundles</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Contributing</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#workflow">Workflow</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#become-a-core-developer">1. Become a core developer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#for-outside-contributions">2. For outside contributions</a></li>
@@ -257,7 +243,7 @@ continuing text aligned with the bullet, instead of after the bullet and whitesp
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/dev.rst.txt"
+      <li><a href="_sources/contrib.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -278,14 +264,14 @@ continuing text aligned with the bullet, instead of after the bullet and whitesp
           <a href="api.html" title="API"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="extend.html" title="Extensions"
+          <a href="bundles.html" title="Model Bundles"
              accesskey="P">previous</a> |</li>
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
     </div>
   </body>
 </html>

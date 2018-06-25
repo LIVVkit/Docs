@@ -3,13 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>livvkit.components.verification &#8212; LIVVkit 2.1.0 documentation</title>
+    <title>livvkit.components.verification &#8212; LIVVkit 2.1.2 documentation</title>
     <link rel="stylesheet" href="../../../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '2.1.0',
+        VERSION:     '2.1.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -35,9 +35,8 @@
       <h3>Navigation</h3>
       <ul>
         <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
-        <li><a href="../../../index.html">LIVVkit 2.1.0 documentation</a> &#187;</li>
-          <li><a href="../../index.html" >Module code</a> &#187;</li>
-          <li><a href="../../livvkit.html" accesskey="U">livvkit</a> &#187;</li> 
+        <li><a href="../../../index.html">LIVVkit 2.1.2 documentation</a> &#187;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>
     
@@ -54,7 +53,8 @@
           <div class="body" role="main">
             
   <h1>Source code for livvkit.components.verification</h1><div class="highlight"><pre>
-<span></span><span class="c1"># Copyright (c) 2015-2017, UT-BATTELLE, LLC</span>
+<span></span><span class="c1"># coding=utf-8</span>
+<span class="c1"># Copyright (c) 2015-2018, UT-BATTELLE, LLC</span>
 <span class="c1"># All rights reserved.</span>
 <span class="c1">#</span>
 <span class="c1"># Redistribution and use in source and binary forms, with or without</span>
@@ -102,7 +102,7 @@
 <span class="kn">from</span> <span class="nn">livvkit.util</span> <span class="k">import</span> <span class="n">elements</span>
 
 
-<span class="k">def</span> <span class="nf">_run_suite</span><span class="p">(</span><span class="n">case</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">summary</span><span class="p">):</span>
+<div class="viewcode-block" id="run_suite"><a class="viewcode-back" href="../../../source/livvkit.components.html#livvkit.components.verification.run_suite">[docs]</a><span class="k">def</span> <span class="nf">run_suite</span><span class="p">(</span><span class="n">case</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">summary</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Run the full suite of verification tests &quot;&quot;&quot;</span>
     <span class="n">config</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">case</span>
     <span class="n">model_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;data_dir&#39;</span><span class="p">],</span> <span class="n">case</span><span class="p">)</span>
@@ -116,9 +116,9 @@
         <span class="n">bench_subcases</span> <span class="o">=</span> <span class="n">bench_cases</span><span class="p">[</span><span class="n">subcase</span><span class="p">]</span> <span class="k">if</span> <span class="n">subcase</span> <span class="ow">in</span> <span class="n">bench_cases</span> <span class="k">else</span> <span class="p">[]</span>
         <span class="n">case_sections</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">mcase</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">model_cases</span><span class="p">[</span><span class="n">subcase</span><span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="n">functions</span><span class="o">.</span><span class="n">sort_processor_counts</span><span class="p">):</span>
-            <span class="n">bpath</span> <span class="o">=</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bench_dir</span><span class="p">,</span> <span class="n">subcase</span><span class="p">,</span> <span class="n">mcase</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">))</span>
+            <span class="n">bpath</span> <span class="o">=</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bench_dir</span><span class="p">,</span> <span class="n">subcase</span><span class="p">,</span> <span class="n">mcase</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="p">))</span>
                      <span class="k">if</span> <span class="n">mcase</span> <span class="ow">in</span> <span class="n">bench_subcases</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-            <span class="n">mpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">subcase</span><span class="p">,</span> <span class="n">mcase</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">))</span>
+            <span class="n">mpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">subcase</span><span class="p">,</span> <span class="n">mcase</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="p">))</span>
             <span class="n">case_result</span> <span class="o">=</span> <span class="n">_analyze_case</span><span class="p">(</span><span class="n">mpath</span><span class="p">,</span> <span class="n">bpath</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
             <span class="n">case_sections</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">elements</span><span class="o">.</span><span class="n">section</span><span class="p">(</span><span class="n">mcase</span><span class="p">,</span> <span class="n">case_result</span><span class="p">))</span>
             <span class="n">case_summary</span><span class="p">[</span><span class="n">subcase</span><span class="p">]</span> <span class="o">=</span> <span class="n">_summarize_result</span><span class="p">(</span><span class="n">case_result</span><span class="p">,</span>
@@ -133,10 +133,10 @@
                                                      <span class="s2">&quot;verification&quot;</span><span class="p">,</span>
                                                      <span class="n">case</span> <span class="o">+</span> <span class="s2">&quot;.html&quot;</span><span class="p">)</span>
                                         <span class="p">)</span>
-    <span class="n">functions</span><span class="o">.</span><span class="n">write_json</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;verification&quot;</span><span class="p">),</span> <span class="n">case</span><span class="o">+</span><span class="s2">&quot;.json&quot;</span><span class="p">)</span>
+    <span class="n">functions</span><span class="o">.</span><span class="n">write_json</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;verification&quot;</span><span class="p">),</span> <span class="n">case</span><span class="o">+</span><span class="s2">&quot;.json&quot;</span><span class="p">)</span></div>
 
 
-<span class="k">def</span> <span class="nf">_analyze_case</span><span class="p">(</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">bench_dir</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_analyze_case</span><span class="p">(</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">bench_dir</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Runs all of the verification checks on a particular case &quot;&quot;&quot;</span>
     <span class="n">bundle</span> <span class="o">=</span> <span class="n">livvkit</span><span class="o">.</span><span class="n">verification_model_module</span>
     <span class="n">model_out</span> <span class="o">=</span> <span class="n">functions</span><span class="o">.</span><span class="n">find_file</span><span class="p">(</span><span class="n">model_dir</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="o">+</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;output_ext&quot;</span><span class="p">])</span>
@@ -145,7 +145,7 @@
     <span class="n">bench_config</span> <span class="o">=</span> <span class="n">functions</span><span class="o">.</span><span class="n">find_file</span><span class="p">(</span><span class="n">bench_dir</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="o">+</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;config_ext&quot;</span><span class="p">])</span>
     <span class="n">model_log</span> <span class="o">=</span> <span class="n">functions</span><span class="o">.</span><span class="n">find_file</span><span class="p">(</span><span class="n">model_dir</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="o">+</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;logfile_ext&quot;</span><span class="p">])</span>
     <span class="n">el</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="n">bit_for_bit</span><span class="p">(</span><span class="n">model_out</span><span class="p">,</span> <span class="n">bench_out</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">plot</span><span class="p">),</span>
+            <span class="n">bit_for_bit</span><span class="p">(</span><span class="n">model_out</span><span class="p">,</span> <span class="n">bench_out</span><span class="p">,</span> <span class="n">config</span><span class="p">),</span>
             <span class="n">diff_configurations</span><span class="p">(</span><span class="n">model_config</span><span class="p">,</span> <span class="n">bench_config</span><span class="p">,</span> <span class="n">bundle</span><span class="p">,</span> <span class="n">bundle</span><span class="p">),</span>
             <span class="n">bundle</span><span class="o">.</span><span class="n">parse_log</span><span class="p">(</span><span class="n">model_log</span><span class="p">)</span>
          <span class="p">]</span>
@@ -221,14 +221,15 @@
     <span class="k">return</span> <span class="n">summary</span>
 
 
-<span class="k">def</span> <span class="nf">_populate_metadata</span><span class="p">(</span><span class="n">case</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+<span class="c1"># noinspection PyUnusedLocal</span>
+<div class="viewcode-block" id="populate_metadata"><a class="viewcode-back" href="../../../source/livvkit.components.html#livvkit.components.verification.populate_metadata">[docs]</a><span class="k">def</span> <span class="nf">populate_metadata</span><span class="p">(</span><span class="n">case</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Provide some top level information for the summary &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;Type&quot;</span><span class="p">:</span> <span class="s2">&quot;Summary&quot;</span><span class="p">,</span>
             <span class="s2">&quot;Title&quot;</span><span class="p">:</span> <span class="s2">&quot;Verification&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;Headers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Bit for Bit&quot;</span><span class="p">,</span> <span class="s2">&quot;Configurations&quot;</span><span class="p">,</span> <span class="s2">&quot;Std. Out Files&quot;</span><span class="p">]}</span>
+            <span class="s2">&quot;Headers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Bit for Bit&quot;</span><span class="p">,</span> <span class="s2">&quot;Configurations&quot;</span><span class="p">,</span> <span class="s2">&quot;Std. Out Files&quot;</span><span class="p">]}</span></div>
 
 
-<div class="viewcode-block" id="bit_for_bit"><a class="viewcode-back" href="../../../source/livvkit.components.html#livvkit.components.verification.bit_for_bit">[docs]</a><span class="k">def</span> <span class="nf">bit_for_bit</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="n">bench_path</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="bit_for_bit"><a class="viewcode-back" href="../../../source/livvkit.components.html#livvkit.components.verification.bit_for_bit">[docs]</a><span class="k">def</span> <span class="nf">bit_for_bit</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="n">bench_path</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Checks whether the given files have bit for bit solution matches</span>
 <span class="sd">    on the given variable list.</span>
@@ -237,21 +238,20 @@
 <span class="sd">        model_path: absolute path to the model dataset</span>
 <span class="sd">        bench_path: absolute path to the benchmark dataset</span>
 <span class="sd">        config: the configuration of the set of analyses</span>
-<span class="sd">        plot: a boolean of whether or not to generate plots</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        A dictionary created by the elements object corresponding to</span>
 <span class="sd">        the results of the bit for bit testing</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">fname</span> <span class="o">=</span> <span class="n">model_path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">fname</span> <span class="o">=</span> <span class="n">model_path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     <span class="c1"># Error handling</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">bench_path</span><span class="p">)</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">model_path</span><span class="p">)):</span>
         <span class="k">return</span> <span class="n">elements</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Bit for Bit&quot;</span><span class="p">,</span>
                               <span class="s2">&quot;File named &quot;</span> <span class="o">+</span> <span class="n">fname</span> <span class="o">+</span> <span class="s2">&quot; has no suitable match!&quot;</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">model_data</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
-        <span class="n">bench_data</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">bench_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
-    <span class="k">except</span><span class="p">:</span>
+        <span class="n">model_data</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
+        <span class="n">bench_data</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">bench_path</span><span class="p">)</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">FileNotFoundError</span><span class="p">,</span> <span class="ne">PermissionError</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">elements</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Bit for Bit&quot;</span><span class="p">,</span>
                               <span class="s2">&quot;File named &quot;</span> <span class="o">+</span> <span class="n">fname</span> <span class="o">+</span> <span class="s2">&quot; could not be read!&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">netcdf</span><span class="o">.</span><span class="n">has_time</span><span class="p">(</span><span class="n">model_data</span><span class="p">)</span> <span class="ow">and</span> <span class="n">netcdf</span><span class="o">.</span><span class="n">has_time</span><span class="p">(</span><span class="n">bench_data</span><span class="p">)):</span>
@@ -262,7 +262,7 @@
     <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Max Error&quot;</span><span class="p">,</span> <span class="s2">&quot;Index of Max Error&quot;</span><span class="p">,</span> <span class="s2">&quot;RMS Error&quot;</span><span class="p">,</span> <span class="s2">&quot;Plot&quot;</span><span class="p">]</span>
     <span class="n">stats</span> <span class="o">=</span> <span class="n">LIVVDict</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">var</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;bit_for_bit_vars&quot;</span><span class="p">]):</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">var</span> <span class="ow">in</span> <span class="n">model_data</span><span class="o">.</span><span class="n">variables</span> <span class="ow">and</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">bench_data</span><span class="o">.</span><span class="n">variables</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">model_data</span><span class="o">.</span><span class="n">variables</span> <span class="ow">and</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">bench_data</span><span class="o">.</span><span class="n">variables</span><span class="p">:</span>
             <span class="n">m_vardata</span> <span class="o">=</span> <span class="n">model_data</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">var</span><span class="p">][:]</span>
             <span class="n">b_vardata</span> <span class="o">=</span> <span class="n">bench_data</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">var</span><span class="p">][:]</span>
             <span class="n">diff_data</span> <span class="o">=</span> <span class="n">m_vardata</span> <span class="o">-</span> <span class="n">b_vardata</span>
@@ -291,6 +291,8 @@
 <span class="sd">    Args:</span>
 <span class="sd">        model_config: a dictionary with the model configuration data</span>
 <span class="sd">        bench_config: a dictionary with the benchmark configuration data</span>
+<span class="sd">        model_bundle: a LIVVkit model bundle object</span>
+<span class="sd">        bench_bundle: a LIVVkit model bundle object</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        A dictionary created by the elements object corresponding to</span>
@@ -301,7 +303,7 @@
     <span class="n">bench_data</span> <span class="o">=</span> <span class="n">bench_bundle</span><span class="o">.</span><span class="n">parse_config</span><span class="p">(</span><span class="n">bench_config</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">model_data</span> <span class="o">==</span> <span class="p">{}</span> <span class="ow">and</span> <span class="n">bench_data</span> <span class="o">==</span> <span class="p">{}:</span>
         <span class="k">return</span> <span class="n">elements</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Configuration Comparison&quot;</span><span class="p">,</span>
-                              <span class="s2">&quot;Could not open file: &quot;</span> <span class="o">+</span> <span class="n">model_config</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+                              <span class="s2">&quot;Could not open file: &quot;</span> <span class="o">+</span> <span class="n">model_config</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
     <span class="n">model_sections</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">iterkeys</span><span class="p">(</span><span class="n">model_data</span><span class="p">))</span>
     <span class="n">bench_sections</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">iterkeys</span><span class="p">(</span><span class="n">bench_data</span><span class="p">))</span>
@@ -321,6 +323,7 @@
 
 <div class="viewcode-block" id="plot_bit_for_bit"><a class="viewcode-back" href="../../../source/livvkit.components.html#livvkit.components.verification.plot_bit_for_bit">[docs]</a><span class="k">def</span> <span class="nf">plot_bit_for_bit</span><span class="p">(</span><span class="n">case</span><span class="p">,</span> <span class="n">var_name</span><span class="p">,</span> <span class="n">model_data</span><span class="p">,</span> <span class="n">bench_data</span><span class="p">,</span> <span class="n">diff_data</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Create a bit for bit plot &quot;&quot;&quot;</span>
+    <span class="n">plot_title</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="n">plot_name</span> <span class="o">=</span> <span class="n">case</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="n">var_name</span> <span class="o">+</span> <span class="s2">&quot;.png&quot;</span>
     <span class="n">plot_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;verification&quot;</span><span class="p">,</span> <span class="s2">&quot;imgs&quot;</span><span class="p">))</span>
     <span class="n">functions</span><span class="o">.</span><span class="n">mkdir_p</span><span class="p">(</span><span class="n">plot_path</span><span class="p">)</span>
@@ -342,8 +345,8 @@
     <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
 
     <span class="c1"># Calculate min and max to scale the colorbars</span>
-    <span class="nb">max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">model_data</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">bench_data</span><span class="p">)])</span>
-    <span class="nb">min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">amin</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">amin</span><span class="p">(</span><span class="n">model_data</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">amin</span><span class="p">(</span><span class="n">bench_data</span><span class="p">)])</span>
+    <span class="n">_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">model_data</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">bench_data</span><span class="p">)])</span>
+    <span class="n">_min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">amin</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">amin</span><span class="p">(</span><span class="n">model_data</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">amin</span><span class="p">(</span><span class="n">bench_data</span><span class="p">)])</span>
 
     <span class="c1"># Plot the model output</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
@@ -351,7 +354,7 @@
     <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">var_name</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">model_data</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="nb">min</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="nb">max</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">colormaps</span><span class="o">.</span><span class="n">viridis</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">model_data</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="n">_min</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">_max</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">colormaps</span><span class="o">.</span><span class="n">viridis</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
 
     <span class="c1"># Plot the benchmark data</span>
@@ -359,7 +362,7 @@
     <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Benchmark Data&quot;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">bench_data</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="nb">min</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="nb">max</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">colormaps</span><span class="o">.</span><span class="n">viridis</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">bench_data</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="n">_min</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">_max</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">colormaps</span><span class="o">.</span><span class="n">viridis</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
 
     <span class="c1"># Plot the difference</span>
@@ -373,7 +376,7 @@
     <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">rect</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">))</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">plot_title</span><span class="p">)</span>
 
-    <span class="n">plot_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">plot_path</span><span class="p">,</span> <span class="n">plot_name</span><span class="p">])</span>
+    <span class="n">plot_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">plot_path</span><span class="p">,</span> <span class="n">plot_name</span><span class="p">])</span>
     <span class="k">if</span> <span class="n">livvkit</span><span class="o">.</span><span class="n">publish</span><span class="p">:</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">plot_file</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;.eps&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">plot_file</span><span class="p">)</span>
@@ -407,8 +410,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../design.html">Design Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../extend.html">Extensions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../dev.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../lex.html">LIVVkit Extensions (LEX)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bundles.html">Model Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contrib.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../ref.html">References and indices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../faq.html">Frequently Asked Questions</a></li>
@@ -432,7 +436,7 @@
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
     </div>
   </body>
 </html>

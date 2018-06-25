@@ -3,13 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Quick Start &#8212; LIVVkit 2.1.0 documentation</title>
+    <title>Quick Start &#8212; LIVVkit 2.1.2 documentation</title>
     <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2.1.0',
+        VERSION:     '2.1.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -37,7 +37,7 @@
       <h3>Navigation</h3>
       <ul>
         <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
-        <li><a href="index.html">LIVVkit 2.1.0 documentation</a> &#187;</li> 
+        <li><a href="index.html">LIVVkit 2.1.2 documentation</a> &#187;</li> 
       </ul>
     </div>
     
@@ -59,18 +59,20 @@
 <div class="section" id="quick-start">
 <h1>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h1>
 <p>Ready to jump right in?</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All terminal (command line) commands in this document will be written POSIX compliant shells
+(<code class="docutils literal"><span class="pre">bash</span></code>, <code class="docutils literal"><span class="pre">zsh</span></code>, <code class="docutils literal"><span class="pre">fish</span></code>, etc.). The use of non-POSIX shells like <code class="docutils literal"><span class="pre">csh</span></code> is <strong>not</strong>
+recommended.</p>
+</div>
 <div class="section" id="basic-install">
 <h2>Basic Install<a class="headerlink" href="#basic-install" title="Permalink to this headline">¶</a></h2>
 <p>The latest LIVVkit release can be installed via <a class="reference external" href="https://pip.pypa.io/en/stable/">Python pip</a>:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>pip isntall --user livvkit
+<div class="highlight-bash"><div class="highlight"><pre><span></span>pip install --user livvkit
 </pre></div>
 </div>
-<p>or <a class="reference external" href="https://conda.io/docs/download.html">Anaconda/Miniconda</a>:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>conda install -c jhkennedy livvkit
-</pre></div>
-</div>
-<p>LIVVkit was designed to be Python 2 and 3 compatible, so either version will work, but Python 3 is
-recommended. If you’re having problems installing LIVVkit, see our <a class="reference internal" href="install.html"><span class="doc">Installation</span></a> page, or
+<p>LIVVkit was designed to be Python 2 and 3 compatible, so either Python version will work, but Python
+3 is recommended. If you’re having problems installing LIVVkit, see our <a class="reference internal" href="install.html"><span class="doc">Installation</span></a> page, or
 <a class="reference external" href="https://github.com/livvkit/livvkit/issues">open an issue on github</a>.</p>
 </div>
 <div class="section" id="basic-usage">
@@ -82,79 +84,126 @@ your installation, run:</p>
 </div>
 <div class="section" id="verification">
 <h3>Verification<a class="headerlink" href="#verification" title="Permalink to this headline">¶</a></h3>
-<p>To run the verification suite you will need a set of model <em>test</em> and <em>reference</em> data. Download
-the example dataset (799 MB):</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>wget jhkennedy.org/sites/default/files/LIVVkit/livvkit2.0.0_example_dataset.tar.gz
-tar -zxvf livvkit2.0.0_example_dataset.tar.gz
+<p>In verification mode, LIVVkit analyzes and compares a regression testing dataset to a reference
+dataset. For example, LIVVkit may analyze the dataset produced from a proposed CISM 2.0.6 release
+(~400MB; <a class="reference external" href="http://jhkennedy.org/LIVVkit/cism-2.0.6-tests.20160728.tgz">download here</a>)
+and compare it to the dataset produced from the CISM 2.0.0 release
+(~400MB; <a class="reference external" href="http://jhkennedy.org/LIVVkit/cism-2.0.0-tests.20160728.tgz">download here</a>).
+To run this example, first download the two aforementioned datasets to a directory, open a terminal,
+and navigate to your download directory. Then, un-tar the datasets:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>tar -zxvf cism-2.0.0-tests.20160728.tgz
+tar -zxvf cism-2.0.6-tests.20160728.tgz
 </pre></div>
 </div>
-<p>Then, for ease, export the path to the two dataset directories:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> livvkit2.0.0_example_dataset
-<span class="nb">export</span> <span class="nv">REF</span><span class="o">=</span><span class="nv">$PWD</span>/cism-2.0.0-ref/titan-gnu/CISM_glissade
-<span class="nb">export</span> <span class="nv">TEST</span><span class="o">=</span><span class="nv">$PWD</span>/cism-2.0.6-test/titan-gnu/CISM_glissade
+<p>For ease, export the path to the two dataset directories:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">REF</span><span class="o">=</span><span class="nv">$PWD</span>/cism-2.0.0-tests/titan-gnu/CISM_glissade
+<span class="nb">export</span> <span class="nv">TEST</span><span class="o">=</span><span class="nv">$PWD</span>/cism-2.0.6-tests/titan-gnu/CISM_glissade
 </pre></div>
 </div>
 <p>To run the suite use:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>livv --verify <span class="nv">$TEST</span> <span class="nv">$REF</span>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>livv --verify <span class="nv">$TEST</span> <span class="nv">$REF</span> --out-dir ver_test --serve
 </pre></div>
 </div>
-<p>or</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>livv -v <span class="nv">$TEST</span> <span class="nv">$REF</span>
+<p>or more simply:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>livv -v <span class="nv">$TEST</span> <span class="nv">$REF</span> -o ver_test -s
 </pre></div>
 </div>
-<p>LIVVkit will run the verification suite, report a summary of the results on the command line, and
-produce an output website in the created <code class="docutils literal"><span class="pre">vv_$YEAR_$MONTH_DAY</span></code> directory (you can change the
-output directory with the <code class="docutils literal"><span class="pre">-o/--output</span></code> option). You can view the output website by opening
-<code class="docutils literal"><span class="pre">vv_$YEAR_$MONTH_DAY/index.html</span></code> in your favorite web browser.</p>
+<p>LIVVkit will run the verification suite, report a summary of the results on the command line,
+produce an output website in the created <code class="docutils literal"><span class="pre">ver_test</span></code> directory specified by the <code class="docutils literal"><span class="pre">-o/--out-dir</span></code>
+option, and launch a http server (the <code class="docutils literal"><span class="pre">-s/--serve</span></code> option) to easily view the output in your
+favorite web browser.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">LIVVkit outputs the full path to the index page at the end of each run so it’s easy type into
-your browser’s address bar (prefix this path with a <code class="docutils literal"><span class="pre">file://</span></code> on most browsers).</p>
+<p class="last">LIVVkit will tell you the address to view the website at on the command
+line, which will typically look like
+<a class="reference external" href="http://0.0.0.0:8000/ver_test/index.html">http://0.0.0.0:8000/ver_test/index.html</a>.</p>
+</div>
+</div>
+<div class="section" id="viewing-analyses">
+<h3>Viewing analyses<a class="headerlink" href="#viewing-analyses" title="Permalink to this headline">¶</a></h3>
+<p>Directly viewing the output websites (e.g., using <code class="docutils literal"><span class="pre">file://</span></code> addresses in a web browser) will likely not work
+because most web browsers are disabling the use of local resources (e.g., javascript; see our <a class="reference internal" href="faq.html"><span class="doc">Frequently Asked Questions</span></a>).
+Fortunately, The LIVVkit server can be used view any previously generated analyses. For example, to view
+the <code class="docutils literal"><span class="pre">ver_test</span></code> analyses generated above again, simply specify the directory using the
+<code class="docutils literal"><span class="pre">-o/--out-dir</span></code> option and the <code class="docutils literal"><span class="pre">-s/--serve</span></code> option:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>livv -o ver_test -s
+</pre></div>
+</div>
+<p>LIVVkit will then launch an HTTP server and tell you the address to view the website at on the
+command line, which will typically look like
+<a class="reference external" href="http://0.0.0.0:8000/ver_test/index.html">http://0.0.0.0:8000/ver_test/index.html</a>.</p>
+</div>
+<div class="section" id="validation-extensions">
+<h3>Validation, Extensions<a class="headerlink" href="#validation-extensions" title="Permalink to this headline">¶</a></h3>
+<p>LIVVkit is extensible to more in-depth or larger validation analyses. However, because these validation
+analyses are particularly data intensive, many of the observational and example model output files are
+much too large to distribute in the LIVVkit package. Therefore, we’ve developed a LIVVkit Extensions
+repository (LEX) which uses <a class="reference external" href="https://git-lfs.github.com">git-lfs</a> (Git Large File Support) in order to
+distribute the required data  <a class="footnote-reference" href="#id3" id="id1">[1]</a>. <code class="docutils literal"><span class="pre">git-lfs</span></code> can be installed either before or after
+cloning this repository, but it will be needed <em>before</em> downloading the required
+data. You can determine if you have <code class="docutils literal"><span class="pre">git-lfs</span></code> installed on your system by running
+this command:</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">command</span> <span class="o">-</span><span class="n">v</span> <span class="n">git</span><span class="o">-</span><span class="n">lfs</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal"><span class="pre">git-lfs</span></code> is not installed, you can install it by following the instructions here:</p>
+<p><a class="reference external" href="https://git-lfs.github.com">https://git-lfs.github.com</a></p>
+<p>Once <code class="docutils literal"><span class="pre">git-lfs</span></code> is installed, clone and enter this repository:</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">lfs</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">code</span><span class="o">.</span><span class="n">ornl</span><span class="o">.</span><span class="n">gov</span><span class="o">/</span><span class="n">LIVVkit</span><span class="o">/</span><span class="n">lex</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">lex</span>
+</pre></div>
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last"><strong>Trouble viewing the output?</strong> Your browser may have disabled javascript for local files (a
-security risk). See our <a class="reference internal" href="faq.html"><span class="doc">Frequently Asked Questions</span></a> for a work around.</p>
+<p class="last">This repository is rather large (~ GBs currently).</p>
 </div>
-</div>
-<div class="section" id="validation">
-<h3>Validation<a class="headerlink" href="#validation" title="Permalink to this headline">¶</a></h3>
-<p>LIVVkit is extensible to more in-depth or larger validation analyses. A template validation module
-is available To run a validation extension. First, find the location of LIVVkit on your system:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">LIVV</span><span class="o">=</span><span class="k">$(</span>dirname <span class="sb">`</span>python -c <span class="s2">&quot;import livvkit; print(livvkit.__file__)&quot;</span><span class="sb">`</span><span class="k">)</span>
-<span class="nb">echo</span> <span class="nv">$LIVV</span>
+<p>Each extension will have an associated JSON configuration file which will describe
+the extension’s analysis code, data locations, and options. To see a list of
+available extensions, you can run this command:</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">find</span> <span class="o">.</span> <span class="o">-</span><span class="n">iname</span> <span class="s2">&quot;*.json&quot;</span>
 </pre></div>
 </div>
-<p>Now, to run the validation template, pass the <code class="docutils literal"><span class="pre">-V/--validate</span></code> option the template extension’s
-configuration file (a JSON file). Use:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>livv --validate <span class="nv">$LIVV</span>/components/validation_tests/template/template.json
+<p>To execute any of these extensions, point <code class="docutils literal"><span class="pre">livv</span></code>
+to any of these extensions config file via the <code class="docutils literal"><span class="pre">-e/--extension</span></code> option (or the
+<code class="docutils literal"><span class="pre">-V/--validate</span></code> option). For example, to run the minimal example extension,
+place the output website in the <code class="docutils literal"><span class="pre">val_test</span></code> directory, and serve the output website
+you’d run this command:</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">livv</span> <span class="o">-</span><span class="n">e</span> <span class="n">example</span><span class="o">/</span><span class="n">example</span><span class="o">.</span><span class="n">json</span> <span class="o">-</span><span class="n">o</span> <span class="n">vv_test</span> <span class="o">-</span><span class="n">s</span>
 </pre></div>
 </div>
-<p>or</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>livv -V <span class="nv">$LIVV</span>/components/validation_tests/template/template.json
-</pre></div>
-</div>
-<p>LIVVkit will run the validation template, report a summary of the results on the command line, and
-produce an output website in the created <code class="docutils literal"><span class="pre">vv_$YEAR_$MONTH_DAY</span></code> directory (you can change the
-output directory with the <code class="docutils literal"><span class="pre">-o/--output</span></code> option). You can view the output website by opening
-<code class="docutils literal"><span class="pre">vv_$YEAR_$MONTH_DAY/index.html</span></code> in your favorite web browser.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">LIVVkit outputs the full path to the index page at the end of each run so it’s easy type into
-your browser’s address bar (prefix this path with a <code class="docutils literal"><span class="pre">file://</span></code> on most browsers).</p>
-</div>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last"><strong>Trouble viewing the output?</strong> Your browser may have disabled javascript for local files (a
-security risk). See our <a class="reference internal" href="faq.html"><span class="doc">Frequently Asked Questions</span></a> for a work around.</p>
-</div>
+<p><em>Note:</em> All the extension configurations files assume you are working from the
+top level <code class="docutils literal"><span class="pre">lex</span></code> directory. You <em>can</em> run any of these extensions from any
+directory, but you will need to edit the paths in the JSON configuration files so
+that <code class="docutils literal"><span class="pre">livv</span></code> can find the required files.</p>
+<p>Likewise, you can also apply these analyses to any new model run <a class="footnote-reference" href="#id4" id="id2">[2]</a> by adjusting
+the paths to point to your model run.</p>
 </div>
 <div class="section" id="advanced">
 <h3>Advanced<a class="headerlink" href="#advanced" title="Permalink to this headline">¶</a></h3>
 <p>Both the verification and validation commands can be executed at the same time and all results will
 be placed into the same website. Additionally, you can pass the <code class="docutils literal"><span class="pre">-V/validate</span></code> option multiple
 JSON configuration files, and it will run all of them.</p>
-<p>For more information, see <a class="reference internal" href="install.html"><span class="doc">Installation</span></a>, <a class="reference internal" href="usage.html"><span class="doc">Usage</span></a>, and <a class="reference internal" href="dev.html"><span class="doc">Development</span></a>.</p>
+<p>For more information, see <a class="reference internal" href="install.html"><span class="doc">Installation</span></a>, <a class="reference internal" href="usage.html"><span class="doc">Usage</span></a>, and <a class="reference internal" href="contrib.html"><span class="doc">Contributing</span></a>.</p>
+<hr class="docutils" />
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>You may find
+<a class="reference external" href="https://www.atlassian.com/git/tutorials/git-lfs">this tutorial by Atlassian useful</a>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>This assumes the new data files conform to the format of the included data
+files. That is, an extension that analyses output from the CISM-Albany ice
+sheet model will likely be able to analyze any similar CISM-Albany simulation,
+but likely would <em>not</em> be able to analyze output from the PISM ice sheet
+model without “massaging” the PISM files into a CISM-Albany like structure, or
+adjusting the extension. <em>This is a problem we are actively working on for future
+LEX releases.</em></td></tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -183,7 +232,8 @@ JSON configuration files, and it will run all of them.</p>
 <li class="toctree-l2"><a class="reference internal" href="#basic-install">Basic Install</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#basic-usage">Basic Usage</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#verification">Verification</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#validation">Validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#viewing-analyses">Viewing analyses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#validation-extensions">Validation, Extensions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#advanced">Advanced</a></li>
 </ul>
 </li>
@@ -193,8 +243,9 @@ JSON configuration files, and it will run all of them.</p>
 <li class="toctree-l1"><a class="reference internal" href="design.html">Design Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="extend.html">Extensions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dev.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lex.html">LIVVkit Extensions (LEX)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundles.html">Model Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contrib.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ref.html">References and indices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
@@ -231,7 +282,7 @@ JSON configuration files, and it will run all of them.</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
     </div>
   </body>
 </html>

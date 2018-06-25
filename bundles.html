@@ -3,13 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Extensions &#8212; LIVVkit 2.1.0 documentation</title>
+    <title>Model Bundles &#8212; LIVVkit 2.1.2 documentation</title>
     <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2.1.0',
+        VERSION:     '2.1.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -23,8 +23,8 @@
     <script type="text/javascript" src="_static/sidebar.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Development" href="dev.html" />
-    <link rel="prev" title="Usage" href="usage.html" />
+    <link rel="next" title="Contributing" href="contrib.html" />
+    <link rel="prev" title="LIVVkit Extensions (LEX)" href="lex.html" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <link rel="shortcut icon" type="image/png" href="_static/favicon.png" />
     <meta name="viewport" content="width=device-width,initial-scale=0.8">
@@ -37,7 +37,7 @@
       <h3>Navigation</h3>
       <ul>
         <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
-        <li><a href="index.html">LIVVkit 2.1.0 documentation</a> &#187;</li> 
+        <li><a href="index.html">LIVVkit 2.1.2 documentation</a> &#187;</li> 
       </ul>
     </div>
     
@@ -56,41 +56,27 @@
   <div class="figure align-center">
 <a class="reference internal image-reference" href="_images/livvkit.png"><img alt="LIVVkit" src="_images/livvkit.png" style="width: 400px;" /></a>
 </div>
-<div class="section" id="extensions">
-<h1>Extensions<a class="headerlink" href="#extensions" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="adding-tests-to-numerics-or-validation">
-<h2>Adding Tests to Numerics or Validation<a class="headerlink" href="#adding-tests-to-numerics-or-validation" title="Permalink to this headline">¶</a></h2>
-<p>Inevitably the standard provided test cases provided by LIVVkit will not fit the needs of new
-scientific questions.  With this in mind, it is possible to add new sets of analyses into LIVVkit.
-We provide an extensible structure for the numerics and validation components, which are most likely
-to change over time. Extending the software verification component, however, requires modifying the
-component module itself.</p>
-<p>Like the implementation of new bundles we provide templates for each class of test that can be used
-to extend LIVVkit to your analysis.  A new test consists of a configuration file and a Python module
-that implements the <code class="docutils literal"><span class="pre">run</span></code> method, which takes a string and a dictionary as inputs.  These refer to
-the name of the test and the data extracted from the configuration file, respectively.</p>
-<p>Within the configuration file there is a required entry pointing to the module that contains the
-<code class="docutils literal"><span class="pre">run</span></code> method described above.  It should be entered as you would import it from within Python
-itself.  In principle you can add the location of your module to your <code class="docutils literal"><span class="pre">PYTHONPATH</span></code>, but the
-recommended method of including new analyses into LIVVkit is to either put them in the
-<code class="docutils literal"><span class="pre">components/validation_tests</span></code> or <code class="docutils literal"><span class="pre">components/numerics_tests</span></code> or create a symlink to those
-locations.</p>
-<p>When the analysis has been wrapped into these two files it can be run from the command line by
-providing the <code class="docutils literal"><span class="pre">--validation</span></code> argument followed by the path to the configuration file.</p>
+<div class="section" id="model-bundles">
+<h1>Model Bundles<a class="headerlink" href="#model-bundles" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The model bundle abstraction is undergoing an overhaul (slated for LIVVkit 2.2) to make adding
+new models significantly easier. We are actively working on supporting
+MALI (<a class="reference external" href="http://mpas-dev.github.io/land_ice/download.html">MPAS-Albany Land Ice</a>),
+PISM (<a class="reference external" href="http://pism-docs.org/wiki/doku.php">Parallel Ice Sheet Model</a>),
+and others. If you’d like to help or request support for your model, please contact
+Joseph H. Kennedy at <a class="reference external" href="mailto:kennedyjh&#37;&#52;&#48;ornl&#46;gov">kennedyjh<span>&#64;</span>ornl<span>&#46;</span>gov</a>.</p>
 </div>
-<div class="section" id="including-new-models">
-<h2>Including New Models<a class="headerlink" href="#including-new-models" title="Permalink to this headline">¶</a></h2>
-<p>Adding new models requires a new implementation in the <code class="docutils literal"><span class="pre">bundles</span></code> directory.  Within the
-<code class="docutils literal"><span class="pre">bundles</span></code> directory there is a <code class="docutils literal"><span class="pre">template</span></code> directory that can be copied when adding compatibility
-for a new model – the name of the new directory should indicate the model being added (e.g.,
+<p>Adding new models requires a new implementation in the <code class="docutils literal"><span class="pre">bundles</span></code> directory.  Currently, <code class="docutils literal"><span class="pre">CISM_glissade</span></code>
+is the only implemented bundle and it should be used as a template for a new bundle. Simply copy the
+entire directory to a new directory where the name should indicate the model being added (e.g.,
 <code class="docutils literal"><span class="pre">cism_albany</span></code>, <code class="docutils literal"><span class="pre">mpas_li</span></code>).</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">The bundle’s name needs to follow the python naming convention for a python package (see
 <span class="target" id="index-0"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0008#package-and-module-names"><strong>PEP 8#package-and-module-names</strong></a>).</p>
 </div>
-<p>The template directory provides sample modules with function stubs that can
-be filled in to provide a drop in way to use each component (verification, performance, numerics,
+<p>The new bundle will need to be edited for use each component (verification, performance, numerics,
 and validation).  These functions primarily are used to accommodate for model-specific
 implementations of things such as parsing log files, assimilating timing data, and arranging data
 onto standard grids.</p>
@@ -100,12 +86,11 @@ schemes, and data locations.</p>
 <p>When the new bundle has been implemented and placed in the <code class="docutils literal"><span class="pre">bundles</span></code> directory it will
 automatically be registered by LIVVkit at runtime. It is important to note that in order to use
 LIVVkit on a new model it will also have to conform to the standards described in the
-<a class="reference internal" href="usage.html#input-hierarchy"><span class="std std-ref">Model Output/LIVVkit Input Hierarchy</span></a> section (above).</p>
+<a class="reference internal" href="usage.html#input-hierarchy"><span class="std std-ref">Model Output/LIVVkit Input Hierarchy</span></a> section.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">It is critical that the <code class="docutils literal"><span class="pre">model_variant</span></code> directory name is the same as the directory name that
-you have implemented in <code class="docutils literal"><span class="pre">bundles</span></code>.</p>
-</div>
+<p class="last">It is critical that the <code class="docutils literal"><span class="pre">model_variant</span></code> sub-directory in the LIVVkit input directory hierarchy
+name is the same as the directory name that you have implemented in <code class="docutils literal"><span class="pre">bundles</span></code>.</p>
 </div>
 </div>
 
@@ -134,12 +119,9 @@ you have implemented in <code class="docutils literal"><span class="pre">bundles
 <li class="toctree-l1"><a class="reference internal" href="design.html">Design Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Extensions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#adding-tests-to-numerics-or-validation">Adding Tests to Numerics or Validation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#including-new-models">Including New Models</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="dev.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lex.html">LIVVkit Extensions (LEX)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Model Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contrib.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ref.html">References and indices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
@@ -148,7 +130,7 @@ you have implemented in <code class="docutils literal"><span class="pre">bundles
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/extend.rst.txt"
+      <li><a href="_sources/bundles.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -166,17 +148,17 @@ you have implemented in <code class="docutils literal"><span class="pre">bundles
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="dev.html" title="Development"
+          <a href="contrib.html" title="Contributing"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="usage.html" title="Usage"
+          <a href="lex.html" title="LIVVkit Extensions (LEX)"
              accesskey="P">previous</a> |</li>
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
     </div>
   </body>
 </html>

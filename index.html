@@ -3,13 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Introduction &#8212; LIVVkit 2.1.0 documentation</title>
+    <title>Introduction &#8212; LIVVkit 2.1.2 documentation</title>
     <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2.1.0',
+        VERSION:     '2.1.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -36,7 +36,7 @@
       <h3>Navigation</h3>
       <ul>
         <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
-        <li><a href="#">LIVVkit 2.1.0 documentation</a> &#187;</li> 
+        <li><a href="#">LIVVkit 2.1.2 documentation</a> &#187;</li> 
       </ul>
     </div>
     
@@ -73,13 +73,14 @@ configuration. It is intended to be a comprehensive testing suite that covers:</
 <p>By integrating LIVVkit into a model’s development workflow, LIVVkit will help users and developers
 build confidence in their model results, and easily transmit testing data to the wider scientific
 community, reviews, and decision/policy makers.</p>
-<p>Currently, LIVVkit is being developed and used in conjunction with the Community Ice Sheet Model
-(<a class="reference external" href="http://oceans11.lanl.gov/cism/documentation.html">CISM</a>), but is designed to be extensible to
+<p>Currently, LIVVkit is being used and developed in conjunction with E3SM
+(<a class="reference external" href="https://e3sm.org">Energy Exascale Earth System Model</a>) and CISM
+(<a class="reference external" href="https://cism.github.io/">Community Ice Sheet Model</a>), but is designed to be extensible to
 other models.</p>
 <p><strong>Users and contributors are welcome!</strong> We’ll help you out –  <a class="reference external" href="https://github.com/livvkit/livvkit/issues">open an issue on github</a> to contact us for any reason.</p>
 <div class="section" id="license-and-attribution">
 <h2>License and Attribution<a class="headerlink" href="#license-and-attribution" title="Permalink to this headline">¶</a></h2>
-<p>LIVVkit 2.1.0 is an open source project licensed under a BSD 3-clause License. We ask that you
+<p>LIVVkit 2.1 is an open source project licensed under a BSD 3-clause License. We ask that you
 please acknowledge LIVVkit in any work it is used or supports. In any corresponding published
 work, please cite <a class="reference internal" href="ref.html#kennedy2017" id="id1">[Kennedy2017]</a>:</p>
 <blockquote>
@@ -96,7 +97,8 @@ verification and validation toolkit for ice sheet models, J. Adv. Model. Earth S
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#basic-install">Basic Install</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#basic-usage">Basic Usage</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="quickstart.html#verification">Verification</a></li>
-<li class="toctree-l3"><a class="reference internal" href="quickstart.html#validation">Validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quickstart.html#viewing-analyses">Viewing analyses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quickstart.html#validation-extensions">Validation, Extensions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="quickstart.html#advanced">Advanced</a></li>
 </ul>
 </li>
@@ -126,25 +128,36 @@ verification and validation toolkit for ice sheet models, J. Adv. Model. Earth S
 <li class="toctree-l3"><a class="reference internal" href="usage.html#model-output-livvkit-input-hierarchy">Model Output/LIVVkit Input Hierarchy</a></li>
 <li class="toctree-l3"><a class="reference internal" href="usage.html#standard-verification-analysis">Standard verification  analysis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="usage.html#integration-analysis">Integration analysis</a></li>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#extended-validation-analyses">Extended validation analyses</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#extended-and-or-validation-analyses">Extended and/or validation analyses</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="extend.html">Extensions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="extend.html#adding-tests-to-numerics-or-validation">Adding Tests to Numerics or Validation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="extend.html#including-new-models">Including New Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lex.html">LIVVkit Extensions (LEX)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="lex.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lex.html#basic-usage">Basic Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lex.html#reproducing-evans-et-al-2018">Reproducing Evans et al. (2018)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lex.html#developing-a-custom-extension">Developing a custom extension</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lex.html#template-py">template.py:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lex.html#template-json">template.json:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lex.html#template-bib">template.bib:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lex.html#template-yml">template.yml:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lex.html#incorporating-your-extension-into-lex">Incorporating your extension into LEX</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="dev.html">Development</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="dev.html#workflow">Workflow</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="dev.html#become-a-core-developer">1. Become a core developer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dev.html#for-outside-contributions">2. For outside contributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lex.html#issues-questions-comments-etc">Issues, questions, comments, etc.?</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="dev.html#code-guidelines">Code Guidelines</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dev.html#tips">Tips</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dev.html#building-the-documentation">Building the documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundles.html">Model Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contrib.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contrib.html#workflow">Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contrib.html#become-a-core-developer">1. Become a core developer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contrib.html#for-outside-contributions">2. For outside contributions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="contrib.html#code-guidelines">Code Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contrib.html#tips">Tips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contrib.html#building-the-documentation">Building the documentation</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a><ul>
@@ -206,8 +219,9 @@ verification and validation toolkit for ice sheet models, J. Adv. Model. Earth S
 <li class="toctree-l1"><a class="reference internal" href="design.html">Design Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="extend.html">Extensions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dev.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lex.html">LIVVkit Extensions (LEX)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundles.html">Model Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contrib.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ref.html">References and indices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
@@ -241,7 +255,7 @@ verification and validation toolkit for ice sheet models, J. Adv. Model. Earth S
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
     </div>
   </body>
 </html>

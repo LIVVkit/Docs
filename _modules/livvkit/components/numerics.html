@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>livvkit.components.numerics &#8212; LIVVkit 2.1.2 documentation</title>
+    <link rel="stylesheet" href="../../../_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2.1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../../_static/sidebar.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <link rel="shortcut icon" type="image/png" href="../../../_static/favicon.png" />
+    <meta name="viewport" content="width=device-width,initial-scale=0.8">
+    
+    
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
+        <li><a href="../../../index.html">LIVVkit 2.1.2 documentation</a> &#187;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    
+        <div class="badge">
+            <a href="https://github.com/LIVVkit/LIVVkit">Fork me on GitHub</a>
+            <img src="../../../_static/right-red@2x.png">
+        </div>
+    
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for livvkit.components.numerics</h1><div class="highlight"><pre>
+<span></span><span class="c1"># coding=utf-8</span>
+<span class="c1"># Copyright (c) 2015-2018, UT-BATTELLE, LLC</span>
+<span class="c1"># All rights reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># Redistribution and use in source and binary forms, with or without</span>
+<span class="c1"># modification, are permitted provided that the following conditions are met:</span>
+<span class="c1">#</span>
+<span class="c1"># 1. Redistributions of source code must retain the above copyright notice, this</span>
+<span class="c1"># list of conditions and the following disclaimer.</span>
+<span class="c1">#</span>
+<span class="c1"># 2. Redistributions in binary form must reproduce the above copyright notice,</span>
+<span class="c1"># this list of conditions and the following disclaimer in the documentation</span>
+<span class="c1"># and/or other materials provided with the distribution.</span>
+<span class="c1">#</span>
+<span class="c1"># 3. Neither the name of the copyright holder nor the names of its contributors</span>
+<span class="c1"># may be used to endorse or promote products derived from this software without</span>
+<span class="c1"># specific prior written permission.</span>
+<span class="c1">#</span>
+<span class="c1"># THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND</span>
+<span class="c1"># ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED</span>
+<span class="c1"># WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE</span>
+<span class="c1"># DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE</span>
+<span class="c1"># FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL</span>
+<span class="c1"># DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR</span>
+<span class="c1"># SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER</span>
+<span class="c1"># CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,</span>
+<span class="c1"># OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span>
+<span class="c1"># OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Numerics Test Base Module.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">importlib</span>
+
+<span class="kn">import</span> <span class="nn">livvkit</span>
+<span class="kn">from</span> <span class="nn">livvkit.util</span> <span class="k">import</span> <span class="n">functions</span>
+<span class="kn">from</span> <span class="nn">livvkit.util</span> <span class="k">import</span> <span class="n">elements</span>
+
+
+<div class="viewcode-block" id="run_suite"><a class="viewcode-back" href="../../../source/livvkit.components.html#livvkit.components.numerics.run_suite">[docs]</a><span class="k">def</span> <span class="nf">run_suite</span><span class="p">(</span><span class="n">case</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">summary</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Run the full suite of numerics tests &quot;&quot;&quot;</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;module&#39;</span><span class="p">])</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">set_up</span><span class="p">()</span>
+    <span class="n">config</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">case</span>
+    <span class="n">analysis_data</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">bundle</span> <span class="o">=</span> <span class="n">livvkit</span><span class="o">.</span><span class="n">numerics_model_module</span>
+    <span class="n">model_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;data_dir&#39;</span><span class="p">],</span> <span class="n">case</span><span class="p">)</span>
+    <span class="n">bench_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">bench_dir</span><span class="p">,</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;data_dir&#39;</span><span class="p">],</span> <span class="n">case</span><span class="p">)</span>
+    <span class="n">plot_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;numerics&quot;</span><span class="p">,</span> <span class="s2">&quot;imgs&quot;</span><span class="p">)</span>
+    <span class="n">config</span><span class="p">[</span><span class="s2">&quot;plot_dir&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">plot_dir</span>
+    <span class="n">functions</span><span class="o">.</span><span class="n">mkdir_p</span><span class="p">(</span><span class="n">plot_dir</span><span class="p">)</span>
+    <span class="n">model_cases</span> <span class="o">=</span> <span class="n">functions</span><span class="o">.</span><span class="n">collect_cases</span><span class="p">(</span><span class="n">model_dir</span><span class="p">)</span>
+    <span class="n">bench_cases</span> <span class="o">=</span> <span class="n">functions</span><span class="o">.</span><span class="n">collect_cases</span><span class="p">(</span><span class="n">bench_dir</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">mscale</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">model_cases</span><span class="p">):</span>
+        <span class="n">bscale</span> <span class="o">=</span> <span class="n">bench_cases</span><span class="p">[</span><span class="n">mscale</span><span class="p">]</span> <span class="k">if</span> <span class="n">mscale</span> <span class="ow">in</span> <span class="n">bench_cases</span> <span class="k">else</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">mproc</span> <span class="ow">in</span> <span class="n">model_cases</span><span class="p">[</span><span class="n">mscale</span><span class="p">]:</span>
+            <span class="n">full_name</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">mscale</span><span class="p">,</span> <span class="n">mproc</span><span class="p">])</span>
+            <span class="n">bpath</span> <span class="o">=</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bench_dir</span><span class="p">,</span> <span class="n">mscale</span><span class="p">,</span> <span class="n">mproc</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="p">))</span>
+                     <span class="k">if</span> <span class="n">mproc</span> <span class="ow">in</span> <span class="n">bscale</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="n">mpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">mscale</span><span class="p">,</span> <span class="n">mproc</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="p">))</span>
+            <span class="n">model_data</span> <span class="o">=</span> <span class="n">functions</span><span class="o">.</span><span class="n">find_file</span><span class="p">(</span><span class="n">mpath</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span> <span class="o">+</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;output_ext&quot;</span><span class="p">])</span>
+            <span class="n">bench_data</span> <span class="o">=</span> <span class="n">functions</span><span class="o">.</span><span class="n">find_file</span><span class="p">(</span><span class="n">bpath</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span> <span class="o">+</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;output_ext&quot;</span><span class="p">])</span>
+            <span class="n">analysis_data</span><span class="p">[</span><span class="n">full_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">bundle</span><span class="o">.</span><span class="n">get_plot_data</span><span class="p">(</span><span class="n">model_data</span><span class="p">,</span>
+                                                            <span class="n">bench_data</span><span class="p">,</span>
+                                                            <span class="n">m</span><span class="o">.</span><span class="n">setup</span><span class="p">[</span><span class="n">case</span><span class="p">],</span>
+                                                            <span class="n">config</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">el</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">analysis_data</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="n">el</span> <span class="o">=</span> <span class="n">elements</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Numerics Plots&quot;</span><span class="p">,</span> <span class="s2">&quot;Missing data&quot;</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">elements</span><span class="o">.</span><span class="n">page</span><span class="p">(</span><span class="n">case</span><span class="p">,</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">],</span> <span class="n">element_list</span><span class="o">=</span><span class="n">el</span><span class="p">)</span>
+    <span class="n">summary</span><span class="p">[</span><span class="n">case</span><span class="p">]</span> <span class="o">=</span> <span class="n">_summarize_result</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">analysis_data</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+    <span class="n">_print_summary</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">case</span><span class="p">,</span> <span class="n">summary</span><span class="p">[</span><span class="n">case</span><span class="p">])</span>
+    <span class="n">functions</span><span class="o">.</span><span class="n">create_page_from_template</span><span class="p">(</span><span class="s2">&quot;numerics.html&quot;</span><span class="p">,</span>
+                                        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">index_dir</span><span class="p">,</span> <span class="s2">&quot;numerics&quot;</span><span class="p">,</span> <span class="n">case</span> <span class="o">+</span> <span class="s2">&quot;.html&quot;</span><span class="p">))</span>
+    <span class="n">functions</span><span class="o">.</span><span class="n">write_json</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;numerics&quot;</span><span class="p">),</span> <span class="n">case</span> <span class="o">+</span> <span class="s2">&quot;.json&quot;</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">_print_summary</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">case</span><span class="p">,</span> <span class="n">summary</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">module</span><span class="o">.</span><span class="n">print_summary</span><span class="p">(</span><span class="n">case</span><span class="p">,</span> <span class="n">summary</span><span class="p">)</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">NotImplementedError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    Ran &quot;</span> <span class="o">+</span> <span class="n">case</span> <span class="o">+</span> <span class="s2">&quot;!&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_summarize_result</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">summary</span> <span class="o">=</span> <span class="n">module</span><span class="o">.</span><span class="n">summarize_result</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">NotImplementedError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">):</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;Could not retrieve summary, open page for statistics&quot;</span>
+        <span class="n">summary</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Test mean </span><span class="si">% e</span><span class="s2">rror&quot;</span><span class="p">:</span> <span class="n">status</span><span class="p">,</span>
+                        <span class="s2">&quot;Bench mean </span><span class="si">% e</span><span class="s2">rror&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;Coefficient of variation&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">}}</span>
+    <span class="k">return</span> <span class="n">summary</span>
+
+
+<span class="c1"># noinspection PyUnusedLocal</span>
+<div class="viewcode-block" id="populate_metadata"><a class="viewcode-back" href="../../../source/livvkit.components.html#livvkit.components.numerics.populate_metadata">[docs]</a><span class="k">def</span> <span class="nf">populate_metadata</span><span class="p">(</span><span class="n">case</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Type&quot;</span><span class="p">:</span> <span class="s2">&quot;Summary&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Title&quot;</span><span class="p">:</span> <span class="s2">&quot;Numerics&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Headers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Bench mean </span><span class="si">% e</span><span class="s2">rror&quot;</span><span class="p">,</span> <span class="s2">&quot;Test mean </span><span class="si">% e</span><span class="s2">rror&quot;</span><span class="p">,</span> <span class="s2">&quot;Coefficient of variation&quot;</span><span class="p">]}</span>
+    <span class="k">return</span> <span class="n">metadata</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+    <a id="sidebar-anchor"></a>
+    
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script><h3><a href="../../../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../vv-intro.html">Introduction to V&amp;V</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../design.html">Design Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../lex.html">LIVVkit Extensions (LEX)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bundles.html">Model Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contrib.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ref.html">References and indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">Frequently Asked Questions</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+    </div>
+  </body>
+</html>

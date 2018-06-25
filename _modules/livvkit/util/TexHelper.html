@@ -3,13 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>livvkit.util.TexHelper &#8212; LIVVkit 2.1.0 documentation</title>
+    <title>livvkit.util.TexHelper &#8212; LIVVkit 2.1.2 documentation</title>
     <link rel="stylesheet" href="../../../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '2.1.0',
+        VERSION:     '2.1.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -35,9 +35,8 @@
       <h3>Navigation</h3>
       <ul>
         <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
-        <li><a href="../../../index.html">LIVVkit 2.1.0 documentation</a> &#187;</li>
-          <li><a href="../../index.html" >Module code</a> &#187;</li>
-          <li><a href="../../livvkit.html" accesskey="U">livvkit</a> &#187;</li> 
+        <li><a href="../../../index.html">LIVVkit 2.1.2 documentation</a> &#187;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>
     
@@ -54,7 +53,8 @@
           <div class="body" role="main">
             
   <h1>Source code for livvkit.util.TexHelper</h1><div class="highlight"><pre>
-<span></span><span class="c1"># Copyright (c) 2015-2017, UT-BATTELLE, LLC</span>
+<span></span><span class="c1"># coding=utf-8</span>
+<span class="c1"># Copyright (c) 2015-2018, UT-BATTELLE, LLC</span>
 <span class="c1"># All rights reserved.</span>
 <span class="c1">#</span>
 <span class="c1"># Redistribution and use in source and binary forms, with or without</span>
@@ -146,7 +146,7 @@
 
 
 <div class="viewcode-block" id="translate_section"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.TexHelper.translate_section">[docs]</a><span class="k">def</span> <span class="nf">translate_section</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39; Translates data where data[&quot;Type&quot;]==&quot;Section&quot; &#39;&#39;&#39;</span>
+    <span class="sd">&quot;&quot;&quot; Translates data where data[&quot;Type&quot;]==&quot;Section&quot; &quot;&quot;&quot;</span>
     <span class="n">sect_str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="n">elements</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Elements&quot;</span><span class="p">,</span> <span class="p">[])</span>
     <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">elements</span><span class="p">:</span>
@@ -156,7 +156,7 @@
 
 
 <div class="viewcode-block" id="translate_tab"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.TexHelper.translate_tab">[docs]</a><span class="k">def</span> <span class="nf">translate_tab</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39; Translates data where data[&quot;Type&quot;]==&quot;Tab&quot; &#39;&#39;&#39;</span>
+    <span class="sd">&quot;&quot;&quot; Translates data where data[&quot;Type&quot;]==&quot;Tab&quot; &quot;&quot;&quot;</span>
     <span class="n">tab_str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="n">sections</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Sections&quot;</span><span class="p">,</span> <span class="p">[])</span>
     <span class="k">for</span> <span class="n">section</span> <span class="ow">in</span> <span class="n">sections</span><span class="p">:</span>
@@ -166,14 +166,14 @@
 
 
 <div class="viewcode-block" id="translate_summary"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.TexHelper.translate_summary">[docs]</a><span class="k">def</span> <span class="nf">translate_summary</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39; Translates data where data[&quot;Type&quot;]==&quot;Summary&quot; &#39;&#39;&#39;</span>
+    <span class="sd">&quot;&quot;&quot; Translates data where data[&quot;Type&quot;]==&quot;Summary&quot; &quot;&quot;&quot;</span>
     <span class="n">headers</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Headers&quot;</span><span class="p">,</span> <span class="p">[]))</span>
     <span class="n">summary</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">FloatBarrier </span><span class="se">\n</span><span class="s1"> </span><span class="se">\\</span><span class="s1">section{$NAME} </span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;$NAME&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Title&quot;</span><span class="p">,</span> <span class="s2">&quot;table&quot;</span><span class="p">))</span>
     <span class="n">summary</span> <span class="o">+=</span> <span class="s1">&#39; </span><span class="se">\\</span><span class="s1">begin</span><span class="si">{table}</span><span class="s1">[!ht] </span><span class="se">\n</span><span class="s1"> </span><span class="se">\\</span><span class="s1">begin</span><span class="si">{center}</span><span class="s1">&#39;</span>
 
     <span class="c1"># Set the number of columns</span>
     <span class="n">n_cols</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
-    <span class="n">col_str</span> <span class="o">=</span> <span class="s2">&quot;l&quot;</span> <span class="o">+</span> <span class="s2">&quot;c&quot;</span><span class="o">*</span><span class="p">(</span><span class="n">n_cols</span><span class="p">)</span>
+    <span class="n">col_str</span> <span class="o">=</span> <span class="s2">&quot;l&quot;</span> <span class="o">+</span> <span class="s2">&quot;c&quot;</span> <span class="o">*</span> <span class="n">n_cols</span>
     <span class="n">summary</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> </span><span class="se">\\</span><span class="s1">begin</span><span class="si">{tabular}</span><span class="s1">{$NCOLS} </span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;$NCOLS&quot;</span><span class="p">,</span> <span class="n">col_str</span><span class="p">)</span>
     <span class="n">spacer</span> <span class="o">=</span> <span class="s1">&#39; &amp;&#39;</span> <span class="o">*</span> <span class="n">n_cols</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">[.5em]&#39;</span>
 
@@ -205,7 +205,7 @@
 
 
 <div class="viewcode-block" id="translate_table"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.TexHelper.translate_table">[docs]</a><span class="k">def</span> <span class="nf">translate_table</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39; Translates data where data[&quot;Type&quot;]==&quot;Table&quot; &#39;&#39;&#39;</span>
+    <span class="sd">&quot;&quot;&quot; Translates data where data[&quot;Type&quot;]==&quot;Table&quot; &quot;&quot;&quot;</span>
     <span class="n">headers</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Headers&quot;</span><span class="p">,</span> <span class="p">[]))</span>
     <span class="n">table</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">FloatBarrier </span><span class="se">\n</span><span class="s1"> </span><span class="se">\\</span><span class="s1">section{$NAME} </span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;$NAME&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Title&quot;</span><span class="p">,</span> <span class="s2">&quot;table&quot;</span><span class="p">))</span>
     <span class="n">table</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">begin</span><span class="si">{table}</span><span class="s1">[!ht] </span><span class="se">\n</span><span class="s1"> </span><span class="se">\\</span><span class="s1">begin</span><span class="si">{center}</span><span class="s1">&#39;</span>
@@ -228,7 +228,7 @@
 
 
 <div class="viewcode-block" id="translate_bit_for_bit"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.TexHelper.translate_bit_for_bit">[docs]</a><span class="k">def</span> <span class="nf">translate_bit_for_bit</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39; Translates data where data[&quot;Type&quot;]==&quot;Bit for Bit&quot; &#39;&#39;&#39;</span>
+    <span class="sd">&quot;&quot;&quot; Translates data where data[&quot;Type&quot;]==&quot;Bit for Bit&quot; &quot;&quot;&quot;</span>
     <span class="n">headers</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Headers&quot;</span><span class="p">,</span> <span class="p">[]))</span>
     <span class="n">table</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">FloatBarrier </span><span class="se">\n</span><span class="s1"> </span><span class="se">\\</span><span class="s1">section{$NAME} </span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;$NAME&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Title&quot;</span><span class="p">,</span> <span class="s2">&quot;table&quot;</span><span class="p">))</span>
     <span class="n">table</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">begin</span><span class="si">{table}</span><span class="s1">[!ht] </span><span class="se">\n</span><span class="s1"> </span><span class="se">\\</span><span class="s1">begin</span><span class="si">{center}</span><span class="s1">&#39;</span>
@@ -253,17 +253,17 @@
 
 
 <div class="viewcode-block" id="translate_gallery"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.TexHelper.translate_gallery">[docs]</a><span class="k">def</span> <span class="nf">translate_gallery</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39; Translates data where data[&quot;Type&quot;]==&quot;Gallery&quot; &#39;&#39;&#39;</span>
+    <span class="sd">&quot;&quot;&quot; Translates data where data[&quot;Type&quot;]==&quot;Gallery&quot; &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="translate_image"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.TexHelper.translate_image">[docs]</a><span class="k">def</span> <span class="nf">translate_image</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39; Translates data where data[&quot;Type&quot;]==&quot;Image&quot; &#39;&#39;&#39;</span>
+    <span class="sd">&quot;&quot;&quot; Translates data where data[&quot;Type&quot;]==&quot;Image&quot; &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="translate_file_diff"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.TexHelper.translate_file_diff">[docs]</a><span class="k">def</span> <span class="nf">translate_file_diff</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39; Translates data where data[&quot;Type&quot;]==&quot;Diff&quot; &#39;&#39;&#39;</span>
+    <span class="sd">&quot;&quot;&quot; Translates data where data[&quot;Type&quot;]==&quot;Diff&quot; &quot;&quot;&quot;</span>
     <span class="n">diff</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">FloatBarrier \section</span><span class="si">{Configuration}</span><span class="s1">&#39;</span>
     <span class="n">sections</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Data&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">title</span><span class="p">,</span> <span class="n">config</span> <span class="ow">in</span> <span class="n">sections</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -281,7 +281,7 @@
 
 
 <div class="viewcode-block" id="translate_error"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.TexHelper.translate_error">[docs]</a><span class="k">def</span> <span class="nf">translate_error</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39; Translates data where data[&quot;Type&quot;]==&quot;Error&quot; &#39;&#39;&#39;</span>
+    <span class="sd">&quot;&quot;&quot; Translates data where data[&quot;Type&quot;]==&quot;Error&quot; &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
 
 
@@ -331,8 +331,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../design.html">Design Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../extend.html">Extensions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../dev.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../lex.html">LIVVkit Extensions (LEX)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bundles.html">Model Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contrib.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../ref.html">References and indices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../faq.html">Frequently Asked Questions</a></li>
@@ -356,7 +357,7 @@
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
     </div>
   </body>
 </html>
