@@ -141,8 +141,14 @@ we’ll help you through the process.</p>
 <p>A template extension is provided as an absolute minimum working example
 in the <code class="docutils literal"><span class="pre">examples/</span></code> directory. To start developing a new extension, copy the
 <code class="docutils literal"><span class="pre">examples/template.*</span></code> files to a (possibly new) relevant directory, and change
-these file names to a descriptive name. These files will provide the basis for your
+these files’ name to a descriptive name. These files will provide the basis for your
 new extension.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Importantly, the only things <em>required</em> for a new extension to run in LIVVkit
+is a <code class="docutils literal"><span class="pre">run()</span></code> method in a <code class="docutils literal"><span class="pre">py</span></code> file and an <code class="docutils literal"><span class="pre">json</span></code> config file as described
+below.</p>
+</div>
 <div class="section" id="template-py">
 <h3>template.py:<a class="headerlink" href="#template-py" title="Permalink to this headline">¶</a></h3>
 <p>This is the primary extension python module. In order to work with LIVVkit, the
@@ -152,11 +158,6 @@ webpage; and <code class="docutils literal"><span class="pre">config</span></cod
 function will then need to return a LIVVkit page element (<a class="reference internal" href="source/livvkit.util.html#livvkit.util.elements.page" title="livvkit.util.elements.page"><code class="xref py py-func docutils literal"><span class="pre">livvkit.util.elements.page()</span></code></a>)
 which will contain a summary description of the extension (typically the extensions docstring),
 and all the page elements to display (see <a class="reference internal" href="source/livvkit.util.html#module-livvkit.util.elements" title="livvkit.util.elements"><code class="xref py py-mod docutils literal"><span class="pre">livvkit.util.elements</span></code></a>).</p>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">a little about elements… Additionally the top-level docstring should be used
-for the extensions summary description.</p>
-</div>
 </div>
 <div class="section" id="template-json">
 <h3>template.json:<a class="headerlink" href="#template-json" title="Permalink to this headline">¶</a></h3>
