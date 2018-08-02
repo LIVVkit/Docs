@@ -2,20 +2,12 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Model Bundles &#8212; LIVVkit 2.1.3 documentation</title>
+    <title>Model Bundles &#8212; LIVVkit 2.1.6 documentation</title>
     <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '2.1.3',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -31,13 +23,12 @@
     
     
 
-  </head>
-  <body>
+  </head><body>
     <div class="related">
       <h3>Navigation</h3>
       <ul>
         <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
-        <li><a href="index.html">LIVVkit 2.1.3 documentation</a> &#187;</li> 
+        <li><a href="index.html">LIVVkit 2.1.6 documentation</a> &#187;</li> 
       </ul>
     </div>
     
@@ -67,10 +58,10 @@ PISM (<a class="reference external" href="http://pism-docs.org/wiki/doku.php">Pa
 and others. If you’d like to help or request support for your model, please contact
 Joseph H. Kennedy at <a class="reference external" href="mailto:kennedyjh&#37;&#52;&#48;ornl&#46;gov">kennedyjh<span>&#64;</span>ornl<span>&#46;</span>gov</a>.</p>
 </div>
-<p>Adding new models requires a new implementation in the <code class="docutils literal"><span class="pre">bundles</span></code> directory.  Currently, <code class="docutils literal"><span class="pre">CISM_glissade</span></code>
+<p>Adding new models requires a new implementation in the <code class="docutils literal notranslate"><span class="pre">bundles</span></code> directory.  Currently, <code class="docutils literal notranslate"><span class="pre">CISM_glissade</span></code>
 is the only implemented bundle and it should be used as a template for a new bundle. Simply copy the
 entire directory to a new directory where the name should indicate the model being added (e.g.,
-<code class="docutils literal"><span class="pre">cism_albany</span></code>, <code class="docutils literal"><span class="pre">mpas_li</span></code>).</p>
+<code class="docutils literal notranslate"><span class="pre">cism_albany</span></code>, <code class="docutils literal notranslate"><span class="pre">mpas_li</span></code>).</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">The bundle’s name needs to follow the python naming convention for a python package (see
@@ -83,14 +74,14 @@ onto standard grids.</p>
 <p>In addition to implementing component specific modules, each bundle must provide component level
 configuration files to provide information about which test cases are run, file and variable naming
 schemes, and data locations.</p>
-<p>When the new bundle has been implemented and placed in the <code class="docutils literal"><span class="pre">bundles</span></code> directory it will
+<p>When the new bundle has been implemented and placed in the <code class="docutils literal notranslate"><span class="pre">bundles</span></code> directory it will
 automatically be registered by LIVVkit at runtime. It is important to note that in order to use
 LIVVkit on a new model it will also have to conform to the standards described in the
 <a class="reference internal" href="usage.html#input-hierarchy"><span class="std std-ref">Model Output/LIVVkit Input Hierarchy</span></a> section.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">It is critical that the <code class="docutils literal"><span class="pre">model_variant</span></code> sub-directory in the LIVVkit input directory hierarchy
-name is the same as the directory name that you have implemented in <code class="docutils literal"><span class="pre">bundles</span></code>.</p>
+<p class="last">It is critical that the <code class="docutils literal notranslate"><span class="pre">model_variant</span></code> sub-directory in the LIVVkit input directory hierarchy
+name is the same as the directory name that you have implemented in <code class="docutils literal notranslate"><span class="pre">bundles</span></code>.</p>
 </div>
 </div>
 
@@ -105,12 +96,14 @@ name is the same as the directory name that you have implemented in <code class=
 
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script><h3><a href="index.html">Table Of Contents</a></h3>
 <ul class="current">
@@ -158,7 +151,7 @@ name is the same as the directory name that you have implemented in <code class=
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
     </div>
   </body>
 </html>

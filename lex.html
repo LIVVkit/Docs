@@ -2,20 +2,12 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>LIVVkit Extensions (LEX) &#8212; LIVVkit 2.1.3 documentation</title>
+    <title>LIVVkit Extensions (LEX) &#8212; LIVVkit 2.1.6 documentation</title>
     <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '2.1.3',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -31,13 +23,12 @@
     
     
 
-  </head>
-  <body>
+  </head><body>
     <div class="related">
       <h3>Navigation</h3>
       <ul>
         <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
-        <li><a href="index.html">LIVVkit 2.1.3 documentation</a> &#187;</li> 
+        <li><a href="index.html">LIVVkit 2.1.6 documentation</a> &#187;</li> 
       </ul>
     </div>
     
@@ -75,20 +66,20 @@ LIVVkit 2.1: Automated and extensible ice sheet model validation.
 <h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
 <p>Because Validation analyses are particularly data intensive, this extensions repo
 uses <a class="reference external" href="https://git-lfs.github.com">git-lfs</a> (Git Large File Support) in order to
-distribute the required data. <code class="docutils literal"><span class="pre">git-lfs</span></code> can be installed either before or after
+distribute the required data. <code class="docutils literal notranslate"><span class="pre">git-lfs</span></code> can be installed either before or after
 cloning this repository, but it will be needed <em>before</em> downloading the required
-data. You can determine if you have <code class="docutils literal"><span class="pre">git-lfs</span></code> installed on your system by running
+data. You can determine if you have <code class="docutils literal notranslate"><span class="pre">git-lfs</span></code> installed on your system by running
 this command:</p>
-<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">command</span> <span class="o">-</span><span class="n">v</span> <span class="n">git</span><span class="o">-</span><span class="n">lfs</span>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">command</span> <span class="o">-</span><span class="n">v</span> <span class="n">git</span><span class="o">-</span><span class="n">lfs</span>
 </pre></div>
 </div>
-<p>If <code class="docutils literal"><span class="pre">git-lfs</span></code> is not installed, you can install it by following the instructions here:</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">git-lfs</span></code> is not installed, you can install it by following the instructions here:</p>
 <p><a class="reference external" href="https://git-lfs.github.com">https://git-lfs.github.com</a></p>
 </div>
 <div class="section" id="basic-usage">
 <h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h2>
-<p>Once <code class="docutils literal"><span class="pre">git-lfs</span></code> is installed, clone and enter this repository:</p>
-<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">lfs</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">code</span><span class="o">.</span><span class="n">ornl</span><span class="o">.</span><span class="n">gov</span><span class="o">/</span><span class="n">LIVVkit</span><span class="o">/</span><span class="n">lex</span><span class="o">.</span><span class="n">git</span>
+<p>Once <code class="docutils literal notranslate"><span class="pre">git-lfs</span></code> is installed, clone and enter this repository:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">lfs</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">code</span><span class="o">.</span><span class="n">ornl</span><span class="o">.</span><span class="n">gov</span><span class="o">/</span><span class="n">LIVVkit</span><span class="o">/</span><span class="n">lex</span><span class="o">.</span><span class="n">git</span>
 <span class="n">cd</span> <span class="n">lex</span>
 </pre></div>
 </div>
@@ -99,30 +90,30 @@ this command:</p>
 <p>Each extension will have an associated JSON configuration file which will describe
 the extension’s analysis code, data locations, and options. To see a list of
 available extensions, you can run this command:</p>
-<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">find</span> <span class="o">.</span> <span class="o">-</span><span class="n">iname</span> <span class="s2">&quot;*.json&quot;</span>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">find</span> <span class="o">.</span> <span class="o">-</span><span class="n">iname</span> <span class="s2">&quot;*.json&quot;</span>
 </pre></div>
 </div>
-<p>To execute any of these extensions, point <code class="docutils literal"><span class="pre">livv</span></code>
-to any of these extensions config file via the <code class="docutils literal"><span class="pre">-e/--extension</span></code> option (or the
-<code class="docutils literal"><span class="pre">-V/--validate</span></code> option). For example, to run the minimal example extension,
-place the output website in the <code class="docutils literal"><span class="pre">val_test</span></code> directory, and serve the output website
+<p>To execute any of these extensions, point <code class="docutils literal notranslate"><span class="pre">livv</span></code>
+to any of these extensions config file via the <code class="docutils literal notranslate"><span class="pre">-e/--extension</span></code> option (or the
+<code class="docutils literal notranslate"><span class="pre">-V/--validate</span></code> option). For example, to run the minimal example extension,
+place the output website in the <code class="docutils literal notranslate"><span class="pre">val_test</span></code> directory, and serve the output website
 you’d run this command:</p>
-<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">livv</span> <span class="o">-</span><span class="n">e</span> <span class="n">example</span><span class="o">/</span><span class="n">example</span><span class="o">.</span><span class="n">json</span> <span class="o">-</span><span class="n">o</span> <span class="n">vv_test</span> <span class="o">-</span><span class="n">s</span>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">livv</span> <span class="o">-</span><span class="n">e</span> <span class="n">example</span><span class="o">/</span><span class="n">example</span><span class="o">.</span><span class="n">json</span> <span class="o">-</span><span class="n">o</span> <span class="n">vv_test</span> <span class="o">-</span><span class="n">s</span>
 </pre></div>
 </div>
 <p><em>Note:</em> All the extension configurations files assume you are working from the
-top level <code class="docutils literal"><span class="pre">lex</span></code> directory. You <em>can</em> run any of these extensions from any
+top level <code class="docutils literal notranslate"><span class="pre">lex</span></code> directory. You <em>can</em> run any of these extensions from any
 directory, but you will need to edit the paths in the JSON configuration files so
-that <code class="docutils literal"><span class="pre">livv</span></code> can find the required files.</p>
+that <code class="docutils literal notranslate"><span class="pre">livv</span></code> can find the required files.</p>
 <p>Likewise, you can also apply these analyses to any new model run <a class="footnote-reference" href="#id10" id="id4">[2]</a> by adjusting
 the paths to point to your model run.</p>
 </div>
 <div class="section" id="reproducing-evans-et-al-2018">
 <h2>Reproducing Evans et al. (2018)<a class="headerlink" href="#reproducing-evans-et-al-2018" title="Permalink to this headline">¶</a></h2>
 <p>If all the required <a class="reference internal" href="#dependencies">Dependencies</a> are installed, and you’ve cloned the repository
-into the directory <code class="docutils literal"><span class="pre">lex</span></code>, you can reproduce all the figures and tables in
-<a class="reference internal" href="ref.html#evans2018" id="id5">[Evans2018]</a> by running this command from within the <code class="docutils literal"><span class="pre">lex</span></code> directory:</p>
-<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">livv</span> <span class="o">--</span><span class="n">validate</span> <span class="n">smb</span><span class="o">/</span><span class="n">smb_icecores</span><span class="o">.</span><span class="n">json</span> \
+into the directory <code class="docutils literal notranslate"><span class="pre">lex</span></code>, you can reproduce all the figures and tables in
+<a class="reference internal" href="ref.html#evans2018" id="id5">[Evans2018]</a> by running this command from within the <code class="docutils literal notranslate"><span class="pre">lex</span></code> directory:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">livv</span> <span class="o">--</span><span class="n">validate</span> <span class="n">smb</span><span class="o">/</span><span class="n">smb_icecores</span><span class="o">.</span><span class="n">json</span> \
                 <span class="n">energy</span><span class="o">/</span><span class="n">energy_cesm</span><span class="o">.</span><span class="n">json</span> \
                 <span class="n">clouds</span><span class="o">/</span><span class="n">clouds_cesm</span><span class="o">.</span><span class="n">json</span> \
                 <span class="n">dynamics</span><span class="o">/</span><span class="n">dynamics_cisma</span><span class="o">.</span><span class="n">json</span> \
@@ -131,7 +122,7 @@ into the directory <code class="docutils literal"><span class="pre">lex</span></
 </div>
 <p>All the <em>model</em> data used for these analyses, and provided as an example, required some
 postprocessing to generate the required input data for analysis with LIVVkit. A set of task-parallel
-postprocessing scripts are provided in the <code class="docutils literal"><span class="pre">postproc</span></code> directory. While these scripts are
+postprocessing scripts are provided in the <code class="docutils literal notranslate"><span class="pre">postproc</span></code> directory. While these scripts are
 currently model specific, a new model can be adapted from current scripts using the directions in
 the <a class="reference external" href="https://code.ornl.gov/LIVVkit/lex/blob/master/postproc/README.md">postprocessing README</a>.
 Note: A more generalized method of postprocessing model data is currently under development.</p>
@@ -145,31 +136,31 @@ Note: A more generalized method of postprocessing model data is currently under 
 we’ll help you through the process.</p>
 </div>
 <p>A template extension is provided as an absolute minimum working example
-in the <code class="docutils literal"><span class="pre">examples/</span></code> directory. To start developing a new extension, copy the
-<code class="docutils literal"><span class="pre">examples/template.*</span></code> files to a (possibly new) relevant directory, and change
+in the <code class="docutils literal notranslate"><span class="pre">examples/</span></code> directory. To start developing a new extension, copy the
+<code class="docutils literal notranslate"><span class="pre">examples/template.*</span></code> files to a (possibly new) relevant directory, and change
 these files’ name to a descriptive name. These files will provide the basis for your
 new extension.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Importantly, the only things <em>required</em> for a new extension to run in LIVVkit
-is a <code class="docutils literal"><span class="pre">run()</span></code> method in a <code class="docutils literal"><span class="pre">py</span></code> file and an <code class="docutils literal"><span class="pre">json</span></code> config file as described
+is a <code class="docutils literal notranslate"><span class="pre">run()</span></code> method in a <code class="docutils literal notranslate"><span class="pre">py</span></code> file and an <code class="docutils literal notranslate"><span class="pre">json</span></code> config file as described
 below.</p>
 </div>
 <div class="section" id="template-py">
 <h3>template.py:<a class="headerlink" href="#template-py" title="Permalink to this headline">¶</a></h3>
 <p>This is the primary extension python module. In order to work with LIVVkit, the
-extension needs to provide a <code class="docutils literal"><span class="pre">run(name,</span> <span class="pre">config)</span></code> function which accepts two arguments:
-<code class="docutils literal"><span class="pre">name</span></code>, the name of the extension which will be displayed on the extensions output
-webpage; and <code class="docutils literal"><span class="pre">config</span></code> which will contain the information in <code class="docutils literal"><span class="pre">template.json</span></code>. This
-function will then need to return a LIVVkit page element (<a class="reference internal" href="source/livvkit.util.html#livvkit.util.elements.page" title="livvkit.util.elements.page"><code class="xref py py-func docutils literal"><span class="pre">livvkit.util.elements.page()</span></code></a>)
+extension needs to provide a <code class="docutils literal notranslate"><span class="pre">run(name,</span> <span class="pre">config)</span></code> function which accepts two arguments:
+<code class="docutils literal notranslate"><span class="pre">name</span></code>, the name of the extension which will be displayed on the extensions output
+webpage; and <code class="docutils literal notranslate"><span class="pre">config</span></code> which will contain the information in <code class="docutils literal notranslate"><span class="pre">template.json</span></code>. This
+function will then need to return a LIVVkit page element (<a class="reference internal" href="source/livvkit.util.html#livvkit.util.elements.page" title="livvkit.util.elements.page"><code class="xref py py-func docutils literal notranslate"><span class="pre">livvkit.util.elements.page()</span></code></a>)
 which will contain a summary description of the extension (typically the extensions docstring),
-and all the page elements to display (see <a class="reference internal" href="source/livvkit.util.html#module-livvkit.util.elements" title="livvkit.util.elements"><code class="xref py py-mod docutils literal"><span class="pre">livvkit.util.elements</span></code></a>).</p>
+and all the page elements to display (see <a class="reference internal" href="source/livvkit.util.html#module-livvkit.util.elements" title="livvkit.util.elements"><code class="xref py py-mod docutils literal notranslate"><span class="pre">livvkit.util.elements</span></code></a>).</p>
 </div>
 <div class="section" id="template-json">
 <h3>template.json:<a class="headerlink" href="#template-json" title="Permalink to this headline">¶</a></h3>
 <p>This file contains a JSON dictionary of the required input data for the extension. It
 should minimally look like:</p>
-<div class="code json highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
+<div class="code json highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="s2">&quot;template&quot;</span> <span class="p">:</span> <span class="p">{</span>
         <span class="s2">&quot;module&quot;</span> <span class="p">:</span> <span class="s2">&quot;examples/template.py&quot;</span><span class="p">,</span>
         <span class="s2">&quot;references&quot;</span> <span class="p">:</span> <span class="s2">&quot;examples/template.bib&quot;</span><span class="p">,</span>
@@ -188,7 +179,7 @@ an extension for <em>yourself</em> these can just be absolute paths to where the
 lives on your machine.</p>
 </div>
 <p>Any other input data needed (e.g., parameters, flags, data file paths) for your
-extension should be added here and not hard-coded <code class="docutils literal"><span class="pre">template.py</span></code>.</p>
+extension should be added here and not hard-coded <code class="docutils literal notranslate"><span class="pre">template.py</span></code>.</p>
 </div>
 <div class="section" id="template-bib">
 <h3>template.bib:<a class="headerlink" href="#template-bib" title="Permalink to this headline">¶</a></h3>
@@ -200,7 +191,7 @@ list should minimally include <a class="reference internal" href="ref.html#kenne
 <div class="section" id="template-yml">
 <h3>template.yml:<a class="headerlink" href="#template-yml" title="Permalink to this headline">¶</a></h3>
 <p>If you use any python packages/modules beyond the required LIVVkit python dependencies
-(see LIVVkit’s <code class="docutils literal"><span class="pre">setup.py</span></code>), you should list them in this <a class="reference external" href="https://conda.io/docs/user-guide/tasks/manage-environments.html?highlight=yml#create-env-file-manually">Anaconda style environment
+(see LIVVkit’s <code class="docutils literal notranslate"><span class="pre">setup.py</span></code>), you should list them in this <a class="reference external" href="https://conda.io/docs/user-guide/tasks/manage-environments.html?highlight=yml#create-env-file-manually">Anaconda style environment
 YAML file</a>.
 By doing so, when LIVVkit runs an extension in an environment without the required
 dependencies, it will quit gracefully and suggest the Anaconda command which can
@@ -215,7 +206,7 @@ the data used, and any information needed for a clear contextual understanding
 of the analyses being presented.</li>
 <li>Include a minimum working example dataset so that the extension can be tested,
 run, and understood immediately on any machine.</li>
-<li>Include a <code class="docutils literal"><span class="pre">.bib</span></code> file and bibliography section that includes all relevant
+<li>Include a <code class="docutils literal notranslate"><span class="pre">.bib</span></code> file and bibliography section that includes all relevant
 citations for the analyses being presented. <em>Please include a DOI where possible.</em></li>
 </ol>
 <p>For extensions that require data for which re-host permission cannot be granted,
@@ -264,12 +255,14 @@ LEX releases.</em></td></tr>
 
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script><h3><a href="index.html">Table Of Contents</a></h3>
 <ul class="current">
@@ -331,7 +324,7 @@ LEX releases.</em></td></tr>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
     </div>
   </body>
 </html>
