@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>livvkit.util.bib &#8212; LIVVkit 3.0.0 documentation</title>
+    <link rel="stylesheet" href="../../../_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../_static/sidebar.js"></script>
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <link rel="shortcut icon" type="image/png" href="../../../_static/favicon.png" />
+    <meta name="viewport" content="width=device-width,initial-scale=0.8">
+    
+    
+
+  </head><body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
+        <li><a href="../../../index.html">LIVVkit 3.0.0 documentation</a> &#187;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    
+        <div class="badge">
+            <a href="https://github.com/LIVVkit/LIVVkit">Fork me on GitHub</a>
+            <img src="../../../_static/right-red@2x.png">
+        </div>
+    
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for livvkit.util.bib</h1><div class="highlight"><pre>
+<span></span><span class="c1"># coding=utf-8</span>
+<span class="c1"># Copyright (c) 2015-2018, UT-BATTELLE, LLC</span>
+<span class="c1"># All rights reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># Redistribution and use in source and binary forms, with or without</span>
+<span class="c1"># modification, are permitted provided that the following conditions are met:</span>
+<span class="c1">#</span>
+<span class="c1"># 1. Redistributions of source code must retain the above copyright notice, this</span>
+<span class="c1"># list of conditions and the following disclaimer.</span>
+<span class="c1">#</span>
+<span class="c1"># 2. Redistributions in binary form must reproduce the above copyright notice,</span>
+<span class="c1"># this list of conditions and the following disclaimer in the documentation</span>
+<span class="c1"># and/or other materials provided with the distribution.</span>
+<span class="c1">#</span>
+<span class="c1"># 3. Neither the name of the copyright holder nor the names of its contributors</span>
+<span class="c1"># may be used to endorse or promote products derived from this software without</span>
+<span class="c1"># specific prior written permission.</span>
+<span class="c1">#</span>
+<span class="c1"># THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND</span>
+<span class="c1"># ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED</span>
+<span class="c1"># WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE</span>
+<span class="c1"># DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE</span>
+<span class="c1"># FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL</span>
+<span class="c1"># DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR</span>
+<span class="c1"># SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER</span>
+<span class="c1"># CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,</span>
+<span class="c1"># OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span>
+<span class="c1"># OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span>
+
+<span class="kn">import</span> <span class="nn">io</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="nn">pybtex.database</span>
+<span class="kn">import</span> <span class="nn">pybtex.io</span>
+
+<span class="kn">from</span> <span class="nn">pybtex.backends.latex</span> <span class="kn">import</span> <span class="n">Backend</span> <span class="k">as</span> <span class="n">LatexBaseBackend</span>
+<span class="kn">from</span> <span class="nn">pybtex.backends.html</span> <span class="kn">import</span> <span class="n">Backend</span> <span class="k">as</span> <span class="n">HTMLBaseBackend</span>
+<span class="kn">from</span> <span class="nn">pybtex.style.formatting.plain</span> <span class="kn">import</span> <span class="n">Style</span> <span class="k">as</span> <span class="n">PlainStyle</span>
+
+
+<span class="c1"># FIXME: This is hacky! Here we&#39;re returning actual latex as if it&#39;s html so we</span>
+<span class="c1">#        can coopt the bib2html function. Either need to make a generic renderbib</span>
+<span class="c1">#        function or a bib2latex function...</span>
+<div class="viewcode-block" id="LatexBackend"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.bib.LatexBackend">[docs]</a><span class="k">class</span> <span class="nc">LatexBackend</span><span class="p">(</span><span class="n">LatexBaseBackend</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">LatexBackend</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_repr_html</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">formatted_bibliography</span><span class="p">):</span>
+        <span class="n">stream</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write_to_stream</span><span class="p">(</span><span class="n">formatted_bibliography</span><span class="p">,</span> <span class="n">stream</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">stream</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="HTMLBackend"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.bib.HTMLBackend">[docs]</a><span class="k">class</span> <span class="nc">HTMLBackend</span><span class="p">(</span><span class="n">HTMLBaseBackend</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HTMLBackend</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_html</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+<div class="viewcode-block" id="HTMLBackend.output"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.bib.HTMLBackend.output">[docs]</a>    <span class="k">def</span> <span class="nf">output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">html</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_html</span> <span class="o">+=</span> <span class="n">html</span></div>
+
+<div class="viewcode-block" id="HTMLBackend.format_protected"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.bib.HTMLBackend.format_protected">[docs]</a>    <span class="k">def</span> <span class="nf">format_protected</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">text</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;http&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">format_href</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">r</span><span class="s1">&#39;&lt;span class=&quot;bibtex-protected&quot;&gt;</span><span class="si">{}</span><span class="s1">&lt;/span&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="HTMLBackend.write_prologue"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.bib.HTMLBackend.write_prologue">[docs]</a>    <span class="k">def</span> <span class="nf">write_prologue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="s1">&#39;&lt;div class=&quot;bibliography&quot;&gt;&lt;h2&gt;References&lt;/h2&gt;&#39;</span>
+                    <span class="s1">&#39;&lt;p&gt;LIVVkit is an open source project licensed under a BSD 3-clause License. &#39;</span>
+                    <span class="s1">&#39;We ask that you please acknowledge LIVVkit in any work it is used or supports. &#39;</span>
+                    <span class="s1">&#39;In any corresponding published work, please cite: &lt;/p&gt;&lt;dl&gt;&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="HTMLBackend.write_epilogue"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.bib.HTMLBackend.write_epilogue">[docs]</a>    <span class="k">def</span> <span class="nf">write_epilogue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="s1">&#39;&lt;/dl&gt;&lt;/div&gt;&#39;</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_repr_html</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">formatted_bibliography</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write_prologue</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">formatted_bibliography</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write_entry</span><span class="p">(</span><span class="n">entry</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">entry</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="n">entry</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write_epilogue</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_html</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">url &lt;a&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;a&#39;</span><span class="p">)</span></div>
+
+
+<span class="c1"># FIXME: For python 3.7+ only...</span>
+<span class="c1"># from functools import singledispatch</span>
+<span class="c1"># from collections.abc import Iterable</span>
+<span class="c1"># from typing import Union</span>
+<span class="c1">#</span>
+<span class="c1"># @singledispatch</span>
+<span class="c1"># def bib2html(bib, style=None, backend=None):</span>
+<span class="c1">#     raise NotImplementedError(&#39;I do not now how to convert a {} type to a bibliography&#39;.format(type(bib)))</span>
+<div class="viewcode-block" id="bib2html"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.bib.bib2html">[docs]</a><span class="k">def</span> <span class="nf">bib2html</span><span class="p">(</span><span class="n">bib</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">bib</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="n">_bib2html_string</span><span class="p">(</span><span class="n">bib</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">bib</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">set</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="n">_bib2html_list</span><span class="p">(</span><span class="n">bib</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">bib</span><span class="p">,</span> <span class="n">pybtex</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">BibliographyData</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">_bib2html_bibdata</span><span class="p">(</span><span class="n">bib</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;I do not now how to convert a </span><span class="si">{}</span><span class="s1"> type to a bibliography&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">bib</span><span class="p">)))</span></div>
+
+
+<span class="c1"># FIXME: For python 3.7+ only...</span>
+<span class="c1"># @bib2html.register</span>
+<span class="c1"># def _bib2html_string(bib: Union[str, Path], style=None, backend=None):</span>
+<span class="k">def</span> <span class="nf">_bib2html_string</span><span class="p">(</span><span class="n">bib</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">style</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">style</span> <span class="o">=</span> <span class="n">PlainStyle</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">backend</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">backend</span> <span class="o">=</span> <span class="n">HTMLBackend</span><span class="p">()</span>
+
+    <span class="n">formatted_bib</span> <span class="o">=</span> <span class="n">style</span><span class="o">.</span><span class="n">format_bibliography</span><span class="p">(</span><span class="n">pybtex</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">parse_file</span><span class="p">(</span><span class="n">bib</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">backend</span><span class="o">.</span><span class="n">_repr_html</span><span class="p">(</span><span class="n">formatted_bib</span><span class="p">)</span>
+
+
+<span class="c1"># FIXME: For python 3.7+ only...</span>
+<span class="c1"># @bib2html.register</span>
+<span class="c1"># def _bib2html_list(bib: Iterable, style=None, backend=None):</span>
+<span class="k">def</span> <span class="nf">_bib2html_list</span><span class="p">(</span><span class="n">bib</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">style</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">style</span> <span class="o">=</span> <span class="n">PlainStyle</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">backend</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">backend</span> <span class="o">=</span> <span class="n">HTMLBackend</span><span class="p">()</span>
+
+    <span class="n">bibliography</span> <span class="o">=</span> <span class="n">pybtex</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">BibliographyData</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">bib_file</span> <span class="ow">in</span> <span class="n">bib</span><span class="p">:</span>
+        <span class="n">temp_bib</span> <span class="o">=</span> <span class="n">pybtex</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">parse_file</span><span class="p">(</span><span class="n">bib_file</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">temp_bib</span><span class="o">.</span><span class="n">entries</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">bibliography</span><span class="o">.</span><span class="n">add_entry</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">entry</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">pybtex</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">BibliographyDataError</span><span class="p">:</span>
+                <span class="c1"># FIXME: should log this...</span>
+                <span class="c1"># Skip duplicate entries</span>
+                <span class="k">continue</span>
+
+    <span class="n">formatted_bib</span> <span class="o">=</span> <span class="n">style</span><span class="o">.</span><span class="n">format_bibliography</span><span class="p">(</span><span class="n">bibliography</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">backend</span><span class="o">.</span><span class="n">_repr_html</span><span class="p">(</span><span class="n">formatted_bib</span><span class="p">)</span>
+
+
+<span class="c1"># FIXME: For python 3.7+ only...</span>
+<span class="c1"># @bib2html.register</span>
+<span class="c1"># def _bib2html_bibdata(bib: pybtex.database.BibliographyData, style=None, backend=None):</span>
+<span class="k">def</span> <span class="nf">_bib2html_bibdata</span><span class="p">(</span><span class="n">bib</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">style</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">style</span> <span class="o">=</span> <span class="n">PlainStyle</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">backend</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">backend</span> <span class="o">=</span> <span class="n">HTMLBackend</span><span class="p">()</span>
+
+    <span class="n">formatted_bib</span> <span class="o">=</span> <span class="n">style</span><span class="o">.</span><span class="n">format_bibliography</span><span class="p">(</span><span class="n">bib</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">backend</span><span class="o">.</span><span class="n">_repr_html</span><span class="p">(</span><span class="n">formatted_bib</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+    <a id="sidebar-anchor"></a>
+    
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script><h3><a href="../../../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../vv-intro.html">Introduction to V&amp;V</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../design.html">Design Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../lex.html">LIVVkit Extensions (LEX)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bundles.html">Model Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ref.html">References and indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">Frequently Asked Questions</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
+    </div>
+  </body>
+</html>

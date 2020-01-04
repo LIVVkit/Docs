@@ -2,17 +2,20 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>livvkit.components.performance &#8212; LIVVkit 2.1.6 documentation</title>
+    <meta charset="utf-8" />
+    <title>livvkit.components.performance &#8212; LIVVkit 3.0.0 documentation</title>
     <link rel="stylesheet" href="../../../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
     <script type="text/javascript" src="../../../_static/sidebar.js"></script>
+    
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
@@ -26,7 +29,7 @@
       <h3>Navigation</h3>
       <ul>
         <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
-        <li><a href="../../../index.html">LIVVkit 2.1.6 documentation</a> &#187;</li>
+        <li><a href="../../../index.html">LIVVkit 3.0.0 documentation</a> &#187;</li>
           <li><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>
@@ -75,8 +78,6 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Performance Test Base Module.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span>
-<span class="kn">import</span> <span class="nn">six</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">glob</span>
@@ -84,15 +85,15 @@
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="kn">import</span> <span class="nn">livvkit</span>
-<span class="kn">from</span> <span class="nn">livvkit.util</span> <span class="k">import</span> <span class="n">functions</span>
-<span class="kn">from</span> <span class="nn">livvkit.util</span> <span class="k">import</span> <span class="n">colormaps</span>
-<span class="kn">from</span> <span class="nn">livvkit.util.LIVVDict</span> <span class="k">import</span> <span class="n">LIVVDict</span>
-<span class="kn">from</span> <span class="nn">livvkit.util</span> <span class="k">import</span> <span class="n">elements</span>
+<span class="kn">from</span> <span class="nn">livvkit</span> <span class="kn">import</span> <span class="n">elements</span>
+<span class="kn">from</span> <span class="nn">livvkit.util</span> <span class="kn">import</span> <span class="n">functions</span>
+<span class="kn">from</span> <span class="nn">livvkit.util</span> <span class="kn">import</span> <span class="n">colormaps</span>
+<span class="kn">from</span> <span class="nn">livvkit.util.LIVVDict</span> <span class="kn">import</span> <span class="n">LIVVDict</span>
 
 <span class="n">SEC_PER_DAY</span> <span class="o">=</span> <span class="mf">86400.0</span>
 
 
-<div class="viewcode-block" id="run_suite"><a class="viewcode-back" href="../../../source/livvkit.components.html#livvkit.components.performance.run_suite">[docs]</a><span class="k">def</span> <span class="nf">run_suite</span><span class="p">(</span><span class="n">case</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">summary</span><span class="p">):</span>
+<div class="viewcode-block" id="run_suite"><a class="viewcode-back" href="../../../source/livvkit.components.html#livvkit.components.performance.run_suite">[docs]</a><span class="k">def</span> <span class="nf">run_suite</span><span class="p">(</span><span class="n">case</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Run the full suite of performance tests &quot;&quot;&quot;</span>
     <span class="n">config</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">case</span>
     <span class="n">timing_data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
@@ -144,27 +145,31 @@
                                        <span class="p">),</span>
         <span class="p">]</span>
 
-    <span class="n">timing_plots</span> <span class="o">=</span> <span class="n">timing_plots</span> <span class="o">+</span> \
+    <span class="n">timing_plots</span> <span class="o">+=</span> \
         <span class="p">[</span><span class="n">generate_timing_breakdown_plot</span><span class="p">(</span><span class="n">timing_data</span><span class="p">[</span><span class="n">s</span><span class="p">],</span>
                                         <span class="n">config</span><span class="p">[</span><span class="s1">&#39;scaling_var&#39;</span><span class="p">],</span>
                                         <span class="s2">&quot;Timing breakdown for &quot;</span> <span class="o">+</span> <span class="n">case</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span><span class="o">+</span><span class="s2">&quot; &quot;</span><span class="o">+</span><span class="n">s</span><span class="p">,</span>
                                         <span class="s2">&quot;&quot;</span><span class="p">,</span>
                                         <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">plot_dir</span><span class="p">,</span> <span class="n">case</span><span class="o">+</span><span class="s2">&quot;_&quot;</span><span class="o">+</span><span class="n">s</span><span class="o">+</span><span class="s2">&quot;_timing_breakdown.png&quot;</span><span class="p">)</span>
                                         <span class="p">)</span>
-         <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">iterkeys</span><span class="p">(</span><span class="n">timing_data</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="n">functions</span><span class="o">.</span><span class="n">sort_scale</span><span class="p">)]</span>
+         <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">timing_data</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">functions</span><span class="o">.</span><span class="n">sort_scale</span><span class="p">)]</span>
 
     <span class="c1"># Build an image gallery and write the results</span>
     <span class="n">el</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="n">elements</span><span class="o">.</span><span class="n">gallery</span><span class="p">(</span><span class="s2">&quot;Performance Plots&quot;</span><span class="p">,</span> <span class="n">timing_plots</span><span class="p">)</span>
+            <span class="n">elements</span><span class="o">.</span><span class="n">Gallery</span><span class="p">(</span><span class="s2">&quot;Performance Plots&quot;</span><span class="p">,</span> <span class="n">timing_plots</span><span class="p">)</span>
          <span class="p">]</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">elements</span><span class="o">.</span><span class="n">page</span><span class="p">(</span><span class="n">case</span><span class="p">,</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">],</span> <span class="n">element_list</span><span class="o">=</span><span class="n">el</span><span class="p">)</span>
-    <span class="n">summary</span><span class="p">[</span><span class="n">case</span><span class="p">]</span> <span class="o">=</span> <span class="n">_summarize_result</span><span class="p">(</span><span class="n">timing_data</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">elements</span><span class="o">.</span><span class="n">Page</span><span class="p">(</span><span class="n">case</span><span class="p">,</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">],</span> <span class="n">elements</span><span class="o">=</span><span class="n">el</span><span class="p">)</span>
+    <span class="n">summary</span> <span class="o">=</span> <span class="n">_summarize_result</span><span class="p">(</span><span class="n">timing_data</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+
     <span class="n">_print_result</span><span class="p">(</span><span class="n">case</span><span class="p">,</span> <span class="n">summary</span><span class="p">)</span>
+
     <span class="n">functions</span><span class="o">.</span><span class="n">create_page_from_template</span><span class="p">(</span><span class="s2">&quot;performance.html&quot;</span><span class="p">,</span>
                                         <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">index_dir</span><span class="p">,</span> <span class="s2">&quot;performance&quot;</span><span class="p">,</span>
                                                      <span class="n">case</span> <span class="o">+</span> <span class="s2">&quot;.html&quot;</span><span class="p">))</span>
-    <span class="n">functions</span><span class="o">.</span><span class="n">write_json</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;performance&quot;</span><span class="p">),</span>
-                         <span class="n">case</span> <span class="o">+</span> <span class="s2">&quot;.json&quot;</span><span class="p">)</span></div>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;performance&quot;</span><span class="p">,</span> <span class="n">case</span> <span class="o">+</span> <span class="s2">&quot;.json&quot;</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">_repr_json</span><span class="p">())</span>
+
+    <span class="k">return</span> <span class="n">summary</span></div>
 
 
 <span class="k">def</span> <span class="nf">_analyze_case</span><span class="p">(</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">bench_dir</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
@@ -181,16 +186,14 @@
     <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model_stats</span><span class="p">,</span> <span class="n">bench</span><span class="o">=</span><span class="n">bench_stats</span><span class="p">)</span>
 
 
-<span class="c1"># noinspection PyUnusedLocal</span>
 <span class="k">def</span> <span class="nf">_print_result</span><span class="p">(</span><span class="n">case</span><span class="p">,</span> <span class="n">summary</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Show some statistics from the run &quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">case</span><span class="p">,</span> <span class="n">case_data</span> <span class="ow">in</span> <span class="n">summary</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="k">for</span> <span class="n">dof</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">case_data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    &quot;</span> <span class="o">+</span> <span class="n">case</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">dof</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    -------------------&quot;</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">header</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    &quot;</span> <span class="o">+</span> <span class="n">header</span> <span class="o">+</span> <span class="s2">&quot; : &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">dof</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">summary</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    &quot;</span> <span class="o">+</span> <span class="n">case</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">dof</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    -------------------&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">header</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    &quot;</span> <span class="o">+</span> <span class="n">header</span> <span class="o">+</span> <span class="s2">&quot; : &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">_summarize_result</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
@@ -216,11 +219,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">time_diff</span> <span class="o">=</span> <span class="s1">&#39;NA&#39;</span>
         <span class="n">summary</span><span class="p">[</span><span class="n">size</span><span class="p">][</span><span class="s1">&#39;Proc. Counts&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">proc_counts</span><span class="p">)])</span>
-        <span class="n">summary</span><span class="p">[</span><span class="n">size</span><span class="p">][</span><span class="s1">&#39;Mean Time Diff (</span><span class="si">% o</span><span class="s1">f benchmark)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time_diff</span>
+        <span class="n">summary</span><span class="p">[</span><span class="n">size</span><span class="p">][</span><span class="s1">&#39;Mean Time Diff (</span><span class="si">% o</span><span class="s1">f benchmark)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time_diff</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">summary</span>
 
 
-<span class="c1"># noinspection PyUnusedLocal</span>
 <div class="viewcode-block" id="populate_metadata"><a class="viewcode-back" href="../../../source/livvkit.components.html#livvkit.components.performance.populate_metadata">[docs]</a><span class="k">def</span> <span class="nf">populate_metadata</span><span class="p">(</span><span class="n">case</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Provide some top level information for the summary &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;Type&quot;</span><span class="p">:</span> <span class="s2">&quot;Summary&quot;</span><span class="p">,</span>
@@ -393,11 +395,12 @@
         <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.44</span><span class="p">,</span> <span class="s2">&quot;To generate this data rerun BATS with the&quot;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.36</span><span class="p">,</span> <span class="s2">&quot;performance option enabled.&quot;</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">livvkit</span><span class="o">.</span><span class="n">publish</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">plot_file</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;.eps&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">plot_file</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">elements</span><span class="o">.</span><span class="n">image</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">plot_file</span><span class="p">))</span></div>
+
+    <span class="n">image</span> <span class="o">=</span> <span class="n">elements</span><span class="o">.</span><span class="n">Image</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">plot_file</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">image</span></div>
 
 
 <div class="viewcode-block" id="scaling_sypd_plot"><a class="viewcode-back" href="../../../source/livvkit.components.html#livvkit.components.performance.scaling_sypd_plot">[docs]</a><span class="k">def</span> <span class="nf">scaling_sypd_plot</span><span class="p">(</span><span class="n">timing_data</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">plot_file</span><span class="p">):</span>
@@ -462,15 +465,14 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        an image element containing the plot file and metadata</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># noinspection PyProtectedMember</span>
     <span class="n">cmap_data</span> <span class="o">=</span> <span class="n">colormaps</span><span class="o">.</span><span class="n">_viridis_data</span>
-    <span class="n">n_subplots</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">viewkeys</span><span class="p">(</span><span class="n">timing_stats</span><span class="p">))</span>
+    <span class="n">n_subplots</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">timing_stats</span><span class="p">)</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_subplots</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="n">n_subplots</span><span class="o">+</span><span class="mi">2</span><span class="p">),</span> <span class="mi">5</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">plot_num</span><span class="p">,</span> <span class="n">p_count</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span>
-            <span class="nb">sorted</span><span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">iterkeys</span><span class="p">(</span><span class="n">timing_stats</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="n">functions</span><span class="o">.</span><span class="n">sort_processor_counts</span><span class="p">)):</span>
+            <span class="nb">sorted</span><span class="p">(</span><span class="n">timing_stats</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">functions</span><span class="o">.</span><span class="n">sort_processor_counts</span><span class="p">)):</span>
 
         <span class="n">case_data</span> <span class="o">=</span> <span class="n">timing_stats</span><span class="p">[</span><span class="n">p_count</span><span class="p">]</span>
-        <span class="n">all_timers</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">iterkeys</span><span class="p">(</span><span class="n">case_data</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">]))</span> <span class="o">|</span> <span class="nb">set</span><span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">iterkeys</span><span class="p">(</span><span class="n">case_data</span><span class="p">[</span><span class="s1">&#39;bench&#39;</span><span class="p">]))</span>
+        <span class="n">all_timers</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">case_data</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">])</span> <span class="o">|</span> <span class="nb">set</span><span class="p">(</span><span class="n">case_data</span><span class="p">[</span><span class="s1">&#39;bench&#39;</span><span class="p">])</span>
         <span class="n">all_timers</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">all_timers</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">cmap_stride</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cmap_data</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">all_timers</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
         <span class="n">colors</span> <span class="o">=</span> <span class="p">{</span><span class="n">all_timers</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span> <span class="n">cmap_data</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">cmap_stride</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">all_timers</span><span class="p">))}</span>
@@ -486,7 +488,7 @@
 
             <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="k">if</span> <span class="n">var_data</span> <span class="o">!=</span> <span class="p">{}:</span>
-                <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">iterkeys</span><span class="p">(</span><span class="n">var_data</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">var_data</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
                     <span class="k">if</span> <span class="n">var</span> <span class="o">!=</span> <span class="n">scaling_var</span><span class="p">:</span>
                         <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">bar_num</span><span class="p">,</span> <span class="n">var_data</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="s1">&#39;mean&#39;</span><span class="p">],</span> <span class="mf">0.8</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="n">offset</span><span class="p">,</span>
                                 <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">var</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="p">(</span><span class="n">var</span> <span class="k">if</span> <span class="n">bar_num</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="s1">&#39;_none&#39;</span><span class="p">))</span>
@@ -507,11 +509,12 @@
             <span class="n">group</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">sub_ax</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">livvkit</span><span class="o">.</span><span class="n">publish</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">plot_file</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;.eps&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">plot_file</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">elements</span><span class="o">.</span><span class="n">image</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">plot_file</span><span class="p">))</span></div>
+
+    <span class="n">image</span> <span class="o">=</span> <span class="n">elements</span><span class="o">.</span><span class="n">Image</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">plot_file</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">image</span></div>
 </pre></div>
 
           </div>
@@ -523,13 +526,11 @@
     
 
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
@@ -542,7 +543,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../lex.html">LIVVkit Extensions (LEX)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../bundles.html">Model Bundles</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../contrib.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CONTRIBUTING.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../ref.html">References and indices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../faq.html">Frequently Asked Questions</a></li>
@@ -566,7 +567,7 @@
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
     </div>
   </body>
 </html>

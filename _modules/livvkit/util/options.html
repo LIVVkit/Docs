@@ -2,17 +2,20 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>livvkit.util.options &#8212; LIVVkit 2.1.6 documentation</title>
+    <meta charset="utf-8" />
+    <title>livvkit.util.options &#8212; LIVVkit 3.0.0 documentation</title>
     <link rel="stylesheet" href="../../../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
     <script type="text/javascript" src="../../../_static/sidebar.js"></script>
+    
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
@@ -26,7 +29,7 @@
       <h3>Navigation</h3>
       <ul>
         <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
-        <li><a href="../../../index.html">LIVVkit 2.1.6 documentation</a> &#187;</li>
+        <li><a href="../../../index.html">LIVVkit 3.0.0 documentation</a> &#187;</li>
           <li><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>
@@ -73,17 +76,29 @@
 <span class="c1"># OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span>
 <span class="c1"># OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span>
 
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span>
-
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">pkgutil</span>
 <span class="kn">import</span> <span class="nn">argparse</span>
 <span class="kn">import</span> <span class="nn">importlib</span>
+<span class="kn">import</span> <span class="nn">multiprocessing</span> <span class="k">as</span> <span class="nn">mp</span>
 
 <span class="kn">import</span> <span class="nn">livvkit</span>
-<span class="kn">from</span> <span class="nn">livvkit</span> <span class="k">import</span> <span class="n">bundles</span>
+<span class="kn">from</span> <span class="nn">livvkit</span> <span class="kn">import</span> <span class="n">bundles</span>
+
+
+<div class="viewcode-block" id="positive_int"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.options.positive_int">[docs]</a><span class="k">def</span> <span class="nf">positive_int</span><span class="p">(</span><span class="n">integer</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Argparse helper function to specify a zero or positive integer as an</span>
+<span class="sd">    argument type</span>
+<span class="sd">    :param integer: A zero or positive integer</span>
+<span class="sd">    :return: integer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">integer</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">integer</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">integer</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentTypeError</span><span class="p">(</span><span class="s1">&#39;Must be zero or a positive integer&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">integer</span></div>
 
 
 <div class="viewcode-block" id="parse_args"><a class="viewcode-back" href="../../../source/livvkit.util.html#livvkit.util.options.parse_args">[docs]</a><span class="k">def</span> <span class="nf">parse_args</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -93,30 +108,28 @@
 <span class="sd">    Args:</span>
 <span class="sd">        args: The list of arguments, typically sys.argv[1:]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Main script to run LIVVkit.&quot;</span><span class="p">,</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Main script to run LIVVkit.&#39;</span><span class="p">,</span>
                                      <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentDefaultsHelpFormatter</span><span class="p">,</span>
                                      <span class="n">fromfile_prefix_chars</span><span class="o">=</span><span class="s1">&#39;@&#39;</span><span class="p">)</span>
 
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="s1">&#39;--out-dir&#39;</span><span class="p">,</span>
-                        <span class="n">default</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;vv_&quot;</span> <span class="o">+</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)),</span>
+                        <span class="n">default</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s1">&#39;vv_&#39;</span> <span class="o">+</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)),</span>
                         <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Location to output the LIVVkit webpages.&#39;</span>
                         <span class="p">)</span>
 
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-v&#39;</span><span class="p">,</span> <span class="s1">&#39;--verify&#39;</span><span class="p">,</span>
                         <span class="n">nargs</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
                         <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                        <span class="n">help</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;Specify the locations of the test and bench bundle to&#39;</span><span class="p">,</span>
-                                       <span class="s1">&#39;compare (respectively).&#39;</span>
-                                       <span class="p">])</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Specify the locations of the test and bench bundle &#39;</span>
+                             <span class="s1">&#39;to compare (respectively).&#39;</span>
                         <span class="p">)</span>
 
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-V&#39;</span><span class="p">,</span> <span class="s1">&#39;--validate&#39;</span><span class="p">,</span>
                         <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store&#39;</span><span class="p">,</span>
                         <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span>
                         <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                        <span class="n">help</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;Specify the location of the configuration files for&#39;</span><span class="p">,</span>
-                                       <span class="s1">&#39;validation tests.&#39;</span>
-                                       <span class="p">])</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Specify the location of the configuration files &#39;</span>
+                             <span class="s1">&#39;for validation tests.&#39;</span>
                         <span class="p">)</span>
 
     <span class="c1"># FIXME: this just short-circuits to the validation option, and should become its own module</span>
@@ -126,24 +139,25 @@
                         <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                         <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;validate&#39;</span><span class="p">,</span>
                         <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;EXTENSION&#39;</span><span class="p">,</span>
-                        <span class="n">help</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;Specify the location of the configuration files for&#39;</span><span class="p">,</span>
-                                       <span class="s1">&#39;LIVVkit extensions.&#39;</span>
-                                       <span class="p">])</span>
-                        <span class="p">)</span>
-
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-p&#39;</span><span class="p">,</span> <span class="s1">&#39;--publish&#39;</span><span class="p">,</span>
-                        <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
-                        <span class="n">help</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;Also produce a publication quality copy of the figure in&#39;</span><span class="p">,</span>
-                                       <span class="s1">&#39;the output directory (eps, 600d pi).&#39;</span>
-                                       <span class="p">])</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Specify the location of the configuration files &#39;</span>
+                             <span class="s1">&#39;for LIVVkit extensions.&#39;</span>
                         <span class="p">)</span>
 
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-s&#39;</span><span class="p">,</span> <span class="s1">&#39;--serve&#39;</span><span class="p">,</span>
-                        <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">const</span><span class="o">=</span><span class="mi">8000</span><span class="p">,</span>
-                        <span class="n">help</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;Start a simple HTTP server for the output website specified&#39;</span><span class="p">,</span>
-                                       <span class="s1">&#39;by OUT_DIR on port SERVE.&#39;</span>
-                                       <span class="p">])</span>
+                        <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span>
+                        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+                        <span class="n">const</span><span class="o">=</span><span class="mi">8000</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Start a simple HTTP server for the output website &#39;</span>
+                             <span class="s1">&#39;specified by OUT_DIR on port SERVE.&#39;</span>
                         <span class="p">)</span>
+
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-p&#39;</span><span class="p">,</span> <span class="s1">&#39;--pool-size&#39;</span><span class="p">,</span>
+                        <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span>
+                        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+                        <span class="n">default</span><span class="o">=</span><span class="p">(</span><span class="n">mp</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">or</span> <span class="mi">1</span><span class="p">),</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;The number of multiprocessing processes to run &#39;</span>
+                             <span class="s1">&#39;analyses in. If zero, processes will run serially &#39;</span>
+                             <span class="s1">&#39;outside of the multiprocessing module.&#39;</span><span class="p">)</span>
 
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--version&#39;</span><span class="p">,</span>
                         <span class="n">action</span><span class="o">=</span><span class="s1">&#39;version&#39;</span><span class="p">,</span>
@@ -165,7 +179,7 @@
     <span class="n">livvkit</span><span class="o">.</span><span class="n">index_dir</span> <span class="o">=</span> <span class="n">livvkit</span><span class="o">.</span><span class="n">output_dir</span>
     <span class="n">livvkit</span><span class="o">.</span><span class="n">verify</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">options</span><span class="o">.</span><span class="n">verify</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">False</span>
     <span class="n">livvkit</span><span class="o">.</span><span class="n">validate</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">options</span><span class="o">.</span><span class="n">validate</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">False</span>
-    <span class="n">livvkit</span><span class="o">.</span><span class="n">publish</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">publish</span>
+    <span class="n">livvkit</span><span class="o">.</span><span class="n">pool_size</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">pool_size</span>
 
     <span class="c1"># Get a list of bundles that provide model specific implementations</span>
     <span class="n">available_bundles</span> <span class="o">=</span> <span class="p">[</span><span class="n">mod</span> <span class="k">for</span> <span class="n">imp</span><span class="p">,</span> <span class="n">mod</span><span class="p">,</span> <span class="n">ispkg</span> <span class="ow">in</span> <span class="n">pkgutil</span><span class="o">.</span><span class="n">iter_modules</span><span class="p">(</span><span class="n">bundles</span><span class="o">.</span><span class="n">__path__</span><span class="p">)]</span>
@@ -246,13 +260,11 @@
     
 
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
@@ -265,7 +277,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../lex.html">LIVVkit Extensions (LEX)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../bundles.html">Model Bundles</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../contrib.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CONTRIBUTING.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../ref.html">References and indices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../faq.html">Frequently Asked Questions</a></li>
@@ -289,7 +301,7 @@
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
     </div>
   </body>
 </html>

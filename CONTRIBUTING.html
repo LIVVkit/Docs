@@ -2,17 +2,20 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Contributing &#8212; LIVVkit 2.1.6 documentation</title>
+    <meta charset="utf-8" />
+    <title>Contributing &#8212; LIVVkit 3.0.0 documentation</title>
     <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
     <script type="text/javascript" src="_static/sidebar.js"></script>
+    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="API" href="api.html" />
@@ -28,7 +31,7 @@
       <h3>Navigation</h3>
       <ul>
         <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
-        <li><a href="index.html">LIVVkit 2.1.6 documentation</a> &#187;</li> 
+        <li><a href="index.html">LIVVkit 3.0.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     
@@ -58,8 +61,8 @@ and releases are packaged and distributed on <a class="reference external" href=
 <div class="section" id="become-a-core-developer">
 <h3>1. Become a core developer<a class="headerlink" href="#become-a-core-developer" title="Permalink to this headline">¶</a></h3>
 <p>If you have many contributions and are planning on being an active developer, you may request to
-become a core developer by contacting <a class="reference external" href="mailto:kennedyjh&#37;&#52;&#48;ornl&#46;gov">Joseph H<span>&#46;</span> Kennedy</a> and briefely
-describing your intended contribution goals. Once approved, you will be given push access to the
+become a core developer by <a class="reference external" href="https://github.com/livvkit/livvkit/issues">opening an issue on github</a> and briefly
+describ your intended contribution goals. Once approved, you will be given push access to the
 <code class="docutils literal notranslate"><span class="pre">LIVVkit/LIVVkit</span></code> repository (and any other needed repositories).</p>
 <p>When developing the code, please follow the <a class="reference external" href="https://www.atlassian.com/git/tutorials/comparing-workflows#gitflow-workflow">GitFlow workflow</a> and make all your
 changes in a feature branch. Feature branches should follow the <code class="docutils literal notranslate"><span class="pre">#-username-feature</span></code> naming
@@ -79,14 +82,13 @@ public repository.</p>
 </div>
 <div class="section" id="code-guidelines">
 <h2>Code Guidelines<a class="headerlink" href="#code-guidelines" title="Permalink to this headline">¶</a></h2>
-<p>Until <a class="reference external" href="https://github.com/LIVVkit/LIVVkit/milestone/3">LIVVkit 3.0</a>
-is released, all code should be written as python 2 and 3 compatible
-code – see <a class="reference external" href="http://python-future.org/compatible_idioms.html">http://python-future.org/compatible_idioms.html</a>.  Additionally, We
-generally follow <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">PEP 8 guidelines</a>
+<p>LIVVkit 3.0+ will be developed and tested on the three latest Python versions (3.6–3.8 for LIVVkit 3.0).
+Additionally, We generally follow <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">PEP 8 guidelines</a>
 as presented at <a class="reference external" href="http://pep8.org/">pep8.org</a>, with the exception of line lengths:
 lines have a soft limit of 100 characters and a hard limit of 120 characters when
-extra length improves readability.  See of a very nice presentation of the PEP 8
-style guide.  A sample code snippet below highlights most of our
+extra length improves readability. We use the
+<a class="reference external" href="https://github.com/google/styleguide/blob/gh-pages/pyguide.md#38-comments-and-docstrings">Google Style</a>
+for our Docstrings. A sample code snippet below highlights most of our
 coding conventions.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># coding=utf-8</span>
 <span class="c1"># LICENSE...</span>
@@ -94,8 +96,6 @@ coding conventions.</p>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Description of module</span>
 <span class="sd">&quot;&quot;&quot;</span>
-
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span>
 
 <span class="kn">import</span> <span class="nn">pymodule</span>
 <span class="kn">import</span> <span class="nn">pymodule2</span>
@@ -133,30 +133,26 @@ coding conventions.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="tips">
-<h2>Tips<a class="headerlink" href="#tips" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>Each source file containing functions that are called by the main <code class="docutils literal notranslate"><span class="pre">livv.py</span></code> script should have
-the license header. (There should be a script to fix when this is forgotten in util).</li>
-<li>Global variables should be stored in the module <code class="docutils literal notranslate"><span class="pre">util.variables</span></code>.  When adding new global
-variables list them in that module with some basic default value so that it is easy for others to
-see which variables may be used by outside modules.</li>
-<li>When refering to system paths use the <code class="docutils literal notranslate"><span class="pre">os.sep</span></code> variable or <code class="docutils literal notranslate"><span class="pre">os.path.join()</span></code> instead of
-relying on whichever version of path separator your system uses.</li>
-</ul>
-</div>
 <div class="section" id="building-the-documentation">
 <h2>Building the documentation<a class="headerlink" href="#building-the-documentation" title="Permalink to this headline">¶</a></h2>
 <p>To build this documentation you will need to install some additional tools:</p>
 <ul class="simple">
-<li><a class="reference external" href="http://usejsdoc.org">JSDoc</a></li>
-<li><a class="reference external" href="http://www.sphinx-doc.org">sphinx</a></li>
-<li><a class="reference external" href="https://pypi.python.org/pypi/sphinx-api-any">sphinx-js</a></li>
-<li><a class="reference external" href="https://pypi.python.org/pypi/sphinx_py3doc_enhanced_theme">sphinx-py3doc-enhanced-theme</a></li>
+<li><p><a class="reference external" href="http://usejsdoc.org">JSDoc</a></p></li>
+<li><p><a class="reference external" href="http://www.sphinx-doc.org">sphinx</a></p></li>
+<li><p><a class="reference external" href="https://pypi.python.org/pypi/sphinx-api-any">sphinx-js</a></p></li>
+<li><p><a class="reference external" href="https://pypi.python.org/pypi/sphinx_py3doc_enhanced_theme">sphinx-py3doc-enhanced-theme</a></p></li>
 </ul>
 <p>We recommend you use <code class="docutils literal notranslate"><span class="pre">npm</span></code>, a <a class="reference external" href="https://www.npmjs.com/get-npm">Javascript package manager</a>, to install
-<code class="docutils literal notranslate"><span class="pre">JSDoc</span></code> and <code class="docutils literal notranslate"><span class="pre">pip</span></code> to install the Sphinx packages (<code class="docutils literal notranslate"><span class="pre">sphinx</span></code> itself can be installed
-via <code class="docutils literal notranslate"><span class="pre">conda</span></code> as well, but the others will still need <code class="docutils literal notranslate"><span class="pre">pip</span></code>).</p>
+<code class="docutils literal notranslate"><span class="pre">JSDoc</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>npm install -g jsdoc
+</pre></div>
+</div>
+<p>and <code class="docutils literal notranslate"><span class="pre">pip</span></code> to install the development version of LIVVkit:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone git@github.com:LIVVkit/LIVVkit.git
+<span class="nb">cd</span> LIVVkit
+pip install -e .<span class="o">[</span>develop<span class="o">]</span>
+</pre></div>
+</div>
 <p>To build the current version of the documentation website, simply run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make html
 </pre></div>
@@ -169,11 +165,11 @@ running:</p>
 </pre></div>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">If you run this command you will need to regenerate all the auto-generated files! <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span></code> will
+<p class="admonition-title">Warning</p>
+<p>If you run this command you will need to regenerate all the auto-generated files! <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span></code> will
 only remove the old website and leave the autogenerated files in place.</p>
 </div>
-<p>Then, auto-generate the documentation of LIVVkit’s python source code:</p>
+<p>Then, auto-generate the documentation of LIVVkit’s Python source code:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sphinx-apidoc -f -o source/ ../livvkit/
 </pre></div>
 </div>
@@ -182,8 +178,8 @@ only remove the old website and leave the autogenerated files in place.</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">You can use the <code class="docutils literal notranslate"><span class="pre">generate_docs.sh</span></code> script to perform these steps.</p>
+<p class="admonition-title">Note</p>
+<p>You can use the <code class="docutils literal notranslate"><span class="pre">generate_docs.sh</span></code> script to perform these steps.</p>
 </div>
 </div>
 </div>
@@ -198,13 +194,11 @@ only remove the old website and leave the autogenerated files in place.</p>
     
 
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
@@ -224,7 +218,6 @@ only remove the old website and leave the autogenerated files in place.</p>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#code-guidelines">Code Guidelines</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#tips">Tips</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#building-the-documentation">Building the documentation</a></li>
 </ul>
 </li>
@@ -236,7 +229,7 @@ only remove the old website and leave the autogenerated files in place.</p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/contrib.rst.txt"
+      <li><a href="_sources/CONTRIBUTING.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -264,7 +257,7 @@ only remove the old website and leave the autogenerated files in place.</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
     </div>
   </body>
 </html>

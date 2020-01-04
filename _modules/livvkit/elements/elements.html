@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>livvkit.elements.elements &#8212; LIVVkit 3.0.0 documentation</title>
+    <link rel="stylesheet" href="../../../_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../_static/sidebar.js"></script>
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <link rel="shortcut icon" type="image/png" href="../../../_static/favicon.png" />
+    <meta name="viewport" content="width=device-width,initial-scale=0.8">
+    
+    
+
+  </head><body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
+        <li><a href="../../../index.html">LIVVkit 3.0.0 documentation</a> &#187;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    
+        <div class="badge">
+            <a href="https://github.com/LIVVkit/LIVVkit">Fork me on GitHub</a>
+            <img src="../../../_static/right-red@2x.png">
+        </div>
+    
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for livvkit.elements.elements</h1><div class="highlight"><pre>
+<span></span><span class="c1"># coding=utf-8</span>
+<span class="c1"># Copyright (c) 2015-2018, UT-BATTELLE, LLC</span>
+<span class="c1"># All rights reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># Redistribution and use in source and binary forms, with or without</span>
+<span class="c1"># modification, are permitted provided that the following conditions are met:</span>
+<span class="c1">#</span>
+<span class="c1"># 1. Redistributions of source code must retain the above copyright notice, this</span>
+<span class="c1"># list of conditions and the following disclaimer.</span>
+<span class="c1">#</span>
+<span class="c1"># 2. Redistributions in binary form must reproduce the above copyright notice,</span>
+<span class="c1"># this list of conditions and the following disclaimer in the documentation</span>
+<span class="c1"># and/or other materials provided with the distribution.</span>
+<span class="c1">#</span>
+<span class="c1"># 3. Neither the name of the copyright holder nor the names of its contributors</span>
+<span class="c1"># may be used to endorse or promote products derived from this software without</span>
+<span class="c1"># specific prior written permission.</span>
+<span class="c1">#</span>
+<span class="c1"># THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND</span>
+<span class="c1"># ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED</span>
+<span class="c1"># WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE</span>
+<span class="c1"># DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE</span>
+<span class="c1"># FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL</span>
+<span class="c1"># DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR</span>
+<span class="c1"># SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER</span>
+<span class="c1"># CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,</span>
+<span class="c1"># OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span>
+<span class="c1"># OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span>
+
+<span class="c1"># FIXME: This docstring</span>
+<span class="sd">&quot;&quot;&quot;Module containing report generation and display elements</span>
+
+<span class="sd">The elements in this module are used by LIVVkit to generate analyses reports.</span>
+<span class="sd">Reports by default will be a portable HTML website, but each of these elements</span>
+<span class="sd">provide some experimental (and therefore undocumented) report formats: JSON-Only</span>
+<span class="sd">and LaTeX.</span>
+
+<span class="sd">New elements should derive from, or implement the same interface as, the</span>
+<span class="sd">BaseElement abstract class.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">abc</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">difflib</span>
+<span class="kn">import</span> <span class="nn">collections</span>
+
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="nn">jinja2</span>
+<span class="kn">import</span> <span class="nn">json_tricks</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">import</span> <span class="nn">livvkit</span>
+<span class="kn">import</span> <span class="nn">livvkit.data</span>
+<span class="kn">from</span> <span class="nn">livvkit.util</span> <span class="kn">import</span> <span class="n">bib</span>
+
+<span class="n">_HERE</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+
+<span class="c1"># skipcq: BAN-B701</span>
+<span class="n">_html_env</span> <span class="o">=</span> <span class="n">jinja2</span><span class="o">.</span><span class="n">Environment</span><span class="p">(</span>
+        <span class="n">loader</span><span class="o">=</span><span class="n">jinja2</span><span class="o">.</span><span class="n">FileSystemLoader</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_HERE</span><span class="p">,</span> <span class="s1">&#39;templates&#39;</span><span class="p">)))</span>
+
+<span class="c1"># skipcq: BAN-B701</span>
+<span class="n">_latex_env</span> <span class="o">=</span> <span class="n">jinja2</span><span class="o">.</span><span class="n">Environment</span><span class="p">(</span>
+        <span class="n">block_start_string</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\BLOCK{&#39;</span><span class="p">,</span>    <span class="c1"># default: {%</span>
+        <span class="n">block_end_string</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;}&#39;</span><span class="p">,</span>            <span class="c1"># default: %}</span>
+        <span class="n">variable_start_string</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\VAR{&#39;</span><span class="p">,</span>   <span class="c1"># default: {{</span>
+        <span class="n">variable_end_string</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;}&#39;</span><span class="p">,</span>         <span class="c1"># default: }}</span>
+        <span class="n">comment_start_string</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\#{&#39;</span><span class="p">,</span>      <span class="c1"># default: {#</span>
+        <span class="n">comment_end_string</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;}&#39;</span><span class="p">,</span>          <span class="c1"># default: #}</span>
+        <span class="n">trim_blocks</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">loader</span><span class="o">=</span><span class="n">jinja2</span><span class="o">.</span><span class="n">FileSystemLoader</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_HERE</span><span class="p">,</span> <span class="s1">&#39;templates&#39;</span><span class="p">)))</span>
+
+
+<div class="viewcode-block" id="BaseElement"><a class="viewcode-back" href="../../../source/livvkit.elements.html#livvkit.elements.elements.BaseElement">[docs]</a><span class="k">class</span> <span class="nc">BaseElement</span><span class="p">(</span><span class="n">abc</span><span class="o">.</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;An abstract base LIVVkit element</span>
+
+<span class="sd">    An abstract base LIVVkit element providing the basic element interface</span>
+<span class="sd">    expected by LIVVkit. All LIVVkit elements should either derive from this</span>
+<span class="sd">    class or implement the same interface.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># FIXME: There&#39;s got to be a better way.</span>
+    <span class="c1">#  We want _html_template (_latex_template) to be required and act like:</span>
+    <span class="c1">#     &gt;&gt;&gt; self._html_template</span>
+    <span class="c1">#     &#39;template.html&#39;</span>
+    <span class="c1">#  This could be satisfied be a simple class attribute or a more complex property,</span>
+    <span class="c1">#  but NOT a method, which would have to be called like:</span>
+    <span class="c1">#     &gt;&gt;&gt; self._html_template()</span>
+    <span class="c1">#     &#39;template.html&#39;</span>
+    <span class="c1">#  Unfortunately, the chained @property and @abc.abstractmethod doesn&#39;t enforce</span>
+    <span class="c1">#  an attribute/property like action and can be satisfied by defining a method,</span>
+    <span class="c1">#  so we make sure that if it&#39;s not a property, it&#39;s also not callable (a method)</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize a LIVVkit element</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">_html_template</span><span class="p">,</span> <span class="nb">property</span><span class="p">)</span> <span class="ow">and</span> <span class="n">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_html_template</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;You must define _html_template as a property or attribute for this class&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">_latex_template</span><span class="p">,</span> <span class="nb">property</span><span class="p">)</span> <span class="ow">and</span> <span class="n">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_latex_template</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;You must define _latex_template as a property or attribute for this class&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">_html_template</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The jinja2 HTML template</span>
+
+<span class="sd">        An attribute or property which holds the jinja2 template used to</span>
+<span class="sd">        represent the element as HTML.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The jinja2 HTML template</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">_latex_template</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The jinja2 LaTeX template</span>
+
+<span class="sd">        An attribute or property which holds the jinja2 template used to</span>
+<span class="sd">        represent the element as LaTeX.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The jinja2 LaTeX template</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="k">def</span> <span class="nf">_repr_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Represent this element as JSON</span>
+
+<span class="sd">        Using the internal dictionary representation of this element, return a</span>
+<span class="sd">        JSON representation of this element</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The JSON representation of this element</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">jsn</span> <span class="o">=</span> <span class="p">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">copy</span><span class="p">()}</span>
+        <span class="n">jsn</span><span class="p">[</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;__module__&#39;</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__module__</span><span class="p">,</span>
+                                         <span class="s1">&#39;_html_template&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_html_template</span><span class="p">,</span>
+                                         <span class="s1">&#39;_latex_template&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_latex_template</span><span class="p">})</span>
+        <span class="k">return</span> <span class="n">json_tricks</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">jsn</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">primitives</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">allow_nan</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_repr_html</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Represent this element as HTML</span>
+
+<span class="sd">        Using the jinja2 template defined by ``self._html_template``, return an</span>
+<span class="sd">        HTML representation of this element</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The HTML representation of this element</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="n">_html_env</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_html_template</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_repr_latex</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Represent this element as LaTeX</span>
+
+<span class="sd">        Using the jinja2 template defined by ``self._latex_template``, return an</span>
+<span class="sd">        LaTeX representation of this element</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The LaTeX representation of this element</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="n">_latex_env</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_latex_template</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CompositeElement"><a class="viewcode-back" href="../../../source/livvkit.elements.html#livvkit.elements.elements.CompositeElement">[docs]</a><span class="k">class</span> <span class="nc">CompositeElement</span><span class="p">(</span><span class="n">BaseElement</span><span class="p">,</span> <span class="n">abc</span><span class="o">.</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;An abstract base LIVVkit element that contains other elements</span>
+
+<span class="sd">    An abstract base LIVVkit element that contains other elements in self.elements</span>
+<span class="sd">    and provides the basic element interface expected by LIVVkit. All LIVVkit</span>
+<span class="sd">    elements should either be derived from the LIVVkit BaseElement or implement</span>
+<span class="sd">    the same interface.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">elements</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize a composite LIVVkit element</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            elements: A list of LIVVkit elements</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">CompositeElement</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">elements</span> <span class="o">=</span> <span class="n">elements</span>
+
+    <span class="k">def</span> <span class="nf">_repr_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Represent this element as JSON</span>
+
+<span class="sd">        Using the internal dictionary representation of this element, return a</span>
+<span class="sd">        JSON representation of this element</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The JSON representation of this element</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">jsn</span> <span class="o">=</span> <span class="p">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">copy</span><span class="p">()}</span>
+        <span class="n">jsn</span><span class="p">[</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;__module__&#39;</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__module__</span><span class="p">,</span>
+                                         <span class="s1">&#39;_html_template&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_html_template</span><span class="p">,</span>
+                                         <span class="s1">&#39;_latex_template&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_latex_template</span><span class="p">})</span>
+
+        <span class="n">elem_repr</span> <span class="o">=</span> <span class="p">[</span><span class="n">json_tricks</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">elem</span><span class="o">.</span><span class="n">_repr_json</span><span class="p">())</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">]</span>
+        <span class="n">jsn</span><span class="p">[</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">][</span><span class="s1">&#39;elements&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">elem_repr</span>
+
+        <span class="k">return</span> <span class="n">json_tricks</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">jsn</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">primitives</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">allow_nan</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_repr_html</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Represent this element as HTML</span>
+
+<span class="sd">        Using the jinja2 template defined by ``self._html_template``, return an</span>
+<span class="sd">        HTML representation of this element</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The HTML representation of this element</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">elem_repr</span> <span class="o">=</span> <span class="p">[</span><span class="n">elem</span><span class="o">.</span><span class="n">_repr_html</span><span class="p">()</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">]</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="n">_html_env</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_html_template</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="n">elem_repr</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_repr_latex</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Represent this element as LaTeX</span>
+
+<span class="sd">        Using the jinja2 template defined by ``self._latex_template``, return an</span>
+<span class="sd">        LaTeX representation of this element</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The LaTeX representation of this element</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="n">_latex_env</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_latex_template</span><span class="p">)</span>
+        <span class="n">elem_repr</span> <span class="o">=</span> <span class="p">[</span><span class="n">elem</span><span class="o">.</span><span class="n">_repr_latex</span><span class="p">()</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="n">elem_repr</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="NamedCompositeElement"><a class="viewcode-back" href="../../../source/livvkit.elements.html#livvkit.elements.elements.NamedCompositeElement">[docs]</a><span class="k">class</span> <span class="nc">NamedCompositeElement</span><span class="p">(</span><span class="n">BaseElement</span><span class="p">,</span> <span class="n">abc</span><span class="o">.</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;An abstract base LIVVkit element that contains multiple other composite elements</span>
+
+<span class="sd">    An abstract base LIVVkit element that allows to logically group multiple</span>
+<span class="sd">    other composite elements in self.element_dict and provides the basic element</span>
+<span class="sd">    interface expected by LIVVkit. All LIVVkit elements should either be derived</span>
+<span class="sd">    from the LIVVkit BaseElement or implement the same interface.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">elements_dict</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize  a multi-composite LIVVkit element</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            elements_dict: A dictionary where the (key, value) item represents a</span>
+<span class="sd">             collection of LIVVkit elements. The key should be a name for the</span>
+<span class="sd">             collection and the value should be a list of elements.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">NamedCompositeElement</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">elements_dict</span> <span class="o">=</span> <span class="n">elements_dict</span>
+
+    <span class="k">def</span> <span class="nf">_repr_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Represent this element as JSON</span>
+
+<span class="sd">        Using the internal dictionary representation of this element, return a</span>
+<span class="sd">        JSON representation of this element</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The JSON representation of this element</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">jsn</span> <span class="o">=</span> <span class="p">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">copy</span><span class="p">()}</span>
+        <span class="n">jsn</span><span class="p">[</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;__module__&#39;</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__module__</span><span class="p">,</span>
+                                         <span class="s1">&#39;_html_template&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_html_template</span><span class="p">,</span>
+                                         <span class="s1">&#39;_latex_template&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_latex_template</span><span class="p">})</span>
+
+        <span class="n">elem_repr</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">title</span><span class="p">,</span> <span class="n">elements</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">elem_repr</span><span class="p">[</span><span class="n">title</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">json_tricks</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">elem</span><span class="o">.</span><span class="n">_repr_json</span><span class="p">())</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">elements</span><span class="p">]</span>
+
+        <span class="n">jsn</span><span class="p">[</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">][</span><span class="s1">&#39;elements_dict&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">elem_repr</span>
+
+        <span class="k">return</span> <span class="n">json_tricks</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">jsn</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">primitives</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">allow_nan</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_repr_html</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Represent this element as HTML</span>
+
+<span class="sd">        Using the jinja2 template defined by ``self._html_template``, return an</span>
+<span class="sd">        HTML representation of this element</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The HTML representation of this element</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">elem_repr</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">title</span><span class="p">,</span> <span class="n">elements</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">elem_repr</span><span class="p">[</span><span class="n">title</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">elem</span><span class="o">.</span><span class="n">_repr_html</span><span class="p">()</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">elements</span><span class="p">]</span>
+
+        <span class="n">template</span> <span class="o">=</span> <span class="n">_html_env</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_html_template</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">,</span> <span class="n">elements_dict</span><span class="o">=</span><span class="n">elem_repr</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_repr_latex</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Represent this element as LaTeX</span>
+
+<span class="sd">        Using the jinja2 template defined by ``self._latex_template``, return an</span>
+<span class="sd">        LaTeX representation of this element</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The LaTeX representation of this element</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">elem_repr</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">title</span><span class="p">,</span> <span class="n">elements</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">elem_repr</span><span class="p">[</span><span class="n">title</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">elem</span><span class="o">.</span><span class="n">_repr_latex</span><span class="p">()</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">elements</span><span class="p">]</span>
+
+        <span class="n">template</span> <span class="o">=</span> <span class="n">_latex_env</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_latex_template</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">,</span> <span class="n">elements_dict</span><span class="o">=</span><span class="n">elem_repr</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Page"><a class="viewcode-back" href="../../../source/livvkit.elements.html#livvkit.elements.elements.Page">[docs]</a><span class="k">class</span> <span class="nc">Page</span><span class="p">(</span><span class="n">CompositeElement</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A LIVVkit Page element</span>
+
+<span class="sd">    The Page element contains the description of an analysis, the elements</span>
+<span class="sd">    that should be displayed for this analysis on the report, as well as any</span>
+<span class="sd">    references that should be included in the report. In general usage, this</span>
+<span class="sd">    will be used to create an HTML page inside LIVVkit output website. It also</span>
+<span class="sd">    will allow for the generation of other (experimental!) Report types</span>
+<span class="sd">    (e.g., LaTeX), where the &quot;page&quot; meaning might be better interpreted as</span>
+<span class="sd">    a &quot;section&quot;.</span>
+
+<span class="sd">    For LIVVkit Extensions (LEX), an instance of this class should be returned</span>
+<span class="sd">    from the extensions `run()` function.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_html_template</span> <span class="o">=</span> <span class="s1">&#39;page.html&#39;</span>
+    <span class="n">_latex_template</span> <span class="o">=</span> <span class="s1">&#39;page.tex&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">elements</span><span class="p">,</span> <span class="n">references</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize a Page elements</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            title: the title to display on the analysis</span>
+<span class="sd">            description: A long (paragraph or more) description of the analysis</span>
+<span class="sd">                being performed. Typically, it&#39;s best to write this description</span>
+<span class="sd">                as the LEX extension&#39;s docstring and pass this class `__doc__`</span>
+<span class="sd">            elements: A list of LIVVkit elements to include in the report</span>
+<span class="sd">            references: The references to include as part of this analysis. This</span>
+<span class="sd">                can be a path to a bibtex file containing the references, or a</span>
+<span class="sd">                list/set/tuple of bibtex files containing the references (Note:</span>
+<span class="sd">                ALL references inside the bibtex file(s) will be included!). Default</span>
+<span class="sd">                value is `references=&#39;&#39;` which will cause only the default LIVVkit</span>
+<span class="sd">                references to be displayed. References can be entirely removed by</span>
+<span class="sd">                setting `references=None`, however, this is *not* recommended.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Page</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ref_list</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">references</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_references</span><span class="p">(</span><span class="n">references</span><span class="p">)</span>
+        <span class="c1"># FIXME: remove once common.js is obsolete</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_repr_html</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Page.add_references"><a class="viewcode-back" href="../../../source/livvkit.elements.html#livvkit.elements.elements.Page.add_references">[docs]</a>    <span class="k">def</span> <span class="nf">add_references</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">references</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add a reference to the internal reference list</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            references: The references to add to this page&#39;s internal reference</span>
+<span class="sd">                list. This can be a path to a bibtex file containing the</span>
+<span class="sd">                references, or a list/set/tuple of bibtex files containing the</span>
+<span class="sd">                references (Note: This will include the default LIVVkit</span>
+<span class="sd">                references and ALL references inside the bibtex file(s)!).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ref_list</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ref_list</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;*.bib&#39;</span><span class="p">)</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">references</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">references</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">)):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_ref_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">references</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">references</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">set</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_ref_list</span> <span class="o">+=</span> <span class="nb">list</span><span class="p">(</span><span class="n">references</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+                    <span class="s1">&#39;Cannot add </span><span class="si">{}</span><span class="s1"> type to the reference list. References must be either a (str or &#39;</span>
+                    <span class="s1">&#39;Path) path to a bibtex file, or a list/set/tuple of bibtex files.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">references</span><span class="p">))</span>
+                <span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_repr_html</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Represent this element as HTML</span>
+
+<span class="sd">        Using the jinja2 template defined by ``self._html_template``, return an</span>
+<span class="sd">        HTML representation of this element</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The HTML representation of this element</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="n">_html_env</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_html_template</span><span class="p">)</span>
+        <span class="n">elem_repr</span> <span class="o">=</span> <span class="p">[</span><span class="n">elem</span><span class="o">.</span><span class="n">_repr_html</span><span class="p">()</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">]</span>
+        <span class="n">rendered_html</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="n">elem_repr</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ref_list</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">rendered_html</span> <span class="o">+=</span> <span class="n">bib</span><span class="o">.</span><span class="n">bib2html</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ref_list</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">rendered_html</span>
+
+    <span class="k">def</span> <span class="nf">_repr_latex</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Represent this element as LaTeX</span>
+
+<span class="sd">        Using the jinja2 template defined by ``self._latex_template``, return an</span>
+<span class="sd">        LaTeX representation of this element</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The LaTeX representation of this element</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="n">_latex_env</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_latex_template</span><span class="p">)</span>
+        <span class="n">elem_repr</span> <span class="o">=</span> <span class="p">[</span><span class="n">elem</span><span class="o">.</span><span class="n">_repr_latex</span><span class="p">()</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">]</span>
+        <span class="n">rendered_tex</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="n">elem_repr</span><span class="p">)</span>
+
+        <span class="c1"># FIXME: This is hacky! We&#39;re cheating the livvkit.util.bib.bib2html</span>
+        <span class="c1">#  functionality to actually return latex... See the LatexBackend class</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ref_list</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">rendered_tex</span> <span class="o">+=</span> <span class="n">bib</span><span class="o">.</span><span class="n">bib2html</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ref_list</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">bib</span><span class="o">.</span><span class="n">LatexBackend</span><span class="p">())</span>
+
+        <span class="k">return</span> <span class="n">rendered_tex</span></div>
+
+
+<div class="viewcode-block" id="Tabs"><a class="viewcode-back" href="../../../source/livvkit.elements.html#livvkit.elements.elements.Tabs">[docs]</a><span class="k">class</span> <span class="nc">Tabs</span><span class="p">(</span><span class="n">NamedCompositeElement</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A LIVVkit Tabs element</span>
+
+<span class="sd">    The Tabs element is a super element intended to logically separate elements</span>
+<span class="sd">    into clickable tabs on the output website. It also will allow for the</span>
+<span class="sd">    generation of other (experimental!) Report types (e.g., LaTeX), where the</span>
+<span class="sd">    &quot;tabs&quot; meaning might be better interpreted as a &quot;subsection&quot;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_html_template</span> <span class="o">=</span> <span class="s1">&#39;tabs.html&#39;</span>
+    <span class="n">_latex_template</span> <span class="o">=</span> <span class="s1">&#39;tabs.tex&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tabs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize a Tabs element</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            tabs: A dictionary where each (key, value) item represents a tab.</span>
+<span class="sd">                Keys will become the tab text and values should be lists of</span>
+<span class="sd">                LIVVkit elements to display within the tab</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Tabs</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">tabs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Section"><a class="viewcode-back" href="../../../source/livvkit.elements.html#livvkit.elements.elements.Section">[docs]</a><span class="k">class</span> <span class="nc">Section</span><span class="p">(</span><span class="n">CompositeElement</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A LIVVkit Section element</span>
+
+<span class="sd">    The Section element is a super element intended to logically separate elements</span>
+<span class="sd">    into titled sections. It also will allow for the generation of other</span>
+<span class="sd">    (experimental!) Report types (e.g., LaTeX), where the &quot;section&quot; meaning might</span>
+<span class="sd">    be better interpreted as a &quot;subsection&quot;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_html_template</span> <span class="o">=</span> <span class="s1">&#39;section.html&#39;</span>
+    <span class="n">_latex_template</span> <span class="o">=</span> <span class="s1">&#39;section.tex&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">elements</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize a Section element</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            title: The title of the section</span>
+<span class="sd">            elements: A list of LIVVkit elements to display within the section</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Section</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span></div>
+
+
+<div class="viewcode-block" id="Table"><a class="viewcode-back" href="../../../source/livvkit.elements.html#livvkit.elements.elements.Table">[docs]</a><span class="k">class</span> <span class="nc">Table</span><span class="p">(</span><span class="n">BaseElement</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A LIVVkit Table element</span>
+
+<span class="sd">    The Table element will produce a table in the analysis report.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_html_template</span> <span class="o">=</span> <span class="s1">&#39;table.html&#39;</span>
+    <span class="n">_latex_template</span> <span class="o">=</span> <span class="s1">&#39;table.tex&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">transpose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize a Section element</span>
+
+<span class="sd">                Args:</span>
+<span class="sd">                    title: The title of the table</span>
+<span class="sd">                    data: The data to display in the table in the form of either</span>
+<span class="sd">                        a pandas DataFrame or a dictionary of the form</span>
+<span class="sd">                        {column1:[row1, row2...],... } where each (key, value)</span>
+<span class="sd">                        item is a table column, with the key being the column</span>
+<span class="sd">                        header and the value being a list of that&#39;s columns&#39; row</span>
+<span class="sd">                        values.</span>
+<span class="sd">                    index: The index to include in the table. If False, no index</span>
+<span class="sd">                        will be included. If True, a numbered index beginning at</span>
+<span class="sd">                        zero will be included in the table. If a collection of</span>
+<span class="sd">                        values the same length as the data rows, the collection</span>
+<span class="sd">                        will be used to label the rows.</span>
+<span class="sd">                    transpose: A boolean (default: False) which will flip the</span>
+<span class="sd">                        table (headers become the index, index becomes the header).</span>
+<span class="sd">                &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Table</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;list&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">rows</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="p">())))</span>
+
+        <span class="k">if</span> <span class="n">index</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">abc</span><span class="o">.</span><span class="n">Collection</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s1">&#39;Table index must be the same length as the table. &#39;</span>
+                                 <span class="s1">&#39;Table rows: </span><span class="si">{}</span><span class="s1">, index length: </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">index</span><span class="p">)))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">index</span>
+
+        <span class="k">if</span> <span class="n">transpose</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_html_template</span> <span class="o">=</span> <span class="s1">&#39;table_transposed.html&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_latex_template</span> <span class="o">=</span> <span class="s1">&#39;table_transposed.tex&#39;</span>
+
+    <span class="k">def</span> <span class="nf">_repr_html</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Represent this element as HTML</span>
+
+<span class="sd">        Using the jinja2 template defined by ``self._html_template``, return an</span>
+<span class="sd">        HTML representation of this element</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The HTML representation of this element</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="n">_html_env</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_html_template</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">,</span> <span class="n">rows</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_repr_latex</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Represent this element as LaTeX</span>
+
+<span class="sd">        Using the jinja2 template defined by ``self._latex_template``, return an</span>
+<span class="sd">        LaTeX representation of this element</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The LaTeX representation of this element</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="n">_latex_env</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_latex_template</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">,</span> <span class="n">rows</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="BitForBit"><a class="viewcode-back" href="../../../source/livvkit.elements.html#livvkit.elements.elements.BitForBit">[docs]</a><span class="k">class</span> <span class="nc">BitForBit</span><span class="p">(</span><span class="n">CompositeElement</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A LIVVkit BitForBit element</span>
+
+<span class="sd">    The BitForBit element will produce a table in the analysis report indicating</span>
+<span class="sd">    bit-for-bit statuses with a difference image shown in the final column of</span>
+<span class="sd">    the table.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_html_template</span> <span class="o">=</span> <span class="s1">&#39;bit4bit.html&#39;</span>
+    <span class="n">_latex_template</span> <span class="o">=</span> <span class="s1">&#39;bit4bit.tex&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">imgs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize a BitForBit element</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            title: The title of the bit-for-bit comparisons</span>
+<span class="sd">            data: The data to display in the table in the form of either</span>
+<span class="sd">                a pandas DataFrame or a dictionary of the form</span>
+<span class="sd">                {column1:[row1, row2...],... } where each (key, value)</span>
+<span class="sd">                item is a table column, with the key being the column</span>
+<span class="sd">                header and the value being a list of that&#39;s columns&#39; row</span>
+<span class="sd">                values</span>
+<span class="sd">            imgs: A list of LIVVkit Image elements to display in an additional</span>
+<span class="sd">                final column of the bit-for-bit table. Note: The list must be</span>
+<span class="sd">                same length as the number of rows in the table data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">BitForBit</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">imgs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;list&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">rows</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="p">())))</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">imgs</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s1">&#39;Imgs must be the same length as the table. &#39;</span>
+                             <span class="s1">&#39;Table rows: </span><span class="si">{}</span><span class="s1">, imgs length: </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">imgs</span><span class="p">)))</span>
+
+    <span class="k">def</span> <span class="nf">_repr_html</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Represent this element as HTML</span>
+
+<span class="sd">        Using the jinja2 template defined by ``self._html_template``, return an</span>
+<span class="sd">        HTML representation of this element</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The HTML representation of this element</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">imgs_repr</span> <span class="o">=</span> <span class="p">[</span><span class="n">img</span><span class="o">.</span><span class="n">_repr_html</span><span class="p">()</span> <span class="k">for</span> <span class="n">img</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">]</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="n">_html_env</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_html_template</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">,</span> <span class="n">rows</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="n">b4b_imgs</span><span class="o">=</span><span class="n">imgs_repr</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_repr_latex</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Represent this element as LaTeX</span>
+
+<span class="sd">        Using the jinja2 template defined by ``self._latex_template``, return an</span>
+<span class="sd">        LaTeX representation of this element</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The LaTeX representation of this element</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">imgs_repr</span> <span class="o">=</span> <span class="p">[</span><span class="n">img</span><span class="o">.</span><span class="n">_repr_latex</span><span class="p">()</span> <span class="k">for</span> <span class="n">img</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">]</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="n">_latex_env</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_latex_template</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">,</span> <span class="n">rows</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="n">b4b_imgs</span><span class="o">=</span><span class="n">imgs_repr</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Gallery"><a class="viewcode-back" href="../../../source/livvkit.elements.html#livvkit.elements.elements.Gallery">[docs]</a><span class="k">class</span> <span class="nc">Gallery</span><span class="p">(</span><span class="n">CompositeElement</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A LIVVkit Gallery element</span>
+
+<span class="sd">    The Gallery element is a super element intended to group LIVVkit Image</span>
+<span class="sd">    elements into a gallery. It also will allow for the generation of other</span>
+<span class="sd">    (experimental!) Report types (e.g., LaTeX), where the &quot;Gallery&quot; meaning</span>
+<span class="sd">    might be better interpreted as a figure &quot;subsection&quot;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_html_template</span> <span class="o">=</span> <span class="s1">&#39;gallery.html&#39;</span>
+    <span class="n">_latex_template</span> <span class="o">=</span> <span class="s1">&#39;gallery.tex&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">elements</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize a Gallery element</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            title: The title of the image gallery</span>
+<span class="sd">            elements: A list of LIVVkit Image elements to display within the</span>
+<span class="sd">                gallery</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Gallery</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span></div>
+
+
+<div class="viewcode-block" id="Image"><a class="viewcode-back" href="../../../source/livvkit.elements.html#livvkit.elements.elements.Image">[docs]</a><span class="k">class</span> <span class="nc">Image</span><span class="p">(</span><span class="n">BaseElement</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A LIVVkit Image element</span>
+
+<span class="sd">    The Image element produces an image/figure in the report.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_html_template</span> <span class="o">=</span> <span class="s1">&#39;image.html&#39;</span>
+    <span class="n">_latex_template</span> <span class="o">=</span> <span class="s1">&#39;image.tex&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">desc</span><span class="p">,</span> <span class="n">image_file</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">relative_to</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize a Section element</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            title: The title of the image</span>
+<span class="sd">            desc: A description of the image which in most report forms will be</span>
+<span class="sd">                figure caption</span>
+<span class="sd">            image_file: The path to the image to display. Note: this should resolve</span>
+<span class="sd">                to a path inside the report output directory</span>
+<span class="sd">            group: Group the images into a JavaScript Lightbox with this name</span>
+<span class="sd">                (default: None). Note: this is only relevant for an HTML report</span>
+<span class="sd">            height: The height of the image in pixels</span>
+<span class="sd">            relative_to: Transform the image path to be relative to this</span>
+<span class="sd">                directory. By default, the image will assumed to be in the</span>
+<span class="sd">                directory, or a subdirectory, of the page it&#39;s displayed on.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Image</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">desc</span> <span class="o">=</span> <span class="n">desc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">image_file</span><span class="p">)</span>
+        <span class="c1"># FIXME: This assumes that images are images are always located in a</span>
+        <span class="c1">#        subdirectory of the current page if a relative path start</span>
+        <span class="c1">#        location isn&#39;t specified</span>
+        <span class="k">if</span> <span class="n">relative_to</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">relative_to</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">relpath</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">relative_to</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">group</span> <span class="o">=</span> <span class="n">group</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">height</span>
+
+    <span class="k">def</span> <span class="nf">_repr_latex</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="n">_latex_env</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_latex_template</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;path&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="B4BImage"><a class="viewcode-back" href="../../../source/livvkit.elements.html#livvkit.elements.elements.B4BImage">[docs]</a><span class="k">class</span> <span class="nc">B4BImage</span><span class="p">(</span><span class="n">Image</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A B4BImage element</span>
+
+<span class="sd">    A dummy Image that can be used by the BitForBit element indicating a</span>
+<span class="sd">    bit-for-bit verification result.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">page_path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize a dummy B4BImage element</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            title: The title of the image</span>
+<span class="sd">            description: A description of the image which in most report forms</span>
+<span class="sd">                will be figure caption</span>
+<span class="sd">            page_path: The path to the page on which the dummy image will be</span>
+<span class="sd">                displayed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">image_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="s1">&#39;imgs&#39;</span><span class="p">,</span> <span class="s1">&#39;b4b.png&#39;</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">B4BImage</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span>
+                                       <span class="n">image_file</span><span class="o">=</span><span class="n">image_file</span><span class="p">,</span>
+                                       <span class="n">relative_to</span><span class="o">=</span><span class="n">page_path</span><span class="p">,</span>
+                                       <span class="n">height</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s1">&#39;b4b&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="NAImage"><a class="viewcode-back" href="../../../source/livvkit.elements.html#livvkit.elements.elements.NAImage">[docs]</a><span class="k">class</span> <span class="nc">NAImage</span><span class="p">(</span><span class="n">Image</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A NAImage element</span>
+
+<span class="sd">    A dummy Image that can be used to indicate a missing image</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">page_path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize a dummy NAImage element</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            title: The title of the image</span>
+<span class="sd">            description: A description of the image which in most report forms</span>
+<span class="sd">                will be figure caption</span>
+<span class="sd">            page_path: The path to the page on which the dummy image will be</span>
+<span class="sd">                displayed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">image_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">livvkit</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="s1">&#39;imgs&#39;</span><span class="p">,</span> <span class="s1">&#39;na.png&#39;</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">NAImage</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span>
+                                      <span class="n">image_file</span><span class="o">=</span><span class="n">image_file</span><span class="p">,</span>
+                                      <span class="n">relative_to</span><span class="o">=</span><span class="n">page_path</span><span class="p">,</span>
+                                      <span class="n">height</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s1">&#39;na&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FileDiff"><a class="viewcode-back" href="../../../source/livvkit.elements.html#livvkit.elements.elements.FileDiff">[docs]</a><span class="k">class</span> <span class="nc">FileDiff</span><span class="p">(</span><span class="n">BaseElement</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A LIVVkit FileDiff element</span>
+
+<span class="sd">    The FilleDiff element will compare two text files and produce a git-diff</span>
+<span class="sd">    style diff of the files.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_html_template</span> <span class="o">=</span> <span class="s1">&#39;diff.html&#39;</span>
+    <span class="n">_latex_template</span> <span class="o">=</span> <span class="s1">&#39;diff.tex&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">from_file</span><span class="p">,</span> <span class="n">to_file</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize a FileDiff element</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            title: The title of the diff</span>
+<span class="sd">            from_file: A path to the file which will be compared against</span>
+<span class="sd">            to_file: A path to the file which which to compare</span>
+<span class="sd">            context: An positive int indicating the number of lines of context</span>
+<span class="sd">                to display on either side of each difference found</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">FileDiff</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">from_file</span> <span class="o">=</span> <span class="n">from_file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">to_file</span> <span class="o">=</span> <span class="n">to_file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">diff</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">diff_status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">diff_files</span><span class="p">(</span><span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">)</span>
+
+<div class="viewcode-block" id="FileDiff.diff_files"><a class="viewcode-back" href="../../../source/livvkit.elements.html#livvkit.elements.elements.FileDiff.diff_files">[docs]</a>    <span class="k">def</span> <span class="nf">diff_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Perform the file diff</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            context: An positive int indicating the number of lines of context</span>
+<span class="sd">                to display on either side of each difference found</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            (tuple): Tuple containing:</span>
+<span class="sd">                difference: A str containing either a git-style diff of the</span>
+<span class="sd">                    files if a difference was found or the original file in</span>
+<span class="sd">                    full</span>
+<span class="sd">                diff_status: A boolean indicating whether any differences were</span>
+<span class="sd">                    found</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">from_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">from_</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">to_</span><span class="p">:</span>
+            <span class="n">fromlines</span> <span class="o">=</span> <span class="n">from_</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+            <span class="n">tolines</span> <span class="o">=</span> <span class="n">to_</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">context</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">context</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">fromlines</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">tolines</span><span class="p">))</span>
+
+            <span class="n">diff</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">difflib</span><span class="o">.</span><span class="n">unified_diff</span><span class="p">(</span><span class="n">fromlines</span><span class="p">,</span> <span class="n">tolines</span><span class="p">,</span>
+                                             <span class="n">n</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>  <span class="n">lineterm</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">))</span>
+            <span class="n">diff_status</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">diff</span><span class="p">:</span>
+                <span class="n">diff_status</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="n">diff</span> <span class="o">=</span> <span class="n">fromlines</span>
+            <span class="k">return</span> <span class="n">diff</span><span class="p">,</span> <span class="n">diff_status</span></div></div>
+
+
+<div class="viewcode-block" id="Error"><a class="viewcode-back" href="../../../source/livvkit.elements.html#livvkit.elements.elements.Error">[docs]</a><span class="k">class</span> <span class="nc">Error</span><span class="p">(</span><span class="n">BaseElement</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A LIVVkit Error element</span>
+
+<span class="sd">    The Error element will produce an error message in the analysis report.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_html_template</span> <span class="o">=</span> <span class="s1">&#39;err.html&#39;</span>
+    <span class="n">_latex_template</span> <span class="o">=</span> <span class="s1">&#39;err.tex&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize a LIVVkit Error element</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            title: The title of the error</span>
+<span class="sd">            message: The error message to display</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Error</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">message</span></div>
+
+
+<div class="viewcode-block" id="RawHTML"><a class="viewcode-back" href="../../../source/livvkit.elements.html#livvkit.elements.elements.RawHTML">[docs]</a><span class="k">class</span> <span class="nc">RawHTML</span><span class="p">(</span><span class="n">BaseElement</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A LIVVkit RawHTML element</span>
+
+<span class="sd">    The RawHTML element will directly display the contained HTML in the analysis</span>
+<span class="sd">    report. For an HTML report (default) this will be directly written onto the</span>
+<span class="sd">    page so is a potential security hole and should be used with caution. For the</span>
+<span class="sd">    experimental report types (e.g., LaTeX) the contained HTML will be written to</span>
+<span class="sd">    report in a code display block or as a raw string.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_html_template</span> <span class="o">=</span> <span class="s1">&#39;raw.html&#39;</span>
+    <span class="n">_latex_template</span> <span class="o">=</span> <span class="s1">&#39;raw.tex&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">html</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize a LIVVkit RawHTML element</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            html: An HTML str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">RawHTML</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">html</span> <span class="o">=</span> <span class="n">html</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+    <a id="sidebar-anchor"></a>
+    
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script><h3><a href="../../../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../vv-intro.html">Introduction to V&amp;V</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../design.html">Design Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../lex.html">LIVVkit Extensions (LEX)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bundles.html">Model Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ref.html">References and indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">Frequently Asked Questions</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
+    </div>
+  </body>
+</html>

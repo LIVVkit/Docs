@@ -2,17 +2,20 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Usage &#8212; LIVVkit 2.1.6 documentation</title>
+    <meta charset="utf-8" />
+    <title>Usage &#8212; LIVVkit 3.0.0 documentation</title>
     <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
     <script type="text/javascript" src="_static/sidebar.js"></script>
+    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="LIVVkit Extensions (LEX)" href="lex.html" />
@@ -28,7 +31,7 @@
       <h3>Navigation</h3>
       <ul>
         <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
-        <li><a href="index.html">LIVVkit 2.1.6 documentation</a> &#187;</li> 
+        <li><a href="index.html">LIVVkit 3.0.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     
@@ -55,8 +58,8 @@ common development cycle used by many scientific modeling groups. LIVVkit would 
 into this development process like:</p>
 <div class="figure align-center" id="id3">
 <a class="reference internal image-reference" href="_images/workflow.png"><img alt="Development cycle" src="_images/workflow.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-text">Schematic of the public-private development cycle used by many scientfic modeling groups
-<a class="reference internal" href="ref.html#kennedy2017" id="id1">[Kennedy2017]</a>. A feature branch is created (<code class="docutils literal notranslate"><span class="pre">d124</span></code>, green path) from the current development
+<p class="caption"><span class="caption-text">Schematic of the public-private development cycle used by many scientific modeling groups
+<a class="reference internal" href="ref.html#kennedy2017" id="id1"><span>[Kennedy2017]</span></a>. A feature branch is created (<code class="docutils literal notranslate"><span class="pre">d124</span></code>, green path) from the current development
 branch (light purple path) and incremental changes are made (<code class="docutils literal notranslate"><span class="pre">f001</span></code>–<code class="docutils literal notranslate"><span class="pre">f003</span></code>). These changes
 frequently undergo the standard set of LIVVkit verification tests (dashed cyan circles). Once
 the feature is complete and tested (<code class="docutils literal notranslate"><span class="pre">f003</span></code>), it is ready to be merged into develop (which
@@ -66,7 +69,7 @@ development branch and the full set of LIVVkit integration tests are started (fi
 circle). Once passed, the feature is merged into develop (<code class="docutils literal notranslate"><span class="pre">d127</span></code>) and the pull request is
 closed. After enough features have been developed, the development branch will be merged into
 the private master branch (<code class="docutils literal notranslate"><span class="pre">m120</span></code>, right purple path), given a version tag (<code class="docutils literal notranslate"><span class="pre">v1.2.0</span></code>), and
-pushed to the mirrored master branch on the public repository (left purple path).</span></p>
+pushed to the mirrored master branch on the public repository (left purple path).</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
 </div>
 <div class="section" id="standard-verification-and-integration-tests">
 <h2>Standard verification and integration tests<a class="headerlink" href="#standard-verification-and-integration-tests" title="Permalink to this headline">¶</a></h2>
@@ -97,8 +100,8 @@ indicates any variant of that test (e.g., <code class="docutils literal notransl
 <code class="docutils literal notranslate"><span class="pre">pPROC</span></code> indicate the number of processors used to run the test, and <code class="docutils literal notranslate"><span class="pre">zSIZE</span></code> indicates the domain
 size used in the test.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The percise meaning of any <code class="docutils literal notranslate"><span class="pre">*</span></code>-ed directory name may be variable from test to test, but
+<p class="admonition-title">Note</p>
+<p>The percise meaning of any <code class="docutils literal notranslate"><span class="pre">*</span></code>-ed directory name may be variable from test to test, but
 will generally follow the definition given here.</p>
 </div>
 </div>
@@ -167,8 +170,8 @@ git checkout develop
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For CISM, BATS recognizes a set of platforms that requires job submission scripts,
+<p class="admonition-title">Note</p>
+<p>For CISM, BATS recognizes a set of platforms that requires job submission scripts,
 automatically sets up the jobs, and creates a submission script. Also, by specifying the
 <code class="docutils literal notranslate"><span class="pre">--timing</span></code> option, a much larger set of tests are run, including repeat runs for performance
 variability.</p>
@@ -212,8 +215,8 @@ for creep, or run a series of extended validation analyses.</p>
 <div class="section" id="extended-and-or-validation-analyses">
 <h2>Extended and/or validation analyses<a class="headerlink" href="#extended-and-or-validation-analyses" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">A set of standard ice sheet model validation analyses are currently being developed and will be
+<p class="admonition-title">Note</p>
+<p>A set of standard ice sheet model validation analyses are currently being developed and will be
 released soon (along with the necessary observational data). Currently, there is a preliminary set
 of validation analyses developed for E3SM (<a class="reference external" href="https://e3sm.org/">Energy Exascale Earth System Model</a>),
 CESM (<a class="reference external" href="http://www.cesm.ucar.edu/">Community Earth System Model</a>), and CISM
@@ -234,13 +237,11 @@ get and use LEX as well as how develop your own validation analysis.</p>
     
 
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
@@ -262,7 +263,7 @@ get and use LEX as well as how develop your own validation analysis.</p>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="lex.html">LIVVkit Extensions (LEX)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bundles.html">Model Bundles</a></li>
-<li class="toctree-l1"><a class="reference internal" href="contrib.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ref.html">References and indices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
@@ -299,7 +300,7 @@ get and use LEX as well as how develop your own validation analysis.</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
     </div>
   </body>
 </html>

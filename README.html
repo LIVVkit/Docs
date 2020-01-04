@@ -2,17 +2,20 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Building the documentation &#8212; LIVVkit 2.1.6 documentation</title>
+    <meta charset="utf-8" />
+    <title>Building the documentation &#8212; LIVVkit 3.0.0 documentation</title>
     <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
     <script type="text/javascript" src="_static/sidebar.js"></script>
+    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
@@ -26,7 +29,7 @@
       <h3>Navigation</h3>
       <ul>
         <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
-        <li><a href="index.html">LIVVkit 2.1.6 documentation</a> &#187;</li> 
+        <li><a href="index.html">LIVVkit 3.0.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     
@@ -46,14 +49,22 @@
 <h1>Building the documentation<a class="headerlink" href="#building-the-documentation" title="Permalink to this headline">¶</a></h1>
 <p>To build this documentation you will need to install some additional tools:</p>
 <ul class="simple">
-<li><a class="reference external" href="http://usejsdoc.org">JSDoc</a></li>
-<li><a class="reference external" href="http://www.sphinx-doc.org">sphinx</a></li>
-<li><a class="reference external" href="https://pypi.python.org/pypi/sphinx-api-any">sphinx-js</a></li>
-<li><a class="reference external" href="https://pypi.python.org/pypi/sphinx_py3doc_enhanced_theme">sphinx-py3doc-enhanced-theme</a></li>
+<li><p><a class="reference external" href="http://usejsdoc.org">JSDoc</a></p></li>
+<li><p><a class="reference external" href="http://www.sphinx-doc.org">sphinx</a></p></li>
+<li><p><a class="reference external" href="https://pypi.python.org/pypi/sphinx-api-any">sphinx-js</a></p></li>
+<li><p><a class="reference external" href="https://pypi.python.org/pypi/sphinx_py3doc_enhanced_theme">sphinx-py3doc-enhanced-theme</a></p></li>
 </ul>
 <p>We recommend you use <code class="docutils literal notranslate"><span class="pre">npm</span></code>, a <a class="reference external" href="https://www.npmjs.com/get-npm">Javascript package manager</a>, to install
-<code class="docutils literal notranslate"><span class="pre">JSDoc</span></code> and <code class="docutils literal notranslate"><span class="pre">pip</span></code> to install the Sphinx packages (<code class="docutils literal notranslate"><span class="pre">sphinx</span></code> itself can be installed
-via <code class="docutils literal notranslate"><span class="pre">conda</span></code> as well, but the others will still need <code class="docutils literal notranslate"><span class="pre">pip</span></code>).</p>
+<code class="docutils literal notranslate"><span class="pre">JSDoc</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>npm install -g jsdoc
+</pre></div>
+</div>
+<p>and <code class="docutils literal notranslate"><span class="pre">pip</span></code> to install the development version of LIVVkit:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone git@github.com:LIVVkit/LIVVkit.git
+<span class="nb">cd</span> LIVVkit
+pip install -e .<span class="o">[</span>develop<span class="o">]</span>
+</pre></div>
+</div>
 <p>To build the current version of the documentation website, simply run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make html
 </pre></div>
@@ -66,11 +77,11 @@ running:</p>
 </pre></div>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">If you run this command you will need to regenerate all the auto-generated files! <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span></code> will
+<p class="admonition-title">Warning</p>
+<p>If you run this command you will need to regenerate all the auto-generated files! <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span></code> will
 only remove the old website and leave the autogenerated files in place.</p>
 </div>
-<p>Then, auto-generate the documentation of LIVVkit’s python source code:</p>
+<p>Then, auto-generate the documentation of LIVVkit’s Python source code:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sphinx-apidoc -f -o source/ ../livvkit/
 </pre></div>
 </div>
@@ -79,8 +90,8 @@ only remove the old website and leave the autogenerated files in place.</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">You can use the <code class="docutils literal notranslate"><span class="pre">generate_docs.sh</span></code> script to perform these steps.</p>
+<p class="admonition-title">Note</p>
+<p>You can use the <code class="docutils literal notranslate"><span class="pre">generate_docs.sh</span></code> script to perform these steps.</p>
 </div>
 </div>
 
@@ -94,13 +105,11 @@ only remove the old website and leave the autogenerated files in place.</p>
     
 
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
@@ -113,7 +122,7 @@ only remove the old website and leave the autogenerated files in place.</p>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lex.html">LIVVkit Extensions (LEX)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bundles.html">Model Bundles</a></li>
-<li class="toctree-l1"><a class="reference internal" href="contrib.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ref.html">References and indices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
@@ -144,7 +153,7 @@ only remove the old website and leave the autogenerated files in place.</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
     </div>
   </body>
 </html>

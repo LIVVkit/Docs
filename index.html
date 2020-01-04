@@ -2,17 +2,20 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Introduction &#8212; LIVVkit 2.1.6 documentation</title>
+    <meta charset="utf-8" />
+    <title>Introduction &#8212; LIVVkit 3.0.0 documentation</title>
     <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
     <script type="text/javascript" src="_static/sidebar.js"></script>
+    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Quick Start" href="quickstart.html" />
@@ -27,7 +30,7 @@
       <h3>Navigation</h3>
       <ul>
         <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
-        <li><a href="#">LIVVkit 2.1.6 documentation</a> &#187;</li> 
+        <li><a href="#">LIVVkit 3.0.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     
@@ -48,18 +51,18 @@
 </div>
 <div class="section" id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
-<p>LIVVkit, the land ice verification &amp; validation toolkit, is a python based V&amp;V toolkit for
+<p>LIVVkit, the land ice verification &amp; validation toolkit, is a Python based V&amp;V toolkit for
 computational ice sheet models, in both a stand-alone or coupled (to an Earth system model)
 configuration. It is intended to be a comprehensive testing suite that covers:</p>
 <p><strong>Model V&amp;V</strong></p>
 <ul class="simple">
-<li>Numerical verification – “Are we solving the equations correctly?”</li>
-<li>Physical validation – “Are we using the right physics?”</li>
+<li><p>Numerical verification – “Are we solving the equations correctly?”</p></li>
+<li><p>Physical validation – “Are we using the right physics?”</p></li>
 </ul>
 <p><strong>Software V&amp;V</strong></p>
 <ul class="simple">
-<li>Code verification  – “did we build what <em>we</em> wanted?”</li>
-<li>Performance validation – “did we build what the <em>users</em> wanted?”</li>
+<li><p>Code verification  – “did we build what <em>we</em> wanted?”</p></li>
+<li><p>Performance validation – “did we build what the <em>users</em> wanted?”</p></li>
 </ul>
 <p>By integrating LIVVkit into a model’s development workflow, LIVVkit will help users and developers
 build confidence in their model results, and easily transmit testing data to the wider scientific
@@ -71,13 +74,17 @@ other models.</p>
 <p><strong>Users and contributors are welcome!</strong> We’ll help you out –  <a class="reference external" href="https://github.com/livvkit/livvkit/issues">open an issue on github</a> to contact us for any reason.</p>
 <div class="section" id="license-and-attribution">
 <h2>License and Attribution<a class="headerlink" href="#license-and-attribution" title="Permalink to this headline">¶</a></h2>
-<p>LIVVkit 2.1 is an open source project licensed under a BSD 3-clause License. We ask that you
+<p>LIVVkit 3.0 is an open source project licensed under a BSD 3-clause License. We ask that you
 please acknowledge LIVVkit in any work it is used or supports. In any corresponding published
-work, please cite <a class="reference internal" href="ref.html#kennedy2017" id="id1">[Kennedy2017]</a>:</p>
+work, please cite <a class="reference internal" href="ref.html#kennedy2017" id="id1"><span>[Kennedy2017]</span></a> and <a class="reference internal" href="ref.html#evans2019" id="id2"><span>[Evans2019]</span></a>:</p>
 <blockquote>
-<div>Kennedy, J.H., et al. (2017), LIVVkit: An extensible, python-based, land ice
+<div><p>Evans, K. J., et al. (2019), LIVVkit 2.1: Automated and extensible ice sheet model validation,
+Geosci. Model Dev., 12, 1067–1086,
+<a class="reference external" href="https://doi.org/10.5194/gmd-12-1067-2019">DOI:10.5194/gmd-12-1067-2019</a>.</p>
+<p>Kennedy, J.H., et al. (2017), LIVVkit: An extensible, Python-based, land ice
 verification and validation toolkit for ice sheet models, J. Adv. Model. Earth Syst., 9,
-<a class="reference external" href="http://dx.doi.org/10.1002/2017MS000916">doi:10.1002/2017MS000916</a>.</div></blockquote>
+<a class="reference external" href="http://dx.doi.org/10.1002/2017MS000916">DOI:10.1002/2017MS000916</a>.</p>
+</div></blockquote>
 </div>
 </div>
 <div class="section" id="user-s-guide">
@@ -127,7 +134,7 @@ verification and validation toolkit for ice sheet models, J. Adv. Model. Earth S
 <li class="toctree-l1"><a class="reference internal" href="lex.html">LIVVkit Extensions (LEX)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="lex.html#dependencies">Dependencies</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lex.html#basic-usage">Basic Usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lex.html#reproducing-evans-et-al-2018">Reproducing Evans et al. (2018)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lex.html#reproducing-evans-et-al-2019">Reproducing Evans et al. (2019)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lex.html#developing-a-custom-extension">Developing a custom extension</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="lex.html#template-py">template.py:</a></li>
 <li class="toctree-l3"><a class="reference internal" href="lex.html#template-json">template.json:</a></li>
@@ -140,15 +147,14 @@ verification and validation toolkit for ice sheet models, J. Adv. Model. Earth S
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="bundles.html">Model Bundles</a></li>
-<li class="toctree-l1"><a class="reference internal" href="contrib.html">Contributing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="contrib.html#workflow">Workflow</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="contrib.html#become-a-core-developer">1. Become a core developer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="contrib.html#for-outside-contributions">2. For outside contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="CONTRIBUTING.html#workflow">Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="CONTRIBUTING.html#become-a-core-developer">1. Become a core developer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CONTRIBUTING.html#for-outside-contributions">2. For outside contributions</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="contrib.html#code-guidelines">Code Guidelines</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contrib.html#tips">Tips</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contrib.html#building-the-documentation">Building the documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CONTRIBUTING.html#code-guidelines">Code Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CONTRIBUTING.html#building-the-documentation">Building the documentation</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a><ul>
@@ -165,7 +171,7 @@ verification and validation toolkit for ice sheet models, J. Adv. Model. Earth S
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="faq.html#why-is-the-output-website-blank">Why is the output website blank?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-does-the-output-website-look-weird-and-or-blank">Why does the output website look weird and/or blank?</a></li>
 </ul>
 </li>
 </ul>
@@ -174,14 +180,14 @@ verification and validation toolkit for ice sheet models, J. Adv. Model. Earth S
 <div class="section" id="indices">
 <h1>Indices<a class="headerlink" href="#indices" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
-<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
 </ul>
 </div>
 <div class="section" id="search">
 <h1>Search<a class="headerlink" href="#search" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
 </div>
 
@@ -195,13 +201,11 @@ verification and validation toolkit for ice sheet models, J. Adv. Model. Earth S
     
 
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
@@ -214,7 +218,7 @@ verification and validation toolkit for ice sheet models, J. Adv. Model. Earth S
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lex.html">LIVVkit Extensions (LEX)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bundles.html">Model Bundles</a></li>
-<li class="toctree-l1"><a class="reference internal" href="contrib.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ref.html">References and indices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
@@ -248,7 +252,7 @@ verification and validation toolkit for ice sheet models, J. Adv. Model. Earth S
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
     </div>
   </body>
 </html>
