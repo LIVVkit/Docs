@@ -5,6 +5,7 @@ Subpackages
 -----------
 
 .. toctree::
+   :maxdepth: 4
 
    livvkit.bundles
    livvkit.components
@@ -23,7 +24,6 @@ livvkit.scheduler module
    :members:
    :undoc-members:
    :show-inheritance:
-
 
 Module contents
 ---------------

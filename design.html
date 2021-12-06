@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
-    <title>Design Overview &#8212; LIVVkit 3.0.0 documentation</title>
-    <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Design Overview &#8212; LIVVkit 3.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pydoctheme.css" />
     
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
     
-    <script type="text/javascript" src="_static/sidebar.js"></script>
+    <script src="_static/sidebar.js"></script>
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -31,7 +31,7 @@
       <h3>Navigation</h3>
       <ul>
         <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
-        <li><a href="index.html">LIVVkit 3.0.0 documentation</a> &#187;</li> 
+        <li><a href="index.html">LIVVkit 3.0.1 documentation</a> &#187;</li> 
       </ul>
     </div>
     
@@ -47,10 +47,10 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="figure align-center">
+  <figure class="align-center">
 <a class="reference internal image-reference" href="_images/livvkit.png"><img alt="LIVVkit" src="_images/livvkit.png" style="width: 400px;" /></a>
-</div>
-<div class="section" id="design-overview">
+</figure>
+<section id="design-overview">
 <h1>Design Overview<a class="headerlink" href="#design-overview" title="Permalink to this headline">¶</a></h1>
 <p>As detailed in <a class="reference internal" href="ref.html#kennedy2017" id="id1"><span>[Kennedy2017]</span></a>, LIVVkit is intended to be a comprehensive V&amp;V toolkit for regular and
 automated testing – that is, testing models as they develop. It is designed to be <em>used</em> by model
@@ -84,11 +84,12 @@ and other results understandable.</p>
 </dl>
 <p>If you find LIVVkit isn’t working for you, meeting these requirements, or have other suggestions for
 improvement, please let us know by <a class="reference external" href="https://github.com/livvkit/livvkit/issues">opening an issue on github</a>.</p>
-<div class="section" id="architecture">
+<section id="architecture">
 <h2>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h2>
-<div class="figure align-center" id="id3">
+<figure class="align-center" id="id3">
 <img alt="Schematic of LIVVkit's architecture and program flow." src="_images/layout.png" />
-<p class="caption"><span class="caption-text">Schematic of LIVVkit’s architecture and program flow <a class="reference internal" href="ref.html#kennedy2017" id="id2"><span>[Kennedy2017]</span></a>. The light blue computers indicate where the
+<figcaption>
+<p><span class="caption-text">Schematic of LIVVkit’s architecture and program flow <a class="reference internal" href="ref.html#kennedy2017" id="id2"><span>[Kennedy2017]</span></a>. The light blue computers indicate where the
 user will interact with LIVVkit, first using the <code class="docutils literal notranslate"><span class="pre">livv</span></code> interface and then finally viewing the analyses report,
 typically as a portable website. The green boxes indicate core LIVVkit functionality, the black boxes are the
 different analyses which are executed in parallel, and the blue and purple boxes represent the ice-sheet model
@@ -98,8 +99,9 @@ the required bundles, components, and extensions; and executes the analyses. As 
 high-level summary information will be displayed on the command line through the interface and fully detailed
 information will be collated into the report. Once all analyses are finished, the interface will inform the
 user and the results of all the analyses can be viewed.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
-</div>
-<div class="section" id="components">
+</figcaption>
+</figure>
+<section id="components">
 <h3>Components<a class="headerlink" href="#components" title="Permalink to this headline">¶</a></h3>
 <p>The major components of LIVVkit are:</p>
 <dl class="simple">
@@ -137,11 +139,12 @@ link in directories containing data for custom extensions.</p></li>
 </dd>
 </dl>
 <p>See <a class="reference internal" href="api.html"><span class="doc">API</span></a> and/or <a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a> for a detailed list and description of LIVVkit’s components.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -154,12 +157,12 @@ link in directories containing data for custom extensions.</p></li>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script><h3><a href="index.html">Table Of Contents</a></h3>
+<script>$('#searchbox').show(0);</script><h3><a href="index.html">Table Of Contents</a></h3>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vv-intro.html">Introduction to V&amp;V</a></li>
@@ -211,7 +214,7 @@ link in directories containing data for custom extensions.</p></li>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.1.
     </div>
   </body>
 </html>

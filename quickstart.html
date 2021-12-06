@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
-    <title>Quick Start &#8212; LIVVkit 3.0.0 documentation</title>
-    <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Quick Start &#8212; LIVVkit 3.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pydoctheme.css" />
     
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
     
-    <script type="text/javascript" src="_static/sidebar.js"></script>
+    <script src="_static/sidebar.js"></script>
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -31,7 +31,7 @@
       <h3>Navigation</h3>
       <ul>
         <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
-        <li><a href="index.html">LIVVkit 3.0.0 documentation</a> &#187;</li> 
+        <li><a href="index.html">LIVVkit 3.0.1 documentation</a> &#187;</li> 
       </ul>
     </div>
     
@@ -47,10 +47,10 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="figure align-center">
+  <figure class="align-center">
 <a class="reference internal image-reference" href="_images/livvkit.png"><img alt="LIVVkit" src="_images/livvkit.png" style="width: 400px;" /></a>
-</div>
-<div class="section" id="quick-start">
+</figure>
+<section id="quick-start">
 <h1>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h1>
 <p>Ready to jump right in?</p>
 <div class="admonition note">
@@ -59,7 +59,7 @@
 (<code class="docutils literal notranslate"><span class="pre">bash</span></code>, <code class="docutils literal notranslate"><span class="pre">zsh</span></code>, <code class="docutils literal notranslate"><span class="pre">fish</span></code>, etc.). The use of non-POSIX shells like <code class="docutils literal notranslate"><span class="pre">csh</span></code> is <strong>not</strong>
 recommended.</p>
 </div>
-<div class="section" id="basic-install">
+<section id="basic-install">
 <h2>Basic Install<a class="headerlink" href="#basic-install" title="Permalink to this headline">¶</a></h2>
 <p>The latest LIVVkit release can be installed via <a class="reference external" href="https://pip.pypa.io/en/stable/">Python pip</a>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install --user livvkit
@@ -68,15 +68,15 @@ recommended.</p>
 <p>LIVVkit was designed to be Python 2 and 3 compatible, so either Python version will work, but Python
 3 is recommended. If you’re having problems installing LIVVkit, see our <a class="reference internal" href="install.html"><span class="doc">Installation</span></a> page, or
 <a class="reference external" href="https://github.com/livvkit/livvkit/issues">open an issue on github</a>.</p>
-</div>
-<div class="section" id="basic-usage">
+</section>
+<section id="basic-usage">
 <h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h2>
 <p>LIVVkit provides a command-line interface called <code class="docutils literal notranslate"><span class="pre">livv</span></code>. To see the full list of options and verify
 your installation, run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>livv -h
 </pre></div>
 </div>
-<div class="section" id="verification">
+<section id="verification">
 <h3>Verification<a class="headerlink" href="#verification" title="Permalink to this headline">¶</a></h3>
 <p>In verification mode, LIVVkit analyzes and compares a regression testing dataset to a reference
 dataset. For example, LIVVkit may analyze the dataset produced from a proposed CISM 2.0.6 release
@@ -112,8 +112,8 @@ favorite web browser.</p>
 line, which will typically look like
 <a class="reference external" href="http://0.0.0.0:8000/ver_test/index.html">http://0.0.0.0:8000/ver_test/index.html</a>.</p>
 </div>
-</div>
-<div class="section" id="viewing-analyses">
+</section>
+<section id="viewing-analyses">
 <h3>Viewing analyses<a class="headerlink" href="#viewing-analyses" title="Permalink to this headline">¶</a></h3>
 <p>Directly viewing the output websites (e.g., using <code class="docutils literal notranslate"><span class="pre">file://</span></code> addresses in a web browser) will likely not work
 because most web browsers are disabling the use of local resources (e.g., javascript; see our <a class="reference internal" href="faq.html"><span class="doc">Frequently Asked Questions</span></a>).
@@ -126,8 +126,8 @@ the <code class="docutils literal notranslate"><span class="pre">ver_test</span>
 <p>LIVVkit will then launch an HTTP server and tell you the address to view the website at on the
 command line, which will typically look like
 <a class="reference external" href="http://0.0.0.0:8000/ver_test/index.html">http://0.0.0.0:8000/ver_test/index.html</a>.</p>
-</div>
-<div class="section" id="validation-extensions">
+</section>
+<section id="validation-extensions">
 <h3>Validation, Extensions<a class="headerlink" href="#validation-extensions" title="Permalink to this headline">¶</a></h3>
 <p>LIVVkit is extensible to more in-depth or larger validation analyses. However, because these validation
 analyses are particularly data intensive, many of the observational and example model output files are
@@ -171,8 +171,8 @@ directory, but you will need to edit the paths in the JSON configuration files s
 that <code class="docutils literal notranslate"><span class="pre">livv</span></code> can find the required files.</p>
 <p>Likewise, you can also apply these analyses to any new model run <a class="footnote-reference brackets" href="#id4" id="id2">2</a> by adjusting
 the paths to point to your model run.</p>
-</div>
-<div class="section" id="advanced">
+</section>
+<section id="advanced">
 <h3>Advanced<a class="headerlink" href="#advanced" title="Permalink to this headline">¶</a></h3>
 <p>Both the verification and validation commands can be executed at the same time and all results will
 be placed into the same website. Additionally, you can pass the <code class="docutils literal notranslate"><span class="pre">-V/validate</span></code> option multiple
@@ -194,11 +194,12 @@ adjusting the extension. <em>This is a problem we are actively working on for fu
 LEX releases.</em></p>
 </dd>
 </dl>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -211,12 +212,12 @@ LEX releases.</em></p>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script><h3><a href="index.html">Table Of Contents</a></h3>
+<script>$('#searchbox').show(0);</script><h3><a href="index.html">Table Of Contents</a></h3>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Quick Start</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#basic-install">Basic Install</a></li>
@@ -272,7 +273,7 @@ LEX releases.</em></p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.1.
     </div>
   </body>
 </html>

@@ -20,7 +20,6 @@ livvkit.bundles.CISM\_glissade.verification module
    :undoc-members:
    :show-inheritance:
 
-
 Module contents
 ---------------
 

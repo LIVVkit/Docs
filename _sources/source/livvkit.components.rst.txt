@@ -5,6 +5,7 @@ Subpackages
 -----------
 
 .. toctree::
+   :maxdepth: 4
 
    livvkit.components.numerics_tests
 
@@ -42,7 +43,6 @@ livvkit.components.verification module
    :members:
    :undoc-members:
    :show-inheritance:
-
 
 Module contents
 ---------------

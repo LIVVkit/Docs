@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
-    <title>Usage &#8212; LIVVkit 3.0.0 documentation</title>
-    <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Usage &#8212; LIVVkit 3.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pydoctheme.css" />
     
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
-    <script type="text/javascript" src="_static/sidebar.js"></script>
+    <script src="_static/sidebar.js"></script>
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -31,7 +32,7 @@
       <h3>Navigation</h3>
       <ul>
         <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
-        <li><a href="index.html">LIVVkit 3.0.0 documentation</a> &#187;</li> 
+        <li><a href="index.html">LIVVkit 3.0.1 documentation</a> &#187;</li> 
       </ul>
     </div>
     
@@ -47,18 +48,19 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="figure align-center">
+  <figure class="align-center">
 <a class="reference internal image-reference" href="_images/livvkit.png"><img alt="LIVVkit" src="_images/livvkit.png" style="width: 400px;" /></a>
-</div>
-<div class="section" id="usage">
+</figure>
+<section id="usage">
 <h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
 <p>LIVVkit is intended to be integrated into a model’s development cycle. A public-private version of
 <a class="reference external" href="https://www.atlassian.com/git/tutorials/comparing-workflows#gitflow-workflow">GitFlow</a> is a
 common development cycle used by many scientific modeling groups. LIVVkit would be integrated
 into this development process like:</p>
-<div class="figure align-center" id="id3">
+<figure class="align-center" id="id3">
 <a class="reference internal image-reference" href="_images/workflow.png"><img alt="Development cycle" src="_images/workflow.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-text">Schematic of the public-private development cycle used by many scientific modeling groups
+<figcaption>
+<p><span class="caption-text">Schematic of the public-private development cycle used by many scientific modeling groups
 <a class="reference internal" href="ref.html#kennedy2017" id="id1"><span>[Kennedy2017]</span></a>. A feature branch is created (<code class="docutils literal notranslate"><span class="pre">d124</span></code>, green path) from the current development
 branch (light purple path) and incremental changes are made (<code class="docutils literal notranslate"><span class="pre">f001</span></code>–<code class="docutils literal notranslate"><span class="pre">f003</span></code>). These changes
 frequently undergo the standard set of LIVVkit verification tests (dashed cyan circles). Once
@@ -70,15 +72,16 @@ circle). Once passed, the feature is merged into develop (<code class="docutils 
 closed. After enough features have been developed, the development branch will be merged into
 the private master branch (<code class="docutils literal notranslate"><span class="pre">m120</span></code>, right purple path), given a version tag (<code class="docutils literal notranslate"><span class="pre">v1.2.0</span></code>), and
 pushed to the mirrored master branch on the public repository (left purple path).</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
-</div>
-<div class="section" id="standard-verification-and-integration-tests">
+</figcaption>
+</figure>
+<section id="standard-verification-and-integration-tests">
 <h2>Standard verification and integration tests<a class="headerlink" href="#standard-verification-and-integration-tests" title="Permalink to this headline">¶</a></h2>
 <p>The standard verification and integration tests are performed by comparing a regression test
 dataset, <code class="docutils literal notranslate"><span class="pre">$TEST</span></code>, against a  reference dataset, <code class="docutils literal notranslate"><span class="pre">$REF</span></code>. The datasets follows a somewhat rigid
 leaf-node structure which allows the testing dataset to be more human-friendly than just a bunch of
 files and still fully describe the tests. This directory structure is, for example, created by
 CISM’s Build and Test Structure (BATS).</p>
-<div class="section" id="model-output-livvkit-input-hierarchy">
+<section id="model-output-livvkit-input-hierarchy">
 <span id="input-hierarchy"></span><h3>Model Output/LIVVkit Input Hierarchy<a class="headerlink" href="#model-output-livvkit-input-hierarchy" title="Permalink to this headline">¶</a></h3>
 <p>The directory layout of the model output should be as follows:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>BUNDLE
@@ -104,8 +107,8 @@ size used in the test.</p>
 <p>The percise meaning of any <code class="docutils literal notranslate"><span class="pre">*</span></code>-ed directory name may be variable from test to test, but
 will generally follow the definition given here.</p>
 </div>
-</div>
-<div class="section" id="standard-verification-analysis">
+</section>
+<section id="standard-verification-analysis">
 <h3>Standard verification  analysis<a class="headerlink" href="#standard-verification-analysis" title="Permalink to this headline">¶</a></h3>
 <p>The standard verification analysis typically compares a regression test dataset with a reference
 dataset. Because these datasets can be quickly generated and analyzed (<span class="math notranslate nohighlight">\(\Delta t \lesssim\)</span> a
@@ -148,8 +151,8 @@ push the feature branch to the development repository and open a pull request, k
 integration analysis by the model integrator(s). Additionally, the output directory may
 compressed and uploaded to Github for viewing by the integration team (every output website is
 portable).</p>
-</div>
-<div class="section" id="integration-analysis">
+</section>
+<section id="integration-analysis">
 <h3>Integration analysis<a class="headerlink" href="#integration-analysis" title="Permalink to this headline">¶</a></h3>
 <p>Upon receiving a pull request for a new feature, a model’s integration team will typically initiate
 a more substantial test of the new feature, often on the target production machine(s).</p>
@@ -210,9 +213,9 @@ changes to their feature.</p>
 <p>Once testing results are satisfactory, the integration team may do a similar comparison to the
 latest release in order to track changes over a longer period of development and analyze the model
 for creep, or run a series of extended validation analyses.</p>
-</div>
-</div>
-<div class="section" id="extended-and-or-validation-analyses">
+</section>
+</section>
+<section id="extended-and-or-validation-analyses">
 <h2>Extended and/or validation analyses<a class="headerlink" href="#extended-and-or-validation-analyses" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -224,10 +227,11 @@ CESM (<a class="reference external" href="http://www.cesm.ucar.edu/">Community E
 Extensions (LEX) repository</a>. See the <a class="reference internal" href="lex.html"><span class="doc">LIVVkit Extensions (LEX)</span></a> page for how to
 get and use LEX as well as how develop your own validation analysis.</p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -240,12 +244,12 @@ get and use LEX as well as how develop your own validation analysis.</p>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script><h3><a href="index.html">Table Of Contents</a></h3>
+<script>$('#searchbox').show(0);</script><h3><a href="index.html">Table Of Contents</a></h3>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vv-intro.html">Introduction to V&amp;V</a></li>
@@ -300,7 +304,7 @@ get and use LEX as well as how develop your own validation analysis.</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.1.
     </div>
   </body>
 </html>

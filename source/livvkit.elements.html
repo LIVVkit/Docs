@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
-    <title>livvkit.elements package &#8212; LIVVkit 3.0.0 documentation</title>
-    <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>livvkit.elements package &#8212; LIVVkit 3.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css" />
     
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
     
-    <script type="text/javascript" src="../_static/sidebar.js"></script>
+    <script src="../_static/sidebar.js"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -31,7 +31,7 @@
       <h3>Navigation</h3>
       <ul>
         <li class="responsive-menu"><a href="#sidebar-anchor" title="Navigation">&#9776;</a></li>
-        <li><a href="../index.html">LIVVkit 3.0.0 documentation</a> &#187;</li>
+        <li><a href="../index.html">LIVVkit 3.0.1 documentation</a> &#187;</li>
           <li><a href="../api.html" >API</a> &#187;</li>
           <li><a href="modules.html" >livvkit</a> &#187;</li>
           <li><a href="livvkit.html" accesskey="U">livvkit package</a> &#187;</li> 
@@ -50,12 +50,12 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="livvkit-elements-package">
+  <section id="livvkit-elements-package">
 <h1>livvkit.elements package<a class="headerlink" href="#livvkit-elements-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="submodules">
+<section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="module-livvkit.elements.elements">
+</section>
+<section id="module-livvkit.elements.elements">
 <span id="livvkit-elements-elements-module"></span><h2>livvkit.elements.elements module<a class="headerlink" href="#module-livvkit.elements.elements" title="Permalink to this headline">¶</a></h2>
 <p>Module containing report generation and display elements</p>
 <p>The elements in this module are used by LIVVkit to generate analyses reports.
@@ -64,18 +64,18 @@ provide some experimental (and therefore undocumented) report formats: JSON-Only
 and LaTeX.</p>
 <p>New elements should derive from, or implement the same interface as, the
 BaseElement abstract class.</p>
-<dl class="class">
-<dt id="livvkit.elements.elements.B4BImage">
-<em class="property">class </em><code class="sig-prename descclassname">livvkit.elements.elements.</code><code class="sig-name descname">B4BImage</code><span class="sig-paren">(</span><em class="sig-param">title</em>, <em class="sig-param">description</em>, <em class="sig-param">page_path</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/elements/elements.html#B4BImage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.elements.elements.B4BImage" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="livvkit.elements.elements.B4BImage">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">livvkit.elements.elements.</span></span><span class="sig-name descname"><span class="pre">B4BImage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/elements/elements.html#B4BImage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#livvkit.elements.elements.B4BImage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#livvkit.elements.elements.Image" title="livvkit.elements.elements.Image"><code class="xref py py-class docutils literal notranslate"><span class="pre">livvkit.elements.elements.Image</span></code></a></p>
 <p>A B4BImage element</p>
 <p>A dummy Image that can be used by the BitForBit element indicating a
 bit-for-bit verification result.</p>
 </dd></dl>
 
-<dl class="class">
-<dt id="livvkit.elements.elements.BaseElement">
-<em class="property">class </em><code class="sig-prename descclassname">livvkit.elements.elements.</code><code class="sig-name descname">BaseElement</code><a class="reference internal" href="../_modules/livvkit/elements/elements.html#BaseElement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.elements.elements.BaseElement" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="livvkit.elements.elements.BaseElement">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">livvkit.elements.elements.</span></span><span class="sig-name descname"><span class="pre">BaseElement</span></span><a class="reference internal" href="../_modules/livvkit/elements/elements.html#BaseElement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#livvkit.elements.elements.BaseElement" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 <p>An abstract base LIVVkit element</p>
 <p>An abstract base LIVVkit element providing the basic element interface
@@ -83,9 +83,9 @@ expected by LIVVkit. All LIVVkit elements should either derive from this
 class or implement the same interface.</p>
 </dd></dl>
 
-<dl class="class">
-<dt id="livvkit.elements.elements.BitForBit">
-<em class="property">class </em><code class="sig-prename descclassname">livvkit.elements.elements.</code><code class="sig-name descname">BitForBit</code><span class="sig-paren">(</span><em class="sig-param">title</em>, <em class="sig-param">data</em>, <em class="sig-param">imgs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/elements/elements.html#BitForBit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.elements.elements.BitForBit" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="livvkit.elements.elements.BitForBit">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">livvkit.elements.elements.</span></span><span class="sig-name descname"><span class="pre">BitForBit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/elements/elements.html#BitForBit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#livvkit.elements.elements.BitForBit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#livvkit.elements.elements.CompositeElement" title="livvkit.elements.elements.CompositeElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">livvkit.elements.elements.CompositeElement</span></code></a></p>
 <p>A LIVVkit BitForBit element</p>
 <p>The BitForBit element will produce a table in the analysis report indicating
@@ -93,9 +93,9 @@ bit-for-bit statuses with a difference image shown in the final column of
 the table.</p>
 </dd></dl>
 
-<dl class="class">
-<dt id="livvkit.elements.elements.CompositeElement">
-<em class="property">class </em><code class="sig-prename descclassname">livvkit.elements.elements.</code><code class="sig-name descname">CompositeElement</code><span class="sig-paren">(</span><em class="sig-param">elements</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/elements/elements.html#CompositeElement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.elements.elements.CompositeElement" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="livvkit.elements.elements.CompositeElement">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">livvkit.elements.elements.</span></span><span class="sig-name descname"><span class="pre">CompositeElement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elements</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/elements/elements.html#CompositeElement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#livvkit.elements.elements.CompositeElement" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#livvkit.elements.elements.BaseElement" title="livvkit.elements.elements.BaseElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">livvkit.elements.elements.BaseElement</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 <p>An abstract base LIVVkit element that contains other elements</p>
 <p>An abstract base LIVVkit element that contains other elements in self.elements
@@ -104,24 +104,24 @@ elements should either be derived from the LIVVkit BaseElement or implement
 the same interface.</p>
 </dd></dl>
 
-<dl class="class">
-<dt id="livvkit.elements.elements.Error">
-<em class="property">class </em><code class="sig-prename descclassname">livvkit.elements.elements.</code><code class="sig-name descname">Error</code><span class="sig-paren">(</span><em class="sig-param">title</em>, <em class="sig-param">message</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/elements/elements.html#Error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.elements.elements.Error" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="livvkit.elements.elements.Error">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">livvkit.elements.elements.</span></span><span class="sig-name descname"><span class="pre">Error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/elements/elements.html#Error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#livvkit.elements.elements.Error" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#livvkit.elements.elements.BaseElement" title="livvkit.elements.elements.BaseElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">livvkit.elements.elements.BaseElement</span></code></a></p>
 <p>A LIVVkit Error element</p>
 <p>The Error element will produce an error message in the analysis report.</p>
 </dd></dl>
 
-<dl class="class">
-<dt id="livvkit.elements.elements.FileDiff">
-<em class="property">class </em><code class="sig-prename descclassname">livvkit.elements.elements.</code><code class="sig-name descname">FileDiff</code><span class="sig-paren">(</span><em class="sig-param">title</em>, <em class="sig-param">from_file</em>, <em class="sig-param">to_file</em>, <em class="sig-param">context=3</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/elements/elements.html#FileDiff"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.elements.elements.FileDiff" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="livvkit.elements.elements.FileDiff">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">livvkit.elements.elements.</span></span><span class="sig-name descname"><span class="pre">FileDiff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">from_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/elements/elements.html#FileDiff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#livvkit.elements.elements.FileDiff" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#livvkit.elements.elements.BaseElement" title="livvkit.elements.elements.BaseElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">livvkit.elements.elements.BaseElement</span></code></a></p>
 <p>A LIVVkit FileDiff element</p>
 <p>The FilleDiff element will compare two text files and produce a git-diff
 style diff of the files.</p>
-<dl class="method">
-<dt id="livvkit.elements.elements.FileDiff.diff_files">
-<code class="sig-name descname">diff_files</code><span class="sig-paren">(</span><em class="sig-param">context=3</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/elements/elements.html#FileDiff.diff_files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.elements.elements.FileDiff.diff_files" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="livvkit.elements.elements.FileDiff.diff_files">
+<span class="sig-name descname"><span class="pre">diff_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/elements/elements.html#FileDiff.diff_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#livvkit.elements.elements.FileDiff.diff_files" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform the file diff</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -149,9 +149,9 @@ full</p>
 
 </dd></dl>
 
-<dl class="class">
-<dt id="livvkit.elements.elements.Gallery">
-<em class="property">class </em><code class="sig-prename descclassname">livvkit.elements.elements.</code><code class="sig-name descname">Gallery</code><span class="sig-paren">(</span><em class="sig-param">title</em>, <em class="sig-param">elements</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/elements/elements.html#Gallery"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.elements.elements.Gallery" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="livvkit.elements.elements.Gallery">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">livvkit.elements.elements.</span></span><span class="sig-name descname"><span class="pre">Gallery</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elements</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/elements/elements.html#Gallery"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#livvkit.elements.elements.Gallery" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#livvkit.elements.elements.CompositeElement" title="livvkit.elements.elements.CompositeElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">livvkit.elements.elements.CompositeElement</span></code></a></p>
 <p>A LIVVkit Gallery element</p>
 <p>The Gallery element is a super element intended to group LIVVkit Image
@@ -160,25 +160,25 @@ elements into a gallery. It also will allow for the generation of other
 might be better interpreted as a figure “subsection”.</p>
 </dd></dl>
 
-<dl class="class">
-<dt id="livvkit.elements.elements.Image">
-<em class="property">class </em><code class="sig-prename descclassname">livvkit.elements.elements.</code><code class="sig-name descname">Image</code><span class="sig-paren">(</span><em class="sig-param">title</em>, <em class="sig-param">desc</em>, <em class="sig-param">image_file</em>, <em class="sig-param">group=None</em>, <em class="sig-param">height=None</em>, <em class="sig-param">relative_to=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/elements/elements.html#Image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.elements.elements.Image" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="livvkit.elements.elements.Image">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">livvkit.elements.elements.</span></span><span class="sig-name descname"><span class="pre">Image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">desc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relative_to</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/elements/elements.html#Image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#livvkit.elements.elements.Image" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#livvkit.elements.elements.BaseElement" title="livvkit.elements.elements.BaseElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">livvkit.elements.elements.BaseElement</span></code></a></p>
 <p>A LIVVkit Image element</p>
 <p>The Image element produces an image/figure in the report.</p>
 </dd></dl>
 
-<dl class="class">
-<dt id="livvkit.elements.elements.NAImage">
-<em class="property">class </em><code class="sig-prename descclassname">livvkit.elements.elements.</code><code class="sig-name descname">NAImage</code><span class="sig-paren">(</span><em class="sig-param">title</em>, <em class="sig-param">description</em>, <em class="sig-param">page_path</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/elements/elements.html#NAImage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.elements.elements.NAImage" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="livvkit.elements.elements.NAImage">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">livvkit.elements.elements.</span></span><span class="sig-name descname"><span class="pre">NAImage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/elements/elements.html#NAImage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#livvkit.elements.elements.NAImage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#livvkit.elements.elements.Image" title="livvkit.elements.elements.Image"><code class="xref py py-class docutils literal notranslate"><span class="pre">livvkit.elements.elements.Image</span></code></a></p>
 <p>A NAImage element</p>
 <p>A dummy Image that can be used to indicate a missing image</p>
 </dd></dl>
 
-<dl class="class">
-<dt id="livvkit.elements.elements.NamedCompositeElement">
-<em class="property">class </em><code class="sig-prename descclassname">livvkit.elements.elements.</code><code class="sig-name descname">NamedCompositeElement</code><span class="sig-paren">(</span><em class="sig-param">elements_dict</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/elements/elements.html#NamedCompositeElement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.elements.elements.NamedCompositeElement" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="livvkit.elements.elements.NamedCompositeElement">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">livvkit.elements.elements.</span></span><span class="sig-name descname"><span class="pre">NamedCompositeElement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elements_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/elements/elements.html#NamedCompositeElement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#livvkit.elements.elements.NamedCompositeElement" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#livvkit.elements.elements.BaseElement" title="livvkit.elements.elements.BaseElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">livvkit.elements.elements.BaseElement</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 <p>An abstract base LIVVkit element that contains multiple other composite elements</p>
 <p>An abstract base LIVVkit element that allows to logically group multiple
@@ -187,9 +187,9 @@ interface expected by LIVVkit. All LIVVkit elements should either be derived
 from the LIVVkit BaseElement or implement the same interface.</p>
 </dd></dl>
 
-<dl class="class">
-<dt id="livvkit.elements.elements.Page">
-<em class="property">class </em><code class="sig-prename descclassname">livvkit.elements.elements.</code><code class="sig-name descname">Page</code><span class="sig-paren">(</span><em class="sig-param">title</em>, <em class="sig-param">description</em>, <em class="sig-param">elements</em>, <em class="sig-param">references=''</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/elements/elements.html#Page"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.elements.elements.Page" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="livvkit.elements.elements.Page">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">livvkit.elements.elements.</span></span><span class="sig-name descname"><span class="pre">Page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elements</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/elements/elements.html#Page"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#livvkit.elements.elements.Page" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#livvkit.elements.elements.CompositeElement" title="livvkit.elements.elements.CompositeElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">livvkit.elements.elements.CompositeElement</span></code></a></p>
 <p>A LIVVkit Page element</p>
 <p>The Page element contains the description of an analysis, the elements
@@ -201,9 +201,9 @@ will allow for the generation of other (experimental!) Report types
 a “section”.</p>
 <p>For LIVVkit Extensions (LEX), an instance of this class should be returned
 from the extensions <cite>run()</cite> function.</p>
-<dl class="method">
-<dt id="livvkit.elements.elements.Page.add_references">
-<code class="sig-name descname">add_references</code><span class="sig-paren">(</span><em class="sig-param">references</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/elements/elements.html#Page.add_references"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.elements.elements.Page.add_references" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="livvkit.elements.elements.Page.add_references">
+<span class="sig-name descname"><span class="pre">add_references</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">references</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/elements/elements.html#Page.add_references"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#livvkit.elements.elements.Page.add_references" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add a reference to the internal reference list</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -218,9 +218,9 @@ references and ALL references inside the bibtex file(s)!).</p>
 
 </dd></dl>
 
-<dl class="class">
-<dt id="livvkit.elements.elements.RawHTML">
-<em class="property">class </em><code class="sig-prename descclassname">livvkit.elements.elements.</code><code class="sig-name descname">RawHTML</code><span class="sig-paren">(</span><em class="sig-param">html</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/elements/elements.html#RawHTML"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.elements.elements.RawHTML" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="livvkit.elements.elements.RawHTML">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">livvkit.elements.elements.</span></span><span class="sig-name descname"><span class="pre">RawHTML</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">html</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/elements/elements.html#RawHTML"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#livvkit.elements.elements.RawHTML" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#livvkit.elements.elements.BaseElement" title="livvkit.elements.elements.BaseElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">livvkit.elements.elements.BaseElement</span></code></a></p>
 <p>A LIVVkit RawHTML element</p>
 <p>The RawHTML element will directly display the contained HTML in the analysis
@@ -230,9 +230,9 @@ experimental report types (e.g., LaTeX) the contained HTML will be written to
 report in a code display block or as a raw string.</p>
 </dd></dl>
 
-<dl class="class">
-<dt id="livvkit.elements.elements.Section">
-<em class="property">class </em><code class="sig-prename descclassname">livvkit.elements.elements.</code><code class="sig-name descname">Section</code><span class="sig-paren">(</span><em class="sig-param">title</em>, <em class="sig-param">elements</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/elements/elements.html#Section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.elements.elements.Section" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="livvkit.elements.elements.Section">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">livvkit.elements.elements.</span></span><span class="sig-name descname"><span class="pre">Section</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elements</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/elements/elements.html#Section"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#livvkit.elements.elements.Section" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#livvkit.elements.elements.CompositeElement" title="livvkit.elements.elements.CompositeElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">livvkit.elements.elements.CompositeElement</span></code></a></p>
 <p>A LIVVkit Section element</p>
 <p>The Section element is a super element intended to logically separate elements
@@ -241,17 +241,17 @@ into titled sections. It also will allow for the generation of other
 be better interpreted as a “subsection”.</p>
 </dd></dl>
 
-<dl class="class">
-<dt id="livvkit.elements.elements.Table">
-<em class="property">class </em><code class="sig-prename descclassname">livvkit.elements.elements.</code><code class="sig-name descname">Table</code><span class="sig-paren">(</span><em class="sig-param">title</em>, <em class="sig-param">data</em>, <em class="sig-param">index=False</em>, <em class="sig-param">transpose=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/elements/elements.html#Table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.elements.elements.Table" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="livvkit.elements.elements.Table">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">livvkit.elements.elements.</span></span><span class="sig-name descname"><span class="pre">Table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transpose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/elements/elements.html#Table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#livvkit.elements.elements.Table" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#livvkit.elements.elements.BaseElement" title="livvkit.elements.elements.BaseElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">livvkit.elements.elements.BaseElement</span></code></a></p>
 <p>A LIVVkit Table element</p>
 <p>The Table element will produce a table in the analysis report.</p>
 </dd></dl>
 
-<dl class="class">
-<dt id="livvkit.elements.elements.Tabs">
-<em class="property">class </em><code class="sig-prename descclassname">livvkit.elements.elements.</code><code class="sig-name descname">Tabs</code><span class="sig-paren">(</span><em class="sig-param">tabs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/elements/elements.html#Tabs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#livvkit.elements.elements.Tabs" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="livvkit.elements.elements.Tabs">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">livvkit.elements.elements.</span></span><span class="sig-name descname"><span class="pre">Tabs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tabs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/livvkit/elements/elements.html#Tabs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#livvkit.elements.elements.Tabs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#livvkit.elements.elements.NamedCompositeElement" title="livvkit.elements.elements.NamedCompositeElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">livvkit.elements.elements.NamedCompositeElement</span></code></a></p>
 <p>A LIVVkit Tabs element</p>
 <p>The Tabs element is a super element intended to logically separate elements
@@ -260,13 +260,14 @@ generation of other (experimental!) Report types (e.g., LaTeX), where the
 “tabs” meaning might be better interpreted as a “subsection”.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="module-livvkit.elements">
+</section>
+<section id="module-livvkit.elements">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-livvkit.elements" title="Permalink to this headline">¶</a></h2>
-</div>
-</div>
+</section>
+</section>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -279,12 +280,12 @@ generation of other (experimental!) Report types (e.g., LaTeX), where the
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script><h3><a href="../index.html">Table Of Contents</a></h3>
+<script>$('#searchbox').show(0);</script><h3><a href="../index.html">Table Of Contents</a></h3>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../vv-intro.html">Introduction to V&amp;V</a></li>
@@ -337,7 +338,7 @@ generation of other (experimental!) Report types (e.g., LaTeX), where the
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Joseph H. Kennedy, Andrew R. Bennett, Katherine J. Evans.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.1.
     </div>
   </body>
 </html>
